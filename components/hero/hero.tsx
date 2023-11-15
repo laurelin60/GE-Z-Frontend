@@ -65,7 +65,7 @@ const Hero = () => {
 
     return (
         <>
-            <div className="flex flex-col px-6 md:px-16 xl:px-0">
+            <div className="flex flex-col px-2 sm:px-6 md:px-16 xl:px-0">
                 <div className="mt-20 flex flex-wrap place-content-center justify-center text-5xl font-bold lg:text-6xl xl:text-[92px]">
                     Find the
                     <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
