@@ -19,11 +19,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <div className="bg-background text-text flex flex-col place-content-center">
-                <Header />
-                {children}
-                <Footer />
-            </div>
+            <body className={inter.className}>
+                <div className="flex flex-col place-content-center bg-background text-text">
+                    <Header />
+                    {children}
+                    <Footer />
+                </div>
+            </body>
         </html>
     );
 }
