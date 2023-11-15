@@ -1,19 +1,8 @@
 "use client";
 
+import { GE_Categories, Universities } from "@/lib/constants";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
-
-const Universities = ["University of California - Irvine"];
-const GE_Categories = [
-    "GE I",
-    "GE II",
-    "GE III",
-    "GE IV",
-    "GE V",
-    "GE VI",
-    "GE VII",
-    "GE VIII",
-];
 
 interface DropdownComponentProps {
     defaultValue: string;
