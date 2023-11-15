@@ -33,7 +33,7 @@ const DropdownComponent = (props: DropdownComponentProps) => {
 
     return (
         <div className="flex place-content-center">
-            <div className="relative h-16 w-72 md:h-20 md:w-96 xl:h-[100px] xl:w-[700px]">
+            <div className="relative h-16 w-72 md:h-16 md:w-96 xl:h-20 xl:w-[600px]">
                 <select
                     value={value}
                     onChange={handleChange}
@@ -43,7 +43,7 @@ const DropdownComponent = (props: DropdownComponentProps) => {
                         <option key={item}>{item}</option>
                     ))}
                 </select>
-                <div className="absolute right-2 top-5 h-8 w-8 text-2xl opacity-25 md:right-8 md:top-6 md:text-4xl xl:top-8">
+                <div className="absolute right-2 top-5 h-8 w-8 text-2xl opacity-25 md:right-5 md:top-5 md:text-3xl xl:top-6">
                     <FaChevronDown />
                 </div>
             </div>
@@ -112,7 +112,7 @@ const Hero = () => {
                     <div className="flex place-content-center">
                         <button
                             type="submit"
-                            className="mt-8 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-3xl font-semibold text-white transition-all active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-[85px] xl:w-[250px] xl:text-4xl"
+                            className="mt-8 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-20 xl:w-56 xl:text-3xl"
                         >
                             <div>Search</div>
                             <FaSearch />
