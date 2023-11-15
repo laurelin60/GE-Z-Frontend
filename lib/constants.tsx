@@ -10,3 +10,9 @@ export const GE_Categories = [
     "GE VII",
     "GE VIII",
 ];
+
+export const Institutions = [
+    "Any Institution",
+    "Irvine Valley College",
+    "Pasadena Community College",
+];
