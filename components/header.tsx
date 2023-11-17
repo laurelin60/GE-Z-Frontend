@@ -4,7 +4,7 @@ import { FaUser } from "react-icons/fa";
 const Header = () => {
     return (
         <>
-            <div className="flex h-24 place-content-center items-center justify-between px-8 md:px-24">
+            <div className="flex h-24 place-content-center items-center justify-between px-8 lg:px-24">
                 <div className="text-4xl font-bold text-primary sm:text-5xl">
                     <a href="http://localhost:3000/">GE-Z</a>
                 </div>

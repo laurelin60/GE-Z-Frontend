@@ -6,7 +6,7 @@ const Tags = (props: any) => {
 
     if (tag == "Online Tutoring") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
                     <FaChalkboard />
                 </div>
@@ -17,7 +17,7 @@ const Tags = (props: any) => {
 
     if (tag == "Zero Textbook Cost") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
                     <FaHandHoldingDollar />
                 </div>
@@ -28,7 +28,7 @@ const Tags = (props: any) => {
 
     if (tag == "Quality Reviewed") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
                     <FaAward />
                 </div>

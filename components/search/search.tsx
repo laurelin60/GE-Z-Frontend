@@ -88,6 +88,26 @@ const Search = () => {
 
     const [data, setData] = useState<CollegeObject[]>([]);
 
+    const handleUniversityChange = (university: string) => {
+        setUniversity(university);
+
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
+    };
+
+    const handleGeChange = (ge: string) => {
+        setGE(ge);
+
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
+    };
+
     useEffect(() => {
         setLoading(true);
 
@@ -188,24 +208,27 @@ const Search = () => {
 
     return (
         <>
-            <div className="mt-16 min-h-[calc(100vh-96px)] px-36">
-                <div className="text-6xl font-bold">Search For Courses</div>
+            <div className="mb-16 mt-16 min-h-[calc(100vh-96px)] px-12 lg:px-36">
+                <div className="flex flex-wrap text-6xl font-bold">
+                    Search{" "}
+                    <span className="hidden md:flex">&nbsp;For Courses</span>
+                </div>
 
                 <form
                     action="submit"
                     onSubmit={handleSubmit}
                     className="mt-8 flex flex-row items-center justify-between"
                 >
-                    <div className="mr-8 flex flex-row gap-4 xl:gap-8">
+                    <div className="mr-8 flex flex-col gap-x-4 gap-y-2 md:flex-row xl:gap-8">
                         <DropdownComponentSearch
                             defaultValue={university}
                             data={Universities}
-                            onChange={setUniversity}
+                            onChange={handleUniversityChange}
                         />
                         <DropdownComponentSearch
                             defaultValue={ge}
                             data={GE_Categories}
-                            onChange={setGE}
+                            onChange={handleGeChange}
                         />
                     </div>
 
@@ -290,7 +313,7 @@ const Search = () => {
                             <div className="border-2 border-t border-bg_secondary"></div>
                         </div>
                         <div className="mt-16 flex flex-row gap-8">
-                            <div className="h-fit w-[450px] rounded-xl bg-bg_secondary p-8">
+                            <div className="hidden h-fit w-[450px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
                                 <div className="mb-8 text-3xl font-medium">
                                     Search Filters
                                 </div>
