@@ -8,6 +8,7 @@ import {
     CalendarFilter,
     CustomFilterCheckbox,
     InstitutionDropdown,
+    SortDropdown,
     UnitsFilter,
 } from "./filterComponents";
 import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
@@ -47,6 +48,25 @@ const Data = [
         endMonth: 5,
         endDay: 17,
         tuition: 230,
+        async: true,
+        hasOpenSeats: false,
+        hasPrereqs: false,
+        instantEnrollment: true,
+    },
+    {
+        college: "Ohlone College",
+        course: "ASN102 - Business Information Processing and Systems",
+        cvcId: "1051975",
+        assistId: "123",
+        niceToHaves: ["Online Tutoring", "Quality Reviewed"],
+        units: 5,
+        term: "Jan 22 - May 17",
+        transferability: [],
+        startMonth: 1,
+        startDay: 22,
+        endMonth: 5,
+        endDay: 17,
+        tuition: 120,
         async: true,
         hasOpenSeats: false,
         hasPrereqs: false,
@@ -195,6 +215,8 @@ const Search = () => {
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(20);
 
+    const [sort, setSort] = useState("Default Sort");
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         // console.log(university);
@@ -238,6 +260,20 @@ const Search = () => {
             endsBefore(result)
         );
     });
+
+    console.log(sort);
+
+    const sortedResults =
+        sort == "Alphabetical"
+            ? filteredResults.sort((courseA, courseB) => {
+                  return courseA.course.localeCompare(courseB.course);
+              })
+            : sort == "Tuition"
+              ? filteredResults.sort((courseA, courseB) => {
+                    console.log(courseA.tuition - courseB.tuition);
+                    return courseA.tuition - courseB.tuition;
+                })
+              : filteredResults;
 
     return (
         <>
@@ -360,26 +396,18 @@ const Search = () => {
                     <div className="w-[100%]">
                         <div className="mb-8 flex items-center justify-end gap-4">
                             <div className="text-lg text-gray">Sort By:</div>
-                            <div className="relative flex flex-col">
-                                <div className="relative">
-                                    <select
-                                        // value={value}
-                                        // onChange={handleChange}
-                                        className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
-                                    >
-                                        {/* {data.map((item) => (
-                                            <option key={item}>{item}</option>
-                                        ))} */}
-                                        <option>Alphabetical</option>
-                                    </select>
-                                    <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
-                                        <FaChevronDown />
-                                    </div>
-                                </div>
-                            </div>
+                            <SortDropdown
+                                defaultValue={sort}
+                                data={[
+                                    "Default Sort",
+                                    "Alphabetical",
+                                    "Tuition",
+                                ]}
+                                onChange={setSort}
+                            />
                         </div>
 
-                        <SearchResults results={filteredResults} />
+                        <SearchResults results={sortedResults} />
                     </div>
                 </div>
             </div>

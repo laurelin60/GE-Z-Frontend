@@ -133,6 +133,17 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
         setValue(e.target.value);
     };
 
+    const uniqueColleges = [];
+    const seenColleges: Record<string, boolean> = {};
+
+    for (const college of data) {
+        const collegeName = college.college;
+        if (!seenColleges[collegeName]) {
+            uniqueColleges.push(collegeName);
+            seenColleges[collegeName] = true;
+        }
+    }
+
     return (
         <div className="relative flex flex-col">
             <div className="mb-2 text-2xl font-medium">
@@ -145,11 +156,9 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
                     className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
                 >
                     <option>{"Any Institution"}</option>
-                    {data
-                        .map((college) => college.college)
-                        .map((item) => (
-                            <option key={item}>{item}</option>
-                        ))}
+                    {uniqueColleges.map((item) => (
+                        <option key={item}>{item}</option>
+                    ))}
                 </select>
                 <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
                     <FaChevronDown />
@@ -204,6 +213,42 @@ export const UnitsFilter = (props: any) => {
                 </div>
             </div>
             <div className="mt-4 border-2 border-t border-[#D9D9D9]"></div>
+        </div>
+    );
+};
+
+interface SortDropdownProps {
+    defaultValue: string;
+    data: string[];
+    onChange: any; // FIX ME
+}
+
+export const SortDropdown = (props: SortDropdownProps) => {
+    const { defaultValue, data, onChange } = props;
+
+    const [value, setValue] = useState(defaultValue);
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        onChange(e.target.value);
+        setValue(e.target.value);
+    };
+
+    return (
+        <div className="relative flex flex-col">
+            <div className="relative">
+                <select
+                    value={value}
+                    onChange={handleChange}
+                    className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
+                >
+                    {data.map((item) => (
+                        <option key={item}>{item}</option>
+                    ))}
+                </select>
+                <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
+                    <FaChevronDown />
+                </div>
+            </div>
         </div>
     );
 };
