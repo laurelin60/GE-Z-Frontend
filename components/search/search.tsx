@@ -95,6 +95,25 @@ const Search = () => {
         setOpen((open) => !open);
     };
 
+    const maxWidthForOpen = 1280;
+
+    const handleResize = () => {
+        if (window.innerWidth < maxWidthForOpen) {
+            setOpen(true);
+        } else {
+            setOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
 
