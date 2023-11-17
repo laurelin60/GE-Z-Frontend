@@ -12,6 +12,31 @@ import {
 } from "./filterComponents";
 import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
 
+const Data = [
+    {
+        college: "Ohlone College",
+        course: "BSN102 - Business Information Processing and Systems",
+        cvcId: "1051975",
+        assistId: "123",
+        niceToHaves: ["Online Tutoring", "Quality Reviewed"],
+        units: 5,
+        term: "Jan 22 - May 17",
+        transferability: [],
+        startMonth: 1,
+        startDay: 22,
+        endMonth: 5,
+        endDay: 17,
+        tuition: 230,
+        async: true,
+        hasOpenSeats: false,
+        hasPrereqs: false,
+        instantEnrollment: true,
+    },
+    // {
+    //     "...": "...",
+    // },
+];
+
 const Results = [
     {
         title: "CS150 - Computer Graphics - Illustrator",
@@ -40,7 +65,7 @@ const Tags = (props: any) => {
 
     if (tag == "Online Tutoring") {
         return (
-            <div className="border-gray text-gray flex w-fit flex-row items-center gap-2 rounded-full border-2 px-4 py-1 font-medium">
+            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
                     <FaChalkboard />
                 </div>
@@ -51,7 +76,7 @@ const Tags = (props: any) => {
 
     if (tag == "Zero Textbook Cost") {
         return (
-            <div className="border-gray text-gray flex w-fit flex-row items-center gap-2 rounded-full border-2 px-4 py-1 font-medium">
+            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
                     <FaHandHoldingDollar />
                 </div>
@@ -61,27 +86,37 @@ const Tags = (props: any) => {
     }
 };
 
-const SearchResults = () => {
+const SearchResults = (props: any) => {
+    const { async, enrollment, available, start, end } = props;
+
+    const filteredResults = Data.filter((result) => {
+        return (
+            result.async == async &&
+            result.instantEnrollment == enrollment &&
+            result.hasOpenSeats == available
+        );
+    });
+
     return (
         <>
             <div className="flex flex-col gap-8">
-                {Results.map((result) => (
+                {filteredResults.map((result) => (
                     <div
-                        className="border-gray rounded-t-lg border-2"
-                        key={result.title + result.institution}
+                        className="rounded-t-lg border-2 border-gray"
+                        key={result.course + result.college}
                     >
                         <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
                             <div className="text-xl font-semibold text-primary">
-                                {result.institution}
+                                {result.college}
                             </div>
                             <div className="text-3xl font-bold">
-                                {result.title}
+                                {result.course}
                             </div>
                         </div>
                         <div>
                             <div className="flex flex-row gap-2 px-8 py-4">
-                                {result.tags.map((tag) => (
-                                    <Tags tag={tag} key={tag} />
+                                {result.niceToHaves.map((tag) => (
+                                    <Tags tag={tag} key={tag.toString()} />
                                 ))}
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
@@ -101,7 +136,7 @@ const SearchResults = () => {
                                         Term
                                     </div>
                                     <div className="text-base font-light">
-                                        {`${result.start} - ${result.end}`}
+                                        {result.term}
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
@@ -139,6 +174,10 @@ const SearchResults = () => {
 };
 
 const Search = () => {
+    const [async, setAsync] = useState([true]);
+    const [enrollment, setEnrollment] = useState([true]);
+    const [available, setAvailable] = useState([true]);
+
     const [university, setUniversity] = useState(Universities[0]);
     const [ge, setGE] = useState(GE_Categories[0]);
 
@@ -192,7 +231,7 @@ const Search = () => {
                 <div className="mt-16 flex flex-col gap-8">
                     <div className="text-4xl font-medium">Search Results</div>
 
-                    <div className="text-gray text-xl font-normal">
+                    <div className="text-xl font-normal text-gray">
                         We found <b className="text-black">31 courses</b> that
                         may transfer to{" "}
                         <b className="text-black">
@@ -231,27 +270,31 @@ const Search = () => {
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <CustomFilterCheckbox
+                            {/* <CustomFilterCheckbox
                                 title="Terms"
+                                // DISABLED FOR WEBJAM
                                 categories={[
-                                    "Fall 2023",
+                                    // "Fall 2023",
                                     "Winter 2024",
-                                    "Spring 2024",
+                                    // "Spring 2024",
                                 ]}
-                            />
+                            /> */}
                             <CustomFilterCheckbox
                                 title="Online Format"
-                                categories={["Synchronous", "Asynchronous"]}
+                                categories={["Asynchronous"]}
+                                onChange={setAsync}
                             />
                             <CustomFilterCheckbox
                                 title="Instant Enrollment"
                                 categories={["Instant Enrollment"]}
+                                onChange={setEnrollment}
                             />
                             <CustomFilterCheckbox
                                 title="Available Seats"
                                 categories={[
                                     "Only show courses with available seats that are open for registration or open within three days",
                                 ]}
+                                onChange={setAvailable}
                             />
                             <CalendarFilter
                                 onStartChange={setStart}
@@ -271,27 +314,31 @@ const Search = () => {
 
                     <div className="w-[100%]">
                         <div className="mb-8 flex items-center justify-end gap-4">
-                            <div className="text-gray text-lg">Sort By:</div>
+                            <div className="text-lg text-gray">Sort By:</div>
                             <div className="relative flex flex-col">
                                 <div className="relative">
                                     <select
                                         // value={value}
                                         // onChange={handleChange}
-                                        className="text-regular border-gray block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] px-4 py-2 pr-12"
+                                        className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
                                     >
                                         {/* {data.map((item) => (
                                             <option key={item}>{item}</option>
                                         ))} */}
                                         <option>Alphabetical</option>
                                     </select>
-                                    <div className="text-gray absolute right-1 top-[14px] h-8 w-8">
+                                    <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
                                         <FaChevronDown />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <SearchResults />
+                        <SearchResults
+                            async={async[0]}
+                            enrollment={enrollment[0]}
+                            available={available[0]}
+                        />
                     </div>
                 </div>
             </div>
