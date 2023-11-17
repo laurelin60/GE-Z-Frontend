@@ -105,7 +105,7 @@ const Hero = () => {
                     <div className="flex place-content-center">
                         <button
                             type="submit"
-                            className="mt-8 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-20 xl:w-56 xl:text-3xl"
+                            className="mt-8 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all hover:border-4 hover:border-white active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-20 xl:w-56 xl:text-3xl"
                         >
                             <div>Search</div>
                             <FaSearch />
