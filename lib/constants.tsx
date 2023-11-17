@@ -1,13 +1,13 @@
 export const Universities = ["University of California - Irvine"];
 
 export const GE_Categories = [
-    "GE IA",
-    "GE IB",
+    "GE Ia",
+    "GE Ib",
     "GE II",
     "GE III",
     "GE IV",
-    "GE VA",
-    "GE VB",
+    "GE Va",
+    "GE Vb",
     "GE VI",
     "GE VII",
     "GE VIII",

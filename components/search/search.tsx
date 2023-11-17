@@ -17,7 +17,11 @@ import {
     SortDropdown,
     UnitsFilter,
 } from "./filterComponents";
-import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
+import {
+    FaCircleInfo,
+    FaHandHoldingDollar,
+    FaUpRightFromSquare,
+} from "react-icons/fa6";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
 
@@ -27,7 +31,7 @@ export interface CollegeObject {
     courseName: string;
     cvcId: string;
     niceToHaves: string[];
-    units: number;
+    units: string;
     term: string;
     startMonth: number;
     startDay: number;
@@ -39,8 +43,8 @@ export interface CollegeObject {
     hasPrereqs: boolean;
     instantEnrollment: boolean;
     fulfillsGEs: string[];
-    mapsToCourses: string[];
-    pdfID: string;
+    mapToCourses: string[];
+    pdfId: string;
 }
 
 const Data = [
@@ -50,7 +54,7 @@ const Data = [
         courseName: "Financial Accounting",
         cvcId: "1051975",
         niceToHaves: ["Online Tutoring", "Quality Reviewed"],
-        units: 5,
+        units: "5",
         term: "Jan 22 - May 17",
         startMonth: 1,
         startDay: 22,
@@ -62,8 +66,8 @@ const Data = [
         hasPrereqs: false,
         instantEnrollment: true,
         fulfillsGEs: ["Ia", "II", "VI"],
-        mapsToCourses: ["RZ101 - Introduction to Rizzology"],
-        pdfID: "12345678",
+        mapToCourses: ["RZ101 - Introduction to Rizzology"],
+        pdfId: "12345678",
     },
 ];
 
@@ -110,50 +114,70 @@ const SearchResults = (props: any) => {
     return (
         <>
             <div className="flex flex-col gap-8">
-                {results.map((result: CollegeObject) => (
-                    <div
-                        className="rounded-t-lg border-2 border-gray"
-                        key={
-                            result.courseCode +
-                            result.courseName +
-                            result.college
-                        }
-                    >
-                        <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
-                            <div className="text-xl font-semibold text-primary">
-                                {result.college}
-                            </div>
-                            <div className="text-3xl font-bold">
-                                {result.courseCode} {result.courseName}
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex flex-row gap-2 px-8 py-4">
-                                {result.niceToHaves.map((tag) => (
-                                    <Tags tag={tag} key={tag.toString()} />
-                                ))}
-                            </div>
-                            <div className="border-2 border-t border-bg_secondary"></div>
-                        </div>
-                        <div className="flex justify-between px-8 py-4">
-                            <div className="flex flex-row gap-8">
-                                <div className="flex flex-col">
-                                    <div className="text-sm font-medium">
-                                        Units
-                                    </div>
-                                    <div className="text-base font-light">
-                                        {`${result.units.toFixed(1)} Units`}
+                {results.map((result: CollegeObject) => {
+                    console.log(result);
+                    return (
+                        <div
+                            className="rounded-t-lg border-2 border-gray"
+                            key={
+                                result.courseCode +
+                                result.courseName +
+                                result.college
+                            }
+                        >
+                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
+                                <div className="w-[500px] truncate text-xl font-semibold text-primary">
+                                    {result.college}
+                                </div>
+                                <div className="flex flex-row justify-between">
+                                    <div className="text-3xl font-bold">
+                                        {result.courseCode} {result.courseName}
                                     </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <div className="text-sm font-medium">
-                                        Term
-                                    </div>
-                                    <div className="text-base font-light">
-                                        {result.term}
-                                    </div>
+                            </div>
+                            <div>
+                                <div className="flex flex-row gap-2 px-8 py-4">
+                                    {result.niceToHaves.map((tag) => (
+                                        <Tags tag={tag} key={tag.toString()} />
+                                    ))}
                                 </div>
-                                {/* <div className="flex flex-col">
+                                <div className="border-2 border-t border-bg_secondary"></div>
+                            </div>
+                            <div className="flex justify-between px-8 py-4">
+                                <div className="flex flex-row gap-8">
+                                    <div className="flex flex-col">
+                                        <div className="text-sm font-medium">
+                                            Units
+                                        </div>
+                                        <div className="text-base font-light">
+                                            {`${result.units} Units`}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="text-sm font-medium">
+                                            Term
+                                        </div>
+                                        <div className="text-base font-light">
+                                            {result.term}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="text-sm font-medium">
+                                            GEs
+                                        </div>
+                                        <div className="flex flex-row gap-2 text-base font-light">
+                                            {result.fulfillsGEs.join(", ")}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="text-sm font-medium">
+                                            Articulates To
+                                        </div>
+                                        <div className="flex flex-row gap-2 text-base font-light">
+                                            {result.mapToCourses.join(", ")}
+                                        </div>
+                                    </div>
+                                    {/* <div className="flex flex-col">
                                     <div className="text-sm font-medium">
                                         Transferability
                                     </div>
@@ -169,19 +193,47 @@ const SearchResults = (props: any) => {
                                         ))}
                                     </div>
                                 </div> */}
+                                </div>
                             </div>
-                            <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
-                                Tuition:{" "}
-                                <span className="text-primary">
-                                    {`$${result.tuition.toFixed(2)}`}
-                                </span>
-                                <div className="text-xl">
-                                    <FaCircleInfo />
+                            <div className="border-2 border-t border-bg_secondary"></div>
+                            <div className="flex justify-between px-8 py-4">
+                                <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
+                                    Tuition:{" "}
+                                    <span className="text-primary">
+                                        {`$${result.tuition.toFixed(2)}`}
+                                    </span>
+                                    {/* <div className="text-xl">
+                                        <FaCircleInfo />
+                                    </div> */}
+                                </div>
+                                <div className="flex items-center gap-4 font-medium">
+                                    <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
+                                        <a
+                                            href={`https://assist.org/transfer/report/${result.pdfId}`}
+                                            target="_blank"
+                                            referrerPolicy="no-referrer"
+                                            className="flex flex-row items-center gap-2"
+                                        >
+                                            View on Assist
+                                            <FaUpRightFromSquare />
+                                        </a>
+                                    </button>
+                                    <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
+                                        <a
+                                            href={`https://search.cvc.edu/courses/${result.cvcId}`}
+                                            target="_blank"
+                                            referrerPolicy="no-referrer"
+                                            className="flex flex-row items-center gap-2"
+                                        >
+                                            View on CVC
+                                            <FaUpRightFromSquare />
+                                        </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </>
     );
@@ -203,7 +255,7 @@ const Search = () => {
 
     const [async, setAsync] = useState([true, true]); // Async first, then synch
     const [enrollment, setEnrollment] = useState([true]);
-    const [available, setAvailable] = useState([false]);
+    const [available, setAvailable] = useState([true]);
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
     const [end, setEnd] = useState<string>();
     const [institution, setInstitution] = useState("Any Institution");
@@ -230,10 +282,12 @@ const Search = () => {
         };
 
         fetchData();
-    }, []);
+    }, [ge]);
 
     const handleSubmit = (e: FormEvent) => {
+        console.log("handle");
         e.preventDefault();
+
         router.push(
             `/search?university=${encodeURIComponent(
                 university,
@@ -265,18 +319,29 @@ const Search = () => {
 
     function filterData(data: CollegeObject[]) {
         const filteredResults = data?.filter((result) => {
+            const onlineFormat =
+                (async[0] && async[1]) ||
+                (result.async && async[0]) ||
+                (result.async == false && async[1]);
+            const instantEnrollment = enrollment[0]
+                ? result.instantEnrollment
+                : true;
+            const hasOpenSeats = available[0] ? result.hasOpenSeats : true;
+            const teachingInstitution =
+                result.college == institution ||
+                institution == "Any Institution";
+            const withinUnits =
+                parseFloat(result.units) >= min &&
+                parseFloat(result.units) <= max;
+            const withinTime = startsAfter(result) && endsBefore(result);
+
             return (
-                ((async[0] && async[1]) ||
-                    (result.async && async[0]) ||
-                    (result.async == false && async[1])) &&
-                result.instantEnrollment == enrollment[0] &&
-                result.hasOpenSeats == available[0] &&
-                (result.college == institution ||
-                    institution == "Any Institution") &&
-                result.units >= min &&
-                result.units <= max &&
-                startsAfter(result) &&
-                endsBefore(result)
+                onlineFormat &&
+                instantEnrollment &&
+                hasOpenSeats &&
+                teachingInstitution &&
+                withinUnits &&
+                withinTime
             );
         });
 
@@ -320,7 +385,7 @@ const Search = () => {
                         />
                     </div>
 
-                    <div className="flex place-content-center">
+                    {/* <div className="flex place-content-center">
                         <button
                             type="submit"
                             className="flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-16 xl:w-56 xl:text-3xl"
@@ -328,7 +393,7 @@ const Search = () => {
                             <div>Search</div>
                             <FaSearch />
                         </button>
-                    </div>
+                    </div> */}
                 </form>
 
                 {loading ? (
@@ -353,7 +418,7 @@ const Search = () => {
                             <div className="text-xl font-normal text-gray">
                                 We found{" "}
                                 <b className="text-black">
-                                    {data.length} courses
+                                    {filterData(data).length} courses
                                 </b>{" "}
                                 that may transfer to{" "}
                                 <b className="text-black">{searchUniversity}</b>{" "}
@@ -457,6 +522,7 @@ const Search = () => {
                                     />
                                 </div>
                                 <SearchResults results={filterData(data)} />
+                                {/* <SearchResults results={Data} /> */}
                             </div>
                         </div>
                     </div>
