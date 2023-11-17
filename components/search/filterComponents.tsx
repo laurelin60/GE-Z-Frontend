@@ -31,11 +31,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
     return (
         <div className="flex flex-col">
             <div className="mb-2 text-2xl font-medium">{title}</div>
-            <div
-                className={`grid ${
-                    categories.length > 1 ? "grid-cols-2" : "grid-cols-1"
-                } gap-y-2`}
-            >
+            <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 {categories.map((category, index) => (
                     <label className="text-lg font-normal" key={category}>
                         <div className="relative flex flex-row items-center gap-2">
@@ -50,7 +46,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
                             <div className="absolute left-[5px] text-sm text-white">
                                 {categoryStates[index] && <FaCheck />}
                             </div>
-                            <div className="max-w-[90%] text-base">
+                            <div className="max-w-[85%] text-base">
                                 {category}
                             </div>
                         </div>
@@ -84,7 +80,7 @@ export const CalendarFilter = (props: any) => {
     return (
         <div className="relative flex flex-col">
             <div className="mb-2 text-2xl font-medium">Timeframe</div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 <div>
                     <label className="text-sm font-medium text-gray">
                         Starts After
@@ -188,7 +184,7 @@ export const UnitsFilter = (props: any) => {
     return (
         <div className="relative flex flex-col">
             <div className="mb-2 text-2xl font-medium">Units</div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 <div>
                     <label className="text-sm font-medium text-gray">Min</label>
                     <div className="flex flex-row items-center gap-2">

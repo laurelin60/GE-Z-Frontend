@@ -235,7 +235,7 @@ const Search = () => {
     return (
         <>
             {open ? (
-                <div className="absolute left-0 top-0 z-50 h-[100vh] w-[100vw] bg-bg_secondary p-8 xl:hidden">
+                <div className="absolute left-0 top-0 z-50 h-fit w-[100vw] bg-bg_secondary p-8 xl:hidden">
                     <div className="mb-8 flex flex-row justify-between">
                         <div className="text-3xl font-medium">
                             Search Filters
@@ -409,7 +409,7 @@ const Search = () => {
                             </div>
 
                             <div className="mt-16 flex flex-row gap-8">
-                                <div className="hidden h-fit w-[450px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                                <div className="hidden h-fit w-[550px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
                                     <div className="mb-8 text-3xl font-medium">
                                         Search Filters
                                     </div>
