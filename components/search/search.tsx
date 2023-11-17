@@ -12,6 +12,26 @@ import {
 } from "./filterComponents";
 import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
 
+export interface CollegeObject {
+    college: string;
+    course: string;
+    cvcId: string;
+    assistId: string;
+    niceToHaves: string[];
+    units: number;
+    term: string;
+    transferability: string[];
+    startMonth: number;
+    startDay: number;
+    endMonth: number;
+    endDay: number;
+    tuition: number;
+    async: boolean;
+    hasOpenSeats: boolean;
+    hasPrereqs: boolean;
+    instantEnrollment: boolean;
+}
+
 const Data = [
     {
         college: "Ohlone College",
@@ -32,9 +52,6 @@ const Data = [
         hasPrereqs: false,
         instantEnrollment: true,
     },
-    // {
-    //     "...": "...",
-    // },
 ];
 
 const Results = [
@@ -87,20 +104,12 @@ const Tags = (props: any) => {
 };
 
 const SearchResults = (props: any) => {
-    const { async, enrollment, available, start, end } = props;
-
-    const filteredResults = Data.filter((result) => {
-        return (
-            result.async == async &&
-            result.instantEnrollment == enrollment &&
-            result.hasOpenSeats == available
-        );
-    });
+    const { results } = props;
 
     return (
         <>
             <div className="flex flex-col gap-8">
-                {filteredResults.map((result) => (
+                {results.map((result: CollegeObject) => (
                     <div
                         className="rounded-t-lg border-2 border-gray"
                         key={result.course + result.college}
@@ -174,18 +183,15 @@ const SearchResults = (props: any) => {
 };
 
 const Search = () => {
-    const [async, setAsync] = useState([true]);
-    const [enrollment, setEnrollment] = useState([true]);
-    const [available, setAvailable] = useState([true]);
-
     const [university, setUniversity] = useState(Universities[0]);
     const [ge, setGE] = useState(GE_Categories[0]);
 
+    const [async, setAsync] = useState([true]);
+    const [enrollment, setEnrollment] = useState([true]);
+    const [available, setAvailable] = useState([false]);
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
-    const [end, setEnd] = useState();
-
-    const [institution, setInstitution] = useState(Institutions[0]);
-
+    const [end, setEnd] = useState<string>();
+    const [institution, setInstitution] = useState("Any Institution");
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(20);
 
@@ -196,6 +202,42 @@ const Search = () => {
 
         return;
     };
+
+    const startsAfter = (result: CollegeObject) => {
+        if (start == undefined) return true;
+
+        return (
+            `2024-${result.startMonth
+                .toString()
+                .padStart(2, "0")}-${result.startDay
+                .toString()
+                .padStart(2, "0")}` >= start
+        );
+    };
+
+    const endsBefore = (result: CollegeObject) => {
+        if (end == undefined) return true;
+
+        return (
+            `2024-${result.endMonth.toString().padStart(2, "0")}-${result.endDay
+                .toString()
+                .padStart(2, "0")}` <= end
+        );
+    };
+
+    const filteredResults = Data.filter((result) => {
+        return (
+            result.async == async[0] &&
+            result.instantEnrollment == enrollment[0] &&
+            result.hasOpenSeats == available[0] &&
+            (result.college == institution ||
+                institution == "Any Institution") &&
+            result.units >= min &&
+            result.units <= max &&
+            startsAfter(result) &&
+            endsBefore(result)
+        );
+    });
 
     return (
         <>
@@ -283,11 +325,13 @@ const Search = () => {
                                 title="Online Format"
                                 categories={["Asynchronous"]}
                                 onChange={setAsync}
+                                defaultValue={async[0]}
                             />
                             <CustomFilterCheckbox
                                 title="Instant Enrollment"
                                 categories={["Instant Enrollment"]}
                                 onChange={setEnrollment}
+                                defaultValue={enrollment[0]}
                             />
                             <CustomFilterCheckbox
                                 title="Available Seats"
@@ -295,14 +339,15 @@ const Search = () => {
                                     "Only show courses with available seats that are open for registration or open within three days",
                                 ]}
                                 onChange={setAvailable}
+                                defaultValue={available[0]}
                             />
                             <CalendarFilter
                                 onStartChange={setStart}
                                 onEndChange={setEnd}
                             />
                             <InstitutionDropdown
-                                defaultValue={Institutions[0]}
-                                data={Institutions}
+                                defaultValue={"Any Institution"}
+                                data={Data}
                                 onChange={setInstitution}
                             />
                             <UnitsFilter
@@ -334,11 +379,7 @@ const Search = () => {
                             </div>
                         </div>
 
-                        <SearchResults
-                            async={async[0]}
-                            enrollment={enrollment[0]}
-                            available={available[0]}
-                        />
+                        <SearchResults results={filteredResults} />
                     </div>
                 </div>
             </div>
