@@ -207,10 +207,13 @@ const Search = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const searchUniversity = searchParams.get("university");
+    const searchGE = searchParams.get("ge");
+
     const [university, setUniversity] = useState(
-        searchParams.get("university") || Universities[0],
+        searchUniversity || Universities[0],
     );
-    const [ge, setGE] = useState(searchParams.get("ge") || GE_Categories[0]);
+    const [ge, setGE] = useState(searchGE || GE_Categories[0]);
 
     const [async, setAsync] = useState([true]);
     const [enrollment, setEnrollment] = useState([true]);
@@ -319,13 +322,14 @@ const Search = () => {
                     <div className="text-4xl font-medium">Search Results</div>
 
                     <div className="text-xl font-normal text-gray">
-                        We found <b className="text-black">31 courses</b> that
+                        We found{" "}
+                        <b className="text-black">{Data.length} courses</b> that
                         may transfer to{" "}
-                        <b className="text-black">
-                            University of California - Irvine
-                        </b>{" "}
-                        for <b className="text-black">GE Category III</b> based
-                        on{" "}
+                        <b className="text-black">{searchUniversity}</b> for{" "}
+                        <b className="text-black">{`${searchGE?.split(
+                            " ",
+                        )[0]} Category ${searchGE?.split(" ")[1]}`}</b>{" "}
+                        based on{" "}
                         <a
                             href="https://assist.org/"
                             target="_blank"
