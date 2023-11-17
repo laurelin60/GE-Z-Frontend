@@ -3,6 +3,7 @@
 import { GE_Categories, Universities } from "@/lib/constants";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 interface DropdownComponentProps {
     defaultValue: string;
@@ -41,15 +42,18 @@ const DropdownComponent = (props: DropdownComponentProps) => {
 };
 
 const Hero = () => {
+    const router = useRouter();
+
     const [university, setUniversity] = useState(Universities[0]);
     const [ge, setGE] = useState(GE_Categories[0]);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        // console.log(university);
-        // console.log(ge);
-
-        return;
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
     };
 
     return (

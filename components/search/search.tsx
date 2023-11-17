@@ -12,6 +12,7 @@ import {
     UnitsFilter,
 } from "./filterComponents";
 import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export interface CollegeObject {
     college: string;
@@ -203,8 +204,13 @@ const SearchResults = (props: any) => {
 };
 
 const Search = () => {
-    const [university, setUniversity] = useState(Universities[0]);
-    const [ge, setGE] = useState(GE_Categories[0]);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const [university, setUniversity] = useState(
+        searchParams.get("university") || Universities[0],
+    );
+    const [ge, setGE] = useState(searchParams.get("ge") || GE_Categories[0]);
 
     const [async, setAsync] = useState([true]);
     const [enrollment, setEnrollment] = useState([true]);
@@ -219,10 +225,11 @@ const Search = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        // console.log(university);
-        // console.log(ge);
-
-        return;
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
     };
 
     const startsAfter = (result: CollegeObject) => {
@@ -261,8 +268,6 @@ const Search = () => {
         );
     });
 
-    console.log(sort);
-
     const sortedResults =
         sort == "Alphabetical"
             ? filteredResults.sort((courseA, courseB) => {
@@ -280,15 +285,19 @@ const Search = () => {
             <div className="mt-16 min-h-[calc(100vh-96px)] px-36">
                 <div className="text-6xl font-bold">Search For Courses</div>
 
-                <div className="mt-8 flex flex-row items-center justify-between">
+                <form
+                    action="submit"
+                    onSubmit={handleSubmit}
+                    className="mt-8 flex flex-row items-center justify-between"
+                >
                     <div className="mr-8 flex flex-row gap-4 xl:gap-8">
                         <DropdownComponentSearch
-                            defaultValue={Universities[0]}
+                            defaultValue={university}
                             data={Universities}
                             onChange={setUniversity}
                         />
                         <DropdownComponentSearch
-                            defaultValue={GE_Categories[0]}
+                            defaultValue={ge}
                             data={GE_Categories}
                             onChange={setGE}
                         />
@@ -303,7 +312,7 @@ const Search = () => {
                             <FaSearch />
                         </button>
                     </div>
-                </div>
+                </form>
 
                 {/* Search Results Blurb */}
                 <div className="mt-16 flex flex-col gap-8">
