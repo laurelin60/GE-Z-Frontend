@@ -2,14 +2,7 @@
 
 import React, { FormEvent, useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { GE_Categories, Institutions, Universities } from "@/lib/constants";
-import {
-    FaAward,
-    FaChalkboard,
-    FaCheck,
-    FaChevronDown,
-    FaSearch,
-} from "react-icons/fa";
+import { GE_Categories, Universities } from "@/lib/constants";
 import {
     CalendarFilter,
     CustomFilterCheckbox,
@@ -17,13 +10,9 @@ import {
     SortDropdown,
     UnitsFilter,
 } from "./filterComponents";
-import {
-    FaCircleInfo,
-    FaHandHoldingDollar,
-    FaUpRightFromSquare,
-} from "react-icons/fa6";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
+import SearchResults from "./searchResults";
 
 export interface CollegeObject {
     college: string;
@@ -71,174 +60,6 @@ const Data = [
     },
 ];
 
-const Tags = (props: any) => {
-    const { tag } = props;
-
-    if (tag == "Online Tutoring") {
-        return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <FaChalkboard />
-                </div>
-                <div>Online Tutoring</div>
-            </div>
-        );
-    }
-
-    if (tag == "Zero Textbook Cost") {
-        return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <FaHandHoldingDollar />
-                </div>
-                <div>Zero Textbook Cost</div>
-            </div>
-        );
-    }
-
-    if (tag == "Quality Reviewed") {
-        return (
-            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <FaAward />
-                </div>
-                <div>Quality Reviewed</div>
-            </div>
-        );
-    }
-};
-
-const SearchResults = (props: any) => {
-    const { results } = props;
-
-    return (
-        <>
-            <div className="flex flex-col gap-8">
-                {results.map((result: CollegeObject) => {
-                    console.log(result);
-                    return (
-                        <div
-                            className="rounded-t-lg border-2 border-gray"
-                            key={
-                                result.courseCode +
-                                result.courseName +
-                                result.college
-                            }
-                        >
-                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
-                                <div className="w-[500px] truncate text-xl font-semibold text-primary">
-                                    {result.college}
-                                </div>
-                                <div className="flex flex-row justify-between">
-                                    <div className="text-3xl font-bold">
-                                        {result.courseCode} {result.courseName}
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="flex flex-row gap-2 px-8 py-4">
-                                    {result.niceToHaves.map((tag) => (
-                                        <Tags tag={tag} key={tag.toString()} />
-                                    ))}
-                                </div>
-                                <div className="border-2 border-t border-bg_secondary"></div>
-                            </div>
-                            <div className="flex justify-between px-8 py-4">
-                                <div className="flex flex-row gap-8">
-                                    <div className="flex flex-col">
-                                        <div className="text-sm font-medium">
-                                            Units
-                                        </div>
-                                        <div className="text-base font-light">
-                                            {`${result.units} Units`}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <div className="text-sm font-medium">
-                                            Term
-                                        </div>
-                                        <div className="text-base font-light">
-                                            {result.term}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <div className="text-sm font-medium">
-                                            GEs
-                                        </div>
-                                        <div className="flex flex-row gap-2 text-base font-light">
-                                            {result.fulfillsGEs.join(", ")}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <div className="text-sm font-medium">
-                                            Articulates To
-                                        </div>
-                                        <div className="flex flex-row gap-2 text-base font-light">
-                                            {result.mapToCourses.join(", ")}
-                                        </div>
-                                    </div>
-                                    {/* <div className="flex flex-col">
-                                    <div className="text-sm font-medium">
-                                        Transferability
-                                    </div>
-                                    <div className="flex flex-row gap-4 text-base font-light">
-                                        {result.mapsToCourses.map((item) => (
-                                            <div
-                                                className="flex items-center gap-2"
-                                                key={item}
-                                            >
-                                                <FaCheck />
-                                                <div>{item}</div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div> */}
-                                </div>
-                            </div>
-                            <div className="border-2 border-t border-bg_secondary"></div>
-                            <div className="flex justify-between px-8 py-4">
-                                <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
-                                    Tuition:{" "}
-                                    <span className="text-primary">
-                                        {`$${result.tuition.toFixed(2)}`}
-                                    </span>
-                                    {/* <div className="text-xl">
-                                        <FaCircleInfo />
-                                    </div> */}
-                                </div>
-                                <div className="flex items-center gap-4 font-medium">
-                                    <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
-                                        <a
-                                            href={`https://assist.org/transfer/report/${result.pdfId}`}
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="flex flex-row items-center gap-2"
-                                        >
-                                            View on Assist
-                                            <FaUpRightFromSquare />
-                                        </a>
-                                    </button>
-                                    <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
-                                        <a
-                                            href={`https://search.cvc.edu/courses/${result.cvcId}`}
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="flex flex-row items-center gap-2"
-                                        >
-                                            View on CVC
-                                            <FaUpRightFromSquare />
-                                        </a>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        </>
-    );
-};
-
 const Search = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -285,7 +106,6 @@ const Search = () => {
     }, [ge]);
 
     const handleSubmit = (e: FormEvent) => {
-        console.log("handle");
         e.preventDefault();
 
         router.push(
@@ -457,15 +277,15 @@ const Search = () => {
                                     Search Filters
                                 </div>
                                 <div className="flex flex-col gap-4">
+                                    {/* DISABLED FOR WEBJAM */}
                                     {/* <CustomFilterCheckbox
-                                    title="Terms"
-                                    // DISABLED FOR WEBJAM
-                                    categories={[
-                                        // "Fall 2023",
-                                        "Winter 2024",
-                                        // "Spring 2024",
-                                    ]}
-                                /> */}
+                                        title="Terms"
+                                        categories={[
+                                            // "Fall 2023",
+                                            "Winter 2024",
+                                            // "Spring 2024",
+                                        ]}
+                                    /> */}
                                     <CustomFilterCheckbox
                                         title="Online Format"
                                         categories={[
@@ -522,7 +342,6 @@ const Search = () => {
                                     />
                                 </div>
                                 <SearchResults results={filterData(data)} />
-                                {/* <SearchResults results={Data} /> */}
                             </div>
                         </div>
                     </div>
