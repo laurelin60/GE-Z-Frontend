@@ -1,9 +1,15 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { GE_Categories, Institutions, Universities } from "@/lib/constants";
-import { FaChalkboard, FaCheck, FaChevronDown, FaSearch } from "react-icons/fa";
+import {
+    FaAward,
+    FaChalkboard,
+    FaCheck,
+    FaChevronDown,
+    FaSearch,
+} from "react-icons/fa";
 import {
     CalendarFilter,
     CustomFilterCheckbox,
@@ -13,16 +19,16 @@ import {
 } from "./filterComponents";
 import { FaCircleInfo, FaHandHoldingDollar } from "react-icons/fa6";
 import { useRouter, useSearchParams } from "next/navigation";
+import { queryDatabase } from "./queryDatabase";
 
 export interface CollegeObject {
     college: string;
-    course: string;
+    courseCode: string;
+    courseName: string;
     cvcId: string;
-    assistId: string;
     niceToHaves: string[];
     units: number;
     term: string;
-    transferability: string[];
     startMonth: number;
     startDay: number;
     endMonth: number;
@@ -32,18 +38,20 @@ export interface CollegeObject {
     hasOpenSeats: boolean;
     hasPrereqs: boolean;
     instantEnrollment: boolean;
+    fulfillsGEs: string[];
+    mapsToCourses: string[];
+    pdfID: string;
 }
 
 const Data = [
     {
         college: "Ohlone College",
-        course: "BSN102 - Business Information Processing and Systems",
+        courseCode: "BA101A",
+        courseName: "Financial Accounting",
         cvcId: "1051975",
-        assistId: "123",
         niceToHaves: ["Online Tutoring", "Quality Reviewed"],
         units: 5,
         term: "Jan 22 - May 17",
-        transferability: [],
         startMonth: 1,
         startDay: 22,
         endMonth: 5,
@@ -53,48 +61,9 @@ const Data = [
         hasOpenSeats: false,
         hasPrereqs: false,
         instantEnrollment: true,
-    },
-    {
-        college: "Ohlone College",
-        course: "ASN102 - Business Information Processing and Systems",
-        cvcId: "1051975",
-        assistId: "123",
-        niceToHaves: ["Online Tutoring", "Quality Reviewed"],
-        units: 5,
-        term: "Jan 22 - May 17",
-        transferability: [],
-        startMonth: 1,
-        startDay: 22,
-        endMonth: 5,
-        endDay: 17,
-        tuition: 120,
-        async: true,
-        hasOpenSeats: false,
-        hasPrereqs: false,
-        instantEnrollment: true,
-    },
-];
-
-const Results = [
-    {
-        title: "CS150 - Computer Graphics - Illustrator",
-        institution: "Irvine Valley College",
-        tags: ["Online Tutoring", "Zero Textbook Cost"],
-        units: 3.0,
-        start: "Jan 08",
-        end: "March 26",
-        transferability: ["IGETC", "CSU Breadth"],
-        tuition: 138,
-    },
-    {
-        title: "ANTHRO125 - Sex, Gender, and Culture",
-        institution: "Foothill College",
-        tags: ["Online Tutoring"],
-        units: 4.0,
-        start: "Jan 11",
-        end: "March 31",
-        transferability: ["IGETC"],
-        tuition: 120,
+        fulfillsGEs: ["Ia", "II", "VI"],
+        mapsToCourses: ["RZ101 - Introduction to Rizzology"],
+        pdfID: "12345678",
     },
 ];
 
@@ -122,6 +91,17 @@ const Tags = (props: any) => {
             </div>
         );
     }
+
+    if (tag == "Quality Reviewed") {
+        return (
+            <div className="flex w-fit flex-row items-center gap-2 rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
+                <div className="text-black">
+                    <FaAward />
+                </div>
+                <div>Quality Reviewed</div>
+            </div>
+        );
+    }
 };
 
 const SearchResults = (props: any) => {
@@ -133,14 +113,18 @@ const SearchResults = (props: any) => {
                 {results.map((result: CollegeObject) => (
                     <div
                         className="rounded-t-lg border-2 border-gray"
-                        key={result.course + result.college}
+                        key={
+                            result.courseCode +
+                            result.courseName +
+                            result.college
+                        }
                     >
                         <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
                             <div className="text-xl font-semibold text-primary">
                                 {result.college}
                             </div>
                             <div className="text-3xl font-bold">
-                                {result.course}
+                                {result.courseCode} {result.courseName}
                             </div>
                         </div>
                         <div>
@@ -169,12 +153,12 @@ const SearchResults = (props: any) => {
                                         {result.term}
                                     </div>
                                 </div>
-                                <div className="flex flex-col">
+                                {/* <div className="flex flex-col">
                                     <div className="text-sm font-medium">
                                         Transferability
                                     </div>
                                     <div className="flex flex-row gap-4 text-base font-light">
-                                        {result.transferability.map((item) => (
+                                        {result.mapsToCourses.map((item) => (
                                             <div
                                                 className="flex items-center gap-2"
                                                 key={item}
@@ -184,7 +168,7 @@ const SearchResults = (props: any) => {
                                             </div>
                                         ))}
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
                                 Tuition:{" "}
@@ -207,6 +191,8 @@ const Search = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const [loading, setLoading] = useState(true);
+
     const searchUniversity = searchParams.get("university");
     const searchGE = searchParams.get("ge");
 
@@ -215,7 +201,7 @@ const Search = () => {
     );
     const [ge, setGE] = useState(searchGE || GE_Categories[0]);
 
-    const [async, setAsync] = useState([true]);
+    const [async, setAsync] = useState([true, true]); // Async first, then synch
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([false]);
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
@@ -225,6 +211,26 @@ const Search = () => {
     const [max, setMax] = useState(20);
 
     const [sort, setSort] = useState("Default Sort");
+
+    const [data, setData] = useState<CollegeObject[]>([]);
+
+    useEffect(() => {
+        setLoading(true);
+
+        const fetchData = async () => {
+            try {
+                const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
+                const data = await queryDatabase(geParam);
+
+                setData(data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -257,31 +263,39 @@ const Search = () => {
         );
     };
 
-    const filteredResults = Data.filter((result) => {
-        return (
-            result.async == async[0] &&
-            result.instantEnrollment == enrollment[0] &&
-            result.hasOpenSeats == available[0] &&
-            (result.college == institution ||
-                institution == "Any Institution") &&
-            result.units >= min &&
-            result.units <= max &&
-            startsAfter(result) &&
-            endsBefore(result)
-        );
-    });
+    function filterData(data: CollegeObject[]) {
+        const filteredResults = data?.filter((result) => {
+            return (
+                ((async[0] && async[1]) ||
+                    (result.async && async[0]) ||
+                    (result.async == false && async[1])) &&
+                result.instantEnrollment == enrollment[0] &&
+                result.hasOpenSeats == available[0] &&
+                (result.college == institution ||
+                    institution == "Any Institution") &&
+                result.units >= min &&
+                result.units <= max &&
+                startsAfter(result) &&
+                endsBefore(result)
+            );
+        });
 
-    const sortedResults =
-        sort == "Alphabetical"
-            ? filteredResults.sort((courseA, courseB) => {
-                  return courseA.course.localeCompare(courseB.course);
-              })
-            : sort == "Tuition"
-              ? filteredResults.sort((courseA, courseB) => {
-                    console.log(courseA.tuition - courseB.tuition);
-                    return courseA.tuition - courseB.tuition;
-                })
-              : filteredResults;
+        const sortedResults =
+            sort == "Alphabetical"
+                ? filteredResults.sort((courseA, courseB) => {
+                      const nameA = courseA.courseCode + courseA.courseName;
+                      const nameB = courseB.courseCode + courseB.courseName;
+
+                      return nameA.localeCompare(nameB);
+                  })
+                : sort == "Tuition"
+                  ? filteredResults.sort((courseA, courseB) => {
+                        return courseA.tuition - courseB.tuition;
+                    })
+                  : filteredResults;
+
+        return sortedResults;
+    }
 
     return (
         <>
@@ -317,112 +331,126 @@ const Search = () => {
                     </div>
                 </form>
 
-                {/* Search Results Blurb */}
-                <div className="mt-16 flex flex-col gap-8">
-                    <div className="text-4xl font-medium">Search Results</div>
-
-                    <div className="text-xl font-normal text-gray">
-                        We found{" "}
-                        <b className="text-black">{Data.length} courses</b> that
-                        may transfer to{" "}
-                        <b className="text-black">{searchUniversity}</b> for{" "}
-                        <b className="text-black">{`${searchGE?.split(
-                            " ",
-                        )[0]} Category ${searchGE?.split(" ")[1]}`}</b>{" "}
-                        based on{" "}
-                        <a
-                            href="https://assist.org/"
-                            target="_blank"
-                            referrerPolicy="no-referrer"
-                            className="underline underline-offset-[5px]"
-                        >
-                            Assist.org
-                        </a>{" "}
-                        and{" "}
-                        <a
-                            href="https://cvc.edu/"
-                            target="_blank"
-                            referrerPolicy="no-referrer"
-                            className="underline underline-offset-[5px]"
-                        >
-                            CVC.edu
-                        </a>
-                        . Please consult an academic advisor for further
-                        information.
-                    </div>
-
-                    <div className="border-2 border-t border-bg_secondary"></div>
-                </div>
-
-                <div className="mt-16 flex flex-row gap-8">
-                    <div className="h-fit w-[450px] rounded-xl bg-bg_secondary p-8">
-                        <div className="mb-8 text-3xl font-medium">
-                            Search Filters
+                {loading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <div>
+                        {/* Search Results Blurb */}
+                        <div className="mt-16 flex flex-col gap-8">
+                            <div className="text-4xl font-medium">
+                                Search Results
+                            </div>
+                            <div className="text-xl font-normal text-gray">
+                                We found{" "}
+                                <b className="text-black">
+                                    {data.length} courses
+                                </b>{" "}
+                                that may transfer to{" "}
+                                <b className="text-black">{searchUniversity}</b>{" "}
+                                for{" "}
+                                <b className="text-black">{`${searchGE?.split(
+                                    " ",
+                                )[0]} Category ${searchGE?.split(
+                                    " ",
+                                )[1]}`}</b>{" "}
+                                based on{" "}
+                                <a
+                                    href="https://assist.org/"
+                                    target="_blank"
+                                    referrerPolicy="no-referrer"
+                                    className="underline underline-offset-[5px]"
+                                >
+                                    Assist.org
+                                </a>{" "}
+                                and{" "}
+                                <a
+                                    href="https://cvc.edu/"
+                                    target="_blank"
+                                    referrerPolicy="no-referrer"
+                                    className="underline underline-offset-[5px]"
+                                >
+                                    CVC.edu
+                                </a>
+                                . Please consult an academic advisor for further
+                                information.
+                            </div>
+                            <div className="border-2 border-t border-bg_secondary"></div>
                         </div>
-
-                        <div className="flex flex-col gap-4">
-                            {/* <CustomFilterCheckbox
-                                title="Terms"
-                                // DISABLED FOR WEBJAM
-                                categories={[
-                                    // "Fall 2023",
-                                    "Winter 2024",
-                                    // "Spring 2024",
-                                ]}
-                            /> */}
-                            <CustomFilterCheckbox
-                                title="Online Format"
-                                categories={["Asynchronous"]}
-                                onChange={setAsync}
-                                defaultValue={async[0]}
-                            />
-                            <CustomFilterCheckbox
-                                title="Instant Enrollment"
-                                categories={["Instant Enrollment"]}
-                                onChange={setEnrollment}
-                                defaultValue={enrollment[0]}
-                            />
-                            <CustomFilterCheckbox
-                                title="Available Seats"
-                                categories={[
-                                    "Only show courses with available seats that are open for registration or open within three days",
-                                ]}
-                                onChange={setAvailable}
-                                defaultValue={available[0]}
-                            />
-                            <CalendarFilter
-                                onStartChange={setStart}
-                                onEndChange={setEnd}
-                            />
-                            <InstitutionDropdown
-                                defaultValue={"Any Institution"}
-                                data={Data}
-                                onChange={setInstitution}
-                            />
-                            <UnitsFilter
-                                onMinChange={setMin}
-                                onMaxChange={setMax}
-                            />
+                        <div className="mt-16 flex flex-row gap-8">
+                            <div className="h-fit w-[450px] rounded-xl bg-bg_secondary p-8">
+                                <div className="mb-8 text-3xl font-medium">
+                                    Search Filters
+                                </div>
+                                <div className="flex flex-col gap-4">
+                                    {/* <CustomFilterCheckbox
+                                    title="Terms"
+                                    // DISABLED FOR WEBJAM
+                                    categories={[
+                                        // "Fall 2023",
+                                        "Winter 2024",
+                                        // "Spring 2024",
+                                    ]}
+                                /> */}
+                                    <CustomFilterCheckbox
+                                        title="Online Format"
+                                        categories={[
+                                            "Asynchronous",
+                                            "Synchronous",
+                                        ]}
+                                        onChange={setAsync}
+                                        defaultValue={async[0]}
+                                    />
+                                    <CustomFilterCheckbox
+                                        title="Instant Enrollment"
+                                        categories={[
+                                            "Only show courses eligible for One-Click Registration between your home school and the teaching school",
+                                        ]}
+                                        onChange={setEnrollment}
+                                        defaultValue={enrollment[0]}
+                                    />
+                                    <CustomFilterCheckbox
+                                        title="Available Seats"
+                                        categories={[
+                                            "Only show courses with available seats that are open for registration or open within three days",
+                                        ]}
+                                        onChange={setAvailable}
+                                        defaultValue={available[0]}
+                                    />
+                                    <CalendarFilter
+                                        onStartChange={setStart}
+                                        onEndChange={setEnd}
+                                    />
+                                    <InstitutionDropdown
+                                        defaultValue={"Any Institution"}
+                                        data={data}
+                                        onChange={setInstitution}
+                                    />
+                                    <UnitsFilter
+                                        onMinChange={setMin}
+                                        onMaxChange={setMax}
+                                    />
+                                </div>
+                            </div>
+                            <div className="w-[100%]">
+                                <div className="mb-8 flex items-center justify-end gap-4">
+                                    <div className="text-lg text-gray">
+                                        Sort By:
+                                    </div>
+                                    <SortDropdown
+                                        defaultValue={sort}
+                                        data={[
+                                            "Default Sort",
+                                            "Alphabetical",
+                                            "Tuition",
+                                        ]}
+                                        onChange={setSort}
+                                    />
+                                </div>
+                                <SearchResults results={filterData(data)} />
+                            </div>
                         </div>
                     </div>
-
-                    <div className="w-[100%]">
-                        <div className="mb-8 flex items-center justify-end gap-4">
-                            <div className="text-lg text-gray">Sort By:</div>
-                            <SortDropdown
-                                defaultValue={sort}
-                                data={[
-                                    "Default Sort",
-                                    "Alphabetical",
-                                    "Tuition",
-                                ]}
-                                onChange={setSort}
-                            />
-                        </div>
-
-                        <SearchResults results={sortedResults} />
-                    </div>
-                </div>
+                )}
             </div>
         </>
     );
