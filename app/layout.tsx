@@ -7,9 +7,9 @@ import Footer from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Degree-EZ",
+    title: "GE-Z",
     description:
-        "Degree-EZ sources data from Assist.org and CVC.edu to find the perfect community college courses for you to take.",
+        "GE-Z sources data from Assist.org and CVC.edu to find the perfect community college courses for you to take.",
 };
 
 export default function RootLayout({
