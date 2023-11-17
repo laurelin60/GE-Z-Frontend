@@ -90,6 +90,7 @@ const Search = () => {
     const [data, setData] = useState<CollegeObject[]>([]);
 
     const [open, setOpen] = useState(false);
+    const [width, setWidth] = useState<number>(0);
 
     const handleClick = () => {
         setOpen((open) => !open);
@@ -98,15 +99,10 @@ const Search = () => {
     const maxWidthForOpen = 1280;
 
     const handleResize = () => {
-        if (window.innerWidth < maxWidthForOpen) {
-            setOpen(true);
-        } else {
-            setOpen(false);
-        }
+        setWidth(window.innerWidth);
     };
 
     useEffect(() => {
-        handleResize();
         window.addEventListener("resize", handleResize);
 
         return () => {
@@ -234,7 +230,7 @@ const Search = () => {
 
     return (
         <>
-            {open ? (
+            {open && width < maxWidthForOpen ? (
                 <div className="absolute left-0 top-0 z-50 h-fit w-[100vw] bg-bg_secondary p-8 xl:hidden">
                     <div className="mb-8 flex flex-row justify-between">
                         <div className="text-3xl font-medium">
