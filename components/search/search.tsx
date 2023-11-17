@@ -65,6 +65,7 @@ const Search = () => {
     const searchParams = useSearchParams();
 
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const searchUniversity = searchParams.get("university");
     const searchGE = searchParams.get("ge");
@@ -97,7 +98,10 @@ const Search = () => {
 
                 setData(data);
                 setLoading(false);
+                setError(false);
             } catch (error) {
+                setLoading(false);
+                setError(true);
                 console.error("Error fetching data:", error);
             }
         };
@@ -227,6 +231,20 @@ const Search = () => {
                             />
                         </div>
                         <div className="flex justify-center">Loading...</div>
+                    </div>
+                ) : error ? (
+                    <div className="mt-16 flex flex-col gap-2 text-2xl">
+                        <div className="flex justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/error.png"
+                                alt="error"
+                                className="flex w-[500px] justify-center"
+                            />
+                        </div>
+                        <div className="flex justify-center">
+                            An error occurred...
+                        </div>
                     </div>
                 ) : (
                     <div>
