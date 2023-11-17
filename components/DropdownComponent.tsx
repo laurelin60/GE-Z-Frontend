@@ -49,7 +49,7 @@ export const DropdownComponentSearch = (props: DropdownComponentProps) => {
 
     return (
         <div className="flex place-content-center">
-            <div className="relative h-12 w-72 md:h-16 lg:w-72 xl:h-16 xl:w-[340px]">
+            <div className="relative flex h-12 w-[100%] sm:w-[340px] md:h-16 xl:h-16">
                 <select
                     value={value}
                     onChange={handleChange}

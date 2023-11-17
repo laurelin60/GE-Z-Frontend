@@ -13,6 +13,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
 import SearchResults from "./searchResults";
+import { FaCircleXmark, FaFilter } from "react-icons/fa6";
 
 export interface CollegeObject {
     college: string;
@@ -87,6 +88,12 @@ const Search = () => {
     const [sort, setSort] = useState("Default Sort");
 
     const [data, setData] = useState<CollegeObject[]>([]);
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen((open) => !open);
+    };
 
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
@@ -208,31 +215,96 @@ const Search = () => {
 
     return (
         <>
-            <div className="mb-16 mt-16 min-h-[calc(100vh-96px)] px-12 lg:px-36">
-                <div className="flex flex-wrap text-6xl font-bold">
-                    Search{" "}
-                    <span className="hidden md:flex">&nbsp;For Courses</span>
-                </div>
-
-                <form
-                    action="submit"
-                    onSubmit={handleSubmit}
-                    className="mt-8 flex flex-row items-center justify-between"
-                >
-                    <div className="mr-8 flex flex-col gap-x-4 gap-y-2 md:flex-row xl:gap-8">
-                        <DropdownComponentSearch
-                            defaultValue={university}
-                            data={Universities}
-                            onChange={handleUniversityChange}
+            {open ? (
+                <div className="absolute left-0 top-0 z-50 h-[100vh] w-[100vw] bg-bg_secondary p-8 xl:hidden">
+                    <div className="mb-8 flex flex-row justify-between">
+                        <div className="text-3xl font-medium">
+                            Search Filters
+                        </div>
+                        <div className="items-top flex">
+                            <button
+                                className="flex flex-row items-center gap-2 text-3xl text-primary"
+                                onClick={handleClick}
+                            >
+                                <FaCircleXmark />
+                            </button>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        {/* DISABLED FOR WEBJAM */}
+                        {/* <CustomFilterCheckbox
+                                        title="Terms"
+                                        categories={[
+                                            // "Fall 2023",
+                                            "Winter 2024",
+                                            // "Spring 2024",
+                                        ]}
+                                    /> */}
+                        <CustomFilterCheckbox
+                            title="Online Format"
+                            categories={["Asynchronous", "Synchronous"]}
+                            onChange={setAsync}
+                            defaultValue={async[0]}
                         />
-                        <DropdownComponentSearch
-                            defaultValue={ge}
-                            data={GE_Categories}
-                            onChange={handleGeChange}
+                        <CustomFilterCheckbox
+                            title="Instant Enrollment"
+                            categories={[
+                                "Only show courses eligible for One-Click Registration between your home school and the teaching school",
+                            ]}
+                            onChange={setEnrollment}
+                            defaultValue={enrollment[0]}
+                        />
+                        <CustomFilterCheckbox
+                            title="Available Seats"
+                            categories={[
+                                "Only show courses with available seats that are open for registration or open within three days",
+                            ]}
+                            onChange={setAvailable}
+                            defaultValue={available[0]}
+                        />
+                        <CalendarFilter
+                            onStartChange={setStart}
+                            onEndChange={setEnd}
+                        />
+                        <InstitutionDropdown
+                            defaultValue={"Any Institution"}
+                            data={data}
+                            onChange={setInstitution}
+                        />
+                        <UnitsFilter
+                            onMinChange={setMin}
+                            onMaxChange={setMax}
                         />
                     </div>
+                </div>
+            ) : (
+                <div className="mb-16 mt-16 min-h-[calc(100vh-96px)] px-12 lg:px-36">
+                    <div className="flex flex-wrap text-6xl font-bold">
+                        Search{" "}
+                        <span className="hidden md:flex">
+                            &nbsp;For Courses
+                        </span>
+                    </div>
 
-                    {/* <div className="flex place-content-center">
+                    <form
+                        action="submit"
+                        onSubmit={handleSubmit}
+                        className="mt-8 flex flex-row items-center justify-between"
+                    >
+                        <div className="flex flex-col flex-wrap gap-x-8 gap-y-2 md:flex-row xl:gap-8">
+                            <DropdownComponentSearch
+                                defaultValue={university}
+                                data={Universities}
+                                onChange={handleUniversityChange}
+                            />
+                            <DropdownComponentSearch
+                                defaultValue={ge}
+                                data={GE_Categories}
+                                onChange={handleGeChange}
+                            />
+                        </div>
+
+                        {/* <div className="flex place-content-center">
                         <button
                             type="submit"
                             className="flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-16 xl:w-56 xl:text-3xl"
@@ -241,85 +313,90 @@ const Search = () => {
                             <FaSearch />
                         </button>
                     </div> */}
-                </form>
+                    </form>
 
-                {loading ? (
-                    <div className="mt-16 flex flex-col gap-2 text-2xl">
-                        <div className="flex justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/loading.gif"
-                                alt="loading gif"
-                                className="flex h-16 w-16 justify-center opacity-60"
-                            />
-                        </div>
-                        <div className="flex justify-center">Loading...</div>
-                    </div>
-                ) : error ? (
-                    <div className="mt-16 flex flex-col gap-2 text-2xl">
-                        <div className="flex justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/error.png"
-                                alt="error"
-                                className="flex w-[500px] justify-center"
-                            />
-                        </div>
-                        <div className="flex justify-center">
-                            An error occurred...
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        {/* Search Results Blurb */}
-                        <div className="mt-16 flex flex-col gap-8">
-                            <div className="text-4xl font-medium">
-                                Search Results
+                    {loading ? (
+                        <div className="mt-16 flex flex-col gap-2 text-2xl">
+                            <div className="flex justify-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/loading.gif"
+                                    alt="loading gif"
+                                    className="flex h-16 w-16 justify-center opacity-60"
+                                />
                             </div>
-                            <div className="text-xl font-normal text-gray">
-                                We found{" "}
-                                <b className="text-black">
-                                    {filterData(data).length} courses
-                                </b>{" "}
-                                that may transfer to{" "}
-                                <b className="text-black">{searchUniversity}</b>{" "}
-                                for{" "}
-                                <b className="text-black">{`${searchGE?.split(
-                                    " ",
-                                )[0]} Category ${searchGE?.split(
-                                    " ",
-                                )[1]}`}</b>{" "}
-                                based on{" "}
-                                <a
-                                    href="https://assist.org/"
-                                    target="_blank"
-                                    referrerPolicy="no-referrer"
-                                    className="underline underline-offset-[5px]"
-                                >
-                                    Assist.org
-                                </a>{" "}
-                                and{" "}
-                                <a
-                                    href="https://cvc.edu/"
-                                    target="_blank"
-                                    referrerPolicy="no-referrer"
-                                    className="underline underline-offset-[5px]"
-                                >
-                                    CVC.edu
-                                </a>
-                                . Please consult an academic advisor for further
-                                information.
+                            <div className="flex justify-center">
+                                Loading...
                             </div>
-                            <div className="border-2 border-t border-bg_secondary"></div>
                         </div>
-                        <div className="mt-16 flex flex-row gap-8">
-                            <div className="hidden h-fit w-[450px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
-                                <div className="mb-8 text-3xl font-medium">
-                                    Search Filters
+                    ) : error ? (
+                        <div className="mt-16 flex flex-col gap-2 text-2xl">
+                            <div className="flex justify-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/error.png"
+                                    alt="error"
+                                    className="flex w-[500px] justify-center"
+                                />
+                            </div>
+                            <div className="flex justify-center">
+                                An error occurred...
+                            </div>
+                        </div>
+                    ) : (
+                        <div>
+                            {/* Search Results Blurb */}
+                            <div className="mt-16 flex flex-col gap-8">
+                                <div className="text-3xl font-medium md:text-4xl">
+                                    Search Results
                                 </div>
-                                <div className="flex flex-col gap-4">
-                                    {/* DISABLED FOR WEBJAM */}
-                                    {/* <CustomFilterCheckbox
+                                <div className="text-lg font-normal text-gray md:text-xl">
+                                    We found{" "}
+                                    <b className="text-black">
+                                        {filterData(data).length} courses
+                                    </b>{" "}
+                                    that may transfer to{" "}
+                                    <b className="text-black">
+                                        {searchUniversity}
+                                    </b>{" "}
+                                    for{" "}
+                                    <b className="text-black">{`${searchGE?.split(
+                                        " ",
+                                    )[0]} Category ${searchGE?.split(
+                                        " ",
+                                    )[1]}`}</b>{" "}
+                                    based on{" "}
+                                    <a
+                                        href="https://assist.org/"
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="underline underline-offset-[5px]"
+                                    >
+                                        Assist.org
+                                    </a>{" "}
+                                    and{" "}
+                                    <a
+                                        href="https://cvc.edu/"
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="underline underline-offset-[5px]"
+                                    >
+                                        CVC.edu
+                                    </a>
+                                    . Please consult an academic advisor for
+                                    further information.
+                                </div>
+                                <div className="border-2 border-t border-bg_secondary"></div>
+                            </div>
+
+                            <div className="mt-16 flex flex-row gap-8">
+                                <div className="hidden h-fit w-[450px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                                    <div className="mb-8 text-3xl font-medium">
+                                        Search Filters
+                                    </div>
+                                    <div className="flex flex-col gap-4">
+                                        {/* DISABLED FOR WEBJAM */}
+                                        {/* <CustomFilterCheckbox
                                         title="Terms"
                                         categories={[
                                             // "Fall 2023",
@@ -327,67 +404,79 @@ const Search = () => {
                                             // "Spring 2024",
                                         ]}
                                     /> */}
-                                    <CustomFilterCheckbox
-                                        title="Online Format"
-                                        categories={[
-                                            "Asynchronous",
-                                            "Synchronous",
-                                        ]}
-                                        onChange={setAsync}
-                                        defaultValue={async[0]}
-                                    />
-                                    <CustomFilterCheckbox
-                                        title="Instant Enrollment"
-                                        categories={[
-                                            "Only show courses eligible for One-Click Registration between your home school and the teaching school",
-                                        ]}
-                                        onChange={setEnrollment}
-                                        defaultValue={enrollment[0]}
-                                    />
-                                    <CustomFilterCheckbox
-                                        title="Available Seats"
-                                        categories={[
-                                            "Only show courses with available seats that are open for registration or open within three days",
-                                        ]}
-                                        onChange={setAvailable}
-                                        defaultValue={available[0]}
-                                    />
-                                    <CalendarFilter
-                                        onStartChange={setStart}
-                                        onEndChange={setEnd}
-                                    />
-                                    <InstitutionDropdown
-                                        defaultValue={"Any Institution"}
-                                        data={data}
-                                        onChange={setInstitution}
-                                    />
-                                    <UnitsFilter
-                                        onMinChange={setMin}
-                                        onMaxChange={setMax}
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-[100%]">
-                                <div className="mb-8 flex items-center justify-end gap-4">
-                                    <div className="text-lg text-gray">
-                                        Sort By:
+                                        <CustomFilterCheckbox
+                                            title="Online Format"
+                                            categories={[
+                                                "Asynchronous",
+                                                "Synchronous",
+                                            ]}
+                                            onChange={setAsync}
+                                            defaultValue={async[0]}
+                                        />
+                                        <CustomFilterCheckbox
+                                            title="Instant Enrollment"
+                                            categories={[
+                                                "Only show courses eligible for One-Click Registration between your home school and the teaching school",
+                                            ]}
+                                            onChange={setEnrollment}
+                                            defaultValue={enrollment[0]}
+                                        />
+                                        <CustomFilterCheckbox
+                                            title="Available Seats"
+                                            categories={[
+                                                "Only show courses with available seats that are open for registration or open within three days",
+                                            ]}
+                                            onChange={setAvailable}
+                                            defaultValue={available[0]}
+                                        />
+                                        <CalendarFilter
+                                            onStartChange={setStart}
+                                            onEndChange={setEnd}
+                                        />
+                                        <InstitutionDropdown
+                                            defaultValue={"Any Institution"}
+                                            data={data}
+                                            onChange={setInstitution}
+                                        />
+                                        <UnitsFilter
+                                            onMinChange={setMin}
+                                            onMaxChange={setMax}
+                                        />
                                     </div>
-                                    <SortDropdown
-                                        defaultValue={sort}
-                                        data={[
-                                            "Default Sort",
-                                            "Alphabetical",
-                                            "Tuition",
-                                        ]}
-                                        onChange={setSort}
-                                    />
                                 </div>
-                                <SearchResults results={filterData(data)} />
+
+                                <div className="w-[100%]">
+                                    <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
+                                        <button
+                                            onClick={handleClick}
+                                            className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
+                                        >
+                                            <FaFilter />
+                                            Search Filters
+                                        </button>
+
+                                        <div className="flex items-center gap-4 md:flex-row">
+                                            <div className="hidden text-gray sm:flex">
+                                                Sort By:
+                                            </div>
+                                            <SortDropdown
+                                                defaultValue={sort}
+                                                data={[
+                                                    "Default Sort",
+                                                    "Alphabetical",
+                                                    "Tuition",
+                                                ]}
+                                                onChange={setSort}
+                                            />
+                                        </div>
+                                    </div>
+                                    <SearchResults results={filterData(data)} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            )}
         </>
     );
 };
