@@ -12,10 +12,14 @@ const Footer = () => {
             </div>
             <div className="flex text-3xl sm:absolute sm:right-24 sm:top-[26px] sm:text-4xl">
                 <div className="flex items-center gap-4">
-                    <a href="" target="_blank" referrerPolicy="no-referrer">
+                    <a
+                        href="https://github.com/laurelinXYZABC/Degree-EZ-Frontend"
+                        target="_blank"
+                        referrerPolicy="no-referrer"
+                    >
                         <FaGithub />
                     </a>
-                    <FaEnvelopeOpenText />
+                    {/* <FaEnvelopeOpenText /> */}
                 </div>
             </div>
         </div>
