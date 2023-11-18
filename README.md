@@ -23,7 +23,6 @@ Whether it's for personal, academic, or financial goals, students want to find t
 - Fully responsive <sub>(hopefully)</sub> across mobile and desktop devices
 - Sort courses by units, tuition, timeframe, and more!
 
-
 ## Screenshots
 
 <p align="center">
@@ -31,7 +30,7 @@ Whether it's for personal, academic, or financial goals, students want to find t
 </p>
 
 <p align="center">
-  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/7afbed27-b60a-43cb-ae7f-f675305aca7a">
+  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/0728e700-0469-4e78-a28a-637e22b7dba7">
 </p>
 
 ## Running GE-Z
