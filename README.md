@@ -31,7 +31,7 @@ Whether it's for personal, academic, or financial goals, students want to find t
 </p>
 
 <p align="center">
-  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/151e5398-58e4-42e0-9237-fee7b2ddd803">
+  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/7afbed27-b60a-43cb-ae7f-f675305aca7a">
 </p>
 
 ## Running GE-Z
