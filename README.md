@@ -3,7 +3,7 @@
 ### The only tool built for University Students that finds online, **articulatable** GE courses at California CCs
 
 <p align="center">
-  <img width=1728 src="https://github.com/laurelinXYZABC/Degree-EZ-Frontend/assets/100006999/5cd2040d-ad8c-48e7-985c-19ec75e57634"
+  <img width="1728" alt="Desktop Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/39eea075-22ec-4339-bf0e-e46d12e2c921">
 </p>
 
 ## Built With
@@ -23,13 +23,15 @@ Whether it's for personal, academic, or financial goals, students want to find t
 - Fully responsive <sub>(hopefully)</sub> across mobile and desktop devices
 - Sort courses by units, tuition, timeframe, and more!
 
+
 ## Screenshots
+
 <p align="center">
-  <img width="250" alt="Mobile Mockup Home Page" src="https://github.com/laurelinXYZABC/Degree-EZ-Frontend/assets/100006999/d884526e-903e-4860-b46d-5c5b5f3ce3fe">
+  <img width="264" alt="Mobile Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/cf1cb429-1820-4fdb-b5fa-e11713dab262">
 </p>
 
 <p align="center">
-  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelinXYZABC/Degree-EZ-Frontend/assets/100006999/a1e617c8-1a79-4da5-bf5f-cc0ba0973d6b">
+  <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/151e5398-58e4-42e0-9237-fee7b2ddd803">
 </p>
 
 ## Running GE-Z
