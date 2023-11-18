@@ -32,7 +32,7 @@ Whether it's for personal, academic, or financial goals, students want to find t
   <img width="1728" alt="Desktop Search Page" src="https://github.com/laurelinXYZABC/Degree-EZ-Frontend/assets/100006999/a1e617c8-1a79-4da5-bf5f-cc0ba0973d6b">
 </p>
 
-## Running IntelliStyle
+## Running GE-Z
 Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 ## Future Plans
