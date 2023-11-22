@@ -1,5 +1,5 @@
 export async function queryDatabase(GE: string) {
-    const url = `http://ge-z.info:5000/api/cvc-courses?category=${GE}`;
+    const url = `https://ge-z.info:5000/api/cvc-courses?category=${GE}`;
 
     try {
         const response = await fetch(url);
