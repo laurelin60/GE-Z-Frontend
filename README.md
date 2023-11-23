@@ -38,3 +38,6 @@ Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 ## Future Plans
 - Although we're very happy about the degree of responsiveness we were able to support, we want to continue to make the user experience more accessible and delightful for all of our users! Readability and support across a variety of screens is top-of-mind!
+
+---------------
+Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, and Alan Tran
