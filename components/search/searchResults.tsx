@@ -27,11 +27,9 @@ const SearchResults = (props: SearchResultsProps) => {
                                 <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
                                     {result.college}
                                 </div>
-                                <div className="overflow-hidden text-ellipsis text-2xl font-bold md:text-3xl">
+                                <div className="text-2xl font-bold md:text-3xl">
                                     {result.courseCode}{" "}
-                                    <span className="overflow-hidden text-ellipsis whitespace-nowrap ">
-                                        {result.courseName}
-                                    </span>
+                                    <span>{result.courseName}</span>
                                 </div>
                             </div>
                             <div className="flex flex-row overflow-hidden">
