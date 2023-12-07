@@ -23,18 +23,19 @@ const SearchResults = (props: SearchResultsProps) => {
                                 result.college
                             }
                         >
-                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-8 py-4">
-                                <div className="text-lg font-semibold text-primary md:text-xl">
+                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
+                                <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
                                     {result.college}
                                 </div>
-                                <div className="flex flex-row justify-between">
-                                    <div className="text-2xl font-bold md:text-3xl">
-                                        {result.courseCode} {result.courseName}
-                                    </div>
+                                <div className="overflow-hidden text-ellipsis text-2xl font-bold md:text-3xl">
+                                    {result.courseCode}{" "}
+                                    <span className="overflow-hidden text-ellipsis whitespace-nowrap ">
+                                        {result.courseName}
+                                    </span>
                                 </div>
                             </div>
                             <div className="flex flex-row overflow-hidden">
-                                <div className="flex flex-row gap-2 overflow-x-auto px-8 py-4">
+                                <div className="flex flex-row gap-2 overflow-x-auto px-4 py-2 md:px-8 md:py-4">
                                     {result.niceToHaves.map((tag) => (
                                         <Tags tag={tag} key={tag.toString()} />
                                     ))}
@@ -42,7 +43,7 @@ const SearchResults = (props: SearchResultsProps) => {
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
                             <div className="flex justify-between overflow-hidden">
-                                <div className="flex flex-row gap-8 overflow-x-auto px-8 py-4">
+                                <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">
                                     <div className="flex flex-col whitespace-nowrap">
                                         <div className="text-sm font-medium">
                                             Units
@@ -78,7 +79,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                 </div>
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
-                            <div className="flex flex-col justify-between gap-y-2 px-8 py-4 md:flex-row">
+                            <div className="flex flex-col justify-between gap-y-2 px-4 py-2 md:flex-row md:px-8 md:py-4">
                                 <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
                                     Tuition:{" "}
                                     <span className="text-primary">

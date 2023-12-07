@@ -293,10 +293,10 @@ const Search = () => {
                     </div>
                 </div>
             ) : (
-                <div className="mb-16 mt-16 min-h-[calc(100vh-96px)] px-12 lg:px-36">
+                <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
                     <div className="flex flex-wrap text-6xl font-bold">
                         Search{" "}
-                        <span className="hidden md:flex">
+                        <span className="hidden lg:flex">
                             &nbsp;For Courses
                         </span>
                     </div>
@@ -361,7 +361,7 @@ const Search = () => {
                     ) : (
                         <div>
                             {/* Search Results Blurb */}
-                            <div className="mt-16 flex flex-col gap-8">
+                            <div className="mt-8 flex flex-col gap-4 md:mt-16 md:gap-8">
                                 <div className="text-3xl font-medium md:text-4xl">
                                     Search Results
                                 </div>
@@ -404,7 +404,7 @@ const Search = () => {
                                 <div className="border-2 border-t border-bg_secondary"></div>
                             </div>
 
-                            <div className="mt-16 flex flex-row gap-8">
+                            <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
                                 <div className="hidden h-fit w-[550px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
                                     <div className="mb-8 text-3xl font-medium">
                                         Search Filters
