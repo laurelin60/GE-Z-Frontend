@@ -24,17 +24,14 @@ const SearchResults = (props: SearchResultsProps) => {
                             }
                             offset={768}
                         >
-                            <div className="rounded-t-lg border-2 border-gray">
-                                <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
-                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
-                                        {result.college}
-                                    </div>
-                                    <div className="overflow-hidden text-ellipsis text-2xl font-bold md:text-3xl">
-                                        {result.courseCode}{" "}
-                                        <span className="overflow-hidden text-ellipsis whitespace-nowrap ">
-                                            {result.courseName}
-                                        </span>
-                                    </div>
+                          <div className="rounded-t-lg border-2 border-gray">
+                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
+                                <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
+                                    {result.college}
+                                </div>
+                                <div className="text-2xl font-bold md:text-3xl">
+                                    {result.courseCode}{" "}
+                                    <span>{result.courseName}</span>
                                 </div>
                                 <div className="flex flex-row overflow-hidden">
                                     <div className="flex flex-row gap-2 overflow-x-auto px-4 py-2 md:px-8 md:py-4">
