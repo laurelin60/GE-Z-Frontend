@@ -365,42 +365,48 @@ const Search = () => {
                                 <div className="text-3xl font-medium md:text-4xl">
                                     Search Results
                                 </div>
-                                <div className="text-lg font-normal text-gray md:text-xl">
-                                    We found{" "}
-                                    <b className="text-black">
-                                        {filterData(data).length} courses
-                                    </b>{" "}
-                                    that may transfer to{" "}
-                                    <b className="text-black">
-                                        {searchUniversity}
-                                    </b>{" "}
-                                    for{" "}
-                                    <b className="text-black">{`${searchGE?.split(
-                                        " ",
-                                    )[0]} Category ${searchGE?.split(
-                                        " ",
-                                    )[1]}`}</b>{" "}
-                                    based on{" "}
-                                    <a
-                                        href="https://assist.org/"
-                                        target="_blank"
-                                        referrerPolicy="no-referrer"
-                                        className="underline underline-offset-[5px]"
-                                    >
-                                        Assist.org
-                                    </a>{" "}
-                                    and{" "}
-                                    <a
-                                        href="https://cvc.edu/"
-                                        target="_blank"
-                                        referrerPolicy="no-referrer"
-                                        className="underline underline-offset-[5px]"
-                                    >
-                                        CVC.edu
-                                    </a>
-                                    . Please consult an academic advisor for
-                                    further information.
+                                <div className="flex flex-col gap-2 text-lg font-normal text-gray md:text-xl">
+                                    <div>
+                                        We found{" "}
+                                        <b className="text-black">
+                                            {filterData(data).length} courses
+                                        </b>{" "}
+                                        that may articulate to{" "}
+                                        <b className="text-black">
+                                            {searchUniversity}
+                                        </b>{" "}
+                                        for{" "}
+                                        <b className="text-black">{`${searchGE?.split(
+                                            " ",
+                                        )[0]} Category ${searchGE?.split(
+                                            " ",
+                                        )[1]}`}</b>{" "}
+                                        based on{" "}
+                                        <a
+                                            href="https://assist.org/"
+                                            target="_blank"
+                                            referrerPolicy="no-referrer"
+                                            className="underline underline-offset-[5px]"
+                                        >
+                                            Assist.org
+                                        </a>{" "}
+                                        and{" "}
+                                        <a
+                                            href="https://cvc.edu/"
+                                            target="_blank"
+                                            referrerPolicy="no-referrer"
+                                            className="underline underline-offset-[5px]"
+                                        >
+                                            CVC.edu
+                                        </a>
+                                        . Please consult an academic advisor for
+                                        further information.
+                                    </div>
+                                    <div className="flex text-base font-light text-gray md:justify-end">
+                                        {"GE-Z's"} data was last updated on 12/7
+                                    </div>
                                 </div>
+
                                 <div className="border-2 border-t border-bg_secondary"></div>
                             </div>
 
