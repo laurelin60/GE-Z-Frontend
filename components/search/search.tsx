@@ -246,15 +246,6 @@ const Search = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-4">
-                        {/* DISABLED FOR WEBJAM */}
-                        {/* <CustomFilterCheckbox
-                                        title="Terms"
-                                        categories={[
-                                            // "Fall 2023",
-                                            "Winter 2024",
-                                            // "Spring 2024",
-                                        ]}
-                                    /> */}
                         <CustomFilterCheckbox
                             title="Online Format"
                             categories={["Asynchronous", "Synchronous"]}
@@ -416,15 +407,6 @@ const Search = () => {
                                         Search Filters
                                     </div>
                                     <div className="flex flex-col gap-4">
-                                        {/* DISABLED FOR WEBJAM */}
-                                        {/* <CustomFilterCheckbox
-                                        title="Terms"
-                                        categories={[
-                                            // "Fall 2023",
-                                            "Winter 2024",
-                                            // "Spring 2024",
-                                        ]}
-                                    /> */}
                                         <CustomFilterCheckbox
                                             title="Online Format"
                                             categories={[
