@@ -3,17 +3,13 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { GE_Categories, Universities } from "@/lib/constants";
-import {
-    CalendarFilter,
-    CustomFilterCheckbox,
-    InstitutionDropdown,
-    SortDropdown,
-    UnitsFilter,
-} from "./filterComponents";
+import { SortDropdown } from "./filterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
 import SearchResults from "./searchResults";
-import { FaCircleXmark, FaFilter } from "react-icons/fa6";
+import { FaFilter } from "react-icons/fa6";
+import { SearchFilterPage, SearchFilters } from "./filters";
+import SearchBlurb from "./blurb";
 
 export interface CollegeObject {
     college: string;
@@ -231,58 +227,21 @@ const Search = () => {
     return (
         <>
             {open && width < maxWidthForOpen ? (
-                <div className="absolute left-0 top-0 z-50 h-fit w-[100vw] bg-bg_secondary p-8 xl:hidden">
-                    <div className="mb-8 flex flex-row justify-between">
-                        <div className="text-3xl font-medium">
-                            Search Filters
-                        </div>
-                        <div className="items-top flex">
-                            <button
-                                className="flex flex-row items-center gap-2 text-3xl text-primary"
-                                onClick={handleClick}
-                            >
-                                <FaCircleXmark />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <CustomFilterCheckbox
-                            title="Online Format"
-                            categories={["Asynchronous", "Synchronous"]}
-                            onChange={setAsync}
-                            defaultValue={async[0]}
-                        />
-                        <CustomFilterCheckbox
-                            title="Instant Enrollment"
-                            categories={[
-                                "Only show courses eligible for One-Click Registration between your home school and the teaching school",
-                            ]}
-                            onChange={setEnrollment}
-                            defaultValue={enrollment[0]}
-                        />
-                        <CustomFilterCheckbox
-                            title="Available Seats"
-                            categories={[
-                                "Only show courses with available seats that are open for registration or open within three days",
-                            ]}
-                            onChange={setAvailable}
-                            defaultValue={available[0]}
-                        />
-                        <CalendarFilter
-                            onStartChange={setStart}
-                            onEndChange={setEnd}
-                        />
-                        <InstitutionDropdown
-                            defaultValue={"Any Institution"}
-                            data={data}
-                            onChange={setInstitution}
-                        />
-                        <UnitsFilter
-                            onMinChange={setMin}
-                            onMaxChange={setMax}
-                        />
-                    </div>
-                </div>
+                <SearchFilterPage
+                    handleClick={handleClick}
+                    setAsync={setAsync}
+                    defaultAsync={async[0]}
+                    setEnrollment={setEnrollment}
+                    defaultEnrollment={enrollment[0]}
+                    setAvailable={setAvailable}
+                    defaultAvailable={available[0]}
+                    setStart={setStart}
+                    setEnd={setEnd}
+                    data={data}
+                    setInstitution={setInstitution}
+                    setMin={setMin}
+                    setMax={setMax}
+                />
             ) : (
                 <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
                     <div className="flex flex-wrap text-6xl font-bold">
@@ -351,104 +310,35 @@ const Search = () => {
                         </div>
                     ) : (
                         <div>
-                            {/* Search Results Blurb */}
-                            <div className="mt-8 flex flex-col gap-4 md:mt-16 md:gap-8">
-                                <div className="text-3xl font-medium md:text-4xl">
-                                    Search Results
-                                </div>
-                                <div className="flex flex-col gap-2 text-lg font-normal text-gray md:text-xl">
-                                    <div>
-                                        We found{" "}
-                                        <b className="text-black">
-                                            {filterData(data).length} courses
-                                        </b>{" "}
-                                        that may articulate to{" "}
-                                        <b className="text-black">
-                                            {searchUniversity}
-                                        </b>{" "}
-                                        for{" "}
-                                        <b className="text-black">{`${searchGE?.split(
-                                            " ",
-                                        )[0]} Category ${searchGE?.split(
-                                            " ",
-                                        )[1]}`}</b>{" "}
-                                        based on{" "}
-                                        <a
-                                            href="https://assist.org/"
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="underline underline-offset-[5px]"
-                                        >
-                                            Assist.org
-                                        </a>{" "}
-                                        and{" "}
-                                        <a
-                                            href="https://cvc.edu/"
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="underline underline-offset-[5px]"
-                                        >
-                                            CVC.edu
-                                        </a>
-                                        . Please consult an academic advisor for
-                                        further information.
-                                    </div>
-                                    <div className="flex text-base font-light text-gray md:justify-end">
-                                        {"GE-Z's"} data was last updated on 12/7
-                                    </div>
-                                </div>
-
-                                <div className="border-2 border-t border-bg_secondary"></div>
-                            </div>
-
+                            <SearchBlurb
+                                filterData={filterData}
+                                data={data}
+                                searchUniversity={university}
+                                searchGE={ge}
+                            />
                             <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
-                                <div className="hidden h-fit w-[550px] rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                                <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
                                     <div className="mb-8 text-3xl font-medium">
                                         Search Filters
                                     </div>
-                                    <div className="flex flex-col gap-4">
-                                        <CustomFilterCheckbox
-                                            title="Online Format"
-                                            categories={[
-                                                "Asynchronous",
-                                                "Synchronous",
-                                            ]}
-                                            onChange={setAsync}
-                                            defaultValue={async[0]}
-                                        />
-                                        <CustomFilterCheckbox
-                                            title="Instant Enrollment"
-                                            categories={[
-                                                "Only show courses eligible for One-Click Registration between your home school and the teaching school",
-                                            ]}
-                                            onChange={setEnrollment}
-                                            defaultValue={enrollment[0]}
-                                        />
-                                        <CustomFilterCheckbox
-                                            title="Available Seats"
-                                            categories={[
-                                                "Only show courses with available seats that are open for registration or open within three days",
-                                            ]}
-                                            onChange={setAvailable}
-                                            defaultValue={available[0]}
-                                        />
-                                        <CalendarFilter
-                                            onStartChange={setStart}
-                                            onEndChange={setEnd}
-                                        />
-                                        <InstitutionDropdown
-                                            defaultValue={"Any Institution"}
-                                            data={data}
-                                            onChange={setInstitution}
-                                        />
-                                        <UnitsFilter
-                                            onMinChange={setMin}
-                                            onMaxChange={setMax}
-                                        />
-                                    </div>
+                                    <SearchFilters
+                                        handleClick={handleClick}
+                                        setAsync={setAsync}
+                                        defaultAsync={async[0]}
+                                        setEnrollment={setEnrollment}
+                                        defaultEnrollment={enrollment[0]}
+                                        setAvailable={setAvailable}
+                                        defaultAvailable={available[0]}
+                                        setStart={setStart}
+                                        setEnd={setEnd}
+                                        data={data}
+                                        setInstitution={setInstitution}
+                                        setMin={setMin}
+                                        setMax={setMax}
+                                    />
                                 </div>
 
-                                <div className="w-[100%]">
+                                <div className="min-w-[65%]">
                                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                                         <button
                                             onClick={handleClick}
