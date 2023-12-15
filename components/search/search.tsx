@@ -72,7 +72,7 @@ const Search = () => {
     );
     const [ge, setGE] = useState(searchGE || GE_Categories[0]);
 
-    const [async, setAsync] = useState([true, true]); // Async first, then synch
+    const [async, setAsync] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([true]);
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
@@ -108,22 +108,10 @@ const Search = () => {
 
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
-
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
     };
 
     const handleGeChange = (ge: string) => {
         setGE(ge);
-
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
     };
 
     useEffect(() => {
@@ -145,17 +133,7 @@ const Search = () => {
         };
 
         fetchData();
-    }, [ge]);
-
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
-    };
+    }, [university, ge]);
 
     const startsAfter = (result: CollegeObject) => {
         if (start == undefined) return true;
@@ -255,11 +233,7 @@ const Search = () => {
                         </span>
                     </div>
 
-                    <form
-                        action="submit"
-                        onSubmit={handleSubmit}
-                        className="mt-8 flex flex-row items-center justify-between"
-                    >
+                    <div className="mt-8 flex flex-row items-center justify-between">
                         <div className="flex flex-col flex-wrap gap-x-8 gap-y-2 md:flex-row xl:gap-8">
                             <DropdownComponentSearch
                                 defaultValue={university}
@@ -272,7 +246,7 @@ const Search = () => {
                                 onChange={handleGeChange}
                             />
                         </div>
-                    </form>
+                    </div>
 
                     {loading ? (
                         <div className="mt-16 flex flex-col gap-2 text-2xl">
