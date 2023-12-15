@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useMemo, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { GE_Categories, Universities } from "@/lib/constants";
 import { SortDropdown } from "./filterComponents";
@@ -24,7 +24,7 @@ export interface CollegeObject {
     endMonth: number;
     endDay: number;
     tuition: number;
-    async: boolean;
+    format: boolean;
     hasOpenSeats: boolean;
     hasPrereqs: boolean;
     instantEnrollment: boolean;
@@ -47,7 +47,7 @@ const Data = [
         endMonth: 5,
         endDay: 17,
         tuition: 230,
-        async: true,
+        format: true,
         hasOpenSeats: false,
         hasPrereqs: false,
         instantEnrollment: true,
@@ -72,7 +72,7 @@ const Search = () => {
     );
     const [ge, setGE] = useState(searchGE || GE_Categories[0]);
 
-    const [async, setAsync] = useState([true, true]);
+    const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([true]);
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
@@ -160,9 +160,9 @@ const Search = () => {
     function filterData(data: CollegeObject[]) {
         const filteredResults = data?.filter((result) => {
             const onlineFormat =
-                (async[0] && async[1]) ||
-                (result.async && async[0]) ||
-                (result.async == false && async[1]);
+                (format[0] && format[1]) ||
+                (result.format && format[0]) ||
+                (result.format == false && format[1]);
             const instantEnrollment = enrollment[0]
                 ? result.instantEnrollment
                 : true;
@@ -207,8 +207,8 @@ const Search = () => {
             {open && width < maxWidthForOpen ? (
                 <SearchFilterPage
                     handleClick={handleFilterButtonClick}
-                    setAsync={setAsync}
-                    defaultAsync={[async[0], async[1]]}
+                    setFormat={setFormat}
+                    defaultFormat={[format[0], format[1]]}
                     setEnrollment={setEnrollment}
                     defaultEnrollment={enrollment}
                     setAvailable={setAvailable}
@@ -291,8 +291,8 @@ const Search = () => {
                                     </div>
                                     <SearchFilters
                                         handleClick={handleFilterButtonClick}
-                                        setAsync={setAsync}
-                                        defaultAsync={[async[0], async[1]]}
+                                        setFormat={setFormat}
+                                        defaultFormat={[format[0], format[1]]}
                                         setEnrollment={setEnrollment}
                                         defaultEnrollment={enrollment}
                                         setAvailable={setAvailable}
@@ -347,3 +347,6 @@ const Search = () => {
 };
 
 export default Search;
+function useCallBack(arg0: () => void) {
+    throw new Error("Function not implemented.");
+}

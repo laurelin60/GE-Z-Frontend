@@ -10,8 +10,8 @@ import { CollegeObject } from "./search";
 
 interface SearchFilterProps {
     handleClick: () => void;
-    setAsync: Dispatch<SetStateAction<boolean[]>>;
-    defaultAsync: boolean[];
+    setFormat: Dispatch<SetStateAction<boolean[]>>;
+    defaultFormat: boolean[];
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     defaultEnrollment: boolean[];
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
@@ -30,8 +30,8 @@ interface SearchFilterProps {
 
 export const SearchFilters = (props: SearchFilterProps) => {
     const {
-        setAsync,
-        defaultAsync,
+        setFormat,
+        defaultFormat,
         setEnrollment,
         defaultEnrollment,
         setAvailable,
@@ -53,8 +53,8 @@ export const SearchFilters = (props: SearchFilterProps) => {
             <CustomFilterCheckbox
                 title="Online Format"
                 categories={["Asynchronous", "Synchronous"]}
-                onChange={setAsync}
-                defaultValue={defaultAsync}
+                onChange={setFormat}
+                defaultValue={defaultFormat}
             />
             <CustomFilterCheckbox
                 title="Instant Enrollment"
@@ -96,8 +96,8 @@ export const SearchFilters = (props: SearchFilterProps) => {
 export const SearchFilterPage = (props: SearchFilterProps) => {
     const {
         handleClick,
-        setAsync,
-        defaultAsync,
+        setFormat,
+        defaultFormat,
         setEnrollment,
         defaultEnrollment,
         setAvailable,
@@ -130,8 +130,8 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                 </div>
                 <SearchFilters
                     handleClick={handleClick}
-                    setAsync={setAsync}
-                    defaultAsync={defaultAsync}
+                    setFormat={setFormat}
+                    defaultFormat={defaultFormat}
                     setEnrollment={setEnrollment}
                     defaultEnrollment={defaultEnrollment}
                     setAvailable={setAvailable}
