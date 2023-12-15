@@ -88,7 +88,7 @@ const Search = () => {
     const [open, setOpen] = useState(false);
     const [width, setWidth] = useState<number>(0);
 
-    const handleClick = () => {
+    const handleFilterButtonClick = () => {
         setOpen((open) => !open);
     };
 
@@ -228,7 +228,7 @@ const Search = () => {
         <>
             {open && width < maxWidthForOpen ? (
                 <SearchFilterPage
-                    handleClick={handleClick}
+                    handleClick={handleFilterButtonClick}
                     setAsync={setAsync}
                     defaultAsync={async[0]}
                     setEnrollment={setEnrollment}
@@ -243,7 +243,10 @@ const Search = () => {
                     setMax={setMax}
                 />
             ) : (
-                <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
+                <div
+                    className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36"
+                    key={university + ge}
+                >
                     <div className="flex flex-wrap text-6xl font-bold">
                         Search{" "}
                         <span className="hidden lg:flex">
@@ -312,7 +315,7 @@ const Search = () => {
                                         Search Filters
                                     </div>
                                     <SearchFilters
-                                        handleClick={handleClick}
+                                        handleClick={handleFilterButtonClick}
                                         setAsync={setAsync}
                                         defaultAsync={async[0]}
                                         setEnrollment={setEnrollment}
@@ -331,7 +334,7 @@ const Search = () => {
                                 <div className="min-w-[65%]">
                                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                                         <button
-                                            onClick={handleClick}
+                                            onClick={handleFilterButtonClick}
                                             className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
                                         >
                                             <FaFilter />

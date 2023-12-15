@@ -1,14 +1,13 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { DropdownComponentProps } from "../DropdownComponent";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
 import { CollegeObject } from "./search";
 
 interface FilterCheckboxProps {
     title: string;
     categories: string[];
-    onChange: any;
+    onChange: Dispatch<SetStateAction<boolean[]>>;
     defaultValue: boolean;
 }
 
@@ -58,16 +57,18 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
     );
 };
 
-export const CalendarFilter = (props: any) => {
+interface CalendarFilterProps {
+    onStartChange: Dispatch<SetStateAction<string>>;
+    onEndChange: Dispatch<SetStateAction<string | undefined>>;
+}
+
+export const CalendarFilter = (props: CalendarFilterProps) => {
     const { onStartChange, onEndChange } = props;
 
     const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
     const [end, setEnd] = useState("");
 
     const handleStartChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // const dateStringArray = e.target.value.split("/");
-        // const formattedDateString = `${dateStringArray[2]}-${dateStringArray[0]}-${dateStringArray[1]}`;
-
         onStartChange(e.target.value);
         setStart(e.target.value);
     };
@@ -116,7 +117,7 @@ export const CalendarFilter = (props: any) => {
 interface InstitutionDropdownProps {
     defaultValue: string;
     data: CollegeObject[];
-    onChange: any; // FIX ME
+    onChange: Dispatch<SetStateAction<string>>;
 }
 
 export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
@@ -165,7 +166,12 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
     );
 };
 
-export const UnitsFilter = (props: any) => {
+interface UnitsFilterProps {
+    onMinChange: Dispatch<SetStateAction<number>>;
+    onMaxChange: Dispatch<SetStateAction<number>>;
+}
+
+export const UnitsFilter = (props: UnitsFilterProps) => {
     const { onMinChange, onMaxChange } = props;
 
     const [min, setMin] = useState(0);
@@ -216,7 +222,7 @@ export const UnitsFilter = (props: any) => {
 interface SortDropdownProps {
     defaultValue: string;
     data: string[];
-    onChange: any; // FIX ME
+    onChange: Dispatch<SetStateAction<string>>;
 }
 
 export const SortDropdown = (props: SortDropdownProps) => {
