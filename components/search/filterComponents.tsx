@@ -1,15 +1,14 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { DropdownComponentProps } from "../DropdownComponent";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
 import { CollegeObject } from "./search";
 
 interface FilterCheckboxProps {
     title: string;
     categories: string[];
-    onChange: any;
-    defaultValue: boolean;
+    onChange: Dispatch<SetStateAction<boolean[]>>;
+    defaultValue: boolean[];
 }
 
 export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
@@ -17,15 +16,16 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 
     // Initialize an array of boolean values to represent the checked state of each category
     const [categoryStates, setCategoryStates] = useState(
-        categories.map(() => defaultValue),
+        categories.map((_, index) => defaultValue[index]),
     );
 
     // Function to toggle the checked state of a category
     const toggleCategory = (index: number) => {
         const newCategoryStates = [...categoryStates];
         newCategoryStates[index] = !categoryStates[index];
+
+        onChange(newCategoryStates);
         setCategoryStates(newCategoryStates);
-        onChange(newCategoryStates); // FIX LATER BAD BAD BAD
     };
 
     return (
@@ -38,7 +38,6 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
                             <input
                                 type="checkbox"
                                 className="h-6 w-6 appearance-none rounded-md border-[1px] border-gray bg-white checked:bg-primary"
-                                // Use the checked state from the categoryStates array
                                 checked={categoryStates[index]}
                                 // Toggle the category state when the checkbox is clicked
                                 onChange={() => toggleCategory(index)}
@@ -58,16 +57,20 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
     );
 };
 
-export const CalendarFilter = (props: any) => {
-    const { onStartChange, onEndChange } = props;
+interface CalendarFilterProps {
+    onStartChange: Dispatch<SetStateAction<string>>;
+    onEndChange: Dispatch<SetStateAction<string | undefined>>;
+    defaultStart: string;
+    defaultEnd: string | undefined;
+}
 
-    const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
-    const [end, setEnd] = useState("");
+export const CalendarFilter = (props: CalendarFilterProps) => {
+    const { onStartChange, onEndChange, defaultStart, defaultEnd } = props;
+
+    const [start, setStart] = useState(defaultStart);
+    const [end, setEnd] = useState(defaultEnd);
 
     const handleStartChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // const dateStringArray = e.target.value.split("/");
-        // const formattedDateString = `${dateStringArray[2]}-${dateStringArray[0]}-${dateStringArray[1]}`;
-
         onStartChange(e.target.value);
         setStart(e.target.value);
     };
@@ -116,7 +119,7 @@ export const CalendarFilter = (props: any) => {
 interface InstitutionDropdownProps {
     defaultValue: string;
     data: CollegeObject[];
-    onChange: any; // FIX ME
+    onChange: Dispatch<SetStateAction<string>>;
 }
 
 export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
@@ -165,11 +168,18 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
     );
 };
 
-export const UnitsFilter = (props: any) => {
-    const { onMinChange, onMaxChange } = props;
+interface UnitsFilterProps {
+    onMinChange: Dispatch<SetStateAction<number>>;
+    onMaxChange: Dispatch<SetStateAction<number>>;
+    defaultMin: number;
+    defaultMax: number;
+}
 
-    const [min, setMin] = useState(0);
-    const [max, setMax] = useState(20);
+export const UnitsFilter = (props: UnitsFilterProps) => {
+    const { onMinChange, onMaxChange, defaultMin, defaultMax } = props;
+
+    const [min, setMin] = useState(defaultMin);
+    const [max, setMax] = useState(defaultMax);
 
     const handleMinChange = (e: ChangeEvent<HTMLInputElement>) => {
         onMinChange(e.target.value ? parseInt(e.target.value) : 0);
@@ -216,7 +226,7 @@ export const UnitsFilter = (props: any) => {
 interface SortDropdownProps {
     defaultValue: string;
     data: string[];
-    onChange: any; // FIX ME
+    onChange: Dispatch<SetStateAction<string>>;
 }
 
 export const SortDropdown = (props: SortDropdownProps) => {
