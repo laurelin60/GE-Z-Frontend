@@ -34,30 +34,6 @@ export interface CollegeObject {
     pdfId: string;
 }
 
-const Data = [
-    {
-        college: "Ohlone College",
-        courseCode: "BA101A",
-        courseName: "Financial Accounting",
-        cvcId: "1051975",
-        niceToHaves: ["Online Tutoring", "Quality Reviewed"],
-        units: "5",
-        term: "Jan 22 - May 17",
-        startMonth: 1,
-        startDay: 22,
-        endMonth: 5,
-        endDay: 17,
-        tuition: 230,
-        format: true,
-        hasOpenSeats: false,
-        hasPrereqs: false,
-        instantEnrollment: true,
-        fulfillsGEs: ["Ia", "II", "VI"],
-        mapToCourses: ["RZ101 - Introduction to Rizzology"],
-        pdfId: "12345678",
-    },
-];
-
 export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
