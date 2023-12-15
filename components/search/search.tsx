@@ -230,23 +230,24 @@ const Search = () => {
                 <SearchFilterPage
                     handleClick={handleFilterButtonClick}
                     setAsync={setAsync}
-                    defaultAsync={async[0]}
+                    defaultAsync={[async[0], async[1]]}
                     setEnrollment={setEnrollment}
-                    defaultEnrollment={enrollment[0]}
+                    defaultEnrollment={enrollment}
                     setAvailable={setAvailable}
-                    defaultAvailable={available[0]}
+                    defaultAvailable={available}
                     setStart={setStart}
                     setEnd={setEnd}
+                    defaultStart={start}
+                    defaultEnd={end}
                     data={data}
                     setInstitution={setInstitution}
                     setMin={setMin}
                     setMax={setMax}
+                    defaultMin={min}
+                    defaultMax={max}
                 />
             ) : (
-                <div
-                    className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36"
-                    key={university + ge}
-                >
+                <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
                     <div className="flex flex-wrap text-6xl font-bold">
                         Search{" "}
                         <span className="hidden lg:flex">
@@ -317,21 +318,25 @@ const Search = () => {
                                     <SearchFilters
                                         handleClick={handleFilterButtonClick}
                                         setAsync={setAsync}
-                                        defaultAsync={async[0]}
+                                        defaultAsync={[async[0], async[1]]}
                                         setEnrollment={setEnrollment}
-                                        defaultEnrollment={enrollment[0]}
+                                        defaultEnrollment={enrollment}
                                         setAvailable={setAvailable}
-                                        defaultAvailable={available[0]}
+                                        defaultAvailable={available}
                                         setStart={setStart}
                                         setEnd={setEnd}
+                                        defaultStart={start}
+                                        defaultEnd={end}
                                         data={data}
                                         setInstitution={setInstitution}
                                         setMin={setMin}
                                         setMax={setMax}
+                                        defaultMin={min}
+                                        defaultMax={max}
                                     />
                                 </div>
 
-                                <div className="min-w-[65%]">
+                                <div className="w-full xl:min-w-[65%]">
                                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                                         <button
                                             onClick={handleFilterButtonClick}

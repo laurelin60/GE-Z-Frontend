@@ -11,17 +11,21 @@ import { CollegeObject } from "./search";
 interface SearchFilterProps {
     handleClick: () => void;
     setAsync: Dispatch<SetStateAction<boolean[]>>;
-    defaultAsync: boolean;
+    defaultAsync: boolean[];
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
-    defaultEnrollment: boolean;
+    defaultEnrollment: boolean[];
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
-    defaultAvailable: boolean;
+    defaultAvailable: boolean[];
     setStart: Dispatch<SetStateAction<string>>;
+    defaultStart: string;
     setEnd: Dispatch<SetStateAction<string | undefined>>;
+    defaultEnd: string | undefined;
     data: CollegeObject[];
     setInstitution: Dispatch<SetStateAction<string>>;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
+    defaultMin: number;
+    defaultMax: number;
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {
@@ -34,10 +38,14 @@ export const SearchFilters = (props: SearchFilterProps) => {
         defaultAvailable,
         setStart,
         setEnd,
+        defaultStart,
+        defaultEnd,
         data,
         setInstitution,
         setMin,
         setMax,
+        defaultMin,
+        defaultMax,
     } = props;
 
     return (
@@ -64,13 +72,23 @@ export const SearchFilters = (props: SearchFilterProps) => {
                 onChange={setAvailable}
                 defaultValue={defaultAvailable}
             />
-            <CalendarFilter onStartChange={setStart} onEndChange={setEnd} />
+            <CalendarFilter
+                onStartChange={setStart}
+                onEndChange={setEnd}
+                defaultStart={defaultStart}
+                defaultEnd={defaultEnd}
+            />
             <InstitutionDropdown
                 defaultValue={"Any Institution"}
                 onChange={setInstitution}
                 data={data}
             />
-            <UnitsFilter onMinChange={setMin} onMaxChange={setMax} />
+            <UnitsFilter
+                onMinChange={setMin}
+                onMaxChange={setMax}
+                defaultMin={defaultMin}
+                defaultMax={defaultMax}
+            />
         </div>
     );
 };
@@ -86,10 +104,14 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
         defaultAvailable,
         setStart,
         setEnd,
+        defaultStart,
+        defaultEnd,
         data,
         setInstitution,
         setMin,
         setMax,
+        defaultMin,
+        defaultMax,
     } = props;
 
     return (
@@ -116,10 +138,14 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                     defaultAvailable={defaultAvailable}
                     setStart={setStart}
                     setEnd={setEnd}
+                    defaultStart={defaultStart}
+                    defaultEnd={defaultEnd}
                     data={data}
                     setInstitution={setInstitution}
                     setMin={setMin}
                     setMax={setMax}
+                    defaultMin={defaultMin}
+                    defaultMax={defaultMax}
                 />
             </div>
         </div>
