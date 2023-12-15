@@ -1,15 +1,16 @@
 "use client";
 
-import React, { FormEvent, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { GE_Categories, Universities } from "@/lib/constants";
 import { SortDropdown } from "./filterComponents";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
 import SearchResults from "./searchResults";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
 import SearchBlurb from "./blurb";
+import { filterData } from "./searchUtils";
 
 export interface CollegeObject {
     college: string;
@@ -57,8 +58,19 @@ const Data = [
     },
 ];
 
+export type FilterValues = {
+    format: boolean[];
+    enrollment: boolean[];
+    available: boolean[];
+    start: string;
+    end: string | undefined;
+    institution: string;
+    min: number;
+    max: number;
+    sort: string;
+};
+
 const Search = () => {
-    const router = useRouter();
     const searchParams = useSearchParams();
 
     const [loading, setLoading] = useState(true);
@@ -84,6 +96,42 @@ const Search = () => {
     const [sort, setSort] = useState("Default Sort");
 
     const [data, setData] = useState<CollegeObject[]>([]);
+
+    const [filterValues, setFilterValues] = useState<FilterValues>({
+        format: format,
+        enrollment: enrollment,
+        available: available,
+        start: start,
+        end: end,
+        institution: institution,
+        min: min,
+        max: max,
+        sort: sort,
+    });
+
+    useEffect(() => {
+        setFilterValues({
+            format,
+            enrollment,
+            available,
+            start,
+            end,
+            institution,
+            min,
+            max,
+            sort,
+        });
+    }, [
+        format,
+        enrollment,
+        available,
+        start,
+        end,
+        institution,
+        min,
+        max,
+        sort,
+    ]);
 
     const [open, setOpen] = useState(false);
     const [width, setWidth] = useState<number>(0);
@@ -134,73 +182,6 @@ const Search = () => {
 
         fetchData();
     }, [university, ge]);
-
-    const startsAfter = (result: CollegeObject) => {
-        if (start == undefined) return true;
-
-        return (
-            `2024-${result.startMonth
-                .toString()
-                .padStart(2, "0")}-${result.startDay
-                .toString()
-                .padStart(2, "0")}` >= start
-        );
-    };
-
-    const endsBefore = (result: CollegeObject) => {
-        if (end == undefined) return true;
-
-        return (
-            `2024-${result.endMonth.toString().padStart(2, "0")}-${result.endDay
-                .toString()
-                .padStart(2, "0")}` <= end
-        );
-    };
-
-    function filterData(data: CollegeObject[]) {
-        const filteredResults = data?.filter((result) => {
-            const onlineFormat =
-                (format[0] && format[1]) ||
-                (result.format && format[0]) ||
-                (result.format == false && format[1]);
-            const instantEnrollment = enrollment[0]
-                ? result.instantEnrollment
-                : true;
-            const hasOpenSeats = available[0] ? result.hasOpenSeats : true;
-            const teachingInstitution =
-                result.college == institution ||
-                institution == "Any Institution";
-            const withinUnits =
-                parseFloat(result.units) >= min &&
-                parseFloat(result.units) <= max;
-            const withinTime = startsAfter(result) && endsBefore(result);
-
-            return (
-                onlineFormat &&
-                instantEnrollment &&
-                hasOpenSeats &&
-                teachingInstitution &&
-                withinUnits &&
-                withinTime
-            );
-        });
-
-        const sortedResults =
-            sort == "Alphabetical"
-                ? filteredResults.sort((courseA, courseB) => {
-                      const nameA = courseA.courseCode + courseA.courseName;
-                      const nameB = courseB.courseCode + courseB.courseName;
-
-                      return nameA.localeCompare(nameB);
-                  })
-                : sort == "Tuition"
-                  ? filteredResults.sort((courseA, courseB) => {
-                        return courseA.tuition - courseB.tuition;
-                    })
-                  : filteredResults;
-
-        return sortedResults;
-    }
 
     return (
         <>
@@ -281,6 +262,7 @@ const Search = () => {
                             <SearchBlurb
                                 filterData={filterData}
                                 data={data}
+                                filterValues={filterValues}
                                 searchUniversity={university}
                                 searchGE={ge}
                             />
@@ -335,7 +317,9 @@ const Search = () => {
                                             />
                                         </div>
                                     </div>
-                                    <SearchResults results={filterData(data)} />
+                                    <SearchResults
+                                        results={filterData(data, filterValues)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -347,6 +331,3 @@ const Search = () => {
 };
 
 export default Search;
-function useCallBack(arg0: () => void) {
-    throw new Error("Function not implemented.");
-}
