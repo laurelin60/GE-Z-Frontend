@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { GE_Categories, Universities } from "@/lib/constants";
 import { SortDropdown } from "./filterComponents";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
 import SearchResults from "./searchResults";
 import { FaFilter } from "react-icons/fa6";
@@ -47,6 +47,7 @@ export type FilterValues = {
 };
 
 const Search = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
 
     const [loading, setLoading] = useState(true);
@@ -132,10 +133,22 @@ const Search = () => {
 
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
+
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
     };
 
     const handleGeChange = (ge: string) => {
         setGE(ge);
+
+        router.push(
+            `/search?university=${encodeURIComponent(
+                university,
+            )}&ge=${encodeURIComponent(ge)}`,
+        );
     };
 
     useEffect(() => {
