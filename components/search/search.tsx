@@ -159,6 +159,21 @@ const Search = () => {
                 const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
                 const data = await queryDatabase(geParam);
 
+                const uniqueColleges = [];
+                const seenColleges: Record<string, boolean> = {};
+
+                for (const college of data) {
+                    const collegeName = college.college;
+                    if (!seenColleges[collegeName]) {
+                        uniqueColleges.push(collegeName);
+                        seenColleges[collegeName] = true;
+                    }
+                }
+
+                // if (!uniqueColleges.includes(institution)) {
+                //     setInstitution("Any Institution");
+                // }
+
                 setData(data);
                 setLoading(false);
                 setError(false);
@@ -189,6 +204,7 @@ const Search = () => {
                     defaultEnd={end}
                     data={data}
                     setInstitution={setInstitution}
+                    defaultInstitution={institution}
                     setMin={setMin}
                     setMax={setMax}
                     defaultMin={min}
@@ -274,6 +290,7 @@ const Search = () => {
                                         defaultEnd={end}
                                         data={data}
                                         setInstitution={setInstitution}
+                                        defaultInstitution={institution}
                                         setMin={setMin}
                                         setMax={setMax}
                                         defaultMin={min}
