@@ -25,7 +25,7 @@ export interface CollegeObject {
     endMonth: number;
     endDay: number;
     tuition: number;
-    format: boolean;
+    async: boolean;
     hasOpenSeats: boolean;
     hasPrereqs: boolean;
     instantEnrollment: boolean;
