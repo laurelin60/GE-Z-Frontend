@@ -24,14 +24,15 @@ export function filterData(data: CollegeObject[], filterValues: FilterValues) {
     const filteredResults = data?.filter((result) => {
         const onlineFormat =
             (filterValues.format[0] && filterValues.format[1]) ||
-            (result.format && filterValues.format[0]) ||
-            (result.format == false && filterValues.format[1]);
+            (result.async && filterValues.format[0]) ||
+            (!result.async && filterValues.format[1]);
+
         const instantEnrollment = filterValues.enrollment[0]
             ? result.instantEnrollment
-            : true;
+            : false;
         const hasOpenSeats = filterValues.available[0]
             ? result.hasOpenSeats
-            : true;
+            : false;
         const teachingInstitution =
             result.college == filterValues.institution ||
             filterValues.institution == "Any Institution";
