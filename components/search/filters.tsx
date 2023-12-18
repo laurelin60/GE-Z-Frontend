@@ -22,6 +22,7 @@ interface SearchFilterProps {
     defaultEnd: string | undefined;
     data: CollegeObject[];
     setInstitution: Dispatch<SetStateAction<string>>;
+    defaultInstitution: string;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
     defaultMin: number;
@@ -42,6 +43,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
         defaultEnd,
         data,
         setInstitution,
+        defaultInstitution,
         setMin,
         setMax,
         defaultMin,
@@ -79,7 +81,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
                 defaultEnd={defaultEnd}
             />
             <InstitutionDropdown
-                defaultValue={"Any Institution"}
+                defaultValue={defaultInstitution}
                 onChange={setInstitution}
                 data={data}
             />
@@ -108,6 +110,7 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
         defaultEnd,
         data,
         setInstitution,
+        defaultInstitution,
         setMin,
         setMax,
         defaultMin,
@@ -142,6 +145,7 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                     defaultEnd={defaultEnd}
                     data={data}
                     setInstitution={setInstitution}
+                    defaultInstitution={defaultInstitution}
                     setMin={setMin}
                     setMax={setMax}
                     defaultMin={defaultMin}

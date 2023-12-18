@@ -132,14 +132,13 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
         setValue(e.target.value);
     };
 
-    const uniqueColleges = [];
-    const seenColleges: Record<string, boolean> = {};
+    const uniqueColleges =
+        defaultValue == "Any Institution" ? [] : [defaultValue];
 
     for (const college of data) {
         const collegeName = college.college;
-        if (!seenColleges[collegeName]) {
+        if (!uniqueColleges.includes(collegeName)) {
             uniqueColleges.push(collegeName);
-            seenColleges[collegeName] = true;
         }
     }
 
