@@ -1,5 +1,5 @@
 import React from "react";
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
 interface BlurbProps {
     filterData: (

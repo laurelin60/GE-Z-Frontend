@@ -1,7 +1,7 @@
 "use client";
 
 import { UNIVERSITY_GE } from "@/lib/constants";
-import React, { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 

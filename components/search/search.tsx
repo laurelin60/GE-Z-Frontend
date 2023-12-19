@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { SortDropdown } from "./filterComponents";
+import { SortDropdown } from "./FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
-import { queryDatabase } from "./queryDatabase";
-import SearchResults from "./searchResults";
+import { queryDatabase } from "./QueryDatabase";
+import SearchResults from "./SearchResults";
 import { FaFilter } from "react-icons/fa6";
-import { SearchFilterPage, SearchFilters } from "./filters";
-import SearchBlurb from "./blurb";
-import { filterData } from "./searchUtils";
+import { SearchFilterPage, SearchFilters } from "./Filters";
+import SearchBlurb from "./Blurb";
+import { filterData } from "./SearchUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 export interface CollegeObject {
