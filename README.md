@@ -14,13 +14,13 @@
 - Tailwind CSS
 
 ## Introduction
-Resources like Assist.org and CVC.edu are great for aspiring transfer students, but they're not design with university students in mind; these tools are "one-directional". GE-Z solves this problem by sourcing our data directly from them, processing it and presenting it for University Students who want to take online, articulatable courses at California COmmunity Colleges!
+Resources like Assist.org and CVC.edu are great for aspiring transfer students, but they're not design with university students in mind; these tools are "one-directional". GE-Z solves this problem by sourcing our data directly from them, processing it and presenting it for University Students who want to take online, articulatable courses at California Community Colleges!
 
 Whether it's for personal, academic, or financial goals, students want to find the right CC course for them — GE-Z makes that process simple and straightforward!
 
 ## Features
 - Find courses eligible for instant enrollment
-- Fully responsive <sub>(hopefully)</sub> across mobile and desktop devices
+- Responsiveness across mobile and desktop devices
 - Sort courses by units, tuition, timeframe, and more!
 
 ## Screenshots
@@ -37,7 +37,8 @@ Whether it's for personal, academic, or financial goals, students want to find t
 Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 ## Future Plans
-- Although we're very happy about the degree of responsiveness we were able to support, we want to continue to make the user experience more accessible and delightful for all of our users! Readability and support across a variety of screens is top-of-mind!
+- Support all UCs
+- Add support for specific course searches
 
 ---------------
 Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran
