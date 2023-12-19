@@ -53,7 +53,7 @@ const Search = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const searchUniversity = searchParams.get("university");
+    const searchUniversity = searchParams.get("uni");
     const searchGE = searchParams.get("ge");
 
     const [university, setUniversity] = useState(
@@ -146,7 +146,6 @@ const Search = () => {
 
         const universityParam = encodeURIComponent(university);
         const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
-
         router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
