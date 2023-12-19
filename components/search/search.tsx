@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { GE_Categories, Universities } from "@/lib/constants";
 import { SortDropdown } from "./filterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
@@ -11,6 +10,7 @@ import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
 import SearchBlurb from "./blurb";
 import { filterData } from "./searchUtils";
+import { UNIVERSITY_GE } from "@/lib/constants";
 
 export interface CollegeObject {
     college: string;
@@ -57,9 +57,9 @@ const Search = () => {
     const searchGE = searchParams.get("ge");
 
     const [university, setUniversity] = useState(
-        searchUniversity || Universities[0],
+        searchUniversity || Object.keys(UNIVERSITY_GE)[0],
     );
-    const [ge, setGE] = useState(searchGE || GE_Categories[0]);
+    const [ge, setGE] = useState(searchGE || UNIVERSITY_GE[university][0]);
 
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
@@ -156,8 +156,9 @@ const Search = () => {
 
         const fetchData = async () => {
             try {
+                const universityParam = university;
                 const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
-                const data = await queryDatabase(geParam);
+                const data = await queryDatabase(universityParam, geParam);
 
                 const uniqueColleges = [];
                 const seenColleges: Record<string, boolean> = {};
@@ -169,10 +170,6 @@ const Search = () => {
                         seenColleges[collegeName] = true;
                     }
                 }
-
-                // if (!uniqueColleges.includes(institution)) {
-                //     setInstitution("Any Institution");
-                // }
 
                 setData(data);
                 setLoading(false);
@@ -193,22 +190,15 @@ const Search = () => {
                 <SearchFilterPage
                     handleClick={handleFilterButtonClick}
                     setFormat={setFormat}
-                    defaultFormat={[format[0], format[1]]}
                     setEnrollment={setEnrollment}
-                    defaultEnrollment={enrollment}
                     setAvailable={setAvailable}
-                    defaultAvailable={available}
                     setStart={setStart}
                     setEnd={setEnd}
-                    defaultStart={start}
-                    defaultEnd={end}
-                    data={data}
                     setInstitution={setInstitution}
-                    defaultInstitution={institution}
                     setMin={setMin}
                     setMax={setMax}
-                    defaultMin={min}
-                    defaultMax={max}
+                    filterValues={filterValues}
+                    data={data}
                 />
             ) : (
                 <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
@@ -223,12 +213,12 @@ const Search = () => {
                         <div className="flex flex-col flex-wrap gap-x-8 gap-y-2 md:flex-row xl:gap-8">
                             <DropdownComponentSearch
                                 defaultValue={university}
-                                data={Universities}
+                                data={Object.keys(UNIVERSITY_GE)}
                                 onChange={handleUniversityChange}
                             />
                             <DropdownComponentSearch
                                 defaultValue={ge}
-                                data={GE_Categories}
+                                data={UNIVERSITY_GE[university]}
                                 onChange={handleGeChange}
                             />
                         </div>
@@ -279,22 +269,15 @@ const Search = () => {
                                     <SearchFilters
                                         handleClick={handleFilterButtonClick}
                                         setFormat={setFormat}
-                                        defaultFormat={[format[0], format[1]]}
                                         setEnrollment={setEnrollment}
-                                        defaultEnrollment={enrollment}
                                         setAvailable={setAvailable}
-                                        defaultAvailable={available}
                                         setStart={setStart}
                                         setEnd={setEnd}
-                                        defaultStart={start}
-                                        defaultEnd={end}
-                                        data={data}
                                         setInstitution={setInstitution}
-                                        defaultInstitution={institution}
                                         setMin={setMin}
                                         setMax={setMax}
-                                        defaultMin={min}
-                                        defaultMax={max}
+                                        filterValues={filterValues}
+                                        data={data}
                                     />
                                 </div>
 
