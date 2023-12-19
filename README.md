@@ -1,6 +1,6 @@
 # GE-Z
 
-### The only tool built for University Students that finds online, **articulatable** GE courses at California CCs
+> ### The only tool built for University Students that finds online, **articulatable** GE courses at California CCs
 
 <p align="center">
   <img width="1728" alt="Desktop Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/39eea075-22ec-4339-bf0e-e46d12e2c921">
