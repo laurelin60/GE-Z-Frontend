@@ -6,48 +6,34 @@ import {
     UnitsFilter,
 } from "./filterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
-import { CollegeObject } from "./search";
+import { CollegeObject, FilterValues } from "./search";
 
 interface SearchFilterProps {
     handleClick: () => void;
     setFormat: Dispatch<SetStateAction<boolean[]>>;
-    defaultFormat: boolean[];
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
-    defaultEnrollment: boolean[];
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
-    defaultAvailable: boolean[];
     setStart: Dispatch<SetStateAction<string>>;
-    defaultStart: string;
     setEnd: Dispatch<SetStateAction<string | undefined>>;
-    defaultEnd: string | undefined;
-    data: CollegeObject[];
     setInstitution: Dispatch<SetStateAction<string>>;
-    defaultInstitution: string;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
-    defaultMin: number;
-    defaultMax: number;
+    filterValues: FilterValues;
+    courses: CollegeObject[];
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {
     const {
         setFormat,
-        defaultFormat,
         setEnrollment,
-        defaultEnrollment,
         setAvailable,
-        defaultAvailable,
         setStart,
         setEnd,
-        defaultStart,
-        defaultEnd,
-        data,
         setInstitution,
-        defaultInstitution,
         setMin,
         setMax,
-        defaultMin,
-        defaultMax,
+        filterValues,
+        courses,
     } = props;
 
     return (
@@ -56,7 +42,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
                 title="Online Format"
                 categories={["Asynchronous", "Synchronous"]}
                 onChange={setFormat}
-                defaultValue={defaultFormat}
+                defaultValue={filterValues.format}
             />
             <CustomFilterCheckbox
                 title="Instant Enrollment"
@@ -64,7 +50,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
                     "Only show courses eligible for One-Click Registration between your home school and the teaching school",
                 ]}
                 onChange={setEnrollment}
-                defaultValue={defaultEnrollment}
+                defaultValue={filterValues.enrollment}
             />
             <CustomFilterCheckbox
                 title="Available Seats"
@@ -72,24 +58,24 @@ export const SearchFilters = (props: SearchFilterProps) => {
                     "Only show courses with available seats that are open for registration or open within three days",
                 ]}
                 onChange={setAvailable}
-                defaultValue={defaultAvailable}
+                defaultValue={filterValues.available}
             />
             <CalendarFilter
                 onStartChange={setStart}
                 onEndChange={setEnd}
-                defaultStart={defaultStart}
-                defaultEnd={defaultEnd}
+                defaultStart={filterValues.start}
+                defaultEnd={filterValues.end}
             />
             <InstitutionDropdown
-                defaultValue={defaultInstitution}
+                defaultValue={filterValues.institution}
                 onChange={setInstitution}
-                data={data}
+                courses={courses}
             />
             <UnitsFilter
                 onMinChange={setMin}
                 onMaxChange={setMax}
-                defaultMin={defaultMin}
-                defaultMax={defaultMax}
+                defaultMin={filterValues.min}
+                defaultMax={filterValues.max}
             />
         </div>
     );
@@ -99,27 +85,20 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
     const {
         handleClick,
         setFormat,
-        defaultFormat,
         setEnrollment,
-        defaultEnrollment,
         setAvailable,
-        defaultAvailable,
         setStart,
         setEnd,
-        defaultStart,
-        defaultEnd,
-        data,
         setInstitution,
-        defaultInstitution,
         setMin,
         setMax,
-        defaultMin,
-        defaultMax,
+        filterValues,
+        courses,
     } = props;
 
     return (
         <div>
-            <div className="absolute left-0 top-0 z-50 h-fit w-[100vw] bg-bg_secondary p-8 xl:hidden">
+            <div className="absolute left-0 top-0 z-50 h-fit min-h-full w-[100vw] bg-bg_secondary p-8 xl:hidden">
                 <div className="mb-8 flex flex-row justify-between">
                     <div className="text-3xl font-medium">Search Filters</div>
                     <div className="items-top flex">
@@ -134,22 +113,15 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                 <SearchFilters
                     handleClick={handleClick}
                     setFormat={setFormat}
-                    defaultFormat={defaultFormat}
                     setEnrollment={setEnrollment}
-                    defaultEnrollment={defaultEnrollment}
                     setAvailable={setAvailable}
-                    defaultAvailable={defaultAvailable}
                     setStart={setStart}
                     setEnd={setEnd}
-                    defaultStart={defaultStart}
-                    defaultEnd={defaultEnd}
-                    data={data}
                     setInstitution={setInstitution}
-                    defaultInstitution={defaultInstitution}
                     setMin={setMin}
                     setMax={setMax}
-                    defaultMin={defaultMin}
-                    defaultMax={defaultMax}
+                    filterValues={filterValues}
+                    courses={courses}
                 />
             </div>
         </div>

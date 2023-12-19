@@ -118,12 +118,12 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
 
 interface InstitutionDropdownProps {
     defaultValue: string;
-    data: CollegeObject[];
+    courses: CollegeObject[];
     onChange: Dispatch<SetStateAction<string>>;
 }
 
 export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
-    const { defaultValue, data, onChange } = props;
+    const { defaultValue, courses, onChange } = props;
 
     const [value, setValue] = useState(defaultValue);
 
@@ -135,12 +135,17 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
     const uniqueColleges =
         defaultValue == "Any Institution" ? [] : [defaultValue];
 
-    for (const college of data) {
-        const collegeName = college.college;
-        if (!uniqueColleges.includes(collegeName)) {
-            uniqueColleges.push(collegeName);
+    const sendingInstitutions = courses?.map(
+        (course: CollegeObject) => course.sendingInstitution,
+    );
+
+    for (const college of sendingInstitutions) {
+        if (!uniqueColleges.includes(college)) {
+            uniqueColleges.push(college);
         }
     }
+
+    uniqueColleges.sort();
 
     return (
         <div className="relative flex flex-col">

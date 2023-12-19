@@ -1,6 +1,6 @@
 "use client";
 
-import { GE_Categories, Universities } from "@/lib/constants";
+import { UNIVERSITY_GE } from "@/lib/constants";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 interface DropdownComponentProps {
     defaultValue: string;
     data: string[];
-    onChange: any; // FIX ME
+    onChange: (value: string) => void;
 }
 
 const DropdownComponent = (props: DropdownComponentProps) => {
@@ -44,8 +44,8 @@ const DropdownComponent = (props: DropdownComponentProps) => {
 const Hero = () => {
     const router = useRouter();
 
-    const [university, setUniversity] = useState(Universities[0]);
-    const [ge, setGE] = useState(GE_Categories[0]);
+    const [university, setUniversity] = useState(Object.keys(UNIVERSITY_GE)[0]);
+    const [ge, setGE] = useState(UNIVERSITY_GE[university][0]);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -91,14 +91,15 @@ const Hero = () => {
                 <form action="submit" onSubmit={handleSubmit}>
                     <div className="mt-6 flex flex-col gap-4 md:mt-12 xl:mt-16 xl:gap-8">
                         <DropdownComponent
-                            defaultValue={Universities[0]}
-                            data={Universities}
+                            defaultValue={university}
+                            data={Object.keys(UNIVERSITY_GE)}
                             onChange={setUniversity}
                         />
                         <DropdownComponent
-                            defaultValue={GE_Categories[0]}
-                            data={GE_Categories}
+                            defaultValue={ge}
+                            data={UNIVERSITY_GE[university]}
                             onChange={setGE}
+                            key={university}
                         />
                     </div>
 

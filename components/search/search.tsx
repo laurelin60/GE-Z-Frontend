@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { GE_Categories, Universities } from "@/lib/constants";
 import { SortDropdown } from "./filterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./queryDatabase";
@@ -11,9 +10,10 @@ import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
 import SearchBlurb from "./blurb";
 import { filterData } from "./searchUtils";
+import { UNIVERSITY_GE } from "@/lib/constants";
 
 export interface CollegeObject {
-    college: string;
+    sendingInstitution: string;
     courseCode: string;
     courseName: string;
     cvcId: string;
@@ -30,8 +30,8 @@ export interface CollegeObject {
     hasPrereqs: boolean;
     instantEnrollment: boolean;
     fulfillsGEs: string[];
-    mapToCourses: string[];
-    pdfId: string;
+    articulatesTo: string[];
+    assistPath: string;
 }
 
 export type FilterValues = {
@@ -53,13 +53,13 @@ const Search = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const searchUniversity = searchParams.get("university");
+    const searchUniversity = searchParams.get("uni");
     const searchGE = searchParams.get("ge");
 
     const [university, setUniversity] = useState(
-        searchUniversity || Universities[0],
+        searchUniversity || Object.keys(UNIVERSITY_GE)[0],
     );
-    const [ge, setGE] = useState(searchGE || GE_Categories[0]);
+    const [ge, setGE] = useState(searchGE || UNIVERSITY_GE[university][0]);
 
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
@@ -72,7 +72,7 @@ const Search = () => {
 
     const [sort, setSort] = useState("Default Sort");
 
-    const [data, setData] = useState<CollegeObject[]>([]);
+    const [courses, setCourses] = useState<CollegeObject[]>([]);
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,
@@ -133,22 +133,20 @@ const Search = () => {
 
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
+        setGE(UNIVERSITY_GE[university][0]);
 
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
+        const universityParam = encodeURIComponent(university);
+        const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
+
+        router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
     const handleGeChange = (ge: string) => {
         setGE(ge);
 
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
+        const universityParam = encodeURIComponent(university);
+        const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
+        router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
     useEffect(() => {
@@ -156,25 +154,11 @@ const Search = () => {
 
         const fetchData = async () => {
             try {
+                const universityParam = university;
                 const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
-                const data = await queryDatabase(geParam);
+                const data = await queryDatabase(universityParam, geParam);
 
-                const uniqueColleges = [];
-                const seenColleges: Record<string, boolean> = {};
-
-                for (const college of data) {
-                    const collegeName = college.college;
-                    if (!seenColleges[collegeName]) {
-                        uniqueColleges.push(collegeName);
-                        seenColleges[collegeName] = true;
-                    }
-                }
-
-                // if (!uniqueColleges.includes(institution)) {
-                //     setInstitution("Any Institution");
-                // }
-
-                setData(data);
+                setCourses(data.courses);
                 setLoading(false);
                 setError(false);
             } catch (error) {
@@ -193,22 +177,15 @@ const Search = () => {
                 <SearchFilterPage
                     handleClick={handleFilterButtonClick}
                     setFormat={setFormat}
-                    defaultFormat={[format[0], format[1]]}
                     setEnrollment={setEnrollment}
-                    defaultEnrollment={enrollment}
                     setAvailable={setAvailable}
-                    defaultAvailable={available}
                     setStart={setStart}
                     setEnd={setEnd}
-                    defaultStart={start}
-                    defaultEnd={end}
-                    data={data}
                     setInstitution={setInstitution}
-                    defaultInstitution={institution}
                     setMin={setMin}
                     setMax={setMax}
-                    defaultMin={min}
-                    defaultMax={max}
+                    filterValues={filterValues}
+                    courses={courses}
                 />
             ) : (
                 <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
@@ -223,13 +200,14 @@ const Search = () => {
                         <div className="flex flex-col flex-wrap gap-x-8 gap-y-2 md:flex-row xl:gap-8">
                             <DropdownComponentSearch
                                 defaultValue={university}
-                                data={Universities}
+                                data={Object.keys(UNIVERSITY_GE)}
                                 onChange={handleUniversityChange}
                             />
                             <DropdownComponentSearch
                                 defaultValue={ge}
-                                data={GE_Categories}
+                                data={UNIVERSITY_GE[university]}
                                 onChange={handleGeChange}
+                                key={university}
                             />
                         </div>
                     </div>
@@ -266,7 +244,7 @@ const Search = () => {
                         <div>
                             <SearchBlurb
                                 filterData={filterData}
-                                data={data}
+                                data={courses}
                                 filterValues={filterValues}
                                 searchUniversity={university}
                                 searchGE={ge}
@@ -279,22 +257,15 @@ const Search = () => {
                                     <SearchFilters
                                         handleClick={handleFilterButtonClick}
                                         setFormat={setFormat}
-                                        defaultFormat={[format[0], format[1]]}
                                         setEnrollment={setEnrollment}
-                                        defaultEnrollment={enrollment}
                                         setAvailable={setAvailable}
-                                        defaultAvailable={available}
                                         setStart={setStart}
                                         setEnd={setEnd}
-                                        defaultStart={start}
-                                        defaultEnd={end}
-                                        data={data}
                                         setInstitution={setInstitution}
-                                        defaultInstitution={institution}
                                         setMin={setMin}
                                         setMax={setMax}
-                                        defaultMin={min}
-                                        defaultMax={max}
+                                        filterValues={filterValues}
+                                        courses={courses}
                                     />
                                 </div>
 
@@ -324,7 +295,10 @@ const Search = () => {
                                         </div>
                                     </div>
                                     <SearchResults
-                                        results={filterData(data, filterValues)}
+                                        results={filterData(
+                                            courses,
+                                            filterValues,
+                                        )}
                                     />
                                 </div>
                             </div>
