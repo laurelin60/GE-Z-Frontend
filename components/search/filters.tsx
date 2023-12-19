@@ -19,7 +19,7 @@ interface SearchFilterProps {
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
     filterValues: FilterValues;
-    data: CollegeObject[];
+    courses: CollegeObject[];
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {
@@ -33,7 +33,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
         setMin,
         setMax,
         filterValues,
-        data,
+        courses,
     } = props;
 
     return (
@@ -69,7 +69,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
             <InstitutionDropdown
                 defaultValue={filterValues.institution}
                 onChange={setInstitution}
-                data={data}
+                courses={courses}
             />
             <UnitsFilter
                 onMinChange={setMin}
@@ -93,12 +93,12 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
         setMin,
         setMax,
         filterValues,
-        data,
+        courses,
     } = props;
 
     return (
         <div>
-            <div className="absolute left-0 top-0 z-50 h-fit w-[100vw] bg-bg_secondary p-8 xl:hidden">
+            <div className="absolute left-0 top-0 z-50 h-fit min-h-full w-[100vw] bg-bg_secondary p-8 xl:hidden">
                 <div className="mb-8 flex flex-row justify-between">
                     <div className="text-3xl font-medium">Search Filters</div>
                     <div className="items-top flex">
@@ -121,7 +121,7 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                     setMin={setMin}
                     setMax={setMax}
                     filterValues={filterValues}
-                    data={data}
+                    courses={courses}
                 />
             </div>
         </div>

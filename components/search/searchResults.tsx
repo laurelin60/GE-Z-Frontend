@@ -19,14 +19,14 @@ const SearchResults = (props: SearchResultsProps) => {
                             key={
                                 result.courseCode +
                                 result.courseName +
-                                result.college
+                                result.sendingInstitution
                             }
                             offset={500}
                         >
                             <div className="rounded-t-lg border-2 border-gray">
                                 <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
                                     <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
-                                        {result.college}
+                                        {result.sendingInstitution}
                                     </div>
                                     <div className="text-2xl font-bold md:text-3xl">
                                         {result.courseCode}{" "}
@@ -75,7 +75,9 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 Articulates To
                                             </div>
                                             <div className="flex flex-row gap-2 text-base font-light">
-                                                {result.mapToCourses.join(", ")}
+                                                {result.articulatesTo.join(
+                                                    ", ",
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +96,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                     <div className="flex items-center gap-4 font-medium">
                                         <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
                                             <a
-                                                href={`https://assist.org/transfer/report/${result.pdfId}`}
+                                                href={`https://assist.org/transfer/report/${result.assistPath}`}
                                                 target="_blank"
                                                 referrerPolicy="no-referrer"
                                                 className="flex flex-row items-center gap-2"

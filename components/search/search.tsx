@@ -13,7 +13,7 @@ import { filterData } from "./SearchUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 export interface CollegeObject {
-    college: string;
+    sendingInstitution: string;
     courseCode: string;
     courseName: string;
     cvcId: string;
@@ -30,8 +30,8 @@ export interface CollegeObject {
     hasPrereqs: boolean;
     instantEnrollment: boolean;
     fulfillsGEs: string[];
-    mapToCourses: string[];
-    pdfId: string;
+    articulatesTo: string[];
+    assistPath: string;
 }
 
 export type FilterValues = {
@@ -72,7 +72,7 @@ const Search = () => {
 
     const [sort, setSort] = useState("Default Sort");
 
-    const [data, setData] = useState<CollegeObject[]>([]);
+    const [courses, setCourses] = useState<CollegeObject[]>([]);
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,
@@ -159,18 +159,7 @@ const Search = () => {
                 const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
                 const data = await queryDatabase(universityParam, geParam);
 
-                const uniqueColleges = [];
-                const seenColleges: Record<string, boolean> = {};
-
-                for (const college of data) {
-                    const collegeName = college.college;
-                    if (!seenColleges[collegeName]) {
-                        uniqueColleges.push(collegeName);
-                        seenColleges[collegeName] = true;
-                    }
-                }
-
-                setData(data);
+                setCourses(data.courses);
                 setLoading(false);
                 setError(false);
             } catch (error) {
@@ -197,7 +186,7 @@ const Search = () => {
                     setMin={setMin}
                     setMax={setMax}
                     filterValues={filterValues}
-                    data={data}
+                    courses={courses}
                 />
             ) : (
                 <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
@@ -256,7 +245,7 @@ const Search = () => {
                         <div>
                             <SearchBlurb
                                 filterData={filterData}
-                                data={data}
+                                data={courses}
                                 filterValues={filterValues}
                                 searchUniversity={university}
                                 searchGE={ge}
@@ -277,7 +266,7 @@ const Search = () => {
                                         setMin={setMin}
                                         setMax={setMax}
                                         filterValues={filterValues}
-                                        data={data}
+                                        courses={courses}
                                     />
                                 </div>
 
@@ -307,7 +296,10 @@ const Search = () => {
                                         </div>
                                     </div>
                                     <SearchResults
-                                        results={filterData(data, filterValues)}
+                                        results={filterData(
+                                            courses,
+                                            filterValues,
+                                        )}
                                     />
                                 </div>
                             </div>

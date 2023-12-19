@@ -21,7 +21,7 @@ const endsBefore = (end: string | undefined, result: CollegeObject) => {
 };
 
 export function filterData(data: CollegeObject[], filterValues: FilterValues) {
-    const filteredResults = data?.filter((result) => {
+    const filteredResults = data.filter((result) => {
         const onlineFormat =
             (filterValues.format[0] && filterValues.format[1]) ||
             (result.async && filterValues.format[0]) ||
@@ -34,7 +34,7 @@ export function filterData(data: CollegeObject[], filterValues: FilterValues) {
             ? result.hasOpenSeats
             : false;
         const teachingInstitution =
-            result.college == filterValues.institution ||
+            result.sendingInstitution == filterValues.institution ||
             filterValues.institution == "Any Institution";
         const withinUnits =
             parseFloat(result.units) >= filterValues.min &&

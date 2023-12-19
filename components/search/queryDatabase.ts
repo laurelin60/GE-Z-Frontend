@@ -3,7 +3,6 @@ export async function queryDatabase(university: string, ge: string) {
     const geParam = encodeURIComponent(ge);
 
     const url = `https://ge-z.info:5000/api/cvc-courses?uni=${universityParam}&ge=${geParam}`;
-    console.log(url);
 
     try {
         const response = await fetch(url);
