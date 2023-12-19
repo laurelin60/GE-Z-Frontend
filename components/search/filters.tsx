@@ -4,9 +4,9 @@ import {
     CustomFilterCheckbox,
     InstitutionDropdown,
     UnitsFilter,
-} from "./FilterComponents";
+} from "./filterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
-import { CollegeObject, FilterValues } from "./Search";
+import { CollegeObject, FilterValues } from "./search";
 
 interface SearchFilterProps {
     handleClick: () => void;

@@ -1,4 +1,4 @@
-import { CollegeObject, FilterValues } from "./Search";
+import { CollegeObject, FilterValues } from "./search";
 
 const startsAfter = (start: string, result: CollegeObject) => {
     if (start == undefined) return true;

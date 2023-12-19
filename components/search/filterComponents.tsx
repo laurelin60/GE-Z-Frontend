@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
-import { CollegeObject } from "./Search";
+import { CollegeObject } from "./search";
 
 interface FilterCheckboxProps {
     title: string;
