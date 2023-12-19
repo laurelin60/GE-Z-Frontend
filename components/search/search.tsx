@@ -145,7 +145,8 @@ const Search = () => {
         setGE(ge);
 
         const universityParam = encodeURIComponent(university);
-        const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
+        const geParam = encodeURIComponent(ge);
+
         router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
