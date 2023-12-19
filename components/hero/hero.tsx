@@ -99,6 +99,7 @@ const Hero = () => {
                             defaultValue={ge}
                             data={UNIVERSITY_GE[university]}
                             onChange={setGE}
+                            key={university}
                         />
                     </div>
 

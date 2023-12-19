@@ -133,22 +133,21 @@ const Search = () => {
 
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
+        setGE(UNIVERSITY_GE[university][0]);
 
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
+        const universityParam = encodeURIComponent(university);
+        const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
+
+        router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
     const handleGeChange = (ge: string) => {
         setGE(ge);
 
-        router.push(
-            `/search?university=${encodeURIComponent(
-                university,
-            )}&ge=${encodeURIComponent(ge)}`,
-        );
+        const universityParam = encodeURIComponent(university);
+        const geParam = encodeURIComponent(UNIVERSITY_GE[university][0]);
+
+        router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
     useEffect(() => {
@@ -220,6 +219,7 @@ const Search = () => {
                                 defaultValue={ge}
                                 data={UNIVERSITY_GE[university]}
                                 onChange={handleGeChange}
+                                key={university}
                             />
                         </div>
                     </div>
