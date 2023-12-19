@@ -38,7 +38,10 @@ Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 ## Future Plans
 - Support all UCs
+  1. UCI ✅
+  2. UCSB ✅
 - Add support for specific course searches
+- Dark mode 🐙
 
 ---------------
 Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran
