@@ -34,7 +34,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-row overflow-hidden">
-                                    <div className="flex flex-row gap-2 overflow-x-auto px-4 py-2 md:px-8 md:py-4">
+                                    <div className="flex min-h-[52px] flex-row gap-2 overflow-x-auto px-4 py-2 md:min-h-[68px] md:px-8 md:py-4">
                                         {result.niceToHaves.map((tag) => (
                                             <Tags
                                                 tag={tag}
@@ -96,7 +96,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                     <div className="flex items-center gap-4 font-medium">
                                         <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
                                             <a
-                                                href={`https://assist.org/transfer/report/${result.assistPath}`}
+                                                href={`https://assist.org/${result.assistPath}`}
                                                 target="_blank"
                                                 referrerPolicy="no-referrer"
                                                 className="flex flex-row items-center gap-2"
