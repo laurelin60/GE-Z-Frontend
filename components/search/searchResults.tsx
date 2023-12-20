@@ -34,16 +34,20 @@ const SearchResults = (props: SearchResultsProps) => {
                                             <span>{result.courseName}</span>
                                         </div>
                                     </div>
-                                    <div className="flex flex-row overflow-hidden">
-                                        <div className="flex min-h-[52px] flex-row gap-2 overflow-x-auto px-4 py-2 md:min-h-[68px] md:px-8 md:py-4">
-                                            {result.niceToHaves.map((tag) => (
-                                                <Tags
-                                                    tag={tag}
-                                                    key={tag.toString()}
-                                                />
-                                            ))}
+                                    {result.niceToHaves.length > 0 && (
+                                        <div className="flex flex-row overflow-hidden">
+                                            <div className="flex flex-row gap-2 overflow-x-auto px-4 py-2 md:px-8 md:py-4">
+                                                {result.niceToHaves.map(
+                                                    (tag) => (
+                                                        <Tags
+                                                            tag={tag}
+                                                            key={tag.toString()}
+                                                        />
+                                                    ),
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                     <div className="border-2 border-t border-bg_secondary"></div>
                                     <div className="flex justify-between overflow-hidden">
                                         <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">
