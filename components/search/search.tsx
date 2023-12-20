@@ -189,7 +189,7 @@ const Search = () => {
                     courses={courses}
                 />
             ) : (
-                <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-8 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
+                <div className="mb-8 mt-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
                     <div className="flex flex-wrap text-6xl font-bold">
                         Search{" "}
                         <span className="hidden lg:flex">

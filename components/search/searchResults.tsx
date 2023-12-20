@@ -12,7 +12,7 @@ const SearchResults = (props: SearchResultsProps) => {
 
     return (
         <>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4 md:gap-8">
                 {results.length > 0 ? (
                     results.map((result: CollegeObject) => {
                         return (
@@ -100,7 +100,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-4 font-medium">
-                                            <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
+                                            <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-primary active:bg-transparent active:text-primary">
                                                 <a
                                                     href={`https://assist.org/${result.assistPath}`}
                                                     target="_blank"
@@ -111,7 +111,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                     <FaUpRightFromSquare />
                                                 </a>
                                             </button>
-                                            <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-2 active:border-primary active:bg-transparent active:text-primary">
+                                            <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
                                                 <a
                                                     href={`https://search.cvc.edu/courses/${result.cvcId}`}
                                                     target="_blank"

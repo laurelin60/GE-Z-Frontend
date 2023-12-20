@@ -27,7 +27,7 @@ const DropdownComponent = (props: DropdownComponentProps) => {
                 <select
                     value={value}
                     onChange={handleChange}
-                    className="block h-full w-full appearance-none overflow-ellipsis rounded-2xl border-4 border-black px-4 pr-12 text-lg opacity-40 focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
+                    className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
                 >
                     {data.map((item) => (
                         <option key={item}>{item}</option>
@@ -89,7 +89,7 @@ const Hero = () => {
                 </div>
 
                 <form action="submit" onSubmit={handleSubmit}>
-                    <div className="mt-6 flex flex-col gap-4 md:mt-12 xl:mt-16 xl:gap-8">
+                    <div className="mt-6 flex flex-col gap-2 md:mt-12 xl:mt-16 xl:gap-4">
                         <DropdownComponent
                             defaultValue={university}
                             data={Object.keys(UNIVERSITY_GE)}
@@ -106,7 +106,7 @@ const Hero = () => {
                     <div className="flex place-content-center">
                         <button
                             type="submit"
-                            className="mt-8 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all hover:border-4 hover:border-white active:border-4 active:border-primary active:bg-transparent active:text-primary xl:h-20 xl:w-56 xl:text-3xl"
+                            className="mt-4 flex h-16 w-48 flex-row place-content-center items-center justify-center gap-4 rounded-2xl bg-primary text-2xl font-semibold text-white transition-all hover:border-4 hover:border-white active:border-4 active:border-primary active:bg-transparent active:text-primary md:mt-8 xl:h-20 xl:w-56 xl:text-3xl"
                         >
                             <div>Search</div>
                             <FaSearch />
