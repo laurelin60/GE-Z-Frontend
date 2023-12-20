@@ -12,7 +12,7 @@ const SearchResults = (props: SearchResultsProps) => {
 
     return (
         <>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4 md:gap-8">
                 {results.length > 0 ? (
                     results.map((result: CollegeObject) => {
                         return (
