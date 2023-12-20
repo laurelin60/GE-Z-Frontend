@@ -27,7 +27,7 @@ const DropdownComponent = (props: DropdownComponentProps) => {
                 <select
                     value={value}
                     onChange={handleChange}
-                    className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
+                    className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 outline-none focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
                 >
                     {data.map((item) => (
                         <option key={item}>{item}</option>
