@@ -18,7 +18,7 @@ export interface CollegeObject {
     courseName: string;
     cvcId: string;
     niceToHaves: string[];
-    units: string;
+    units: number;
     term: string;
     startMonth: number;
     startDay: number;

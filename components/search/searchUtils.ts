@@ -37,8 +37,8 @@ export function filterData(data: CollegeObject[], filterValues: FilterValues) {
             result.sendingInstitution == filterValues.institution ||
             filterValues.institution == "Any Institution";
         const withinUnits =
-            parseFloat(result.units) >= filterValues.min &&
-            parseFloat(result.units) <= filterValues.max;
+            result.units >= filterValues.min &&
+            result.units <= filterValues.max;
         const withinTime =
             startsAfter(filterValues.start, result) &&
             endsBefore(filterValues.end, result);
