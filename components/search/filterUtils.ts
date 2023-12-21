@@ -1,6 +1,9 @@
 import { CollegeObject, FilterValues } from "./search";
 
-const startsAfter = (start: string, result: CollegeObject) => {
+export const startsAfter = (
+    start: string | undefined,
+    result: CollegeObject,
+) => {
     if (start == undefined) return true;
 
     return (
@@ -10,7 +13,7 @@ const startsAfter = (start: string, result: CollegeObject) => {
     );
 };
 
-const endsBefore = (end: string | undefined, result: CollegeObject) => {
+export const endsBefore = (end: string | undefined, result: CollegeObject) => {
     if (end == undefined) return true;
 
     return (
@@ -29,10 +32,10 @@ export function filterData(data: CollegeObject[], filterValues: FilterValues) {
 
         const instantEnrollment = filterValues.enrollment[0]
             ? result.instantEnrollment
-            : false;
+            : true;
         const hasOpenSeats = filterValues.available[0]
             ? result.hasOpenSeats
-            : false;
+            : true;
         const teachingInstitution =
             result.sendingInstitution == filterValues.institution ||
             filterValues.institution == "Any Institution";
