@@ -9,7 +9,7 @@ import SearchResults from "./searchResults";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
 import SearchBlurb from "./blurb";
-import { filterData } from "./searchUtils";
+import { filterData } from "./filterUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 export interface CollegeObject {
@@ -18,7 +18,7 @@ export interface CollegeObject {
     courseName: string;
     cvcId: string;
     niceToHaves: string[];
-    units: string;
+    units: number;
     term: string;
     startMonth: number;
     startDay: number;
@@ -38,7 +38,7 @@ export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
     available: boolean[];
-    start: string;
+    start: string | undefined;
     end: string | undefined;
     institution: string;
     min: number;

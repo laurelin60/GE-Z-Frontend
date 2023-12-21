@@ -60,7 +60,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 interface CalendarFilterProps {
     onStartChange: Dispatch<SetStateAction<string>>;
     onEndChange: Dispatch<SetStateAction<string | undefined>>;
-    defaultStart: string;
+    defaultStart: string | undefined;
     defaultEnd: string | undefined;
 }
 
