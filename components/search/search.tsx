@@ -259,6 +259,7 @@ const Search = () => {
                                                 "Default Sort",
                                                 "Alphabetical",
                                                 "Tuition",
+                                                "Shortest Term",
                                             ]}
                                             onChange={setSort}
                                         />
