@@ -26,7 +26,7 @@ Whether it's for personal, academic, or financial goals, students want to find t
 ## Screenshots
 
 <p align="center">
-  <img width="264" alt="Mobile Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/cf1cb429-1820-4fdb-b5fa-e11713dab262">
+  <img width="264" alt="Mobile Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/c86a8705-4b41-4f0d-940d-a32ab6b60b46">
 </p>
 
 <p align="center">
