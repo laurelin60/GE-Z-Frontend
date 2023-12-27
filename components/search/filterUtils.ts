@@ -68,7 +68,21 @@ export function filterData(data: CollegeObject[], filterValues: FilterValues) {
               ? filteredResults.sort((courseA, courseB) => {
                     return courseA.tuition - courseB.tuition;
                 })
-              : filteredResults;
+              : filterValues.sort == "Shortest Term"
+                ? filteredResults.sort((courseA, courseB) => {
+                      const termLengthA =
+                          ((courseA.endMonth - courseA.startMonth + 12) % 12) *
+                              30 +
+                          (courseA.endDay - courseA.startDay);
+
+                      const termLengthB =
+                          ((courseB.endMonth - courseB.startMonth + 12) % 12) *
+                              30 +
+                          (courseB.endDay - courseB.startDay);
+
+                      return termLengthA - termLengthB;
+                  })
+                : filteredResults;
 
     return sortedResults;
 }

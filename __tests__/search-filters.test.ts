@@ -17,11 +17,11 @@ const data = {
             cvcId: "123456",
             niceToHaves: ["Zero Textbook Cost"],
             units: 4,
-            term: "Mar 11 - May 25",
+            term: "January 1 - May 31",
             startMonth: 1,
             startDay: 1,
-            endMonth: 6,
-            endDay: 1,
+            endMonth: 5,
+            endDay: 31,
             tuition: 138,
             async: true,
             hasOpenSeats: true,
@@ -38,7 +38,7 @@ const data = {
             cvcId: "1234567",
             niceToHaves: ["Zero Textbook Cost"],
             units: 16,
-            term: "Mar 11 - May 25",
+            term: "January 1 - June 1",
             startMonth: 1,
             startDay: 1,
             endMonth: 6,
@@ -50,6 +50,27 @@ const data = {
             instantEnrollment: false,
             assistPath: "placeholder path 2",
             articulatesTo: ["placeholder course 2"],
+            fulfillsGEs: ["II"],
+        },
+        {
+            sendingInstitution: "placeholder sending institution 3",
+            courseCode: "placeholder course code 3",
+            courseName: "placeholder course name 3",
+            cvcId: "1234567",
+            niceToHaves: ["Zero Textbook Cost"],
+            units: 16,
+            term: "January 1 - June 1",
+            startMonth: 12,
+            startDay: 30,
+            endMonth: 1,
+            endDay: 1,
+            tuition: 100,
+            async: false,
+            hasOpenSeats: false,
+            hasPrereqs: false,
+            instantEnrollment: false,
+            assistPath: "placeholder path 3",
+            articulatesTo: ["placeholder course 3"],
             fulfillsGEs: ["II"],
         },
     ],
@@ -240,6 +261,26 @@ describe("Search Sorting", () => {
         });
         expect(result[0].sendingInstitution).toEqual(
             "placeholder sending institution 2",
+        );
+    });
+
+    test("shortest term sorts correctly", async () => {
+        const result = filterData(data.courses.slice(0, 2), {
+            ...defaultFilterValues,
+            sort: "Shortest Term",
+        });
+        expect(result[0].sendingInstitution).toEqual(
+            "placeholder sending institution 1",
+        );
+    });
+
+    test("shortest term sorts correctly on december courses", async () => {
+        const result = filterData(data.courses, {
+            ...defaultFilterValues,
+            sort: "Shortest Term",
+        });
+        expect(result[0].sendingInstitution).toEqual(
+            "placeholder sending institution 3",
         );
     });
 });
