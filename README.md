@@ -19,9 +19,9 @@ Built with: <br>
 </p>
 
 ## About
-GE-Z is the first tool of its kind for finding high-quality, articulatable courses at Community Colleges that any Californian University student can take to advance their academic goals.
+GE-Z is the first tool of its kind for finding high-quality, articulatable courses at Community Colleges that any Californian university student can take to advance their academic goals.
 
-Resources like Assist.org and CVC.edu are great for aspiring transfer students, but they're not designed with university students in mind; these tools are "one-directional": community colleges ➡️ universities. GE-Z solves this problem by sourcing our data directly from Assist and CVC and processing it to make finding courses simple and straightforward.
+Resources like Assist.org and CVC.edu are great for aspiring transfer students, but they're not designed with university students in mind; these tools are "one-directional": community colleges ➡️ universities. GE-Z solves this problem by sourcing our data directly from Assist and CVC and reverses it to make finding courses simple and straightforward for university students too.
 
 ### Currently Supports:
 * UCI ✅
