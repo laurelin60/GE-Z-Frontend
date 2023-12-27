@@ -51,4 +51,4 @@ Resources like Assist.org and CVC.edu are great for aspiring transfer students, 
 Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 ---------------
-Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran
+Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran 
