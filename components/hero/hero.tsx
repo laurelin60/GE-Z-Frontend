@@ -55,7 +55,7 @@ const Hero = () => {
             category: analyticsEnum.search.title,
             action: analyticsEnum.search.actions.SEARCH,
             label: university,
-            value: UNIVERSITY_GE.university.findIndex((item) => {
+            value: UNIVERSITY_GE[university].findIndex((item) => {
                 return item.includes(ge);
             }),
         });
