@@ -11,6 +11,22 @@ export const metadata: Metadata = {
     title: "GE-Z",
     description:
         "GE-Z sources data from Assist.org and CVC.edu to find the perfect community college courses for you to take.",
+    openGraph: {
+        title: "GE-Z",
+        description:
+            "Find online, async, and articulatable courses from California Community Colleges.",
+        url: "https://ge-z.vercel.app",
+        siteName: "GE-Z",
+        images: [
+            {
+                url: "/open-graph.png",
+                width: 1728,
+                height: 868,
+            },
+        ],
+        locale: "en_US",
+        type: "website",
+    },
 };
 
 export default function RootLayout({
