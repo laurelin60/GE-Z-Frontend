@@ -12,7 +12,6 @@ import SearchBlurb from "./blurb";
 import { filterData } from "./filterUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
-import * as gtag from "@/lib/gtag";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 
 export interface CollegeObject {
@@ -311,6 +310,8 @@ const Search = () => {
                                             courses,
                                             filterValues,
                                         )}
+                                        university={university}
+                                        ge={ge}
                                     />
                                 )}
                             </div>

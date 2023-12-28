@@ -5,10 +5,12 @@ import Tags from "./tags";
 
 interface SearchResultsProps {
     results: CollegeObject[];
+    university: string;
+    ge: string;
 }
 
 const SearchResults = (props: SearchResultsProps) => {
-    const { results } = props;
+    const { results, university, ge } = props;
 
     return (
         <>
@@ -138,8 +140,14 @@ const SearchResults = (props: SearchResultsProps) => {
                                 className="flex w-[500px] justify-center"
                             />
                         </div>
-                        <div className="flex justify-center">
-                            No results found...
+                        <div className="flex w-full flex-col justify-center gap-y-2 text-center">
+                            <p>No results found...</p>
+                            {university == "University of California, Irvine" &&
+                            (ge.includes("Ia") || ge.includes("Ib")) ? (
+                                <p className="text-sm text-zinc-500">
+                                    (GE Ia and Ib are not transferable at UCI)
+                                </p>
+                            ) : null}
                         </div>
                     </div>
                 )}
