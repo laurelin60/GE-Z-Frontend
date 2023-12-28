@@ -2,7 +2,7 @@ export const analyticsEnum = {
     search: {
         title: "Search Page",
         actions: {
-            SEARCH: "Search Course", // Label is school, value is
+            SEARCH: "Search Course", // Label is school, value is index of GE
         },
     },
 };
