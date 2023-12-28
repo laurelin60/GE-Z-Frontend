@@ -12,6 +12,9 @@ import SearchBlurb from "./blurb";
 import { filterData } from "./filterUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
+import * as gtag from "@/lib/gtag";
+import { analyticsEnum, logAnalytics } from "@/lib/analytics";
+
 export interface CollegeObject {
     sendingInstitution: string;
     courseCode: string;
@@ -168,6 +171,15 @@ const Search = () => {
                 console.error("Error fetching data:", error);
             }
         };
+
+        logAnalytics({
+            category: analyticsEnum.search.title,
+            action: analyticsEnum.search.actions.SEARCH,
+            label: university,
+            value: UNIVERSITY_GE[university].findIndex((item) => {
+                return item.includes(ge);
+            }),
+        });
 
         fetchData();
     }, [university, ge]);

@@ -4,6 +4,7 @@ import { UNIVERSITY_GE } from "@/lib/constants";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 
 interface DropdownComponentProps {
     defaultValue: string;
@@ -49,6 +50,16 @@ const Hero = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
+        logAnalytics({
+            category: analyticsEnum.search.title,
+            action: analyticsEnum.search.actions.SEARCH,
+            label: university,
+            value: UNIVERSITY_GE[university].findIndex((item) => {
+                return item.includes(ge);
+            }),
+        });
+
         router.push(
             `/search?uni=${encodeURIComponent(
                 university,
