@@ -20,8 +20,8 @@ export const metadata: Metadata = {
         images: [
             {
                 url: "/open-graph.png",
-                width: 1728,
-                height: 868,
+                width: 800,
+                height: 600,
             },
         ],
         locale: "en_US",
