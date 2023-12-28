@@ -50,7 +50,7 @@ const Hero = () => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         router.push(
-            `/search?university=${encodeURIComponent(
+            `/search?uni=${encodeURIComponent(
                 university,
             )}&ge=${encodeURIComponent(ge)}`,
         );
