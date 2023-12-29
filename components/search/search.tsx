@@ -181,7 +181,7 @@ const Search = () => {
 
                 const numSearches = gezSearches ? parseInt(gezSearches) : 0;
 
-                if (true || (!dismissedRecently && numSearches > 2)) {
+                if (!dismissedRecently && numSearches > 2) {
                     toast({
                         title: "Enjoying GE-Z?",
                         description:
