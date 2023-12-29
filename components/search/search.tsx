@@ -13,6 +13,9 @@ import { filterData } from "./filterUtils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
+import { useToast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
+import Link from "next/link";
 
 export interface CollegeObject {
     sendingInstitution: string;
@@ -51,6 +54,7 @@ export type FilterValues = {
 const Search = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const { toast } = useToast();
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -164,6 +168,57 @@ const Search = () => {
                 setCourses(data.courses);
                 setLoading(false);
                 setError(false);
+
+                const enjoymentDismissalTime = window.localStorage.getItem(
+                    "enjoymentDismissalTime",
+                );
+                const dismissedRecently =
+                    enjoymentDismissalTime !== null &&
+                    Date.now() - parseInt(enjoymentDismissalTime) <
+                        4 * 7 * 24 * 3600 * 1000;
+
+                const gezSearches = window.localStorage.getItem("gezSearches");
+
+                const numSearches = gezSearches ? parseInt(gezSearches) : 0;
+
+                if (!dismissedRecently && numSearches > 2) {
+                    toast({
+                        title: "Enjoying GE-Z?",
+                        description:
+                            "Support us by giving us a star on Github!",
+                        action: (
+                            <Link href="https://github.com/laurelin60/GE-Z-Frontend">
+                                <ToastAction
+                                    altText="Star us on Github"
+                                    className="flex gap-x-2 border-2 border-primary drop-shadow-lg hover:drop-shadow-none"
+                                >
+                                    Star{" "}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        className="h-3 w-3"
+                                    >
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                </ToastAction>
+                            </Link>
+                        ),
+                    });
+
+                    window.localStorage.setItem(
+                        "enjoymentDismissalTime",
+                        Date.now().toString(),
+                    );
+                }
+
+                window.localStorage.setItem(
+                    "gezSearches",
+                    (numSearches + 1).toString(),
+                );
             } catch (error) {
                 setLoading(false);
                 setError(true);
