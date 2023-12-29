@@ -1,4 +1,4 @@
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
 export const startsAfter = (
     start: string | undefined,

@@ -9,7 +9,7 @@ import SearchResults from "./searchResults";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
 import SearchBlurb from "./blurb";
-import { filterData } from "./filterUtils";
+import { filterData } from "./filter-utils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";

@@ -1,9 +1,9 @@
-import { FilterValues } from "@/components/search/search";
+import { FilterValues } from "@/components/search/Search";
 import {
     endsBefore,
     filterData,
     startsAfter,
-} from "@/components/search/filterUtils";
+} from "@/components/search/filter-utils";
 import "@testing-library/jest-dom";
 
 const data = {

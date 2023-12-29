@@ -1,6 +1,6 @@
 import LazyLoad from "react-lazy-load";
 import { FaUpRightFromSquare } from "react-icons/fa6";
-import { CollegeObject } from "./search";
+import { CollegeObject } from "./Search";
 import Tags from "./tags";
 
 interface SearchResultsProps {
