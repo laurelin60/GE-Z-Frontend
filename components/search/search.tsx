@@ -43,8 +43,8 @@ export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
     available: boolean[];
-    start: string | undefined;
-    end: string | undefined;
+    start: string;
+    end: string;
     institution: string;
     min: number;
     max: number;
@@ -84,7 +84,7 @@ const Search = () => {
 
     const [sort, setSort] = useState("Default Sort");
 
-    const [courses, setCourses] = useState<CollegeObject[]>([]);
+    const [courses, setCourses] = useState<CollegeObject[]>();
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,

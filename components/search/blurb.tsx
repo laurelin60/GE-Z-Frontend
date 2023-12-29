@@ -6,7 +6,7 @@ interface BlurbProps {
         data: CollegeObject[],
         filterValues: FilterValues,
     ) => CollegeObject[];
-    data: CollegeObject[];
+    data: CollegeObject[] | undefined;
     filterValues: FilterValues;
     searchUniversity: string;
     searchGE: string;
@@ -26,10 +26,13 @@ const SearchBlurb = (props: BlurbProps) => {
                     <div>
                         We found{" "}
                         <b className="text-black">
-                            {filterData(data, filterValues).length} courses
+                            {data ? filterData(data, filterValues).length : "x"}
+                            courses
                         </b>{" "}
                         that may articulate to{" "}
-                        <b className="text-black">{searchUniversity}</b> for{" "}
+                        <b className="text-black">
+                            {searchUniversity}
+                        </b> for{" "}
                         <b className="text-black">{`${searchGE?.split(
                             " ",
                         )[0]} Category ${searchGE?.split(" ")[1]}`}</b>{" "}

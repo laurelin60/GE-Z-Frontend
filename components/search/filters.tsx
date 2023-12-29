@@ -19,7 +19,7 @@ interface SearchFilterProps {
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
     filterValues: FilterValues;
-    courses: CollegeObject[];
+    courses: CollegeObject[] | undefined;
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {
