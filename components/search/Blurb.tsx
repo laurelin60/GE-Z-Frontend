@@ -1,12 +1,12 @@
 import React from "react";
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
 interface BlurbProps {
     filterData: (
         data: CollegeObject[],
         filterValues: FilterValues,
     ) => CollegeObject[];
-    data: CollegeObject[];
+    data: CollegeObject[] | undefined;
     filterValues: FilterValues;
     searchUniversity: string;
     searchGE: string;
@@ -26,7 +26,8 @@ const SearchBlurb = (props: BlurbProps) => {
                     <div>
                         We found{" "}
                         <b className="text-black">
-                            {filterData(data, filterValues).length} courses
+                            {data ? filterData(data, filterValues).length : "x"}{" "}
+                            courses
                         </b>{" "}
                         that may articulate to{" "}
                         <b className="text-black">{searchUniversity}</b> for{" "}

@@ -4,9 +4,9 @@ import {
     CustomFilterCheckbox,
     InstitutionDropdown,
     UnitsFilter,
-} from "./filterComponents";
+} from "./FilterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
 interface SearchFilterProps {
     handleClick: () => void;
@@ -14,12 +14,12 @@ interface SearchFilterProps {
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
     setStart: Dispatch<SetStateAction<string>>;
-    setEnd: Dispatch<SetStateAction<string | undefined>>;
+    setEnd: Dispatch<SetStateAction<string>>;
     setInstitution: Dispatch<SetStateAction<string>>;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
     filterValues: FilterValues;
-    courses: CollegeObject[];
+    courses: CollegeObject[] | undefined;
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {

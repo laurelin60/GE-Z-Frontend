@@ -1,9 +1,6 @@
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
-export const startsAfter = (
-    start: string | undefined,
-    result: CollegeObject,
-) => {
+export const startsAfter = (start: string, result: CollegeObject) => {
     if (start == undefined) return true;
 
     return (
@@ -13,8 +10,8 @@ export const startsAfter = (
     );
 };
 
-export const endsBefore = (end: string | undefined, result: CollegeObject) => {
-    if (end == undefined) return true;
+export const endsBefore = (end: string, result: CollegeObject) => {
+    if (end == "") return true;
 
     return (
         `2024-${result.endMonth.toString().padStart(2, "0")}-${result.endDay
@@ -23,7 +20,14 @@ export const endsBefore = (end: string | undefined, result: CollegeObject) => {
     );
 };
 
-export function filterData(data: CollegeObject[], filterValues: FilterValues) {
+export function filterData(
+    data: CollegeObject[] | undefined,
+    filterValues: FilterValues,
+) {
+    if (!data) {
+        return [];
+    }
+
     const filteredResults = data.filter((result) => {
         const onlineFormat =
             (filterValues.format[0] && filterValues.format[1]) ||

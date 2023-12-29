@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
-import { CollegeObject } from "./search";
+import { CollegeObject } from "./Search";
 
 interface FilterCheckboxProps {
     title: string;
@@ -59,7 +59,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 
 interface CalendarFilterProps {
     onStartChange: Dispatch<SetStateAction<string>>;
-    onEndChange: Dispatch<SetStateAction<string | undefined>>;
+    onEndChange: Dispatch<SetStateAction<string>>;
     defaultStart: string | undefined;
     defaultEnd: string | undefined;
 }
@@ -118,7 +118,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
 
 interface InstitutionDropdownProps {
     defaultValue: string;
-    courses: CollegeObject[];
+    courses: CollegeObject[] | undefined;
     onChange: Dispatch<SetStateAction<string>>;
 }
 
@@ -139,13 +139,15 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
         (course: CollegeObject) => course.sendingInstitution,
     );
 
-    for (const college of sendingInstitutions) {
-        if (!uniqueColleges.includes(college)) {
-            uniqueColleges.push(college);
+    if (sendingInstitutions) {
+        for (const college of sendingInstitutions) {
+            if (!uniqueColleges.includes(college)) {
+                uniqueColleges.push(college);
+            }
         }
-    }
 
-    uniqueColleges.sort();
+        uniqueColleges.sort();
+    }
 
     return (
         <div className="relative flex flex-col">

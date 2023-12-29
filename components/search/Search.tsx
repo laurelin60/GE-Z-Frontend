@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { SortDropdown } from "./filterComponents";
+import { SortDropdown } from "./FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
-import { queryDatabase } from "./queryDatabase";
-import SearchResults from "./searchResults";
+import { queryDatabase } from "./query-db";
+import SearchResults from "./SearchResults";
 import { FaFilter } from "react-icons/fa6";
-import { SearchFilterPage, SearchFilters } from "./filters";
-import SearchBlurb from "./blurb";
-import { filterData } from "./filterUtils";
+import { SearchFilterPage, SearchFilters } from "./Filters";
+import SearchBlurb from "./Blurb";
+import { filterData } from "./filter-utils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
@@ -43,8 +43,8 @@ export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
     available: boolean[];
-    start: string | undefined;
-    end: string | undefined;
+    start: string;
+    end: string;
     institution: string;
     min: number;
     max: number;
@@ -70,15 +70,21 @@ const Search = () => {
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([true]);
-    const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
-    const [end, setEnd] = useState<string>();
+    const [start, setStart] = useState(() => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const day = today.getDate().toString().padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    });
+    const [end, setEnd] = useState("");
     const [institution, setInstitution] = useState("Any Institution");
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(20);
 
     const [sort, setSort] = useState("Default Sort");
 
-    const [courses, setCourses] = useState<CollegeObject[]>([]);
+    const [courses, setCourses] = useState<CollegeObject[]>();
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,
@@ -236,7 +242,7 @@ const Search = () => {
         });
 
         fetchData();
-    }, [university, ge]);
+    }, [university, ge, toast]);
 
     return (
         <>
