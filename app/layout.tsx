@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     title: "GE-Z",
     description:
         "GE-Z sources data from Assist.org and CVC.edu to find the perfect community college courses for you to take.",
+    metadataBase: new URL("https://ge-z.vercel.app"),
     openGraph: {
         title: "GE-Z",
         description:
