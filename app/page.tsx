@@ -1,7 +1,12 @@
 import Hero from "@/components/hero/Hero";
 import { Button, buttonVariants } from "@/components/ui/button";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { HelpCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -37,9 +42,33 @@ export default function Home() {
                     >
                         CVC.edu
                     </Link>{" "}
-                    to find you high-quality California Community College
-                    courses that can accelerate your academic goals, while
-                    saving you money.
+                    to find you high-quality, articulatable
+                    <Popover>
+                        <PopoverTrigger>
+                            <HelpCircle className="inline-block h-4 w-4" />
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <p className="text-sm">
+                                &quot;An articulated course is a course... that
+                                can be used to satisfy... general education
+                                requirements at another college or
+                                university.&quot; - <br />
+                                <Link
+                                    href={
+                                        "https://www.sdmesa.edu/about-mesa/administration/articulation/homepage-docs/Articulated%20vs%20Transferable.pdf"
+                                    }
+                                    referrerPolicy="no-referrer"
+                                    target="_blank"
+                                >
+                                    <i>
+                                        <u>San Diego Mesa College</u>
+                                    </i>
+                                </Link>
+                            </p>
+                        </PopoverContent>
+                    </Popover>{" "}
+                    California Community College courses that can accelerate
+                    your academic goals, while saving you money.
                 </p>
             </div>
 
