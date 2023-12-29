@@ -236,7 +236,7 @@ const Search = () => {
         });
 
         fetchData();
-    }, [university, ge]);
+    }, [university, ge, toast]);
 
     return (
         <>
