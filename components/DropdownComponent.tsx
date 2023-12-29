@@ -26,7 +26,11 @@ export const DropdownComponentHero = (props: DropdownComponentProps) => {
                     className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
                 >
                     {data.map((item) => (
-                        <option key={item}>{item}</option>
+                        <option key={item} value={item}>
+                            {item.includes("University of California")
+                                ? "UC " + item.split(", ")[1]
+                                : item}
+                        </option>
                     ))}
                 </select>
                 <div className="absolute right-2 top-5 h-8 w-8 text-2xl opacity-25 md:right-5 md:top-5 md:text-3xl xl:top-6">
@@ -56,7 +60,11 @@ export const DropdownComponentSearch = (props: DropdownComponentProps) => {
                     className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 outline-none focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
                 >
                     {data.map((item) => (
-                        <option key={item}>{item}</option>
+                        <option key={item} value={item}>
+                            {item.includes("University of California")
+                                ? "UC " + item.split(", ")[1]
+                                : item}
+                        </option>
                     ))}
                 </select>
                 <div className="absolute right-2 top-[14px] h-8 w-8 text-2xl opacity-25 md:right-5 md:top-[18px] md:text-3xl">
