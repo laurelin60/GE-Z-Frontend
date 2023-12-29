@@ -13,16 +13,16 @@ export default function Home() {
     return (
         <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
             <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-28">
-                <h1 className="flex-center max-w-2xl flex-col text-6xl font-bold md:text-7xl">
+                <h1 className="flex-center max-w-2xl flex-col text-4xl font-bold sm:text-6xl md:text-7xl">
                     <span className="hidden lg:flex">Online, Async, and </span>
                     <span className="flex text-center lg:hidden">
                         Online, Async,
                     </span>
-                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-7xl text-transparent">
+                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent sm:text-7xl">
                         Articulatable
                     </span>
                 </h1>
-                <p className="text-gray-600 max-w-prose text-lg text-slate-600">
+                <p className="text-gray-600 hidden max-w-prose text-slate-600 sm:flex sm:text-lg">
                     GE-Z sources data directly from{" "}
                     <Link
                         href="https://assist.org/"
@@ -68,6 +68,52 @@ export default function Home() {
                     </Popover>{" "}
                     California Community College courses that can accelerate
                     your academic goals, while saving you money.
+                </p>
+                <p className="text-gray-600 max-w-prose text-slate-600 sm:hidden">
+                    GE-Z sources data directly from{" "}
+                    <Link
+                        href="https://assist.org/"
+                        target="_blank"
+                        referrerPolicy="no-referrer"
+                        className="underline"
+                    >
+                        Assist.org
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                        href="https://cvc.edu/"
+                        target="_blank"
+                        referrerPolicy="no-referrer"
+                        className="underline"
+                    >
+                        CVC.edu
+                    </Link>{" "}
+                    to find you high-quality, articulatable
+                    <Popover>
+                        <PopoverTrigger>
+                            <HelpCircle className="inline-block h-4 w-4" />
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <p className="text-sm">
+                                &quot;An articulated course is a course... that
+                                can be used to satisfy... general education
+                                requirements at another college or
+                                university.&quot; - <br />
+                                <Link
+                                    href={
+                                        "https://www.sdmesa.edu/about-mesa/administration/articulation/homepage-docs/Articulated%20vs%20Transferable.pdf"
+                                    }
+                                    referrerPolicy="no-referrer"
+                                    target="_blank"
+                                >
+                                    <i>
+                                        <u>San Diego Mesa College</u>
+                                    </i>
+                                </Link>
+                            </p>
+                        </PopoverContent>
+                    </Popover>{" "}
+                    communiy college courses.
                 </p>
 
                 <Link href={"/search"}>
