@@ -5,42 +5,13 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
+import { DropdownComponentHero } from "../DropdownComponent";
 
 interface DropdownComponentProps {
     defaultValue: string;
     data: string[];
     onChange: (value: string) => void;
 }
-
-const DropdownComponent = (props: DropdownComponentProps) => {
-    const { defaultValue, data, onChange } = props;
-
-    const [value, setValue] = useState(defaultValue);
-
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        onChange(e.target.value);
-        setValue(e.target.value);
-    };
-
-    return (
-        <div className="flex place-content-center">
-            <div className="relative h-16 w-72 md:h-16 md:w-96 xl:h-20 xl:w-[600px]">
-                <select
-                    value={value}
-                    onChange={handleChange}
-                    className="block h-full w-full appearance-none overflow-ellipsis rounded-xl border-4 border-black px-4 pr-12 text-lg opacity-40 outline-none focus:border-primary focus:opacity-80 md:pr-16 md:text-2xl"
-                >
-                    {data.map((item) => (
-                        <option key={item}>{item}</option>
-                    ))}
-                </select>
-                <div className="absolute right-2 top-5 h-8 w-8 text-2xl opacity-25 md:right-5 md:top-5 md:text-3xl xl:top-6">
-                    <FaChevronDown />
-                </div>
-            </div>
-        </div>
-    );
-};
 
 const Hero = () => {
     const router = useRouter();
@@ -101,12 +72,12 @@ const Hero = () => {
 
                 <form action="submit" onSubmit={handleSubmit}>
                     <div className="mt-6 flex flex-col gap-2 md:mt-12 xl:mt-16 xl:gap-4">
-                        <DropdownComponent
+                        <DropdownComponentHero
                             defaultValue={university}
                             data={Object.keys(UNIVERSITY_GE)}
                             onChange={setUniversity}
                         />
-                        <DropdownComponent
+                        <DropdownComponentHero
                             defaultValue={ge}
                             data={UNIVERSITY_GE[university]}
                             onChange={setGE}
