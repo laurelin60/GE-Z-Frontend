@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 const Header = () => {
     return (
         <>
-            <nav className="wrapper flex-between sticky inset-x-0 top-0 z-30 h-24 backdrop-blur-lg">
+            <nav className="wrapper flex-between inset-x-0 z-30 h-24">
                 <div className="text-4xl font-bold text-primary sm:text-5xl">
                     <Link href="/">GE-Z</Link>
                 </div>
