@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
 import { SortDropdown } from "./filterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
-import { queryDatabase } from "./queryDatabase";
+import { queryDatabase } from "./query-db";
 import SearchResults from "./searchResults";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filters";
-import SearchBlurb from "./blurb";
+import SearchBlurb from "./Blurb";
 import { filterData } from "./filter-utils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 

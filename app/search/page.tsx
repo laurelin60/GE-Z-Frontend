@@ -1,4 +1,4 @@
-import Search from "@/components/search/Search";
+import Search from "@/components/search/search";
 import React from "react";
 
 const SearchPage = () => {

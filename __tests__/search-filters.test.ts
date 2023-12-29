@@ -1,4 +1,4 @@
-import { FilterValues } from "@/components/search/Search";
+import { FilterValues } from "@/components/search/search";
 import {
     endsBefore,
     filterData,
