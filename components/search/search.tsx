@@ -70,8 +70,14 @@ const Search = () => {
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([true]);
-    const [start, setStart] = useState(new Date().toLocaleDateString("en-CA"));
-    const [end, setEnd] = useState<string>();
+    const [start, setStart] = useState(() => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const day = today.getDate().toString().padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    });
+    const [end, setEnd] = useState("");
     const [institution, setInstitution] = useState("Any Institution");
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(20);

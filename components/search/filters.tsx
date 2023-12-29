@@ -14,7 +14,7 @@ interface SearchFilterProps {
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
     setStart: Dispatch<SetStateAction<string>>;
-    setEnd: Dispatch<SetStateAction<string | undefined>>;
+    setEnd: Dispatch<SetStateAction<string>>;
     setInstitution: Dispatch<SetStateAction<string>>;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
