@@ -91,7 +91,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                     <div className="flex flex-row items-center gap-2">
                         <input
                             type="date"
-                            className="h-full w-full appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
+                            className="appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                             value={start}
                             onChange={handleStartChange}
                         />
@@ -104,7 +104,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                     <div className="flex flex-row items-center gap-2">
                         <input
                             type="date"
-                            className="h-full w-full appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
+                            className="appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                             value={end}
                             onChange={handleEndChange}
                         />
