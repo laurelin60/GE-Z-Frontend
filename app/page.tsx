@@ -13,10 +13,9 @@ export default function Home() {
     return (
         <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
             <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-28">
-                {/* <h1 className="text-9xl font-bold">GE-Z</h1> */}
                 <h1 className="flex-center max-w-2xl flex-col text-6xl font-bold md:text-7xl">
-                    <span className="hidden md:flex">Online, Async, and </span>
-                    <span className="flex text-center md:hidden">
+                    <span className="hidden lg:flex">Online, Async, and </span>
+                    <span className="flex text-center lg:hidden">
                         Online, Async,
                     </span>
                     <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-7xl text-transparent">
