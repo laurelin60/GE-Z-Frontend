@@ -1,4 +1,4 @@
-import { FilterValues } from "@/components/search/search";
+import { FilterValues } from "@/components/search/Search";
 import {
     endsBefore,
     filterData,
@@ -81,7 +81,7 @@ const defaultFilterValues: FilterValues = {
     enrollment: [false],
     available: [false],
     start: "2023-12-20",
-    end: undefined,
+    end: "",
     institution: "Any Institution",
     min: 0,
     max: 20,
@@ -192,8 +192,8 @@ describe("Search Filters", () => {
 });
 
 describe("Filter Utils' Time Utilities", () => {
-    test("startsAfter undefined", async () => {
-        const result = startsAfter(undefined, data.courses[0]);
+    test("startsAfter none", async () => {
+        const result = startsAfter("", data.courses[0]);
         expect(result).toBe(true);
     });
 
@@ -207,8 +207,8 @@ describe("Filter Utils' Time Utilities", () => {
         expect(result).toBe(false);
     });
 
-    test("endsBefore undefined", async () => {
-        const result = endsBefore(undefined, data.courses[0]);
+    test("endsBefore none", async () => {
+        const result = endsBefore("", data.courses[0]);
         expect(result).toBe(true);
     });
 

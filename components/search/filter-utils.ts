@@ -1,9 +1,6 @@
-import { CollegeObject, FilterValues } from "./search";
+import { CollegeObject, FilterValues } from "./Search";
 
-export const startsAfter = (
-    start: string | undefined,
-    result: CollegeObject,
-) => {
+export const startsAfter = (start: string, result: CollegeObject) => {
     if (start == undefined) return true;
 
     return (

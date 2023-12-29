@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { DropdownComponentSearch } from "../DropdownComponent";
-import { SortDropdown } from "./filterComponents";
+import { SortDropdown } from "./FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./query-db";
-import SearchResults from "./searchResults";
+import SearchResults from "./SearchResults";
 import { FaFilter } from "react-icons/fa6";
-import { SearchFilterPage, SearchFilters } from "./filters";
+import { SearchFilterPage, SearchFilters } from "./Filters";
 import SearchBlurb from "./Blurb";
 import { filterData } from "./filter-utils";
 import { UNIVERSITY_GE } from "@/lib/constants";
