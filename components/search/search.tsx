@@ -181,7 +181,7 @@ const Search = () => {
 
                 const numSearches = gezSearches ? parseInt(gezSearches) : 0;
 
-                if (!dismissedRecently && numSearches > 2) {
+                if (true || (!dismissedRecently && numSearches > 2)) {
                     toast({
                         title: "Enjoying GE-Z?",
                         description:
@@ -190,7 +190,7 @@ const Search = () => {
                             <Link href="https://github.com/laurelin60/GE-Z-Frontend">
                                 <ToastAction
                                     altText="Star us on Github"
-                                    className="flex gap-x-2"
+                                    className="flex gap-x-2 border-2 border-primary drop-shadow-lg hover:drop-shadow-none"
                                 >
                                     Star{" "}
                                     <svg
