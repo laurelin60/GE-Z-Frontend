@@ -97,7 +97,7 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
     } = props;
 
     return (
-        <div>
+        <>
             <div className="absolute left-0 top-0 z-50 h-fit min-h-full w-[100vw] bg-bg_secondary p-8 xl:hidden">
                 <div className="mb-8 flex flex-row justify-between">
                     <div className="text-3xl font-medium">Search Filters</div>
@@ -124,6 +124,6 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                     courses={courses}
                 />
             </div>
-        </div>
+        </>
     );
 };
