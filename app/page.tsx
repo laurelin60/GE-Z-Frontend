@@ -31,7 +31,7 @@ const EXAMPLES = [
     },
     {
         uni: "UC Irvine",
-        ge: "GE VIII - Multicultural Studies",
+        ge: "GE VII - Multicultural Studies",
         courses: 100,
         link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20VII",
     },
