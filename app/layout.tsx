@@ -18,7 +18,6 @@ export const metadata: Metadata = {
         description:
             "Find online, async, and articulatable courses from California Community Colleges.",
         url: "https://ge-z.vercel.app",
-        siteName: "GE-Z",
         images: [
             {
                 url: "/open-graph.png",
