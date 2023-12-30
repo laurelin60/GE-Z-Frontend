@@ -32,7 +32,7 @@ const EXAMPLES = [
     {
         uni: "UC Irvine",
         ge: "GE VII - Multicultural Studies",
-        courses: 100,
+        courses: 75,
         link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20VII",
     },
 ];
