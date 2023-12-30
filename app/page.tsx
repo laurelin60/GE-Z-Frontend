@@ -1,5 +1,12 @@
-import Hero from "@/components/hero/Hero";
 import { Button, buttonVariants } from "@/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import {
     Popover,
     PopoverContent,
@@ -8,6 +15,27 @@ import {
 import { cn } from "@/lib/utils";
 import { HelpCircle, Search } from "lucide-react";
 import Link from "next/link";
+
+const EXAMPLES = [
+    {
+        uni: "UC Irvine",
+        ge: "GE IV - Arts and Humanities",
+        courses: 150,
+        link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20IV",
+    },
+    {
+        uni: "UC Santa Barbara",
+        ge: "GE E - Culture and Thought",
+        courses: 100,
+        link: "/search?uni=University%20of%20California%2C%20Santa%20Barbara&ge=GE%20E",
+    },
+    {
+        uni: "UC Irvine",
+        ge: "GE VIII - Multicultural Studies",
+        courses: 100,
+        link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20VII",
+    },
+];
 
 const ArticulatableDefinition = () => {
     return (
@@ -34,6 +62,41 @@ const ArticulatableDefinition = () => {
                 </p>
             </PopoverContent>
         </Popover>
+    );
+};
+
+const Graphics = () => {
+    return (
+        <div>
+            <div className="relative isolate">
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-48"
+                >
+                    <div
+                        style={{
+                            clipPath:
+                                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                        }}
+                        className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[26.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-blue-500 to-purple-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[42.1875rem]"
+                    />
+                </div>
+            </div>
+            <div className="relative isolate hidden md:flex">
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-72"
+                >
+                    <div
+                        style={{
+                            clipPath:
+                                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                        }}
+                        className="relative aspect-[1155/678] w-[16.125rem] rotate-[30deg] bg-gradient-to-tr from-blue-500 to-purple-500 opacity-30 sm:w-[22.1875rem] md:-right-[0vw] lg:-right-[12vw] xl:-right-[20vw]"
+                    />
+                </div>
+            </div>
+        </div>
     );
 };
 
@@ -88,34 +151,46 @@ export default function Home() {
                 </Link>
             </div>
 
-            <div>
-                <div className="relative isolate">
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-48"
-                    >
-                        <div
-                            style={{
-                                clipPath:
-                                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                            }}
-                            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[26.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-blue-500 to-purple-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[42.1875rem]"
-                        />
+            <Graphics />
+
+            <div className="mx-auto my-32 flex max-w-5xl flex-col gap-4">
+                <div className="px-6 lg:px-8">
+                    <div className="mx-auto flex max-w-2xl flex-col gap-4 sm:text-center">
+                        <h2 className="text-4xl font-bold text-slate-900 sm:text-5xl">
+                            Check out some searches
+                        </h2>
+                        <p className="text-lg text-slate-600">
+                            GE-Z makes course discovery simple. No complicated
+                            articulation agreements necessary.
+                        </p>
                     </div>
                 </div>
-                <div className="relative isolate hidden md:flex">
-                    <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-72"
-                    >
-                        <div
-                            style={{
-                                clipPath:
-                                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                            }}
-                            className="relative aspect-[1155/678] w-[16.125rem] rotate-[30deg] bg-gradient-to-tr from-blue-500 to-purple-500 opacity-30 sm:w-[22.1875rem] md:-right-[5vw] lg:-right-[15vw] xl:-right-[20vw]"
-                        />
-                    </div>
+
+                <div className="flex flex-wrap gap-4 px-6 sm:justify-center lg:px-8">
+                    {EXAMPLES.map((example) => (
+                        <Card
+                            className="w-[275px] hover:shadow-md sm:w-[300px]"
+                            key={example.uni + example.ge}
+                        >
+                            <CardHeader>
+                                <CardTitle>{example.uni}</CardTitle>
+                                <CardDescription>{example.ge}</CardDescription>
+                            </CardHeader>
+                            <CardFooter className="flex justify-between">
+                                <span className="flex text-neutral-600 sm:hidden">
+                                    <b>{example.courses}+</b>&nbsp;Courses
+                                </span>
+                                <span className="hidden text-neutral-600 sm:flex">
+                                    <b>{example.courses}+</b>&nbsp;Courses Found
+                                </span>
+                                <Link href={example.link}>
+                                    <Button className="text-white">
+                                        Go To
+                                    </Button>
+                                </Link>
+                            </CardFooter>
+                        </Card>
+                    ))}
                 </div>
             </div>
         </main>
