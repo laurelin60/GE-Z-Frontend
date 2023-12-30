@@ -103,45 +103,48 @@ const Graphics = () => {
 export default function Home() {
     return (
         <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
-            <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-28">
-                <h1 className="flex-center max-w-2xl flex-col text-4xl font-bold sm:text-6xl md:text-7xl">
-                    <span className="hidden lg:flex">Online, Async, and </span>
-                    <span className="flex text-center lg:hidden">
-                        Online, Async,
-                    </span>
-                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent sm:text-7xl">
-                        Articulatable
-                    </span>
-                </h1>
-                <p className="text-gray-600 max-w-prose text-slate-600 sm:text-lg">
-                    GE-Z sources data directly from{" "}
-                    <Link
-                        href="https://assist.org/"
-                        target="_blank"
-                        referrerPolicy="no-referrer"
-                        className="underline"
-                    >
-                        Assist.org
-                    </Link>{" "}
-                    and{" "}
-                    <Link
-                        href="https://cvc.edu/"
-                        target="_blank"
-                        referrerPolicy="no-referrer"
-                        className="underline"
-                    >
-                        CVC.edu
-                    </Link>{" "}
-                    to find you high-quality, articulatable
-                    <ArticulatableDefinition /> California Community College
-                    courses that save you time and money.
-                </p>
+            <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-24">
+                <div className="flex flex-col items-center gap-y-5 text-center">
+                    <h1 className="flex-center xs:text-5xl max-w-2xl flex-col text-4xl font-bold sm:text-6xl">
+                        <span className="hidden md:flex">
+                            Online, Async, and{" "}
+                        </span>
+                        <span className="flex text-center md:hidden">
+                            Online, Async,
+                        </span>
+                        <span className="xs:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent sm:text-7xl md:text-8xl">
+                            Articulatable
+                        </span>
+                    </h1>
+                    <p className="text-gray-600 max-w-prose text-slate-600 sm:text-lg">
+                        GE-Z sources data directly from{" "}
+                        <Link
+                            href="https://assist.org/"
+                            target="_blank"
+                            referrerPolicy="no-referrer"
+                            className="underline"
+                        >
+                            Assist.org
+                        </Link>{" "}
+                        and{" "}
+                        <Link
+                            href="https://cvc.edu/"
+                            target="_blank"
+                            referrerPolicy="no-referrer"
+                            className="underline"
+                        >
+                            CVC.edu
+                        </Link>{" "}
+                        to find you high-quality, articulatable
+                        <ArticulatableDefinition /> California Community College
+                        courses that save you time and money.
+                    </p>
+                </div>
                 <Link href={"/search"}>
                     <Button
                         className={cn(
                             buttonVariants({
                                 size: "lg",
-                                className: "mt-5",
                             }),
                             "flex-center w-fit gap-2 text-lg text-white",
                         )}
@@ -153,7 +156,7 @@ export default function Home() {
 
             <Graphics />
 
-            <div className="mx-auto my-32 flex max-w-5xl flex-col gap-4">
+            <div className="mx-auto my-24 flex max-w-5xl flex-col gap-4 md:my-32">
                 <div className="px-6 lg:px-8">
                     <div className="mx-auto flex max-w-2xl flex-col gap-4 sm:text-center">
                         <h2 className="text-4xl font-bold text-slate-900 sm:text-5xl">
