@@ -182,15 +182,13 @@ export default function Home() {
                                         {example.ge}
                                     </CardDescription>
                                 </CardHeader>
-                                <CardFooter className="flex justify-between">
-                                    <span className="flex text-neutral-600 sm:hidden">
-                                        <b>{example.courses}+</b>&nbsp;Courses
+                                <CardFooter className="flex text-neutral-600">
+                                    <span className="font-bold text-primary">
+                                        <b>{example.courses}+</b>
                                     </span>
-                                    <span className="hidden text-neutral-600 sm:flex">
-                                        <span className="font-bold text-primary">
-                                            {example.courses}+
-                                        </span>
-                                        &nbsp;Courses Found
+                                    &nbsp;Courses&nbsp;
+                                    <span className="hidden sm:flex">
+                                        Found
                                     </span>
                                 </CardFooter>
                             </Card>
