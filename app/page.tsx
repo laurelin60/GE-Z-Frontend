@@ -171,28 +171,30 @@ export default function Home() {
 
                 <div className="flex flex-wrap gap-4 px-6 sm:justify-center lg:px-8">
                     {EXAMPLES.map((example) => (
-                        <Card
-                            className="w-[275px] hover:shadow-md sm:w-[300px]"
+                        <Link
+                            href={example.link}
                             key={example.uni + example.ge}
                         >
-                            <CardHeader>
-                                <CardTitle>{example.uni}</CardTitle>
-                                <CardDescription>{example.ge}</CardDescription>
-                            </CardHeader>
-                            <CardFooter className="flex justify-between">
-                                <span className="flex text-neutral-600 sm:hidden">
-                                    <b>{example.courses}+</b>&nbsp;Courses
-                                </span>
-                                <span className="hidden text-neutral-600 sm:flex">
-                                    <b>{example.courses}+</b>&nbsp;Courses Found
-                                </span>
-                                <Link href={example.link}>
-                                    <Button className="text-white">
-                                        Go To
-                                    </Button>
-                                </Link>
-                            </CardFooter>
-                        </Card>
+                            <Card className="w-[275px] drop-shadow-md hover:shadow-md sm:w-[300px]">
+                                <CardHeader>
+                                    <CardTitle>{example.uni}</CardTitle>
+                                    <CardDescription>
+                                        {example.ge}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardFooter className="flex justify-between">
+                                    <span className="flex text-neutral-600 sm:hidden">
+                                        <b>{example.courses}+</b>&nbsp;Courses
+                                    </span>
+                                    <span className="hidden text-neutral-600 sm:flex">
+                                        <span className="font-bold text-primary">
+                                            {example.courses}+
+                                        </span>
+                                        &nbsp;Courses Found
+                                    </span>
+                                </CardFooter>
+                            </Card>
+                        </Link>
                     ))}
                 </div>
             </div>
