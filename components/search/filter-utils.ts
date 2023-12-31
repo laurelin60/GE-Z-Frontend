@@ -1,23 +1,27 @@
 import { CollegeObject, FilterValues } from "./Search";
 
-export const startsAfter = (start: string, result: CollegeObject) => {
-    if (start == undefined) return true;
+export const startsAfter = (start: Date, result: CollegeObject) => {
+    const month = result.startMonth.toString().padStart(2, "0");
+    const day = result.startDay.toString().padStart(2, "0");
+    const courseDate = new Date(`2024-${month}-${day}`);
+    courseDate.setHours(0, 0, 0, 0);
+    courseDate.setDate(courseDate.getDate() + 1);
 
-    return (
-        `2024-${result.startMonth.toString().padStart(2, "0")}-${result.startDay
-            .toString()
-            .padStart(2, "0")}` >= start
-    );
+    return courseDate > start;
 };
 
-export const endsBefore = (end: string, result: CollegeObject) => {
-    if (end == "") return true;
+export const endsBefore = (end: Date | undefined, result: CollegeObject) => {
+    if (end == undefined) {
+        return true;
+    }
 
-    return (
-        `2024-${result.endMonth.toString().padStart(2, "0")}-${result.endDay
-            .toString()
-            .padStart(2, "0")}` <= end
-    );
+    const month = result.endMonth.toString().padStart(2, "0");
+    const day = result.endDay.toString().padStart(2, "0");
+    const courseDate = new Date(`2024-${month}-${day}`);
+    courseDate.setHours(0, 0, 0, 0);
+    courseDate.setDate(courseDate.getDate() + 1);
+
+    return courseDate < end;
 };
 
 export function filterData(

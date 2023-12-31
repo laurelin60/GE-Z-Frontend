@@ -43,8 +43,8 @@ export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
     available: boolean[];
-    start: string;
-    end: string;
+    start: Date;
+    end: Date | undefined;
     institution: string;
     min: number;
     max: number;
@@ -70,14 +70,8 @@ const Search = () => {
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
     const [available, setAvailable] = useState([true]);
-    const [start, setStart] = useState(() => {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = (today.getMonth() + 1).toString().padStart(2, "0");
-        const day = today.getDate().toString().padStart(2, "0");
-        return `${year}-${month}-${day}`;
-    });
-    const [end, setEnd] = useState("");
+    const [start, setStart] = useState(new Date());
+    const [end, setEnd] = useState<Date>();
     const [institution, setInstitution] = useState("Any Institution");
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(20);
