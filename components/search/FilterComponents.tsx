@@ -98,7 +98,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                             selected={start}
                             onChange={handleStartChange}
                             onSelect={handleStartChange}
-                            className="w-40 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
+                            className="w-44 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                         />
                     </div>
                 </div>
@@ -111,7 +111,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                             selected={end}
                             onChange={handleEndChange}
                             onSelect={handleEndChange}
-                            className="w-40 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
+                            className="w-44 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                         />
                     </div>
                 </div>
