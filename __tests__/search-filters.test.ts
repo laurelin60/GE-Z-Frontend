@@ -80,8 +80,8 @@ const defaultFilterValues: FilterValues = {
     format: [true, true],
     enrollment: [false],
     available: [false],
-    start: "2023-12-20",
-    end: "",
+    start: new Date(2023, 11, 20),
+    end: undefined,
     institution: "Any Institution",
     min: 0,
     max: 20,
@@ -192,33 +192,28 @@ describe("Search Filters", () => {
 });
 
 describe("Filter Utils' Time Utilities", () => {
-    test("startsAfter none", async () => {
-        const result = startsAfter("", data.courses[0]);
-        expect(result).toBe(true);
-    });
-
     test("startsAfter defined returns true", async () => {
-        const result = startsAfter("2023-12-25", data.courses[0]);
+        const result = startsAfter(new Date("2023-12-25"), data.courses[0]);
         expect(result).toBe(true);
     });
 
     test("startsAfter defined returns false", async () => {
-        const result = startsAfter("2024-12-25", data.courses[0]);
+        const result = startsAfter(new Date("2024-12-25"), data.courses[0]);
         expect(result).toBe(false);
     });
 
-    test("endsBefore none", async () => {
-        const result = endsBefore("", data.courses[0]);
+    test("endsBefore undefined", async () => {
+        const result = endsBefore(undefined, data.courses[0]);
         expect(result).toBe(true);
     });
 
     test("endsBefore defined returns true", async () => {
-        const result = endsBefore("2024-06-14", data.courses[0]);
+        const result = endsBefore(new Date("2024-06-14"), data.courses[0]);
         expect(result).toBe(true);
     });
 
     test("endsBefore defined returns false", async () => {
-        const result = endsBefore("2024-05-14", data.courses[0]);
+        const result = endsBefore(new Date("2024-05-14"), data.courses[0]);
         expect(result).toBe(false);
     });
 
