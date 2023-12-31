@@ -3,6 +3,9 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
 import { CollegeObject } from "./Search";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 interface FilterCheckboxProps {
     title: string;
@@ -58,26 +61,28 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 };
 
 interface CalendarFilterProps {
-    onStartChange: Dispatch<SetStateAction<string>>;
-    onEndChange: Dispatch<SetStateAction<string>>;
-    defaultStart: string | undefined;
-    defaultEnd: string | undefined;
+    onStartChange: Dispatch<React.SetStateAction<Date>>;
+    onEndChange: Dispatch<SetStateAction<Date | undefined>>;
+    defaultStart: Date;
+    defaultEnd: Date | undefined;
 }
 
 export const CalendarFilter = (props: CalendarFilterProps) => {
     const { onStartChange, onEndChange, defaultStart, defaultEnd } = props;
 
-    const [start, setStart] = useState(defaultStart);
+    const [start, setStart] = useState(
+        defaultStart ? new Date(defaultStart) : new Date(),
+    );
     const [end, setEnd] = useState(defaultEnd);
 
-    const handleStartChange = (e: ChangeEvent<HTMLInputElement>) => {
-        onStartChange(e.target.value);
-        setStart(e.target.value);
+    const handleStartChange = (date: Date) => {
+        onStartChange(date);
+        setStart(date);
     };
 
-    const handleEndChange = (e: ChangeEvent<HTMLInputElement>) => {
-        onEndChange(e.target.value);
-        setEnd(e.target.value);
+    const handleEndChange = (date: Date) => {
+        onEndChange(date);
+        setEnd(date);
     };
 
     return (
@@ -89,11 +94,11 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                         Starts After
                     </label>
                     <div className="flex flex-row items-center gap-2">
-                        <input
-                            type="date"
-                            className="appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
-                            value={start}
+                        <DatePicker
+                            selected={start}
                             onChange={handleStartChange}
+                            onSelect={handleStartChange}
+                            className="w-40 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                         />
                     </div>
                 </div>
@@ -102,11 +107,11 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                         Ends Before
                     </label>
                     <div className="flex flex-row items-center gap-2">
-                        <input
-                            type="date"
-                            className="appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
-                            value={end}
+                        <DatePicker
+                            selected={end}
                             onChange={handleEndChange}
+                            onSelect={handleEndChange}
+                            className="w-40 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
                         />
                     </div>
                 </div>

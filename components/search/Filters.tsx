@@ -13,8 +13,8 @@ interface SearchFilterProps {
     setFormat: Dispatch<SetStateAction<boolean[]>>;
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
-    setStart: Dispatch<SetStateAction<string>>;
-    setEnd: Dispatch<SetStateAction<string>>;
+    setStart: Dispatch<React.SetStateAction<Date>>;
+    setEnd: Dispatch<SetStateAction<Date | undefined>>;
     setInstitution: Dispatch<SetStateAction<string>>;
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
