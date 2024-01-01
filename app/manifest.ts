@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        theme_color: "#7e55ff",
+        theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
         scope: "/",
