@@ -49,10 +49,10 @@ const ScrollToTop = () => {
                 </svg>
                 <span
                     className={
-                        "hidden px-2 transition-all group-hover:inline-flex"
+                        "hidden px-2 group-hover:inline-flex"
                     }
                 >
-                    <p className="line-clamp-1 truncate text-clip overflow-hidden font-medium tracking-wide text-white ">
+                    <p className="line-clamp-1 overflow-hidden truncate text-clip font-medium tracking-wide text-white">
                         Back to top
                     </p>
                 </span>
