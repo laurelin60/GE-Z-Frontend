@@ -6,6 +6,7 @@ import { SortDropdown } from "./FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./query-db";
 import SearchResults from "./SearchResults";
+import ScrollToTop from "./ScrollToTop";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./Filters";
 import SearchBlurb from "./Blurb";
@@ -369,6 +370,7 @@ const Search = () => {
                                         ge={ge}
                                     />
                                 )}
+                                <ScrollToTop />
                             </div>
                         </div>
                     </div>

@@ -82,8 +82,10 @@ const config = {
                 "accordion-up": "accordion-up 0.2s ease-out",
             },
         },
+
     },
     plugins: [require("tailwindcss-animate")],
+    width: ["responsive", "hover", "focus"],
 } satisfies Config;
 
 export default config;
