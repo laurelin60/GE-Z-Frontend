@@ -28,8 +28,8 @@ const ScrollToTop = () => {
     return (
         <div
             className={`${
-                isVisible ? "visible opacity-60" : "invisible opacity-0"
-            } group fixed bottom-4 right-4 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary px-3 transition-all hover:w-40 hover:opacity-100`}
+                isVisible ? "visible opacity-60 hover:w-40 hover:opacity-100" : "opacity-0 invisible"
+            } group fixed bottom-4 right-4 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary px-3 transition-all`}
             onClick={scrollToTop}
         >
             <div className="flex items-center justify-center">
