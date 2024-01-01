@@ -35,10 +35,10 @@ export default function manifest(): MetadataRoute.Manifest {
                 purpose: "any",
             },
             {
-                src: "icons/icon-512x512.png",
+                src: "icons/icon-1024x1024.png",
                 sizes: "512x512",
                 type: "image/png",
-                purpose: "maskable",
+                purpose: "any",
             },
         ],
     };
