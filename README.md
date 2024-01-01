@@ -15,7 +15,7 @@ Built with: <br>
 ### 🥇 WebJam 2023 First Place Winner
 
 <p align="center">
-  <img width="1728" alt="Desktop Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/39eea075-22ec-4339-bf0e-e46d12e2c921">
+  <img width="1728" alt="Open Graph Image" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/4d500a0c-4d2b-40ca-b7b9-46cf52cdf7f9">
 </p>
 
 ## About
