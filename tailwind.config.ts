@@ -85,6 +85,7 @@ const config = {
 
     },
     plugins: [require("tailwindcss-animate")],
+    width: ["responsive", "hover", "focus"],
 } satisfies Config;
 
 export default config;
