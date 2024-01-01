@@ -262,7 +262,7 @@ export const SortDropdown = (props: SortDropdownProps) => {
                         <option key={item}>{item}</option>
                     ))}
                 </select>
-                <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
+                <div className="pointer-events-none absolute right-1 top-[14px] h-8 w-8 text-gray">
                     <FaChevronDown />
                 </div>
             </div>

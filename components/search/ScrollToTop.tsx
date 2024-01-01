@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaChevronUp } from "react-icons/fa";
 
 const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -33,20 +34,7 @@ const ScrollToTop = () => {
             onClick={scrollToTop}
         >
             <div className="flex items-center justify-center">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="white"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 15l7-7 7 7"
-                    />
-                </svg>
+                <FaChevronUp style={{color: "white"}}/>
                 <span
                     className={
                         "hidden px-2 group-hover:inline-flex"

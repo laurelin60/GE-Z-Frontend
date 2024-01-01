@@ -67,7 +67,7 @@ export const DropdownComponentSearch = (props: DropdownComponentProps) => {
                         </option>
                     ))}
                 </select>
-                <div className="absolute right-2 top-[14px] h-8 w-8 text-2xl opacity-25 md:right-5 md:top-[18px] md:text-3xl">
+                <div className="pointer-events-none absolute right-2 top-[14px] h-8 w-8 text-2xl opacity-25 md:right-5 md:top-[18px] md:text-3xl">
                     <FaChevronDown />
                 </div>
             </div>
