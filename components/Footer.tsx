@@ -13,9 +13,10 @@ const Footer = () => {
             <div className="flex text-3xl sm:absolute sm:right-24 sm:top-[26px] sm:text-4xl">
                 <div className="flex items-center gap-4">
                     <a
-                        href="https://github.com/laurelinXYZABC/Degree-EZ-Frontend"
+                        href="https://github.com/laurelin60/Degree-EZ-Frontend"
                         target="_blank"
                         referrerPolicy="no-referrer"
+                        aria-label="GE-Z GitHub"
                     >
                         <FaGithub />
                     </a>

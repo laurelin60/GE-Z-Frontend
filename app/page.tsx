@@ -40,7 +40,7 @@ const EXAMPLES = [
 const ArticulatableDefinition = () => {
     return (
         <Popover>
-            <PopoverTrigger>
+            <PopoverTrigger aria-label="definition">
                 <HelpCircle className="inline-block h-4 w-4" />
             </PopoverTrigger>
             <PopoverContent>
