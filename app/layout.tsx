@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "@/components/ui/toaster";
+import ThemeProvider  from "./providers/ThemeProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
 
@@ -40,11 +42,17 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <div className="flex flex-col place-content-center bg-background text-text">
-                    <Header />
-                    <GoogleAnalytics />
-                    {children}
-                    <Footer />
-                    <Toaster />
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                    >
+                        <Header />
+                        <GoogleAnalytics />
+                        {children}
+                        <Footer />
+                        <Toaster />
+                    </ThemeProvider>
                 </div>
             </body>
         </html>
