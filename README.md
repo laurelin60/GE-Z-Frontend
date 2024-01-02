@@ -28,7 +28,7 @@ Resources like Assist.org and CVC.edu are great for aspiring transfer students, 
 * UCSB ✅
 
 ### In the Works:
-* All UCs and CSUs
+* All UCs 
 * Dark Mode 🐙
 
 ## Features
