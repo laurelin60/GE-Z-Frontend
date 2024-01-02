@@ -65,5 +65,7 @@ for university students.
 
 Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
+See the backend here: [GE-Z Backend](https://github.com/laurelin60/GE-Z-Backend)
+
 ---------------
 Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran 
