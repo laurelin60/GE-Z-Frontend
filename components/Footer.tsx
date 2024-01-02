@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="flex flex-col">
                 <div className="text-lg sm:text-xl">Made with 💖</div>
                 <div className="text-xs sm:text-sm">
-                    Copyright &copy; 2023 | All Rights Reserved
+                    Copyright &copy; 2024 | All Rights Reserved
                 </div>
             </div>
             <div className="flex text-3xl sm:absolute sm:right-24 sm:top-[26px] sm:text-4xl">
