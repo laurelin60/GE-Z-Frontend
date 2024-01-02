@@ -55,7 +55,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
                     </label>
                 ))}
             </div>
-            <div className="mt-4 border-2 border-t border-[#D9D9D9]"></div>
+            <div className="mt-4 border-2 border-t border-border"></div>
         </div>
     );
 };
