@@ -159,7 +159,7 @@ export default function Home() {
             <div className="mx-auto my-24 flex max-w-5xl flex-col gap-4 md:my-32">
                 <div className="px-6 lg:px-8">
                     <div className="mx-auto flex max-w-2xl flex-col gap-4 sm:text-center">
-                        <h2 className="text-4xl font-bold text-slate-900 sm:text-5xl">
+                        <h2 className="text-4xl font-bold sm:text-5xl">
                             Check out some searches
                         </h2>
                         <p className="text-lg text-slate-600">

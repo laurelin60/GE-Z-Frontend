@@ -6,9 +6,9 @@ import ThemeToggle from "@/components/ThemeToggle";
 const Header = () => {
     return (
         <>
-            <nav className="wrapper flex-between inset-x-0 z-30 h-24">
+            <nav className="wrapper flex-between inset-x-0 z-30 h-24 bg-background">
                 <div className="text-4xl font-bold text-primary sm:text-5xl">
-                    <Link href="/">GE-Z</Link>
+                    <Link href="/" className={"text-primary"}>GE-Z</Link>
                 </div>
                 <ThemeToggle />
 

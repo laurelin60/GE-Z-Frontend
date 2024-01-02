@@ -25,13 +25,13 @@ const SearchBlurb = (props: BlurbProps) => {
                 <div className="flex flex-col gap-2 text-lg font-normal text-gray md:text-xl">
                     <div>
                         We found{" "}
-                        <b className="text-black">
+                        <b className="text-text">
                             {data ? filterData(data, filterValues).length : "x"}{" "}
                             courses
                         </b>{" "}
                         that may articulate to{" "}
-                        <b className="text-black">{searchUniversity}</b> for{" "}
-                        <b className="text-black">{`${searchGE?.split(
+                        <b className="text-text">{searchUniversity}</b> for{" "}
+                        <b className="text-text">{`${searchGE?.split(
                             " ",
                         )[0]} Category ${searchGE?.split(" ")[1]}`}</b>{" "}
                         based on{" "}
