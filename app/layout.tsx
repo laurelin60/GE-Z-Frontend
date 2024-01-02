@@ -41,7 +41,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div className="flex flex-col place-content-center text-text">
+                <div className="flex flex-col place-content-center text-primary">
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system"

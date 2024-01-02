@@ -27,15 +27,15 @@ const SearchResults = (props: SearchResultsProps) => {
                             //     offset={500}
                             // >
                             <div
-                                className="rounded-t-lg border-2 border-gray"
+                                className="rounded-t-lg border-2 border-border-muted"
                                 key={
                                     result.courseCode +
                                     result.courseName +
                                     result.sendingInstitution
                                 }
                             >
-                                <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
-                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
+                                <div className="flex flex-col gap-2 rounded-t-lg bg-background-secondary px-4 py-2 md:px-8 md:py-4">
+                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-accent md:text-xl">
                                         {result.sendingInstitution}
                                     </div>
                                     <div className="text-2xl font-bold md:text-3xl">
@@ -55,7 +55,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                         </div>
                                     </div>
                                 )}
-                                <div className="border-2 border-t border-bg_secondary"></div>
+                                <div className="border-2 border-t border-border-secondary"></div>
                                 <div className="flex justify-between overflow-hidden">
                                     <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">
                                         <div className="flex flex-col whitespace-nowrap">
@@ -94,16 +94,16 @@ const SearchResults = (props: SearchResultsProps) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="border-2 border-t border-bg_secondary"></div>
+                                <div className="border-2 border-t border-border-secondary"></div>
                                 <div className="flex flex-col justify-between gap-y-2 px-4 py-2 md:flex-row md:px-8 md:py-4">
                                     <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
                                         Tuition:{" "}
-                                        <span className="text-primary">
+                                        <span className="text-accent">
                                             {`$${result.tuition.toFixed(2)}`}
                                         </span>
                                     </div>
                                     <div className="flex items-center gap-4 font-medium">
-                                        <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-primary active:bg-transparent active:text-primary">
+                                        <button className="rounded-lg border-2 border-accent bg-accent px-4 py-1 text-white transition-all active:border-accent active:bg-transparent active:text-accent">
                                             <a
                                                 href={`https://assist.org/${result.assistPath}`}
                                                 target="_blank"
@@ -114,7 +114,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 <FaUpRightFromSquare />
                                             </a>
                                         </button>
-                                        <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
+                                        <button className="rounded-lg border-2 px-4 py-1 text-accent transition-all active:border-accent active:bg-accent active:text-white">
                                             <a
                                                 href={`https://search.cvc.edu/courses/${result.cvcId}`}
                                                 target="_blank"
@@ -145,7 +145,7 @@ const SearchResults = (props: SearchResultsProps) => {
                             <p>No results found...</p>
                             {university == "University of California, Irvine" &&
                             (ge.includes("Ia") || ge.includes("Ib")) ? (
-                                <p className="text-sm text-zinc-500">
+                                <p className="text-sm text-muted">
                                     (GE Ia and Ib are not transferable at UCI)
                                 </p>
                             ) : null}

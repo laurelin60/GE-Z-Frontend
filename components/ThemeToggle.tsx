@@ -9,8 +9,8 @@ export const ThemeToggle = () => {
     return (
         <button
             onClick={() => theme == "dark"? setTheme('light'): setTheme("dark")}
-            className='text-red-500'>
-            Toggle Mode
+            className='text-destructive'>
+            Toggle Light/Dark Mode
         </button>
     )
 };

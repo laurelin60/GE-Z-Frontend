@@ -8,7 +8,9 @@ const Header = () => {
         <>
             <nav className="wrapper flex-between inset-x-0 z-30 h-24 bg-background">
                 <div className="text-4xl font-bold text-primary sm:text-5xl">
-                    <Link href="/" className={"text-primary"}>GE-Z</Link>
+                    <Link href="/" className="text-accent">
+                        GE-Z
+                    </Link>
                 </div>
                 <ThemeToggle />
 

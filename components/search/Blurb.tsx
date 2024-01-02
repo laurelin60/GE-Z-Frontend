@@ -22,19 +22,24 @@ const SearchBlurb = (props: BlurbProps) => {
                 <div className="text-3xl font-medium md:text-4xl">
                     Search Results
                 </div>
-                <div className="flex flex-col gap-2 text-lg font-normal text-gray md:text-xl">
+                <div className="flex flex-col gap-2 text-lg font-normal md:text-xl">
                     <div>
-                        We found{" "}
-                        <b className="text-text">
-                            {data ? filterData(data, filterValues).length : "x"}{" "}
+                        <span className="text-muted"> We found </span>
+                        <b className="text-primary">
+                            {data ? filterData(data, filterValues).length : "?"}{" "}
                             courses
-                        </b>{" "}
-                        that may articulate to{" "}
-                        <b className="text-text">{searchUniversity}</b> for{" "}
-                        <b className="text-text">{`${searchGE?.split(
+                        </b>
+                        <span className="text-muted">
+                            {" "}
+                            that may articulate to{" "}
+                        </span>
+                        <b className="text-primary">
+                            {searchUniversity}
+                        </b> for{" "}
+                        <b className="text-primary">{`${searchGE?.split(
                             " ",
-                        )[0]} Category ${searchGE?.split(" ")[1]}`}</b>{" "}
-                        based on{" "}
+                        )[0]} Category ${searchGE?.split(" ")[1]}`}</b>
+                        <span className="text-muted"> based on </span>
                         <a
                             href="https://assist.org/"
                             target="_blank"
@@ -42,8 +47,8 @@ const SearchBlurb = (props: BlurbProps) => {
                             className="underline underline-offset-[5px]"
                         >
                             Assist.org
-                        </a>{" "}
-                        and{" "}
+                        </a>
+                        <span className="text-muted"> and </span>
                         <a
                             href="https://cvc.edu/"
                             target="_blank"
@@ -52,10 +57,12 @@ const SearchBlurb = (props: BlurbProps) => {
                         >
                             CVC.edu
                         </a>
-                        . Please consult an academic advisor for further
-                        information.
+                        <span className="text-muted">
+                            . Please consult an academic advisor for further
+                            information.
+                        </span>
                     </div>
-                    <div className="flex text-base font-light text-gray md:justify-end">
+                    <div className="flex text-base font-light text-muted md:justify-end">
                         {"GE-Z's"} data was last updated on 12/30
                     </div>
                 </div>

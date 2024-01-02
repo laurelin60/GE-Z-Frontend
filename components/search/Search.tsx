@@ -191,7 +191,7 @@ const Search = () => {
                             <Link href="https://github.com/laurelin60/GE-Z-Frontend">
                                 <ToastAction
                                     altText="Star us on Github"
-                                    className="flex gap-x-2 border-2 border-primary drop-shadow-lg hover:drop-shadow-none"
+                                    className="flex gap-x-2 border-2 border-accent drop-shadow-lg hover:drop-shadow-none"
                                 >
                                     Star{" "}
                                     <svg
@@ -287,7 +287,7 @@ const Search = () => {
                             searchGE={ge}
                         />
                         <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
-                            <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                            <div className="bg-background-secondary hidden h-fit rounded-xl p-8 xl:flex xl:flex-col">
                                 <div className="mb-8 text-3xl font-medium">
                                     Search Filters
                                 </div>
@@ -310,14 +310,14 @@ const Search = () => {
                                 <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                                     <button
                                         onClick={handleFilterButtonClick}
-                                        className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
+                                        className="flex items-center gap-2 rounded-full border-2 bg-accent px-4 py-2 text-white transition-all active:border-accent active:bg-transparent active:text-accent xl:hidden"
                                     >
                                         <FaFilter />
                                         Search Filters
                                     </button>
 
                                     <div className="flex items-center gap-4 md:flex-row">
-                                        <div className="hidden text-gray sm:flex">
+                                        <div className="hidden text-muted sm:flex">
                                             Sort By:
                                         </div>
                                         <SortDropdown

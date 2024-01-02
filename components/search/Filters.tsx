@@ -98,12 +98,12 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
 
     return (
         <>
-            <div className="absolute left-0 top-0 z-50 h-fit min-h-full w-[100vw] bg-bg_secondary p-8 xl:hidden">
+            <div className="absolute left-0 top-0 z-50 h-fit min-h-full w-[100vw] bg-background-secondary p-8 xl:hidden">
                 <div className="mb-8 flex flex-row justify-between">
                     <div className="text-3xl font-medium">Search Filters</div>
                     <div className="items-top flex">
                         <button
-                            className="flex flex-row items-center gap-2 text-3xl text-primary"
+                            className="flex flex-row items-center gap-2 text-3xl text-accent"
                             onClick={handleClick}
                         >
                             <FaCircleXmark />

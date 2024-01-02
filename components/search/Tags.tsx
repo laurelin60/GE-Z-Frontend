@@ -6,33 +6,33 @@ const Tags = (props: any) => {
 
     if (tag == "Online Tutoring") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-border-muted px-4 py-1 font-medium">
+                <div className="text-primary">
                     <FaChalkboard />
                 </div>
-                <div>Online Tutoring</div>
+                <div className="text-muted">Online Tutoring</div>
             </div>
         );
     }
 
     if (tag == "Zero Textbook Cost") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-border-muted px-4 py-1 font-medium">
+                <div className="text-primary">
                     <FaHandHoldingDollar />
                 </div>
-                <div>Zero Textbook Cost</div>
+                <div className="text-muted">Zero Textbook Cost</div>
             </div>
         );
     }
 
     if (tag == "Quality Reviewed") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
+            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-border-muted px-4 py-1 font-medium">
+                <div className="text-primary">
                     <FaAward />
                 </div>
-                <div>Quality Reviewed</div>
+                <div className="text-muted">Quality Reviewed</div>
             </div>
         );
     }

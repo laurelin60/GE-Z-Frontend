@@ -29,9 +29,6 @@ const config = {
 
                 foreground: "var(--foreground)",
 
-                text: "#000000",
-                gray: "#00000060",
-
                 primary: {
                     DEFAULT: "hsl(var(--primary))",
                     foreground: "hsl(var(--primary-foreground))",
@@ -61,7 +58,11 @@ const config = {
                     foreground: "var(--card-foreground)",
                 },
 
-                border: "var(--border)",
+                border: {
+                    DEFAULT: "var(--border)",
+                    secondary: "var(--border-secondary)",
+                    muted: "var(--border-muted)",
+                },
                 input: "var(--input)",
                 ring: "var(--ring)",
             },
