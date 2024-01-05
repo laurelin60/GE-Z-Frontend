@@ -105,14 +105,14 @@ export default function Home() {
         <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
             <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-24">
                 <div className="flex flex-col items-center gap-y-5 text-center">
-                    <h1 className="flex-center xs:text-5xl max-w-2xl flex-col text-4xl font-bold sm:text-6xl">
+                    <h1 className="flex-center max-w-2xl flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
                         <span className="hidden md:flex">
                             Online, Async, and{" "}
                         </span>
                         <span className="flex text-center md:hidden">
                             Online, Async,
                         </span>
-                        <span className="xs:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent sm:text-7xl md:text-8xl">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent xs:text-6xl sm:text-7xl md:text-8xl">
                             Articulatable
                         </span>
                     </h1>
