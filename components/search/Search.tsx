@@ -164,9 +164,9 @@ const Search = () => {
             try {
                 const universityParam = university;
                 const geParam = !ge.includes("GE") ? ge : ge.split(" ")[1];
-                const data = await queryDatabase(universityParam, geParam);
+                const courses = await queryDatabase(universityParam, geParam);
 
-                setCourses(data.courses);
+                setCourses(courses);
                 setLoading(false);
                 setError(false);
 
@@ -287,7 +287,7 @@ const Search = () => {
                             searchGE={ge}
                         />
                         <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
-                            <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                            <div className="bg-bg_secondary hidden h-fit rounded-xl p-8 xl:flex xl:flex-col">
                                 <div className="mb-8 text-3xl font-medium">
                                     Search Filters
                                 </div>
@@ -317,7 +317,7 @@ const Search = () => {
                                     </button>
 
                                     <div className="flex items-center gap-4 md:flex-row">
-                                        <div className="hidden text-gray sm:flex">
+                                        <div className="text-gray hidden sm:flex">
                                             Sort By:
                                         </div>
                                         <SortDropdown

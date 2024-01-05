@@ -1,4 +1,22 @@
-export async function queryDatabase(university: string, ge: string) {
+import { CollegeObject } from "./Search";
+
+const cache: Record<string, [Date, CollegeObject[]]> = {};
+
+export async function queryDatabase(
+    university: string,
+    ge: string,
+): Promise<CollegeObject[]> {
+    const cacheKey = university + ge;
+
+    if (cache[cacheKey] && cache[cacheKey][0]) {
+        const [cachedDate, cachedData] = cache[cacheKey];
+
+        // If not older than 30 minutes, return cached courses
+        if ((new Date().getTime() - cachedDate.getTime()) / (1000 * 60) <= 30) {
+            return cachedData;
+        }
+    }
+
     const universityParam = encodeURIComponent(university);
     const geParam = encodeURIComponent(ge);
 
@@ -11,7 +29,10 @@ export async function queryDatabase(university: string, ge: string) {
         }
 
         const data = await response.json();
-        return data;
+
+        cache[cacheKey] = [new Date(), data.courses];
+
+        return data.courses;
     } catch (error) {
         console.error("Error:", error);
         throw error;
