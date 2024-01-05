@@ -6,7 +6,6 @@ export async function queryDatabase(
     university: string,
     ge: string,
 ): Promise<CollegeObject[]> {
-    console.log(cache);
     if (cache[university + ge]) {
         return cache[university + ge];
     }
