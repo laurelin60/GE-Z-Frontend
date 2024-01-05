@@ -30,7 +30,7 @@ export async function queryDatabase(
 
         const data = await response.json();
 
-        cache[university + ge] = [new Date(), data.courses];
+        cache[cacheKey] = [new Date(), data.courses];
 
         return data.courses;
     } catch (error) {
