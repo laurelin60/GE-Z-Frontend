@@ -1,8 +1,6 @@
 # GE-Z
 
-> ### The only tool built for University Students that finds online, <ins>
->
-> _articulatable_</ins> GE courses at California CCs
+> ### The only tool built for University Students that finds online, <ins>_articulatable_</ins> GE courses at California CCs
 
 <p align="center">
 Built with: <br>
