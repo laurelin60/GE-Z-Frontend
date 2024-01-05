@@ -1,13 +1,20 @@
 import { CollegeObject } from "./Search";
 
-const cache: Record<string, CollegeObject[]> = {};
+const cache: Record<string, [Date, CollegeObject[]]> = {};
 
 export async function queryDatabase(
     university: string,
     ge: string,
 ): Promise<CollegeObject[]> {
-    if (cache[university + ge]) {
-        return cache[university + ge];
+    const cacheKey = university + ge;
+
+    if (cache[cacheKey] && cache[cacheKey][0]) {
+        const [cachedDate, cachedData] = cache[cacheKey];
+
+        // If not older than 30 minutes, return cached courses
+        if ((new Date().getTime() - cachedDate.getTime()) / (1000 * 60) <= 30) {
+            return cachedData;
+        }
     }
 
     const universityParam = encodeURIComponent(university);
@@ -23,7 +30,7 @@ export async function queryDatabase(
 
         const data = await response.json();
 
-        cache[university + ge] = data.courses;
+        cache[university + ge] = [new Date(), data.courses];
 
         return data.courses;
     } catch (error) {
