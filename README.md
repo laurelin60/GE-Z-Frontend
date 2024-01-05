@@ -1,7 +1,6 @@
 # GE-Z
 
-> ### The only tool built for University Students that finds online, <ins>
-*articulatable*</ins> GE courses at California CCs
+> ### The only tool built for University Students that finds online, <ins>_articulatable_</ins> GE courses at California CCs
 
 <p align="center">
 Built with: <br>
@@ -33,19 +32,19 @@ for university students.
 
 ### Currently Supports:
 
-* UCI ✅
-* UCSB ✅
+-   UCI ✅
+-   UCSB ✅
 
 ### In the Works:
 
-* All UCs and CSUs
-* Dark Mode 🐙
+-   All UCs and CSUs
+-   Dark Mode 🐙
 
 ## Features
 
-* Search across universities and general education requirements
-* Find courses eligible for instant enrollment, zero textbook fees, and more
-* Sort courses by units, tuition, timeframe, and more!
+-   Search across universities and general education requirements
+-   Find courses eligible for instant enrollment, zero textbook fees, and more
+-   Sort courses by units, tuition, timeframe, and more!
 
 ## Screenshots
 
@@ -67,5 +66,6 @@ Access GE-Z live! Click this link: [GE-Z](https://ge-z.vercel.app)
 
 See the backend here: [GE-Z Backend](https://github.com/laurelin60/GE-Z-Backend)
 
----------------
-Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran 
+---
+
+Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran
