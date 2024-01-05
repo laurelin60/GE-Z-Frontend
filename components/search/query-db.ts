@@ -1,4 +1,16 @@
-export async function queryDatabase(university: string, ge: string) {
+import { CollegeObject } from "./Search";
+
+const cache: Record<string, CollegeObject[]> = {};
+
+export async function queryDatabase(
+    university: string,
+    ge: string,
+): Promise<CollegeObject[]> {
+    console.log(cache);
+    if (cache[university + ge]) {
+        return cache[university + ge];
+    }
+
     const universityParam = encodeURIComponent(university);
     const geParam = encodeURIComponent(ge);
 
@@ -11,7 +23,10 @@ export async function queryDatabase(university: string, ge: string) {
         }
 
         const data = await response.json();
-        return data;
+
+        cache[university + ge] = data.courses;
+
+        return data.courses;
     } catch (error) {
         console.error("Error:", error);
         throw error;
