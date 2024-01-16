@@ -17,6 +17,7 @@ import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import Link from "next/link";
+import { SearchSelect } from "./SearchSelect";
 
 export interface CollegeObject {
     sendingInstitution: string;
@@ -264,17 +265,18 @@ const Search = () => {
                         </span>
                     </div>
                     <div className="mt-8 flex flex-row items-center justify-between">
-                        <div className="flex flex-col flex-wrap gap-x-8 gap-y-2 md:flex-row xl:gap-8">
-                            <DropdownComponentSearch
-                                defaultValue={university}
+                        <div className="flex flex-col flex-wrap gap-x-4 gap-y-2 md:flex-row">
+                            <SearchSelect
+                                value={university}
                                 data={Object.keys(UNIVERSITY_GE)}
                                 onChange={handleUniversityChange}
+                                placeholder="University"
                             />
-                            <DropdownComponentSearch
-                                defaultValue={ge}
+                            <SearchSelect
+                                value={ge}
                                 data={UNIVERSITY_GE[university]}
                                 onChange={handleGeChange}
-                                key={university}
+                                placeholder="Category"
                             />
                         </div>
                     </div>
