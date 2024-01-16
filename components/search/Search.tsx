@@ -265,7 +265,7 @@ const Search = () => {
                         </span>
                     </div>
                     <div className="mt-8 flex flex-row items-center justify-between">
-                        <div className="flex flex-col flex-wrap gap-x-4 gap-y-2 md:flex-row">
+                        <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-2">
                             <SearchSelect
                                 value={university}
                                 data={Object.keys(UNIVERSITY_GE)}
