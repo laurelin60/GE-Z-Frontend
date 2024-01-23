@@ -68,4 +68,4 @@ See the backend here: [GE-Z Backend](https://github.com/laurelin60/GE-Z-Backend)
 
 ---
 
-Made with ❤️ by Andrew Wang, Uno Pasadhika, Kevin Wu, Alan Tran
+Made with ❤️ by [Andrew Wang](https://www.linkedin.com/in/andrew-wang0/), [Uno Pasadhika](https://www.linkedin.com/in/wpasadhika/), [Kevin Wu](https://www.linkedin.com/in/kevinwu098/), [Alan Tran](https://www.linkedin.com/in/alantran296/)
