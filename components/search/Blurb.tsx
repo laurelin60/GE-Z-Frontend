@@ -56,7 +56,7 @@ const SearchBlurb = (props: BlurbProps) => {
                         information.
                     </div>
                     <div className="flex text-base font-light text-gray md:justify-end">
-                        {"GE-Z's"} data was last updated on 1/19
+                        {"GE-Z's"} data was last updated on 2/29
                     </div>
                 </div>
 
