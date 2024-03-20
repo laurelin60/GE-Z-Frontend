@@ -20,19 +20,19 @@ const EXAMPLES = [
     {
         uni: "UC Irvine",
         ge: "GE IV - Arts and Humanities",
-        courses: 150,
+        courses: 75,
         link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20IV",
     },
     {
         uni: "UC Santa Barbara",
         ge: "GE E - Culture and Thought",
-        courses: 100,
+        courses: 75,
         link: "/search?uni=University%20of%20California%2C%20Santa%20Barbara&ge=GE%20E",
     },
     {
         uni: "UC Irvine",
         ge: "GE VII - Multicultural Studies",
-        courses: 75,
+        courses: 50,
         link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20VII",
     },
 ];
