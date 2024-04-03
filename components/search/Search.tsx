@@ -280,11 +280,12 @@ const Search = () => {
     }
 
     return (
-        <div className="wrapper my-8 min-h-[calc(100vh-96px)] px-4 md:my-16 lg:px-28 xl:px-36">
+        <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
             <div className="flex flex-wrap text-6xl font-bold">
                 Search <span className="hidden lg:flex">&nbsp;For Courses</span>
             </div>
-            <div className="mt-8 flex flex-row items-center justify-between">
+
+            <div className="mt-4 flex flex-row items-center justify-between">
                 <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-2">
                     <SearchSelect
                         value={university}
@@ -301,72 +302,71 @@ const Search = () => {
                 </div>
             </div>
 
-            <div>
-                <Blurb
-                    filterData={filterData}
-                    data={courses}
-                    filterValues={filterValues}
-                />
-                <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
-                    <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
-                        <div className="mb-8 text-3xl font-medium">
+            <Blurb
+                filterData={filterData}
+                data={courses}
+                filterValues={filterValues}
+            />
+
+            <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
+                <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
+                    <div className="mb-8 text-3xl font-medium">
+                        Search Filters
+                    </div>
+                    <SearchFilters
+                        handleClick={handleFilterButtonClick}
+                        setFormat={setFormat}
+                        setEnrollment={setEnrollment}
+                        setAvailable={setAvailable}
+                        setStart={setStart}
+                        setEnd={setEnd}
+                        setInstitution={setInstitution}
+                        setMin={setMin}
+                        setMax={setMax}
+                        filterValues={filterValues}
+                        courses={courses}
+                    />
+                </div>
+
+                <div className="w-full xl:min-w-[65%]">
+                    <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
+                        <button
+                            onClick={handleFilterButtonClick}
+                            className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
+                        >
+                            <FaFilter />
                             Search Filters
-                        </div>
-                        <SearchFilters
-                            handleClick={handleFilterButtonClick}
-                            setFormat={setFormat}
-                            setEnrollment={setEnrollment}
-                            setAvailable={setAvailable}
-                            setStart={setStart}
-                            setEnd={setEnd}
-                            setInstitution={setInstitution}
-                            setMin={setMin}
-                            setMax={setMax}
-                            filterValues={filterValues}
-                            courses={courses}
-                        />
-                    </div>
+                        </button>
 
-                    <div className="w-full xl:min-w-[65%]">
-                        <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
-                            <button
-                                onClick={handleFilterButtonClick}
-                                className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
-                            >
-                                <FaFilter />
-                                Search Filters
-                            </button>
-
-                            <div className="flex items-center gap-4 md:flex-row">
-                                <div className="hidden text-gray sm:flex">
-                                    Sort By:
-                                </div>
-                                <SortDropdown
-                                    defaultValue={sort}
-                                    data={[
-                                        "Default Sort",
-                                        "Alphabetical",
-                                        "Tuition",
-                                        "Shortest Term",
-                                    ]}
-                                    onChange={setSort}
-                                />
+                        <div className="flex items-center gap-4 md:flex-row">
+                            <div className="hidden text-gray sm:flex">
+                                Sort By:
                             </div>
-                        </div>
-
-                        {loading ? (
-                            <LoadingState />
-                        ) : error ? (
-                            <ErrorState />
-                        ) : (
-                            <SearchResults
-                                results={filterData(courses, filterValues)}
-                                university={university}
-                                ge={ge}
+                            <SortDropdown
+                                defaultValue={sort}
+                                data={[
+                                    "Default Sort",
+                                    "Alphabetical",
+                                    "Tuition",
+                                    "Shortest Term",
+                                ]}
+                                onChange={setSort}
                             />
-                        )}
-                        <ScrollToTop />
+                        </div>
                     </div>
+
+                    {loading ? (
+                        <LoadingState />
+                    ) : error ? (
+                        <ErrorState />
+                    ) : (
+                        <SearchResults
+                            results={filterData(courses, filterValues)}
+                            university={university}
+                            ge={ge}
+                        />
+                    )}
+                    <ScrollToTop />
                 </div>
             </div>
         </div>
