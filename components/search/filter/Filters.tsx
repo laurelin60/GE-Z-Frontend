@@ -6,7 +6,7 @@ import {
     UnitsFilter,
 } from "./FilterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
-import { CollegeObject, FilterValues } from "./Search";
+import { CollegeObject, FilterValues } from "../Search";
 
 interface SearchFilterProps {
     handleClick: () => void;

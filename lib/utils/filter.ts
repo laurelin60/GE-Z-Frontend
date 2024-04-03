@@ -1,4 +1,4 @@
-import { CollegeObject, FilterValues } from "./Search";
+import { CollegeObject, FilterValues } from "../../components/search/Search";
 
 export const startsAfter = (start: Date, result: CollegeObject) => {
     const month = result.startMonth.toString().padStart(2, "0");

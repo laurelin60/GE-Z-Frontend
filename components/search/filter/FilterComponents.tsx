@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
-import { CollegeObject } from "./Search";
+import { CollegeObject } from "../Search";
 import { format } from "date-fns";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -12,7 +12,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 

@@ -1,4 +1,4 @@
-import { CollegeObject } from "./Search";
+import { CollegeObject } from "../../components/search/Search";
 
 const cache: Record<string, [Date, CollegeObject[]]> = {};
 
