@@ -3,9 +3,18 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
 import { CollegeObject } from "./Search";
-import DatePicker from "react-datepicker";
+import { format } from "date-fns";
 
-import "react-datepicker/dist/react-datepicker.css";
+import { Calendar } from "@/components/ui/calendar";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+
+import { Button } from "../ui/button";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FilterCheckboxProps {
     title: string;
@@ -70,19 +79,24 @@ interface CalendarFilterProps {
 export const CalendarFilter = (props: CalendarFilterProps) => {
     const { onStartChange, onEndChange, defaultStart, defaultEnd } = props;
 
-    const [start, setStart] = useState(
+    const [startDate, setStartDate] = useState<Date | undefined>(
         defaultStart ? new Date(defaultStart) : new Date(),
     );
-    const [end, setEnd] = useState(defaultEnd);
+    const [endDate, setEndDate] = useState<Date | undefined>(defaultEnd);
 
-    const handleStartChange = (date: Date) => {
+    const handleStartChange = (date: Date | undefined) => {
+        if (!date) {
+            console.error("No start date selected");
+            return;
+        }
+
         onStartChange(date);
-        setStart(date);
+        setStartDate(date);
     };
 
-    const handleEndChange = (date: Date) => {
+    const handleEndChange = (date: Date | undefined) => {
         onEndChange(date);
-        setEnd(date);
+        setEndDate(date);
     };
 
     return (
@@ -94,12 +108,33 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                         Starts After
                     </label>
                     <div className="flex flex-row items-center gap-2">
-                        <DatePicker
-                            selected={start}
-                            onChange={handleStartChange}
-                            onSelect={handleStartChange}
-                            className="w-44 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
-                        />
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
+                                        !startDate && "text-muted-foreground",
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                    {startDate ? (
+                                        format(startDate, "PP")
+                                    ) : (
+                                        <span>Start date</span>
+                                    )}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                                <Calendar
+                                    mode="single"
+                                    selected={startDate}
+                                    onSelect={handleStartChange}
+                                    initialFocus
+                                    required
+                                />
+                            </PopoverContent>
+                        </Popover>
                     </div>
                 </div>
                 <div>
@@ -107,12 +142,32 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                         Ends Before
                     </label>
                     <div className="flex flex-row items-center gap-2">
-                        <DatePicker
-                            selected={end}
-                            onChange={handleEndChange}
-                            onSelect={handleEndChange}
-                            className="w-44 appearance-none rounded-lg border-[1px] border-gray px-4 py-2"
-                        />
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
+                                        !endDate && "text-muted-foreground",
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                    {endDate ? (
+                                        format(endDate, "PP")
+                                    ) : (
+                                        <span>End date</span>
+                                    )}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                                <Calendar
+                                    mode="single"
+                                    selected={endDate}
+                                    onSelect={handleEndChange}
+                                    initialFocus
+                                />
+                            </PopoverContent>
+                        </Popover>
                     </div>
                 </div>
             </div>
