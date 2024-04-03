@@ -134,7 +134,7 @@ export default function Home() {
                         >
                             CVC.edu
                         </Link>{" "}
-                        to find you high-quality, articulatable
+                        to find you high-quality, articulable
                         <ArticulatableDefinition /> California Community College
                         courses that save you time and money.
                     </p>
