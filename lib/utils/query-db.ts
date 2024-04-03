@@ -20,7 +20,7 @@ export async function queryDatabase(
     const universityParam = encodeURIComponent(university);
     const geParam = encodeURIComponent(ge);
 
-    const url = `https://ge-z.info:5000/api/cvc-courses?uni=${universityParam}&ge=${geParam}`;
+    const url = `https://ge-z.info/api/cvc-courses?institution=${universityParam}&ge=${geParam}`;
 
     try {
         const response = await fetch(url);
@@ -30,9 +30,9 @@ export async function queryDatabase(
 
         const data = await response.json();
 
-        cache[cacheKey] = [new Date(), data.courses];
+        cache[cacheKey] = [new Date(), data.data];
 
-        return data.courses;
+        return data.data;
     } catch (error) {
         console.error("Error:", error);
         throw error;
