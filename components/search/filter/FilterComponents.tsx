@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { FaCheck, FaChevronDown } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { CollegeObject } from "../Search";
 import { format } from "date-fns";
 
@@ -11,6 +11,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 import { Button } from "../../ui/button";
 import { CalendarIcon } from "lucide-react";
@@ -187,9 +194,9 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
 
     const [value, setValue] = useState(defaultValue);
 
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        onChange(e.target.value);
-        setValue(e.target.value);
+    const handleChange = (value: string) => {
+        onChange(value);
+        setValue(value);
     };
 
     const uniqueColleges =
@@ -214,21 +221,21 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
             <div className="mb-2 text-2xl font-medium">
                 Teaching Institution
             </div>
-            <div className="relative">
-                <select
-                    value={value}
-                    onChange={handleChange}
-                    className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
-                >
-                    <option>{"Any Institution"}</option>
-                    {uniqueColleges.map((item) => (
-                        <option key={item}>{item}</option>
+            <Select value={value} onValueChange={handleChange}>
+                <SelectTrigger className="text-regular min-h-full w-full max-w-[368px] rounded-lg border-[1px] border-gray">
+                    <SelectValue placeholder="Teaching Institution" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="Any Institution">
+                        Any Institution
+                    </SelectItem>
+                    {uniqueColleges.map((college) => (
+                        <SelectItem value={college} key={college}>
+                            {college}
+                        </SelectItem>
                     ))}
-                </select>
-                <div className="absolute right-1 top-[14px] h-8 w-8 text-gray">
-                    <FaChevronDown />
-                </div>
-            </div>
+                </SelectContent>
+            </Select>
             <div className="mt-4 border-2 border-t border-[#D9D9D9]"></div>
         </div>
     );
@@ -300,27 +307,26 @@ export const SortDropdown = (props: SortDropdownProps) => {
 
     const [value, setValue] = useState(defaultValue);
 
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        onChange(e.target.value);
-        setValue(e.target.value);
+    const handleChange = (value: string) => {
+        onChange(value);
+        setValue(value);
     };
 
     return (
-        <div className="relative flex flex-col">
-            <div className="relative">
-                <select
-                    value={value}
-                    onChange={handleChange}
-                    className="text-regular block h-full w-full appearance-none overflow-ellipsis rounded-lg border-[1px] border-gray px-4 py-2 pr-12"
-                >
+        <div className="flex items-center gap-4 md:flex-row">
+            <div className="hidden text-gray sm:flex">Sort By:</div>
+            <Select value={value} onValueChange={handleChange}>
+                <SelectTrigger className="text-regular min-h-full w-40 rounded-lg border-[1px] border-gray">
+                    <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
                     {data.map((item) => (
-                        <option key={item}>{item}</option>
+                        <SelectItem value={item} key={item}>
+                            {item}
+                        </SelectItem>
                     ))}
-                </select>
-                <div className="pointer-events-none absolute right-1 top-[14px] h-8 w-8 text-gray">
-                    <FaChevronDown />
-                </div>
-            </div>
+                </SelectContent>
+            </Select>
         </div>
     );
 };

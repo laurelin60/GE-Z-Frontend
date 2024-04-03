@@ -338,21 +338,16 @@ const Search = () => {
                             Search Filters
                         </button>
 
-                        <div className="flex items-center gap-4 md:flex-row">
-                            <div className="hidden text-gray sm:flex">
-                                Sort By:
-                            </div>
-                            <SortDropdown
-                                defaultValue={sort}
-                                data={[
-                                    "Default Sort",
-                                    "Alphabetical",
-                                    "Tuition",
-                                    "Shortest Term",
-                                ]}
-                                onChange={setSort}
-                            />
-                        </div>
+                        <SortDropdown
+                            defaultValue={sort}
+                            data={[
+                                "Default Sort",
+                                "Alphabetical",
+                                "Tuition",
+                                "Shortest Term",
+                            ]}
+                            onChange={setSort}
+                        />
                     </div>
 
                     {loading ? (
