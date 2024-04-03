@@ -8,7 +8,7 @@ import SearchResults from "./SearchResults";
 import ScrollToTop from "./ScrollToTop";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./Filters";
-import SearchBlurb from "./Blurb";
+import Blurb from "./Blurb";
 import { filterData } from "./filter-utils";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
@@ -256,7 +256,7 @@ const Search = () => {
                     courses={courses}
                 />
             ) : (
-                <div className="wrapper mb-8 mt-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 md:mt-16 lg:px-28 xl:px-36">
+                <div className="wrapper my-8 min-h-[calc(100vh-96px)] px-4 md:my-16 lg:px-28 xl:px-36">
                     <div className="flex flex-wrap text-6xl font-bold">
                         Search{" "}
                         <span className="hidden lg:flex">
@@ -280,12 +280,10 @@ const Search = () => {
                         </div>
                     </div>
                     <div>
-                        <SearchBlurb
+                        <Blurb
                             filterData={filterData}
                             data={courses}
                             filterValues={filterValues}
-                            searchUniversity={university}
-                            searchGE={ge}
                         />
                         <div className="mt-8 flex flex-row gap-4 md:mt-16 md:gap-8">
                             <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
