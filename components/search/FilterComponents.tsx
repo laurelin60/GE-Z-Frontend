@@ -3,7 +3,6 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
 import { CollegeObject } from "./Search";
-import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -13,7 +12,6 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "../ui/button";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
