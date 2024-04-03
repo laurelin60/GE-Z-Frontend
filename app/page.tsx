@@ -43,7 +43,7 @@ const ArticulableDefinition = () => {
                 <HelpCircle className="inline-block h-4 w-4" />
             </PopoverTrigger>
             <PopoverContent>
-                <p className="text-sm">
+                <p className="text-sm text-muted-foreground">
                     &quot;An articulated course is a course... that can be used
                     to satisfy... general education requirements at another
                     college or university.&quot; - <br />
@@ -111,11 +111,11 @@ export default function Home() {
                         <span className="flex text-center md:hidden">
                             Online, Async,
                         </span>
-                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent xs:text-6xl sm:text-7xl md:text-8xl">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent xs:text-7xl sm:text-8xl md:text-9xl">
                             Articulable
                         </span>
                     </h1>
-                    <p className="text-gray-600 max-w-prose text-slate-600 sm:text-lg">
+                    <p className="max-w-prose px-2 text-muted-foreground sm:text-lg">
                         GE-Z sources data directly from{" "}
                         <Link
                             href="https://assist.org/"
