@@ -1,3 +1,15 @@
 {
-    "extends": "next/core-web-vitals"
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "parserOptions": {
+        "project": ["./tsconfig.json"],
+        "sourceType": "module"
+    },
+    "ignorePatterns": [
+        "postcss.config.js",
+        "tailwind.config.ts",
+        "next.config.js"
+    ]
 }
