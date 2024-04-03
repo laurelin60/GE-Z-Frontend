@@ -1,4 +1,4 @@
-import { CollegeObject } from "../../components/search/Search";
+import { CollegeObject } from "@/components/search/Search";
 
 const cache: Record<string, [Date, CollegeObject[]]> = {};
 
@@ -25,6 +25,7 @@ export async function queryDatabase(
     try {
         const response = await fetch(url);
         if (!response.ok) {
+            // noinspection ExceptionCaughtLocallyJS
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 

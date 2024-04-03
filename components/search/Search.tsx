@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { SortDropdown } from "./filter/FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
-import { queryDatabase } from "../../lib/utils/query-db";
+import { queryDatabase } from "@/lib/utils/query-db";
 import SearchResults from "./SearchResults";
 import ScrollToTop from "./ScrollToTop";
 import { FaFilter } from "react-icons/fa6";
 import { SearchFilterPage, SearchFilters } from "./filter/Filters";
 import Blurb from "./Blurb";
-import { filterData } from "../../lib/utils/filter";
+import { filterData } from "@/lib/utils/filter";
 import { UNIVERSITY_GE } from "@/lib/constants";
 
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";

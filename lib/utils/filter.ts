@@ -1,4 +1,4 @@
-import { CollegeObject, FilterValues } from "../../components/search/Search";
+import { CollegeObject, FilterValues } from "@/components/search/Search";
 
 export const startsAfter = (start: Date, result: CollegeObject) => {
     const month = result.startMonth.toString().padStart(2, "0");
@@ -64,33 +64,28 @@ export function filterData(
         );
     });
 
-    const sortedResults =
-        filterValues.sort == "Alphabetical"
+    return filterValues.sort == "Alphabetical"
+        ? filteredResults.sort((courseA, courseB) => {
+              const nameA = courseA.courseCode + courseA.courseName;
+              const nameB = courseB.courseCode + courseB.courseName;
+
+              return nameA.localeCompare(nameB);
+          })
+        : filterValues.sort == "Tuition"
+          ? filteredResults.sort((courseA, courseB) => {
+                return courseA.tuition - courseB.tuition;
+            })
+          : filterValues.sort == "Shortest Term"
             ? filteredResults.sort((courseA, courseB) => {
-                  const nameA = courseA.courseCode + courseA.courseName;
-                  const nameB = courseB.courseCode + courseB.courseName;
+                  const termLengthA =
+                      ((courseA.endMonth - courseA.startMonth + 12) % 12) * 30 +
+                      (courseA.endDay - courseA.startDay);
 
-                  return nameA.localeCompare(nameB);
+                  const termLengthB =
+                      ((courseB.endMonth - courseB.startMonth + 12) % 12) * 30 +
+                      (courseB.endDay - courseB.startDay);
+
+                  return termLengthA - termLengthB;
               })
-            : filterValues.sort == "Tuition"
-              ? filteredResults.sort((courseA, courseB) => {
-                    return courseA.tuition - courseB.tuition;
-                })
-              : filterValues.sort == "Shortest Term"
-                ? filteredResults.sort((courseA, courseB) => {
-                      const termLengthA =
-                          ((courseA.endMonth - courseA.startMonth + 12) % 12) *
-                              30 +
-                          (courseA.endDay - courseA.startDay);
-
-                      const termLengthB =
-                          ((courseB.endMonth - courseB.startMonth + 12) % 12) *
-                              30 +
-                          (courseB.endDay - courseB.startDay);
-
-                      return termLengthA - termLengthB;
-                  })
-                : filteredResults;
-
-    return sortedResults;
+            : filteredResults;
 }

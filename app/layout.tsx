@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "@/components/ui/toaster";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
 
