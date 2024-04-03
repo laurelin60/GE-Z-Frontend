@@ -1,6 +1,6 @@
 # GE-Z
 
-> ### The only tool built for University Students that finds online, <ins>_articulatable_</ins> GE courses at California CCs
+> ### The only tool built for University Students that finds online, <ins>_articulable_</ins> GE courses at California CCs
 
 <p align="center">
 Built with: <br>
@@ -22,7 +22,7 @@ Built with: <br>
 
 ## About
 
-GE-Z is the first tool of its kind for finding high-quality, articulatable courses at California Community Colleges (
+GE-Z is the first tool of its kind for finding high-quality, articulable courses at California Community Colleges (
 CCC) that any Californian university student can take to advance their academic goals.
 
 Resources like Assist.org and CVC.edu are great for aspiring transfer students, but they're not designed with university

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "GE-Z",
         description:
-            "Find online, async, and articulatable courses from California Community Colleges.",
+            "Find online, async, and articulable courses from California Community Colleges.",
         url: "https://ge-z.vercel.app",
         images: [
             {
