@@ -1,10 +1,9 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
@@ -42,7 +41,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <div className="flex flex-col place-content-center bg-background text-text">
                     <Header />
-                    <GoogleAnalytics gaId="G-PMNW29ZB3Y" />
+                    <GoogleAnalytics />
                     {children}
                     <Footer />
                     <Toaster />
