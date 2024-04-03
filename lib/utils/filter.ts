@@ -1,23 +1,21 @@
-import { CollegeObject, FilterValues } from "../../components/search/Search";
+import { CourseObject, FilterValues } from "../../components/search/Search";
 
-export const startsAfter = (start: Date, result: CollegeObject) => {
-    const month = result.startMonth.toString().padStart(2, "0");
-    const day = result.startDay.toString().padStart(2, "0");
-    const courseDate = new Date(`2024-${month}-${day}`);
+export const startsAfter = (start: Date, result: CourseObject) => {
+    const courseDate = new Date(result.startDate);
+
     courseDate.setHours(0, 0, 0, 0);
     courseDate.setDate(courseDate.getDate() + 1);
 
     return courseDate > start;
 };
 
-export const endsBefore = (end: Date | undefined, result: CollegeObject) => {
+export const endsBefore = (end: Date | undefined, result: CourseObject) => {
     if (end == undefined) {
         return true;
     }
 
-    const month = result.endMonth.toString().padStart(2, "0");
-    const day = result.endDay.toString().padStart(2, "0");
-    const courseDate = new Date(`2024-${month}-${day}`);
+    const courseDate = new Date(result.endDate);
+
     courseDate.setHours(0, 0, 0, 0);
     courseDate.setDate(courseDate.getDate() + 1);
 
@@ -25,7 +23,7 @@ export const endsBefore = (end: Date | undefined, result: CollegeObject) => {
 };
 
 export function filterData(
-    data: CollegeObject[] | undefined,
+    data: CourseObject[] | undefined,
     filterValues: FilterValues,
 ) {
     if (!data) {
@@ -78,15 +76,8 @@ export function filterData(
                 })
               : filterValues.sort == "Shortest Term"
                 ? filteredResults.sort((courseA, courseB) => {
-                      const termLengthA =
-                          ((courseA.endMonth - courseA.startMonth + 12) % 12) *
-                              30 +
-                          (courseA.endDay - courseA.startDay);
-
-                      const termLengthB =
-                          ((courseB.endMonth - courseB.startMonth + 12) % 12) *
-                              30 +
-                          (courseB.endDay - courseB.startDay);
+                      const termLengthA = courseA.endDate - courseA.startDate;
+                      const termLengthB = courseB.endDate - courseB.startDate;
 
                       return termLengthA - termLengthB;
                   })
