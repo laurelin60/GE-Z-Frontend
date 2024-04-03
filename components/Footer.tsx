@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub, FaEnvelopeOpenText } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -20,7 +20,6 @@ const Footer = () => {
                     >
                         <FaGithub />
                     </a>
-                    {/* <FaEnvelopeOpenText /> */}
                 </div>
             </div>
         </div>

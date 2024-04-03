@@ -1,7 +1,11 @@
 import React from "react";
 import { FaChalkboard, FaAward, FaHandHoldingDollar } from "react-icons/fa6";
 
-const Tags = (props: any) => {
+interface TagsProps {
+    tag: string;
+}
+
+const Tags = (props: TagsProps) => {
     const { tag } = props;
 
     if (tag == "Online Tutoring") {

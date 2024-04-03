@@ -1,4 +1,4 @@
-import LazyLoad from "react-lazy-load";
+// import LazyLoad from "react-lazy-load";
 import { FaUpRightFromSquare } from "react-icons/fa6";
 import { CollegeObject } from "./Search";
 import Tags from "./Tags";
@@ -134,7 +134,6 @@ const SearchResults = (props: SearchResultsProps) => {
                 ) : (
                     <div className="flex flex-col gap-2 text-2xl">
                         <div className="flex justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src="/no_results.png"
                                 alt="no results"

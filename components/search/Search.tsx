@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { DropdownComponentSearch } from "../DropdownComponent";
 import { SortDropdown } from "./FilterComponents";
 import { useRouter, useSearchParams } from "next/navigation";
 import { queryDatabase } from "./query-db";
@@ -337,7 +336,6 @@ const Search = () => {
                                 {loading ? (
                                     <div className="mt-16 flex flex-col gap-2 text-2xl">
                                         <div className="flex justify-center">
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img
                                                 src="/loading.gif"
                                                 alt="loading gif"
@@ -351,7 +349,6 @@ const Search = () => {
                                 ) : error ? (
                                     <div className="mt-16 flex flex-col gap-2 text-2xl">
                                         <div className="flex justify-center">
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img
                                                 src="/error.png"
                                                 alt="error"
