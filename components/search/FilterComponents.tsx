@@ -119,7 +119,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                                 >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
                                     {startDate ? (
-                                        format(startDate, "PPP")
+                                        format(startDate, "PP")
                                     ) : (
                                         <span>Start date</span>
                                     )}
@@ -153,7 +153,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                                 >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
                                     {endDate ? (
-                                        format(endDate, "PPP")
+                                        format(endDate, "PP")
                                     ) : (
                                         <span>End date</span>
                                     )}
