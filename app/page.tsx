@@ -36,7 +36,7 @@ const EXAMPLES = [
     },
 ];
 
-const ArticulatableDefinition = () => {
+const ArticulableDefinition = () => {
     return (
         <Popover>
             <PopoverTrigger aria-label="definition">
@@ -112,7 +112,7 @@ export default function Home() {
                             Online, Async,
                         </span>
                         <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent xs:text-6xl sm:text-7xl md:text-8xl">
-                            Articulatable
+                            Articulable
                         </span>
                     </h1>
                     <p className="text-gray-600 max-w-prose text-slate-600 sm:text-lg">
@@ -135,7 +135,7 @@ export default function Home() {
                             CVC.edu
                         </Link>{" "}
                         to find you high-quality, articulable
-                        <ArticulatableDefinition /> California Community College
+                        <ArticulableDefinition /> California Community College
                         courses that save you time and money.
                     </p>
                 </div>
