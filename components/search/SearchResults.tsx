@@ -137,7 +137,7 @@ const SearchResults = (props: SearchResultsProps) => {
                             <img
                                 src="/no_results.png"
                                 alt="no results"
-                                className="flex w-[500px] justify-center"
+                                className="pointer-events-none flex w-[500px] justify-center"
                             />
                         </div>
                         <div className="flex w-full flex-col justify-center gap-y-2 text-center">

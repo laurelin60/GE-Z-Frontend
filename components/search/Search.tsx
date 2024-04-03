@@ -62,7 +62,7 @@ const LoadingState = () => {
                 <img
                     src="/loading.gif"
                     alt="loading gif"
-                    className="flex h-16 w-16 justify-center opacity-60"
+                    className="pointer-events-none flex h-16 w-16 justify-center opacity-60"
                 />
             </div>
             <div className="flex justify-center">Loading...</div>
@@ -77,7 +77,7 @@ const ErrorState = () => {
                 <img
                     src="/error.png"
                     alt="error"
-                    className="flex w-[500px] justify-center"
+                    className="pointer-events-none flex w-[500px] justify-center"
                 />
             </div>
             <div className="flex justify-center">An error occurred...</div>
