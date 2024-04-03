@@ -20,6 +20,7 @@ export function logAnalytics({
     label,
     value,
 }: AnalyticsProps) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).gtag("event", action, {
         event_category: category,
         event_label: label,
