@@ -19,27 +19,29 @@ import Link from "next/link";
 import { SearchSelect } from "./SearchSelect";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
 
-export interface CollegeObject {
+export interface CourseObject {
     sendingInstitution: string;
     courseCode: string;
     courseName: string;
     cvcId: string;
+    assistPath: string;
     niceToHaves: string[];
     units: number;
-    term: string;
-    startMonth: number;
-    startDay: number;
-    endMonth: number;
-    endDay: number;
     tuition: number;
+    startDate: number;
+    endDate: number;
     async: boolean;
     hasOpenSeats: boolean;
     hasPrereqs: boolean;
     instantEnrollment: boolean;
-    fulfillsGEs: string[];
+    fulfillsGEs: FullFillsGE[];
     articulatesTo: string[];
-    assistPath: string;
 }
+
+type FullFillsGE = {
+    category: string;
+    count: number;
+};
 
 export type FilterValues = {
     format: boolean[];
@@ -112,7 +114,7 @@ const Search = () => {
 
     const [sort, setSort] = useState("Default Sort");
 
-    const [courses, setCourses] = useState<CollegeObject[]>();
+    const [courses, setCourses] = useState<CourseObject[]>();
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,

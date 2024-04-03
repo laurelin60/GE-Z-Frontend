@@ -1,11 +1,11 @@
-import { CollegeObject } from "../../components/search/Search";
+import { CourseObject } from "../../components/search/Search";
 
-const cache: Record<string, [Date, CollegeObject[]]> = {};
+const cache: Record<string, [Date, CourseObject[]]> = {};
 
 export async function queryDatabase(
     university: string,
     ge: string,
-): Promise<CollegeObject[]> {
+): Promise<CourseObject[]> {
     const cacheKey = university + ge;
 
     if (cache[cacheKey] && cache[cacheKey][0]) {

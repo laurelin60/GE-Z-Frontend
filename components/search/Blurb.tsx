@@ -1,12 +1,12 @@
 import React from "react";
-import { CollegeObject, FilterValues } from "./Search";
+import { CourseObject, FilterValues } from "./Search";
 
 interface BlurbProps {
     filterData: (
-        data: CollegeObject[],
+        data: CourseObject[],
         filterValues: FilterValues,
-    ) => CollegeObject[];
-    data: CollegeObject[] | undefined;
+    ) => CourseObject[];
+    data: CourseObject[] | undefined;
     filterValues: FilterValues;
 }
 
