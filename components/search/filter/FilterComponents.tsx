@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FaCheck } from "react-icons/fa";
-import { CollegeObject } from "../Search";
+import { CourseObject } from "../Search";
 import { format } from "date-fns";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -185,7 +185,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
 
 interface InstitutionDropdownProps {
     defaultValue: string;
-    courses: CollegeObject[] | undefined;
+    courses: CourseObject[] | undefined;
     onChange: Dispatch<SetStateAction<string>>;
 }
 
@@ -203,7 +203,7 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
         defaultValue == "Any Institution" ? [] : [defaultValue];
 
     const sendingInstitutions = courses?.map(
-        (course: CollegeObject) => course.sendingInstitution,
+        (course: CourseObject) => course.sendingInstitution,
     );
 
     if (sendingInstitutions) {

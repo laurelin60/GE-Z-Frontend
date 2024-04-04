@@ -1,10 +1,15 @@
 // import LazyLoad from "react-lazy-load";
 import { FaUpRightFromSquare } from "react-icons/fa6";
-import { CollegeObject } from "./Search";
+import { CourseObject } from "./Search";
 import Tags from "./Tags";
+import { format } from "date-fns";
+
+const formatTime = (date: number) => {
+    return format(new Date(date), "MMM d");
+};
 
 interface SearchResultsProps {
-    results: CollegeObject[];
+    results: CourseObject[];
     university: string;
     ge: string;
 }
@@ -16,7 +21,10 @@ const SearchResults = (props: SearchResultsProps) => {
         <>
             <div className="flex flex-col gap-4 md:gap-8">
                 {results.length > 0 ? (
-                    results.map((result: CollegeObject) => {
+                    results.map((result: CourseObject) => {
+                        const startTime = formatTime(result.startDate);
+                        const endTime = formatTime(result.endDate);
+
                         return (
                             // <LazyLoad
                             //     key={
@@ -71,7 +79,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 Term
                                             </div>
                                             <div className="text-base font-light">
-                                                {result.term}
+                                                {startTime + " - " + endTime}
                                             </div>
                                         </div>
                                         <div className="flex flex-col whitespace-nowrap">
@@ -79,7 +87,9 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 GEs
                                             </div>
                                             <div className="flex flex-row gap-2 text-base font-light">
-                                                {result.fulfillsGEs.join(", ")}
+                                                {result.fulfillsGEs
+                                                    .map((obj) => obj.category)
+                                                    .join(", ")}
                                             </div>
                                         </div>
                                         <div className="flex flex-col whitespace-nowrap">

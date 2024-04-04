@@ -6,7 +6,7 @@ import {
     UnitsFilter,
 } from "./FilterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
-import { CollegeObject, FilterValues } from "../Search";
+import { CourseObject, FilterValues } from "../Search";
 
 interface SearchFilterProps {
     handleClick: () => void;
@@ -19,7 +19,7 @@ interface SearchFilterProps {
     setMin: Dispatch<SetStateAction<number>>;
     setMax: Dispatch<SetStateAction<number>>;
     filterValues: FilterValues;
-    courses: CollegeObject[] | undefined;
+    courses: CourseObject[] | undefined;
 }
 
 export const SearchFilters = (props: SearchFilterProps) => {

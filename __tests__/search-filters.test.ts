@@ -1,11 +1,16 @@
-import { FilterValues } from "@/components/search/Search";
+import { CourseObject, FilterValues } from "@/components/search/Search";
 import { endsBefore, filterData, startsAfter } from "@/lib/utils/filter";
 import "@testing-library/jest-dom";
 
-const data = {
-    institution: "University of California, Irvine",
-    geCategory: "II",
-    courses: [
+interface CourseData {
+    status: number;
+    data: CourseObject[];
+    lastUpdated: number; // unix
+}
+
+const data: CourseData = {
+    status: 200,
+    data: [
         {
             sendingInstitution: "placeholder sending institution 1",
             courseCode: "placeholder course code 1",
@@ -13,11 +18,8 @@ const data = {
             cvcId: "123456",
             niceToHaves: ["Zero Textbook Cost"],
             units: 4,
-            term: "January 1 - May 31",
-            startMonth: 1,
-            startDay: 1,
-            endMonth: 5,
-            endDay: 31,
+            startDate: 1704096000000,
+            endDate: 1717138800000,
             tuition: 138,
             async: true,
             hasOpenSeats: true,
@@ -25,7 +27,7 @@ const data = {
             instantEnrollment: true,
             assistPath: "placeholder path 1",
             articulatesTo: ["placeholder course 1"],
-            fulfillsGEs: ["II"],
+            fulfillsGEs: [{ category: "II", count: 1 }],
         },
         {
             sendingInstitution: "placeholder sending institution 2",
@@ -34,11 +36,8 @@ const data = {
             cvcId: "1234567",
             niceToHaves: ["Zero Textbook Cost"],
             units: 16,
-            term: "January 1 - June 1",
-            startMonth: 1,
-            startDay: 1,
-            endMonth: 6,
-            endDay: 1,
+            startDate: 1704096000000,
+            endDate: 1717225200000,
             tuition: 100,
             async: false,
             hasOpenSeats: false,
@@ -46,7 +45,7 @@ const data = {
             instantEnrollment: false,
             assistPath: "placeholder path 2",
             articulatesTo: ["placeholder course 2"],
-            fulfillsGEs: ["II"],
+            fulfillsGEs: [{ category: "II", count: 1 }],
         },
         {
             sendingInstitution: "placeholder sending institution 3",
@@ -55,11 +54,8 @@ const data = {
             cvcId: "1234567",
             niceToHaves: ["Zero Textbook Cost"],
             units: 16,
-            term: "January 1 - June 1",
-            startMonth: 12,
-            startDay: 30,
-            endMonth: 1,
-            endDay: 1,
+            startDate: 1704009600000,
+            endDate: 1704096000000,
             tuition: 100,
             async: false,
             hasOpenSeats: false,
@@ -67,9 +63,10 @@ const data = {
             instantEnrollment: false,
             assistPath: "placeholder path 3",
             articulatesTo: ["placeholder course 3"],
-            fulfillsGEs: ["II"],
+            fulfillsGEs: [{ category: "II", count: 1 }],
         },
     ],
+    lastUpdated: 100,
 };
 
 const defaultFilterValues: FilterValues = {
@@ -90,20 +87,20 @@ describe("Search Filters", () => {
     });
 
     test("default filter values do not throw error", async () => {
-        expect(() => filterData(data.courses, defaultFilterValues)).not.toThrow(
+        expect(() => filterData(data.data, defaultFilterValues)).not.toThrow(
             Error,
         );
     });
 
     test("default filter values return all", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
         });
-        expect(result).toEqual(data.courses);
+        expect(result).toEqual(data.data);
     });
 
     test("no formats filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             format: [false, false],
         });
@@ -111,15 +108,15 @@ describe("Search Filters", () => {
     });
 
     test("both formats filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             format: [true, true],
         });
-        expect(result).toEqual(data.courses);
+        expect(result).toEqual(data.data);
     });
 
     test("only async format filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             format: [true, false],
         });
@@ -127,7 +124,7 @@ describe("Search Filters", () => {
     });
 
     test("only sync format filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             format: [false, true],
         });
@@ -136,7 +133,7 @@ describe("Search Filters", () => {
     });
 
     test("only instant enrollment filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             enrollment: [true],
         });
@@ -145,7 +142,7 @@ describe("Search Filters", () => {
     });
 
     test("only available seats filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             available: [true],
         });
@@ -153,15 +150,15 @@ describe("Search Filters", () => {
     });
 
     test("any institution filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             institution: "Any Institution",
         });
-        expect(result).toEqual(data.courses);
+        expect(result).toEqual(data.data);
     });
 
     test("specific institution filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             institution: "placeholder sending institution 1",
         });
@@ -171,7 +168,7 @@ describe("Search Filters", () => {
     });
 
     test("min units filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             min: 5,
         });
@@ -179,7 +176,7 @@ describe("Search Filters", () => {
     });
 
     test("max units filters correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             max: 5,
         });
@@ -189,32 +186,32 @@ describe("Search Filters", () => {
 
 describe("Filter Utils' Time Utilities", () => {
     test("startsAfter defined returns true", async () => {
-        const result = startsAfter(new Date("2023-12-25"), data.courses[0]);
+        const result = startsAfter(new Date("2023-12-25"), data.data[0]);
         expect(result).toBe(true);
     });
 
     test("startsAfter defined returns false", async () => {
-        const result = startsAfter(new Date("2024-12-25"), data.courses[0]);
+        const result = startsAfter(new Date("2024-12-25"), data.data[0]);
         expect(result).toBe(false);
     });
 
     test("endsBefore undefined", async () => {
-        const result = endsBefore(undefined, data.courses[0]);
+        const result = endsBefore(undefined, data.data[0]);
         expect(result).toBe(true);
     });
 
     test("endsBefore defined returns true", async () => {
-        const result = endsBefore(new Date("2024-06-14"), data.courses[0]);
+        const result = endsBefore(new Date("2024-06-14"), data.data[0]);
         expect(result).toBe(true);
     });
 
     test("endsBefore defined returns false", async () => {
-        const result = endsBefore(new Date("2024-05-14"), data.courses[0]);
+        const result = endsBefore(new Date("2024-05-14"), data.data[0]);
         expect(result).toBe(false);
     });
 
     test("tuition sorts correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             sort: "Tuition",
         });
@@ -226,7 +223,7 @@ describe("Filter Utils' Time Utilities", () => {
 
 describe("Search Sorting", () => {
     test("default sorts correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             sort: "Alphabetical",
         });
@@ -236,7 +233,7 @@ describe("Search Sorting", () => {
     });
 
     test("alphabetical sorts correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             sort: "Alphabetical",
         });
@@ -246,7 +243,7 @@ describe("Search Sorting", () => {
     });
 
     test("tuition sorts correctly", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             sort: "Tuition",
         });
@@ -256,7 +253,7 @@ describe("Search Sorting", () => {
     });
 
     test("shortest term sorts correctly", async () => {
-        const result = filterData(data.courses.slice(0, 2), {
+        const result = filterData(data.data.slice(0, 2), {
             ...defaultFilterValues,
             sort: "Shortest Term",
         });
@@ -266,10 +263,13 @@ describe("Search Sorting", () => {
     });
 
     test("shortest term sorts correctly on december courses", async () => {
-        const result = filterData(data.courses, {
+        const result = filterData(data.data, {
             ...defaultFilterValues,
             sort: "Shortest Term",
         });
+
+        console.log(result);
+
         expect(result[0].sendingInstitution).toEqual(
             "placeholder sending institution 3",
         );
