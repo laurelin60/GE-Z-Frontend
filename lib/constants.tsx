@@ -21,4 +21,13 @@ export const UNIVERSITY_GE: Record<string, string[]> = {
         "GE F",
         "GE G",
     ],
+    "University of California, Los Angeles": [
+        "Arts and Humanities: Literary and Cultural Analysis",
+        "Arts and Humanities: Philosophical and Linguistic Analysis",
+        "Arts and Humanities: Visual and Performance Arts Analysis and Practice",
+        "Scientific Inquiry: Life Sciences",
+        "Scientific Inquiry: Physical Sciences",
+        "Society and Culture: Historical Analysis",
+        "Society and Culture: Social Analysis",
+    ],
 };
