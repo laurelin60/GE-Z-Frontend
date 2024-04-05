@@ -36,6 +36,10 @@ export const SearchSelect = (props: DropdownComponentProps) => {
                             option = item.split(": ")[1];
                         }
 
+                        if (option.includes("Los Angeles")) {
+                            option = "UCLA";
+                        }
+
                         return (
                             <SelectItem
                                 value={item}
