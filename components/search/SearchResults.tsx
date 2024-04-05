@@ -88,7 +88,18 @@ const SearchResults = (props: SearchResultsProps) => {
                                             </div>
                                             <div className="flex flex-row gap-2 text-base font-light">
                                                 {result.fulfillsGEs
-                                                    .map((obj) => obj.category)
+                                                    .map((obj) => {
+                                                        const category =
+                                                            obj.category;
+
+                                                        return category.includes(
+                                                            ":",
+                                                        )
+                                                            ? category.split(
+                                                                  ": ",
+                                                              )[1]
+                                                            : category;
+                                                    })
                                                     .join(", ")}
                                             </div>
                                         </div>
