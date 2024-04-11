@@ -47,7 +47,7 @@ export type FilterValues = {
     format: boolean[];
     enrollment: boolean[];
     available: boolean[];
-    start: Date;
+    start: Date | undefined;
     end: Date | undefined;
     institution: string;
     min: number;
@@ -105,8 +105,8 @@ const Search = () => {
 
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
-    const [available, setAvailable] = useState([true]);
-    const [start, setStart] = useState(new Date());
+    const [available, setAvailable] = useState([false]);
+    const [start, setStart] = useState<Date>();
     const [end, setEnd] = useState<Date>();
     const [institution, setInstitution] = useState("Any Institution");
     const [min, setMin] = useState(0);

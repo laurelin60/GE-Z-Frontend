@@ -1,6 +1,10 @@
 import { CourseObject, FilterValues } from "../../components/search/Search";
 
-export const startsAfter = (start: Date, result: CourseObject) => {
+export const startsAfter = (start: Date | undefined, result: CourseObject) => {
+    if (start === undefined) {
+        return true;
+    }
+
     const courseDate = new Date(result.startDate);
 
     courseDate.setHours(0, 0, 0, 0);
@@ -10,7 +14,7 @@ export const startsAfter = (start: Date, result: CourseObject) => {
 };
 
 export const endsBefore = (end: Date | undefined, result: CourseObject) => {
-    if (end == undefined) {
+    if (end === undefined) {
         return true;
     }
 

@@ -77,18 +77,16 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 };
 
 interface CalendarFilterProps {
-    onStartChange: Dispatch<React.SetStateAction<Date>>;
+    onStartChange: Dispatch<SetStateAction<Date | undefined>>;
     onEndChange: Dispatch<SetStateAction<Date | undefined>>;
-    defaultStart: Date;
+    defaultStart: Date | undefined;
     defaultEnd: Date | undefined;
 }
 
 export const CalendarFilter = (props: CalendarFilterProps) => {
     const { onStartChange, onEndChange, defaultStart, defaultEnd } = props;
 
-    const [startDate, setStartDate] = useState<Date | undefined>(
-        defaultStart ? new Date(defaultStart) : new Date(),
-    );
+    const [startDate, setStartDate] = useState<Date | undefined>(defaultStart);
     const [endDate, setEndDate] = useState<Date | undefined>(defaultEnd);
 
     const handleStartChange = (date: Date | undefined) => {
@@ -138,7 +136,6 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                                     selected={startDate}
                                     onSelect={handleStartChange}
                                     initialFocus
-                                    required
                                 />
                             </PopoverContent>
                         </Popover>

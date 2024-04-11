@@ -3,7 +3,6 @@ import {
     CalendarFilter,
     CustomFilterCheckbox,
     InstitutionDropdown,
-    UnitsFilter,
 } from "./FilterComponents";
 import { FaCircleXmark } from "react-icons/fa6";
 import { CourseObject, FilterValues } from "../Search";
@@ -13,7 +12,7 @@ interface SearchFilterProps {
     setFormat: Dispatch<SetStateAction<boolean[]>>;
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     setAvailable: Dispatch<SetStateAction<boolean[]>>;
-    setStart: Dispatch<React.SetStateAction<Date>>;
+    setStart: Dispatch<React.SetStateAction<Date | undefined>>;
     setEnd: Dispatch<SetStateAction<Date | undefined>>;
     setInstitution: Dispatch<SetStateAction<string>>;
     setMin: Dispatch<SetStateAction<number>>;
@@ -25,13 +24,10 @@ interface SearchFilterProps {
 export const SearchFilters = (props: SearchFilterProps) => {
     const {
         setFormat,
-        setEnrollment,
         setAvailable,
         setStart,
         setEnd,
         setInstitution,
-        setMin,
-        setMax,
         filterValues,
         courses,
     } = props;
@@ -43,14 +39,6 @@ export const SearchFilters = (props: SearchFilterProps) => {
                 categories={["Asynchronous", "Synchronous"]}
                 onChange={setFormat}
                 defaultValue={filterValues.format}
-            />
-            <CustomFilterCheckbox
-                title="Instant Enrollment"
-                categories={[
-                    "Only show courses eligible for One-Click Registration between your home school and the teaching school",
-                ]}
-                onChange={setEnrollment}
-                defaultValue={filterValues.enrollment}
             />
             <CustomFilterCheckbox
                 title="Available Seats"
@@ -70,12 +58,6 @@ export const SearchFilters = (props: SearchFilterProps) => {
                 defaultValue={filterValues.institution}
                 onChange={setInstitution}
                 courses={courses}
-            />
-            <UnitsFilter
-                onMinChange={setMin}
-                onMaxChange={setMax}
-                defaultMin={filterValues.min}
-                defaultMax={filterValues.max}
             />
         </div>
     );
