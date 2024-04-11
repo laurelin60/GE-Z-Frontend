@@ -1,11 +1,16 @@
 import { CourseObject } from "../../components/search/Search";
 
-const cache: Record<string, [Date, CourseObject[]]> = {};
+type DatabaseReturn = {
+    data: CourseObject[];
+    lastUpdated: number;
+};
+
+const cache: Record<string, [Date, DatabaseReturn]> = {};
 
 export async function queryDatabase(
     university: string,
     ge: string,
-): Promise<CourseObject[]> {
+): Promise<DatabaseReturn> {
     const cacheKey = university + ge;
 
     if (cache[cacheKey] && cache[cacheKey][0]) {
@@ -29,10 +34,11 @@ export async function queryDatabase(
         }
 
         const data = await response.json();
+        const output = { data: data.data, lastUpdated: data.lastUpdated };
 
-        cache[cacheKey] = [new Date(), data.data];
+        cache[cacheKey] = [new Date(), output];
 
-        return data.data;
+        return output;
     } catch (error) {
         console.error("Error:", error);
         throw error;

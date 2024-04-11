@@ -1,17 +1,20 @@
-import React from "react";
 import { CourseObject, FilterValues } from "./Search";
+import { format } from "date-fns";
 
 interface BlurbProps {
     filterData: (
         data: CourseObject[],
         filterValues: FilterValues,
     ) => CourseObject[];
-    data: CourseObject[] | undefined;
+    courses: CourseObject[] | undefined;
+    lastUpdated: number | undefined;
     filterValues: FilterValues;
 }
 
 const Blurb = (props: BlurbProps) => {
-    const { filterData, data, filterValues } = props;
+    const { filterData, courses, lastUpdated, filterValues } = props;
+
+    const date = lastUpdated ? format(new Date(lastUpdated), "M/d") : "x";
 
     return (
         <>
@@ -20,7 +23,9 @@ const Blurb = (props: BlurbProps) => {
                     <div>
                         We found{" "}
                         <b className="text-black">
-                            {data ? filterData(data, filterValues).length : "x"}{" "}
+                            {courses
+                                ? filterData(courses, filterValues).length
+                                : "x"}{" "}
                             courses
                         </b>{" "}
                         based on your search and filters. Please consult an
@@ -28,7 +33,7 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was last updated on 3/7
+                        {"GE-Z's"} data was last updated on {date}
                     </div>
                 </div>
 

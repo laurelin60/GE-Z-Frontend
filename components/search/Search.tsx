@@ -115,6 +115,7 @@ const Search = () => {
     const [sort, setSort] = useState("Default Sort");
 
     const [courses, setCourses] = useState<CourseObject[]>();
+    const [lastUpdated, setLastUpdated] = useState<number>();
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,
@@ -199,7 +200,8 @@ const Search = () => {
                 const geParam = ge.includes("GE") ? ge.split(" ")[1] : ge;
                 const courses = await queryDatabase(universityParam, geParam);
 
-                setCourses(courses);
+                setCourses(courses.data);
+                setLastUpdated(courses.lastUpdated);
                 setLoading(false);
                 setError(false);
 
@@ -306,8 +308,9 @@ const Search = () => {
 
             <Blurb
                 filterData={filterData}
-                data={courses}
+                courses={courses}
                 filterValues={filterValues}
+                lastUpdated={lastUpdated}
             />
 
             <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
