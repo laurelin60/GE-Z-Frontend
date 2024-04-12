@@ -196,9 +196,7 @@ const Search = () => {
 
         const fetchData = async () => {
             try {
-                const universityParam = university;
-                const geParam = ge.includes("GE") ? ge.split(" ")[1] : ge;
-                const courses = await queryDatabase(universityParam, geParam);
+                const courses = await queryDatabase(university, ge);
 
                 setCourses(courses.data);
                 setLastUpdated(courses.lastUpdated);

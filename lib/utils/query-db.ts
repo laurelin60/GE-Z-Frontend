@@ -1,6 +1,6 @@
 import { CourseObject } from "../../components/search/Search";
 
-type DatabaseReturn = {
+export type DatabaseReturn = {
     data: CourseObject[];
     lastUpdated: number;
 };
@@ -11,7 +11,10 @@ export async function queryDatabase(
     university: string,
     ge: string,
 ): Promise<DatabaseReturn> {
-    const cacheKey = university + ge;
+    const universityParam = university;
+    const geParam = ge.includes("GE") ? ge.split(" ")[1] : ge;
+
+    const cacheKey = universityParam + geParam;
 
     if (cache[cacheKey] && cache[cacheKey][0]) {
         const [cachedDate, cachedData] = cache[cacheKey];
@@ -22,10 +25,10 @@ export async function queryDatabase(
         }
     }
 
-    const universityParam = encodeURIComponent(university);
-    const geParam = encodeURIComponent(ge);
+    const universityUri = encodeURIComponent(universityParam);
+    const geUri = encodeURIComponent(geParam);
 
-    const url = `https://ge-z.info/api/cvc-courses?institution=${universityParam}&ge=${geParam}`;
+    const url = `https://ge-z.info/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
 
     try {
         const response = await fetch(url);
