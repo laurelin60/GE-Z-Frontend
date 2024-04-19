@@ -10,7 +10,7 @@ import {
 
 export interface DropdownComponentProps {
     value: string;
-    data: string[];
+    data?: string[];
     onChange: (university: string) => void;
     placeholder?: string;
 }
@@ -25,7 +25,7 @@ export const SearchSelect = (props: DropdownComponentProps) => {
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
-                    {data.map((item) => {
+                    {data?.map((item) => {
                         let option = item;
 
                         if (option.includes("University of California")) {
