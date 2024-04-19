@@ -34,6 +34,7 @@ for university students.
 
 -   UCI ✅
 -   UCSB ✅
+-   UCLA ✅
 
 ### In the Works:
 
