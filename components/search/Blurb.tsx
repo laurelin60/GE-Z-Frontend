@@ -1,5 +1,6 @@
-import { CourseObject, FilterValues } from "./Search";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import { CourseObject, FilterValues } from './Search';
+import { formatDistanceToNow } from 'date-fns';
 
 interface BlurbProps {
     filterData: (
@@ -14,7 +15,21 @@ interface BlurbProps {
 const Blurb = (props: BlurbProps) => {
     const { filterData, courses, lastUpdated, filterValues } = props;
 
-    const date = lastUpdated ? format(new Date(lastUpdated), "M/d") : "x";
+    const [timeAgo, setTimeAgo] = useState('');
+
+    useEffect(() => {
+        const updateRelativeTime = () => {
+            if (lastUpdated) {
+                const formattedTimeAgo = formatDistanceToNow(new Date(lastUpdated));
+                setTimeAgo(`${formattedTimeAgo} ago`);
+            }
+        };
+
+        updateRelativeTime(); // Update initially
+        const intervalId = setInterval(updateRelativeTime, 1000); // Update every second
+
+        return () => clearInterval(intervalId); // Cleanup on unmount
+    }, [lastUpdated]);
 
     return (
         <>
@@ -33,7 +48,7 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was last updated on {date}
+                        {"GE-Z's"} data was updated {lastUpdated ? timeAgo : '[oopsie, time not available :(]'}
                     </div>
                 </div>
 
