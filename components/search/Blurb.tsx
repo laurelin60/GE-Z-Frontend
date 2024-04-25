@@ -22,17 +22,19 @@ const Blurb = (props: BlurbProps) => {
             const updatedDate = new Date(date);
             const diff = now.getTime() - updatedDate.getTime();
 
-            const seconds = Math.floor((diff / 1000) % 60);
             const minutes = Math.floor((diff / 1000 / 60) % 60);
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24) % 365);
-            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365);
 
             let result = "";
-            if (years > 0) result += `${years} years, `;
-            if (days > 0 || years > 0) result += `${days} days, `;
-            if (hours > 0 || days > 0 || years > 0) result += `${hours} hours, `;
-            result += `${minutes} minutes and ${seconds} seconds ago`;
+
+            if (days > 0) {
+                result += `${days} ${days == 1 ? "day" : "days"}`;
+            } else if (hours > 0) {
+                result += `${hours} ${hours == 1 ? "hour" : "hours"}`;
+            } else {
+                result += `${minutes} ${minutes == 1 ? "minute" : "minutes"}`;
+            }
 
             return result;
         };
@@ -43,10 +45,10 @@ const Blurb = (props: BlurbProps) => {
             }
         };
 
-        updateRelativeTime(); // Update initially
-        const intervalId = setInterval(updateRelativeTime, 1000); // Update every second
+        updateRelativeTime();
+        const interval = setInterval(updateRelativeTime, 1000);
 
-        return () => clearInterval(intervalId); // Cleanup on unmount
+        return () => clearInterval(interval);
     }, [lastUpdated]);
 
     return (
@@ -66,7 +68,8 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was updated {lastUpdated ? timeAgo : "x"}
+                        {"GE-Z's"} data was updated{" "}
+                        {lastUpdated ? timeAgo : "x"} ago
                     </div>
                 </div>
 
