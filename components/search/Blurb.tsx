@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CourseObject, FilterValues } from "./Search";
-import { formatDistanceToNow } from "date-fns";
+import { intervalToDuration } from "date-fns";
 
 interface BlurbProps {
     filterData: (
@@ -20,10 +20,7 @@ const Blurb = (props: BlurbProps) => {
     useEffect(() => {
         const updateRelativeTime = () => {
             if (lastUpdated) {
-                const formattedTimeAgo = formatDistanceToNow(
-                    new Date(lastUpdated),
-                );
-                setTimeAgo(`${formattedTimeAgo} ago`);
+                setTimeAgo(formatTimeSince(lastUpdated));
             }
         };
 
@@ -32,6 +29,19 @@ const Blurb = (props: BlurbProps) => {
 
         return () => clearInterval(intervalId);
     }, [lastUpdated]);
+
+    function formatTimeSince(dateTimestamp) {
+        const duration = intervalToDuration({ start: new Date(dateTimestamp), end: new Date() });
+        const parts = [];
+        if (duration.years) parts.push(duration.years + " year" + (duration.years !== 1 ? "s" : ""));
+        if (duration.months) parts.push(duration.months + " month" + (duration.months !== 1 ? "s" : ""));
+        if (duration.days) parts.push(duration.days + " day" + (duration.days !== 1 ? "s" : ""));
+        if (duration.hours) parts.push(duration.hours + " hour" + (duration.hours !== 1 ? "s" : ""));
+        if (duration.minutes) parts.push(duration.minutes + " minute" + (duration.minutes !== 1 ? "s" : ""));
+        if (duration.seconds) parts.push(duration.seconds + " second" + (duration.seconds !== 1 ? "s" : ""));
+
+        return parts.join(", ") + " ago";
+    }
 
     return (
         <>
@@ -50,8 +60,8 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was updated{" "}
-                        {lastUpdated ? timeAgo : "x"}
+                        {"GE-Z's"} data was last updated{" "}
+                        {lastUpdated ? timeAgo : "not available"}
                     </div>
                 </div>
 
