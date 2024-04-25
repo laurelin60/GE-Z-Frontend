@@ -66,7 +66,7 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was {lastUpdated ? timeAgo : "not available"}
+                        {"GE-Z's"} data was updated {lastUpdated ? timeAgo : "x"}
                     </div>
                 </div>
 
