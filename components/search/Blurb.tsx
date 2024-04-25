@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CourseObject, FilterValues } from "./Search";
-import { intervalToDuration } from "date-fns";
 
 interface BlurbProps {
     filterData: (
@@ -18,30 +17,37 @@ const Blurb = (props: BlurbProps) => {
     const [timeAgo, setTimeAgo] = useState("");
 
     useEffect(() => {
+        const getTimeAgo = (date) => {
+            const now = new Date();
+            const updatedDate = new Date(date);
+            const diff = now - updatedDate;
+
+            const seconds = Math.floor((diff / 1000) % 60);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24) % 365);
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+
+            let result = "";
+            if (years > 0) result += `${years} years, `;
+            if (days > 0 || years > 0) result += `${days} days, `;
+            if (hours > 0 || days > 0 || years > 0) result += `${hours} hours, `;
+            result += `${minutes} minutes and ${seconds} seconds ago`;
+
+            return result;
+        };
+
         const updateRelativeTime = () => {
             if (lastUpdated) {
-                setTimeAgo(formatTimeSince(lastUpdated));
+                setTimeAgo(getTimeAgo(lastUpdated));
             }
         };
 
-        updateRelativeTime();
-        const intervalId = setInterval(updateRelativeTime, 1000);
+        updateRelativeTime(); // Update initially
+        const intervalId = setInterval(updateRelativeTime, 1000); // Update every second
 
-        return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId); // Cleanup on unmount
     }, [lastUpdated]);
-
-    function formatTimeSince(dateTimestamp) {
-        const duration = intervalToDuration({ start: new Date(dateTimestamp), end: new Date() });
-        const parts = [];
-        if (duration.years) parts.push(duration.years + " year" + (duration.years !== 1 ? "s" : ""));
-        if (duration.months) parts.push(duration.months + " month" + (duration.months !== 1 ? "s" : ""));
-        if (duration.days) parts.push(duration.days + " day" + (duration.days !== 1 ? "s" : ""));
-        if (duration.hours) parts.push(duration.hours + " hour" + (duration.hours !== 1 ? "s" : ""));
-        if (duration.minutes) parts.push(duration.minutes + " minute" + (duration.minutes !== 1 ? "s" : ""));
-        if (duration.seconds) parts.push(duration.seconds + " second" + (duration.seconds !== 1 ? "s" : ""));
-
-        return parts.join(", ") + " ago";
-    }
 
     return (
         <>
@@ -60,8 +66,7 @@ const Blurb = (props: BlurbProps) => {
                     </div>
 
                     <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
-                        {"GE-Z's"} data was last updated{" "}
-                        {lastUpdated ? timeAgo : "not available"}
+                        {"GE-Z's"} data was {lastUpdated ? timeAgo : "not available"}
                     </div>
                 </div>
 
