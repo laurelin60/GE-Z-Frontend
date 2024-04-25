@@ -17,10 +17,10 @@ const Blurb = (props: BlurbProps) => {
     const [timeAgo, setTimeAgo] = useState("");
 
     useEffect(() => {
-        const getTimeAgo = (date) => {
+        const getTimeAgo = (date: number) => {
             const now = new Date();
             const updatedDate = new Date(date);
-            const diff = now - updatedDate;
+            const diff = now.getTime() - updatedDate.getTime();
 
             const seconds = Math.floor((diff / 1000) % 60);
             const minutes = Math.floor((diff / 1000 / 60) % 60);
