@@ -54,26 +54,43 @@ export function filterData(
         );
     });
 
-    const sortedResults =
-        filterValues.sort == "Alphabetical"
-            ? filteredResults.sort((courseA, courseB) => {
-                  const nameA = courseA.courseCode + courseA.courseName;
-                  const nameB = courseB.courseCode + courseB.courseName;
+    const sort = filterValues.sort;
 
-                  return nameA.localeCompare(nameB);
-              })
-            : filterValues.sort == "Tuition"
-              ? filteredResults.sort((courseA, courseB) => {
-                    return courseA.tuition - courseB.tuition;
-                })
-              : filterValues.sort == "Shortest Term"
-                ? filteredResults.sort((courseA, courseB) => {
-                      const termLengthA = courseA.endDate - courseA.startDate;
-                      const termLengthB = courseB.endDate - courseB.startDate;
+    if (sort === "Alphabetical") {
+        filteredResults.sort((courseA, courseB) => {
+            const nameA = courseA.courseCode + courseA.courseName;
+            const nameB = courseB.courseCode + courseB.courseName;
 
-                      return termLengthA - termLengthB;
-                  })
-                : filteredResults;
+            return nameA.localeCompare(nameB);
+        });
+    } else if (sort === "Tuition") {
+        filteredResults.sort((courseA, courseB) => {
+            return courseA.tuition - courseB.tuition;
+        });
+    } else if (sort === "Shortest Term") {
+        filteredResults.sort((courseA, courseB) => {
+            const termLengthA = courseA.endDate - courseA.startDate;
+            const termLengthB = courseB.endDate - courseB.startDate;
 
-    return sortedResults;
+            return termLengthA - termLengthB;
+        });
+    } else {
+        // Default Sort pushes past courses to the bottom of the list
+
+        const pastCourses = filteredResults.filter(
+            (course) => new Date(course.startDate) <= new Date(),
+        );
+
+        const futureCourses = filteredResults.filter(
+            (course) => new Date(course.startDate) > new Date(),
+        );
+
+        const dateAggregatedCourses = [];
+        dateAggregatedCourses.push(...futureCourses);
+        dateAggregatedCourses.push(...pastCourses);
+
+        return dateAggregatedCourses;
+    }
+
+    return filteredResults;
 }
