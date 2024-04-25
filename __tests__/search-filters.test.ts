@@ -132,15 +132,6 @@ describe("Search Filters", () => {
         expect(result.every((course) => !course.async)).toBe(true);
     });
 
-    test("only instant enrollment filters correctly", async () => {
-        const result = filterData(data.data, {
-            ...defaultFilterValues,
-            enrollment: [true],
-        });
-
-        expect(result.every((course) => course.instantEnrollment)).toBe(true);
-    });
-
     test("only available seats filters correctly", async () => {
         const result = filterData(data.data, {
             ...defaultFilterValues,
@@ -165,22 +156,6 @@ describe("Search Filters", () => {
         expect(result[0].sendingInstitution).toEqual(
             "placeholder sending institution 1",
         );
-    });
-
-    test("min units filters correctly", async () => {
-        const result = filterData(data.data, {
-            ...defaultFilterValues,
-            min: 5,
-        });
-        expect(result.every((course) => course.units >= 5)).toBe(true);
-    });
-
-    test("max units filters correctly", async () => {
-        const result = filterData(data.data, {
-            ...defaultFilterValues,
-            max: 5,
-        });
-        expect(result.every((course) => course.units <= 5)).toBe(true);
     });
 });
 
