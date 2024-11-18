@@ -28,7 +28,7 @@ export async function queryDatabase(
     const universityUri = encodeURIComponent(universityParam);
     const geUri = encodeURIComponent(geParam);
 
-    const url = `https://ge-z.info/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
+    const url = `https://i-did-ur.mom/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
 
     try {
         const response = await fetch(url);
