@@ -2,6 +2,7 @@
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
     Popover,
     PopoverContent,
@@ -50,26 +51,20 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
             <div className="mb-2 text-2xl font-medium">{title}</div>
             <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 {categories.map((category, index) => (
-                    <label
-                        className="text-lg font-normal"
-                        key={category}
-                    >
-                        <div className="relative flex flex-row items-center gap-2">
-                            <input
-                                type="checkbox"
-                                className="h-6 w-6 appearance-none rounded-md border-[1px] border-gray bg-white checked:bg-primary"
-                                checked={categoryStates[index]}
-                                // Toggle the category state when the checkbox is clicked
-                                onChange={() => toggleCategory(index)}
-                            />
-                            <div className="absolute left-[5px] text-sm text-white">
-                                {categoryStates[index] && <CheckIcon />}
-                            </div>
-                            <div className="max-w-[85%] text-base">
-                                {category}
-                            </div>
-                        </div>
-                    </label>
+                    <div className="flex-center space-x-2">
+                        <Checkbox
+                            id={category + "label"}
+                            className="size-5 text-white"
+                            defaultChecked
+                            onClick={() => toggleCategory(index)}
+                        />
+                        <label
+                            htmlFor={category + "label"}
+                            className="text-lg"
+                        >
+                            {category}
+                        </label>
+                    </div>
                 ))}
             </div>
             <div className="mt-4 border-2 border-t border-[#D9D9D9]"></div>

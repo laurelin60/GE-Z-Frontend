@@ -331,7 +331,7 @@ const Search = () => {
                     />
                 </div>
 
-                <div className="w-full xl:min-w-[65%]">
+                <div className="w-full xl:w-[65%]">
                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                         <button
                             onClick={handleFilterButtonClick}

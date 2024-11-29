@@ -43,9 +43,7 @@ export const SearchFilters = (props: SearchFilterProps) => {
             />
             <CustomFilterCheckbox
                 title="Available Seats"
-                categories={[
-                    "Only show courses with available seats that are open for registration or open within three days",
-                ]}
+                categories={["Only show courses with available seats"]}
                 onChange={setAvailable}
                 defaultValue={filterValues.available}
             />
