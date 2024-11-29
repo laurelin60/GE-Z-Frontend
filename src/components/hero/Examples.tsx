@@ -55,7 +55,7 @@ const ExampleCard = ({ example }: { example: Example }) => {
             setData(courses);
         };
         fetchData();
-    }, [example.name, example.ge]);
+    }, [example.name, example.ge, example.institution]);
 
     return (
         <Link

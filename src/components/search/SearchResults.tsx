@@ -133,10 +133,10 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 className="flex flex-row items-center gap-2"
                                             >
                                                 Assist
-                                                <ExternalLinkIcon />
+                                                <ExternalLinkIcon className="size-5" />
                                             </a>
                                         </button>
-                                        <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
+                                        <button className="flex items-center rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
                                             <a
                                                 href={`https://search.cvc.edu/courses/${result.cvcId}`}
                                                 target="_blank"
@@ -144,7 +144,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 className="flex flex-row items-center gap-2"
                                             >
                                                 CVC
-                                                <ExternalLinkIcon />
+                                                <ExternalLinkIcon className="size-5" />
                                             </a>
                                         </button>
                                     </div>

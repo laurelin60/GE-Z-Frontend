@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, CheckIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 
 import { Button } from "../../ui/button";
 import { CourseObject } from "../Search";
@@ -51,7 +51,10 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
             <div className="mb-2 text-2xl font-medium">{title}</div>
             <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 {categories.map((category, index) => (
-                    <div className="flex-center space-x-2">
+                    <div
+                        key={category}
+                        className="flex-center space-x-2"
+                    >
                         <Checkbox
                             id={category + "label"}
                             className="size-5 text-white"
