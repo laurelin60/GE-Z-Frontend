@@ -1,11 +1,11 @@
+import React, { Suspense } from "react";
 import Search from "@/components/search/Search";
-import React from "react";
 
 const SearchPage = () => {
     return (
-        <>
+        <Suspense>
             <Search />
-        </>
+        </Suspense>
     );
 };
 

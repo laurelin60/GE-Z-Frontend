@@ -1,11 +1,10 @@
+import Link from "next/link";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { HelpCircle } from "lucide-react";
-
-import Link from "next/link";
 
 const ArticulableDefinition = () => {
     return (

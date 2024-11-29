@@ -20,7 +20,10 @@ export const SearchSelect = (props: DropdownComponentProps) => {
 
     return (
         <div className="relative flex h-12 w-[300px] md:h-16">
-            <Select value={value} onValueChange={onChange}>
+            <Select
+                value={value}
+                onValueChange={onChange}
+            >
                 <SelectTrigger className="h-full w-full overflow-ellipsis rounded-xl border-2 border-gray px-4 text-left text-base md:text-2xl">
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>

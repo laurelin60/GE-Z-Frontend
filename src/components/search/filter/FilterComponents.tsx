@@ -1,10 +1,6 @@
 "use client";
 
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { FaCheck } from "react-icons/fa";
-import { CourseObject } from "../Search";
-import { format } from "date-fns";
-
 import { Calendar } from "@/components/ui/calendar";
 import {
     Popover,
@@ -18,10 +14,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { FaCheck } from "react-icons/fa";
 
 import { Button } from "../../ui/button";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { CourseObject } from "../Search";
 
 interface FilterCheckboxProps {
     title: string;
@@ -35,7 +34,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
 
     // Initialize an array of boolean values to represent the checked state of each category
     const [categoryStates, setCategoryStates] = useState(
-        categories.map((_, index) => defaultValue[index]),
+        categories.map((_, index) => defaultValue[index])
     );
 
     // Function to toggle the checked state of a category
@@ -52,7 +51,10 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
             <div className="mb-2 text-2xl font-medium">{title}</div>
             <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
                 {categories.map((category, index) => (
-                    <label className="text-lg font-normal" key={category}>
+                    <label
+                        className="text-lg font-normal"
+                        key={category}
+                    >
                         <div className="relative flex flex-row items-center gap-2">
                             <input
                                 type="checkbox"
@@ -119,7 +121,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                                     variant={"outline"}
                                     className={cn(
                                         "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
-                                        !startDate && "text-muted-foreground",
+                                        !startDate && "text-muted-foreground"
                                     )}
                                 >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -152,7 +154,7 @@ export const CalendarFilter = (props: CalendarFilterProps) => {
                                     variant={"outline"}
                                     className={cn(
                                         "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
-                                        !endDate && "text-muted-foreground",
+                                        !endDate && "text-muted-foreground"
                                     )}
                                 >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -200,7 +202,7 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
         defaultValue == "Any Institution" ? [] : [defaultValue];
 
     const sendingInstitutions = courses?.map(
-        (course: CourseObject) => course.sendingInstitution,
+        (course: CourseObject) => course.sendingInstitution
     );
 
     if (sendingInstitutions) {
@@ -218,7 +220,10 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
             <div className="mb-2 text-2xl font-medium">
                 Teaching Institution
             </div>
-            <Select value={value} onValueChange={handleChange}>
+            <Select
+                value={value}
+                onValueChange={handleChange}
+            >
                 <SelectTrigger className="text-regular min-h-full w-full max-w-[368px] rounded-lg border-[1px] border-gray">
                     <SelectValue placeholder="Teaching Institution" />
                 </SelectTrigger>
@@ -227,7 +232,10 @@ export const InstitutionDropdown = (props: InstitutionDropdownProps) => {
                         Any Institution
                     </SelectItem>
                     {uniqueColleges.map((college) => (
-                        <SelectItem value={college} key={college}>
+                        <SelectItem
+                            value={college}
+                            key={college}
+                        >
                             {college}
                         </SelectItem>
                     ))}
@@ -312,13 +320,19 @@ export const SortDropdown = (props: SortDropdownProps) => {
     return (
         <div className="flex items-center gap-4 md:flex-row">
             <div className="hidden text-gray sm:flex">Sort By:</div>
-            <Select value={value} onValueChange={handleChange}>
+            <Select
+                value={value}
+                onValueChange={handleChange}
+            >
                 <SelectTrigger className="text-regular min-h-full w-40 rounded-lg border-[1px] border-gray">
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                     {data.map((item) => (
-                        <SelectItem value={item} key={item}>
+                        <SelectItem
+                            value={item}
+                            key={item}
+                        >
                             {item}
                         </SelectItem>
                     ))}

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+
 import { CourseObject, FilterValues } from "./Search";
 
 interface BlurbProps {
     filterData: (
         data: CourseObject[],
-        filterValues: FilterValues,
+        filterValues: FilterValues
     ) => CourseObject[];
     courses: CourseObject[] | undefined;
     lastUpdated: number | undefined;

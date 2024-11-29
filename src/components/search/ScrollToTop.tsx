@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaChevronUp } from "react-icons/fa";
+import { ChevronUpIcon } from "lucide-react";
 
 const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -36,7 +36,7 @@ const ScrollToTop = () => {
             onClick={scrollToTop}
         >
             <div className="flex items-center justify-center">
-                <FaChevronUp style={{ color: "white" }} />
+                <ChevronUpIcon style={{ color: "white" }} />
                 <span className={"hidden px-2 group-hover:inline-flex"}>
                     <p className="line-clamp-1 overflow-hidden truncate text-clip font-medium tracking-wide text-white">
                         Back to top

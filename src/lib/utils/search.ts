@@ -1,6 +1,6 @@
 export const getDismissedRecently = () => {
     const enjoymentDismissalTime = window.localStorage.getItem(
-        "enjoymentDismissalTime",
+        "enjoymentDismissalTime"
     );
     const dismissedRecently =
         enjoymentDismissalTime !== null &&

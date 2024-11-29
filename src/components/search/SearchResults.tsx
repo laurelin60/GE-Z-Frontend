@@ -1,8 +1,9 @@
 // import LazyLoad from "react-lazy-load";
-import { FaUpRightFromSquare } from "react-icons/fa6";
+import { format } from "date-fns";
+import { ExternalLinkIcon } from "lucide-react";
+
 import { CourseObject } from "./Search";
 import Tags from "./Tags";
-import { format } from "date-fns";
 
 const formatTime = (date: number) => {
     return format(new Date(date), "MMM d");
@@ -93,10 +94,10 @@ const SearchResults = (props: SearchResultsProps) => {
                                                             obj.category;
 
                                                         return category.includes(
-                                                            ":",
+                                                            ":"
                                                         )
                                                             ? category.split(
-                                                                  ": ",
+                                                                  ": "
                                                               )[1]
                                                             : category;
                                                     })
@@ -109,7 +110,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                             </div>
                                             <div className="flex flex-row gap-2 text-base font-light">
                                                 {result.articulatesTo.join(
-                                                    ", ",
+                                                    ", "
                                                 )}
                                             </div>
                                         </div>
@@ -132,7 +133,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 className="flex flex-row items-center gap-2"
                                             >
                                                 Assist
-                                                <FaUpRightFromSquare />
+                                                <ExternalLinkIcon />
                                             </a>
                                         </button>
                                         <button className="rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
@@ -143,7 +144,7 @@ const SearchResults = (props: SearchResultsProps) => {
                                                 className="flex flex-row items-center gap-2"
                                             >
                                                 CVC
-                                                <FaUpRightFromSquare />
+                                                <ExternalLinkIcon />
                                             </a>
                                         </button>
                                     </div>

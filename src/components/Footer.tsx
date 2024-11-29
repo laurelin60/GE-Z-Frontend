@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub } from "react-icons/fa6";
+import { GithubIcon } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -18,7 +18,7 @@ const Footer = () => {
                         referrerPolicy="no-referrer"
                         aria-label="GE-Z GitHub"
                     >
-                        <FaGithub />
+                        <GithubIcon />
                     </a>
                 </div>
             </div>

@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
+import { FaCircleXmark } from "react-icons/fa6";
+
+import { CourseObject, FilterValues } from "../Search";
 import {
     CalendarFilter,
     CustomFilterCheckbox,
     InstitutionDropdown,
 } from "./FilterComponents";
-import { FaCircleXmark } from "react-icons/fa6";
-import { CourseObject, FilterValues } from "../Search";
 
 interface SearchFilterProps {
     handleClick: () => void;

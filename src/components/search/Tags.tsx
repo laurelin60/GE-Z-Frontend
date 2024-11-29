@@ -1,5 +1,5 @@
 import React from "react";
-import { FaChalkboard, FaAward, FaHandHoldingDollar } from "react-icons/fa6";
+import { AwardIcon, HandCoinsIcon, PresentationIcon } from "lucide-react";
 
 interface TagsProps {
     tag: string;
@@ -12,7 +12,7 @@ const Tags = (props: TagsProps) => {
         return (
             <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
-                    <FaChalkboard />
+                    <PresentationIcon />
                 </div>
                 <div>Online Tutoring</div>
             </div>
@@ -23,7 +23,7 @@ const Tags = (props: TagsProps) => {
         return (
             <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
-                    <FaHandHoldingDollar />
+                    <HandCoinsIcon />
                 </div>
                 <div>Zero Textbook Cost</div>
             </div>
@@ -34,7 +34,7 @@ const Tags = (props: TagsProps) => {
         return (
             <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
                 <div className="text-black">
-                    <FaAward />
+                    <AwardIcon />
                 </div>
                 <div>Quality Reviewed</div>
             </div>

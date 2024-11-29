@@ -1,23 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SortDropdown } from "./filter/FilterComponents";
-import { useRouter, useSearchParams } from "next/navigation";
-import { queryDatabase } from "../../lib/utils/query-db";
-import SearchResults from "./SearchResults";
-import ScrollToTop from "./ScrollToTop";
-import { FaFilter } from "react-icons/fa6";
-import { SearchFilterPage, SearchFilters } from "./filter/Filters";
-import Blurb from "./Blurb";
-import { filterData } from "../../lib/utils/filter";
-import { UNIVERSITY_GE } from "@/lib/constants";
-
-import { analyticsEnum, logAnalytics } from "@/lib/analytics";
-import { useToast } from "../ui/use-toast";
-import { ToastAction } from "../ui/toast";
 import Link from "next/link";
-import { SearchSelect } from "./SearchSelect";
+import { useRouter, useSearchParams } from "next/navigation";
+import { analyticsEnum, logAnalytics } from "@/lib/analytics";
+import { UNIVERSITY_GE } from "@/lib/constants";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
+import { ListFilterIcon } from "lucide-react";
+
+import { filterData } from "../../lib/utils/filter";
+import { queryDatabase } from "../../lib/utils/query-db";
+import { ToastAction } from "../ui/toast";
+import { useToast } from "../ui/use-toast";
+import Blurb from "./Blurb";
+import { SortDropdown } from "./filter/FilterComponents";
+import { SearchFilterPage, SearchFilters } from "./filter/Filters";
+import ScrollToTop from "./ScrollToTop";
+import SearchResults from "./SearchResults";
+import { SearchSelect } from "./SearchSelect";
 
 export interface CourseObject {
     sendingInstitution: string;
@@ -99,7 +99,7 @@ const Search = () => {
     const searchGE = searchParams.get("ge");
 
     const [university, setUniversity] = useState(
-        searchUniversity || Object.keys(UNIVERSITY_GE)[0],
+        searchUniversity || Object.keys(UNIVERSITY_GE)[0]
     );
     const [ge, setGE] = useState(searchGE || UNIVERSITY_GE[university][4]);
 
@@ -236,13 +236,13 @@ const Search = () => {
 
                     window.localStorage.setItem(
                         "enjoymentDismissalTime",
-                        Date.now().toString(),
+                        Date.now().toString()
                     );
                 }
 
                 window.localStorage.setItem(
                     "gezSearches",
-                    (numSearches + 1).toString(),
+                    (numSearches + 1).toString()
                 );
             } catch (error) {
                 setLoading(false);
@@ -337,7 +337,7 @@ const Search = () => {
                             onClick={handleFilterButtonClick}
                             className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
                         >
-                            <FaFilter />
+                            <ListFilterIcon />
                             Search Filters
                         </button>
 

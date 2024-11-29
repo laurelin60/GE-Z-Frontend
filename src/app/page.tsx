@@ -1,12 +1,10 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-
-import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
 import Link from "next/link";
-
+import ArticulableDefinition from "@/components/hero/ArticulableDefinition";
 import Examples from "@/components/hero/Examples";
 import Graphics from "@/components/hero/Graphics";
-import ArticulableDefinition from "@/components/hero/ArticulableDefinition";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Search } from "lucide-react";
 
 export default function Home() {
     return (
@@ -54,7 +52,7 @@ export default function Home() {
                             buttonVariants({
                                 size: "lg",
                             }),
-                            "flex-center w-fit gap-2 text-lg text-white",
+                            "flex-center w-fit gap-2 text-lg text-white"
                         )}
                     >
                         Discover Courses <Search className="h-5 w-5" />

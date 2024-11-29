@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
     Card,
     CardDescription,
@@ -8,8 +10,6 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { DatabaseReturn, queryDatabase } from "@/lib/utils/query-db";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
 interface Example {
     name: string;
@@ -50,7 +50,7 @@ const ExampleCard = ({ example }: { example: Example }) => {
         const fetchData = async () => {
             const courses = await queryDatabase(
                 example.institution,
-                example.ge,
+                example.ge
             );
             setData(courses);
         };
@@ -58,7 +58,10 @@ const ExampleCard = ({ example }: { example: Example }) => {
     }, [example.name, example.ge]);
 
     return (
-        <Link href={example.link} key={example.name + example.ge}>
+        <Link
+            href={example.link}
+            key={example.name + example.ge}
+        >
             <Card className="w-[275px] drop-shadow-md hover:shadow-md sm:w-[300px]">
                 <CardHeader>
                     <CardTitle>{example.name}</CardTitle>
@@ -80,7 +83,10 @@ const Examples = () => {
     return (
         <div className="flex flex-wrap gap-4 px-6 sm:justify-center lg:px-8">
             {EXAMPLES.map((example) => (
-                <ExampleCard key={example.institution + example.ge}example={example} />
+                <ExampleCard
+                    key={example.institution + example.ge}
+                    example={example}
+                />
             ))}
         </div>
     );

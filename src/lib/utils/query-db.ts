@@ -9,7 +9,7 @@ const cache: Record<string, [Date, DatabaseReturn]> = {};
 
 export async function queryDatabase(
     university: string,
-    ge: string,
+    ge: string
 ): Promise<DatabaseReturn> {
     const universityParam = university;
     const geParam = ge.includes("GE") ? ge.split(" ")[1] : ge;

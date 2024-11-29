@@ -28,7 +28,7 @@ export const endsBefore = (end: Date | undefined, result: CourseObject) => {
 
 export function filterData(
     data: CourseObject[] | undefined,
-    filterValues: FilterValues,
+    filterValues: FilterValues
 ) {
     if (!data) {
         return [];
@@ -78,11 +78,11 @@ export function filterData(
         // Default Sort pushes past courses to the bottom of the list
 
         const pastCourses = filteredResults.filter(
-            (course) => new Date(course.startDate) <= new Date(),
+            (course) => new Date(course.startDate) <= new Date()
         );
 
         const futureCourses = filteredResults.filter(
-            (course) => new Date(course.startDate) > new Date(),
+            (course) => new Date(course.startDate) > new Date()
         );
 
         const dateAggregatedCourses = [];
