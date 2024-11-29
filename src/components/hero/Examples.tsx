@@ -80,7 +80,7 @@ const Examples = () => {
     return (
         <div className="flex flex-wrap gap-4 px-6 sm:justify-center lg:px-8">
             {EXAMPLES.map((example) => (
-                <ExampleCard example={example} />
+                <ExampleCard key={example.institution + example.ge}example={example} />
             ))}
         </div>
     );

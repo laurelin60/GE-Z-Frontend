@@ -1,15 +1,22 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-    "parserOptions": {
-        "project": ["./tsconfig.json"],
-        "sourceType": "module"
+    "extends": ["next/core-web-vitals", "next/typescript"],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_",
+                "caughtErrorsIgnorePattern": "^_"
+            }
+        ],
+        "no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_",
+                "caughtErrorsIgnorePattern": "^_"
+            }
+        ]
     },
-    "ignorePatterns": [
-        "postcss.config.js",
-        "tailwind.config.ts",
-        "next.config.js"
-    ]
+    "ignorePatterns": ["tailwind.config.ts"]
 }
