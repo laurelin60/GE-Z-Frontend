@@ -16,8 +16,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { FaCheck } from "react-icons/fa";
+import { CalendarIcon, CheckIcon } from "lucide-react";
 
 import { Button } from "../../ui/button";
 import { CourseObject } from "../Search";
@@ -64,7 +63,7 @@ export const CustomFilterCheckbox = (props: FilterCheckboxProps) => {
                                 onChange={() => toggleCategory(index)}
                             />
                             <div className="absolute left-[5px] text-sm text-white">
-                                {categoryStates[index] && <FaCheck />}
+                                {categoryStates[index] && <CheckIcon />}
                             </div>
                             <div className="max-w-[85%] text-base">
                                 {category}

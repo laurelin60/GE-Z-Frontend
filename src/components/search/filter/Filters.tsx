@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { FaCircleXmark } from "react-icons/fa6";
+import { CircleXIcon } from "lucide-react";
 
 import { CourseObject, FilterValues } from "../Search";
 import {
@@ -89,7 +89,7 @@ export const SearchFilterPage = (props: SearchFilterProps) => {
                             className="flex flex-row items-center gap-2 text-3xl text-primary"
                             onClick={handleClick}
                         >
-                            <FaCircleXmark />
+                            <CircleXIcon />
                         </button>
                     </div>
                 </div>
