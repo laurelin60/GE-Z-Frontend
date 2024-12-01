@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
+import { SearchBlurb } from "@/components/search/search-blurb";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
@@ -12,7 +13,6 @@ import { filterData } from "../../lib/utils/filter";
 import { queryDatabase } from "../../lib/utils/query-db";
 import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
-import Blurb from "./Blurb";
 import { SortDropdown } from "./filter/FilterComponents";
 import { SearchFilter } from "./filter/search-filter";
 import ScrollToTop from "./ScrollToTop";
@@ -265,7 +265,7 @@ const Search = () => {
                 </div>
             </div>
 
-            <Blurb
+            <SearchBlurb
                 filterData={filterData}
                 courses={courses}
                 filterValues={filterValues}

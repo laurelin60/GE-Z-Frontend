@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { CourseObject, FilterValues } from "./Search";
 
-interface BlurbProps {
+interface SearchBlurbProps {
     filterData: (
         data: CourseObject[],
         filterValues: FilterValues
@@ -12,45 +12,48 @@ interface BlurbProps {
     filterValues: FilterValues;
 }
 
-const Blurb = (props: BlurbProps) => {
-    const { filterData, courses, lastUpdated, filterValues } = props;
-
+export const SearchBlurb = ({
+    filterData,
+    courses,
+    lastUpdated,
+    filterValues,
+}: SearchBlurbProps) => {
     const [timeAgo, setTimeAgo] = useState("");
 
+    const getTimeAgo = useCallback((date: number) => {
+        const now = new Date();
+        const updatedDate = new Date(date);
+        const diff = now.getTime() - updatedDate.getTime();
+
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365);
+
+        let result = "";
+
+        if (days > 0) {
+            result += `${days} ${days == 1 ? "day" : "days"}`;
+        } else if (hours > 0) {
+            result += `${hours} ${hours == 1 ? "hour" : "hours"}`;
+        } else {
+            result += `${minutes} ${minutes == 1 ? "minute" : "minutes"}`;
+        }
+
+        return result;
+    }, []);
+
+    const updateRelativeTime = useCallback(() => {
+        if (lastUpdated) {
+            setTimeAgo(getTimeAgo(lastUpdated));
+        }
+    }, [getTimeAgo, lastUpdated]);
+
     useEffect(() => {
-        const getTimeAgo = (date: number) => {
-            const now = new Date();
-            const updatedDate = new Date(date);
-            const diff = now.getTime() - updatedDate.getTime();
-
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365);
-
-            let result = "";
-
-            if (days > 0) {
-                result += `${days} ${days == 1 ? "day" : "days"}`;
-            } else if (hours > 0) {
-                result += `${hours} ${hours == 1 ? "hour" : "hours"}`;
-            } else {
-                result += `${minutes} ${minutes == 1 ? "minute" : "minutes"}`;
-            }
-
-            return result;
-        };
-
-        const updateRelativeTime = () => {
-            if (lastUpdated) {
-                setTimeAgo(getTimeAgo(lastUpdated));
-            }
-        };
-
         updateRelativeTime();
         const interval = setInterval(updateRelativeTime, 1000);
 
         return () => clearInterval(interval);
-    }, [lastUpdated]);
+    }, [lastUpdated, updateRelativeTime]);
 
     return (
         <>
@@ -79,5 +82,3 @@ const Blurb = (props: BlurbProps) => {
         </>
     );
 };
-
-export default Blurb;
