@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
@@ -14,7 +15,7 @@ import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
 import Blurb from "./Blurb";
 import { SortDropdown } from "./filter/FilterComponents";
-import { SearchFilterPage, SearchFilters } from "./filter/Filters";
+import { SearchFilter } from "./filter/search-filter";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./SearchResults";
 import { SearchSelect } from "./SearchSelect";
@@ -54,8 +55,6 @@ export type FilterValues = {
     max: number;
     sort: string;
 };
-
-const FILTER_PAGE_BREAKPOINT = 1280;
 
 const LoadingState = () => {
     return (
@@ -263,23 +262,23 @@ const Search = () => {
         fetchData();
     }, [university, ge, toast]);
 
-    if (open && width < FILTER_PAGE_BREAKPOINT) {
-        return (
-            <SearchFilterPage
-                handleClick={handleFilterButtonClick}
-                setFormat={setFormat}
-                setEnrollment={setEnrollment}
-                setAvailable={setAvailable}
-                setStart={setStart}
-                setEnd={setEnd}
-                setInstitution={setInstitution}
-                setMin={setMin}
-                setMax={setMax}
-                filterValues={filterValues}
-                courses={courses}
-            />
-        );
-    }
+    // if (open && width < FILTER_PAGE_BREAKPOINT) {
+    //     return (
+    //         <SearchFilterPage
+    //             handleClick={handleFilterButtonClick}
+    //             setFormat={setFormat}
+    //             setEnrollment={setEnrollment}
+    //             setAvailable={setAvailable}
+    //             setStart={setStart}
+    //             setEnd={setEnd}
+    //             setInstitution={setInstitution}
+    //             setMin={setMin}
+    //             setMax={setMax}
+    //             filterValues={filterValues}
+    //             courses={courses}
+    //         />
+    //     );
+    // }
 
     return (
         <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
@@ -312,11 +311,8 @@ const Search = () => {
             />
 
             <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
-                <div className="hidden h-fit rounded-xl bg-bg_secondary p-8 xl:flex xl:flex-col">
-                    <div className="mb-8 text-3xl font-medium">
-                        Search Filters
-                    </div>
-                    <SearchFilters
+                <div className="hidden h-fit xl:flex xl:flex-col">
+                    <SearchFilter
                         handleClick={handleFilterButtonClick}
                         setFormat={setFormat}
                         setEnrollment={setEnrollment}
@@ -333,13 +329,19 @@ const Search = () => {
 
                 <div className="w-full xl:w-[65%]">
                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
-                        <button
-                            onClick={handleFilterButtonClick}
-                            className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden"
-                        >
-                            <ListFilterIcon />
-                            Search Filters
-                        </button>
+                        <SearchFilterDialog
+                            handleClick={handleFilterButtonClick}
+                            setFormat={setFormat}
+                            setEnrollment={setEnrollment}
+                            setAvailable={setAvailable}
+                            setStart={setStart}
+                            setEnd={setEnd}
+                            setInstitution={setInstitution}
+                            setMin={setMin}
+                            setMax={setMax}
+                            filterValues={filterValues}
+                            courses={courses}
+                        />
 
                         <SortDropdown
                             defaultValue={sort}
