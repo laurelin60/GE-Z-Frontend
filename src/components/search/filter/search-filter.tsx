@@ -7,8 +7,7 @@ import {
     InstitutionDropdown,
 } from "./FilterComponents";
 
-export interface SearchFilterProps {
-    handleClick: () => void;
+interface SearchFilterProps {
     setFormat: Dispatch<SetStateAction<boolean[]>>;
     setEnrollment: Dispatch<SetStateAction<boolean[]>>;
     setAvailable: Dispatch<SetStateAction<boolean[]>>;

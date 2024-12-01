@@ -1,8 +1,4 @@
 import {
-    SearchFilter,
-    SearchFilterProps,
-} from "@/components/search/filter/search-filter";
-import {
     Dialog,
     DialogContent,
     DialogDescription,
@@ -12,21 +8,11 @@ import {
 import { cn } from "@/lib/utils";
 import { ListFilterIcon } from "lucide-react";
 
-export function SearchFilterDialog(props: SearchFilterProps) {
-    const {
-        handleClick,
-        setFormat,
-        setEnrollment,
-        setAvailable,
-        setStart,
-        setEnd,
-        setInstitution,
-        setMin,
-        setMax,
-        filterValues,
-        courses,
-    } = props;
-
+export function SearchFilterDialog({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <Dialog>
             <DialogTrigger className="flex items-center gap-2 rounded-full border-2 bg-primary px-4 py-2 text-white transition-all active:border-primary active:bg-transparent active:text-primary xl:hidden">
@@ -41,21 +27,7 @@ export function SearchFilterDialog(props: SearchFilterProps) {
                 )}
             >
                 <DialogHeader>
-                    <DialogDescription asChild>
-                        <SearchFilter
-                            handleClick={handleClick}
-                            setFormat={setFormat}
-                            setEnrollment={setEnrollment}
-                            setAvailable={setAvailable}
-                            setStart={setStart}
-                            setEnd={setEnd}
-                            setInstitution={setInstitution}
-                            setMin={setMin}
-                            setMax={setMax}
-                            filterValues={filterValues}
-                            courses={courses}
-                        />
-                    </DialogDescription>
+                    <DialogDescription asChild>{children}</DialogDescription>
                 </DialogHeader>
             </DialogContent>
         </Dialog>

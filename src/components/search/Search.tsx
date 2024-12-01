@@ -7,7 +7,6 @@ import { SearchFilterDialog } from "@/components/search/filter/search-filter-dia
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
-import { ListFilterIcon } from "lucide-react";
 
 import { filterData } from "../../lib/utils/filter";
 import { queryDatabase } from "../../lib/utils/query-db";
@@ -152,25 +151,6 @@ const Search = () => {
         sort,
     ]);
 
-    const [open, setOpen] = useState(false);
-    const [width, setWidth] = useState<number>(0);
-
-    const handleFilterButtonClick = () => {
-        setOpen((open) => !open);
-    };
-
-    const handleResize = () => {
-        setWidth(window.innerWidth);
-    };
-
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
     const handleUniversityChange = (university: string) => {
         setUniversity(university);
         setGE(UNIVERSITY_GE[university][0]);
@@ -262,24 +242,6 @@ const Search = () => {
         fetchData();
     }, [university, ge, toast]);
 
-    // if (open && width < FILTER_PAGE_BREAKPOINT) {
-    //     return (
-    //         <SearchFilterPage
-    //             handleClick={handleFilterButtonClick}
-    //             setFormat={setFormat}
-    //             setEnrollment={setEnrollment}
-    //             setAvailable={setAvailable}
-    //             setStart={setStart}
-    //             setEnd={setEnd}
-    //             setInstitution={setInstitution}
-    //             setMin={setMin}
-    //             setMax={setMax}
-    //             filterValues={filterValues}
-    //             courses={courses}
-    //         />
-    //     );
-    // }
-
     return (
         <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
             <div className="flex flex-wrap text-6xl font-bold">
@@ -313,7 +275,6 @@ const Search = () => {
             <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
                 <div className="hidden h-fit xl:flex xl:flex-col">
                     <SearchFilter
-                        handleClick={handleFilterButtonClick}
                         setFormat={setFormat}
                         setEnrollment={setEnrollment}
                         setAvailable={setAvailable}
@@ -329,19 +290,20 @@ const Search = () => {
 
                 <div className="w-full xl:w-[65%]">
                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
-                        <SearchFilterDialog
-                            handleClick={handleFilterButtonClick}
-                            setFormat={setFormat}
-                            setEnrollment={setEnrollment}
-                            setAvailable={setAvailable}
-                            setStart={setStart}
-                            setEnd={setEnd}
-                            setInstitution={setInstitution}
-                            setMin={setMin}
-                            setMax={setMax}
-                            filterValues={filterValues}
-                            courses={courses}
-                        />
+                        <SearchFilterDialog>
+                            <SearchFilter
+                                setFormat={setFormat}
+                                setEnrollment={setEnrollment}
+                                setAvailable={setAvailable}
+                                setStart={setStart}
+                                setEnd={setEnd}
+                                setInstitution={setInstitution}
+                                setMin={setMin}
+                                setMax={setMax}
+                                filterValues={filterValues}
+                                courses={courses}
+                            />
+                        </SearchFilterDialog>
 
                         <SortDropdown
                             defaultValue={sort}
