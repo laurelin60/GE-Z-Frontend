@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
 import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
+import { SearchResults } from "@/components/search/search-results";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
@@ -16,7 +17,6 @@ import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
 import { SearchFilter } from "./filter/search-filter";
 import ScrollToTop from "./ScrollToTop";
-import SearchResults from "./SearchResults";
 import { SearchSelect } from "./SearchSelect";
 
 export interface CourseObject {
