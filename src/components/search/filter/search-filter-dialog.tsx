@@ -22,7 +22,7 @@ export function SearchFilterDialog({
 
             <DialogContent
                 className={cn(
-                    "border-none bg-transparent",
+                    "max-h-full overflow-auto border-none bg-transparent",
                     "[&>button.absolute]:right-8 [&>button.absolute]:top-8" // target close button
                 )}
             >
