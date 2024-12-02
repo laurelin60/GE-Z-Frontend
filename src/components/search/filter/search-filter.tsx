@@ -1,11 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
+import { SearchFilterDateSelect } from "@/components/search/filter/search-filter-date-select";
+import { SearchFilterInstitutionDropdown } from "@/components/search/filter/search-filter-institution-dropdown";
 
 import { CourseObject, FilterValues } from "../Search";
-import {
-    CalendarFilter,
-    CustomFilterCheckbox,
-    InstitutionDropdown,
-} from "./FilterComponents";
+import { SearchFilterCheckbox } from "./search-filter-checkbox";
 
 interface SearchFilterProps {
     setFormat: Dispatch<SetStateAction<boolean[]>>;
@@ -38,26 +36,26 @@ export const SearchFilter = (props: SearchFilterProps) => {
             </div>
 
             <div className="flex flex-col gap-4">
-                <CustomFilterCheckbox
+                <SearchFilterCheckbox
                     title="Online Format"
-                    categories={["Asynchronous", "Synchronous"]}
+                    value={filterValues.format}
                     onChange={setFormat}
-                    defaultValue={filterValues.format}
+                    categories={["Asynchronous", "Synchronous"]}
                 />
-                <CustomFilterCheckbox
+                <SearchFilterCheckbox
                     title="Available Seats"
-                    categories={["Only show courses with available seats"]}
+                    value={filterValues.available}
                     onChange={setAvailable}
-                    defaultValue={filterValues.available}
+                    categories={["Only show courses with available seats"]}
                 />
-                <CalendarFilter
+                <SearchFilterDateSelect
                     onStartChange={setStart}
                     onEndChange={setEnd}
-                    defaultStart={filterValues.start}
-                    defaultEnd={filterValues.end}
+                    start={filterValues.start}
+                    end={filterValues.end}
                 />
-                <InstitutionDropdown
-                    defaultValue={filterValues.institution}
+                <SearchFilterInstitutionDropdown
+                    value={filterValues.institution}
                     onChange={setInstitution}
                     courses={courses}
                 />

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
+import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
@@ -13,7 +14,6 @@ import { filterData } from "../../lib/utils/filter";
 import { queryDatabase } from "../../lib/utils/query-db";
 import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
-import { SortDropdown } from "./filter/FilterComponents";
 import { SearchFilter } from "./filter/search-filter";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./SearchResults";
@@ -103,7 +103,7 @@ const Search = () => {
 
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
-    const [available, setAvailable] = useState([false]);
+    const [available, setAvailable] = useState([true]);
     const [start, setStart] = useState<Date>();
     const [end, setEnd] = useState<Date>();
     const [institution, setInstitution] = useState("Any Institution");
@@ -305,15 +305,15 @@ const Search = () => {
                             />
                         </SearchFilterDialog>
 
-                        <SortDropdown
-                            defaultValue={sort}
+                        <SearchFilterSortDropdown
+                            value={sort}
+                            onChange={setSort}
                             data={[
                                 "Default Sort",
                                 "Alphabetical",
                                 "Tuition",
                                 "Shortest Term",
                             ]}
-                            onChange={setSort}
                         />
                     </div>
 
