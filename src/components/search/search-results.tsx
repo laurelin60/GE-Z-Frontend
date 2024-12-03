@@ -134,7 +134,7 @@ export function SearchResults({ results, university, ge }: SearchResultsProps) {
                                 </div>
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
-                            <div className="flex flex-col justify-between gap-y-2 px-4 py-2 md:flex-row md:px-8 md:py-4">
+                            <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 px-4 py-2 md:px-8 md:py-4">
                                 <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
                                     Tuition:{" "}
                                     <span className="text-primary">
