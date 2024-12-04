@@ -16,7 +16,6 @@ import { queryDatabase } from "../../lib/utils/query-db";
 import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
 import { SearchFilter } from "./filter/search-filter";
-import ScrollToTop from "./ScrollToTop";
 import { SearchSelect } from "./SearchSelect";
 
 export interface CourseObject {
@@ -328,7 +327,6 @@ const Search = () => {
                             ge={ge}
                         />
                     )}
-                    <ScrollToTop />
                 </div>
             </div>
         </div>

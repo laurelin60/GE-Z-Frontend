@@ -6,6 +6,7 @@ import "./globals.css";
 import { Footer } from "@/components/footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Header } from "@/components/header";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
@@ -45,6 +46,7 @@ export default function RootLayout({
                     <Header />
                     <GoogleAnalytics />
                     {children}
+                    <ScrollToTop />
                     <Footer />
                     <Toaster />
                 </div>
