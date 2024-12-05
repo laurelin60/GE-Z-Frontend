@@ -1,19 +1,20 @@
 import { Suspense } from "react";
+import { searchParamsCache } from "@/app/search/searchParams";
 import { Search } from "@/components/search/search";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { queryDatabase } from "@/lib/utils/query-db";
+import { SearchParams } from "nuqs";
 
 export default async function Page({
     searchParams,
 }: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+    searchParams: Promise<SearchParams>;
 }) {
-    // ! fix me
-    const searchUniversity = (await searchParams)["university"] as string;
-    const searchGE = (await searchParams)["ge"] as string;
+    const { university: searchUniversity, ge: searchGe } =
+        await searchParamsCache.parse(searchParams);
 
     const university = searchUniversity || Object.keys(UNIVERSITY_GE)[0];
-    const ge = searchGE || UNIVERSITY_GE[university][0];
+    const ge = searchGe || UNIVERSITY_GE[university][0];
 
     const coursesResponse = await queryDatabase(university, ge).catch((e) => {
         console.error(e);
