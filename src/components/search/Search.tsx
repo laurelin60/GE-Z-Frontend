@@ -1,20 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
 import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
-import { analyticsEnum, logAnalytics } from "@/lib/analytics";
 import { UNIVERSITY_GE } from "@/lib/constants";
-import { getDismissedRecently, getNumSearches } from "@/lib/utils/search";
 
 import { filterData } from "../../lib/utils/filter";
-import { queryDatabase } from "../../lib/utils/query-db";
-import { ToastAction } from "../ui/toast";
-import { useToast } from "../ui/use-toast";
+// import { useToast } from "../ui/use-toast";
 import { SearchFilter } from "./filter/search-filter";
 import { SearchSelect } from "./SearchSelect";
 
@@ -54,51 +49,52 @@ export type FilterValues = {
     sort: string;
 };
 
-const LoadingState = () => {
-    return (
-        <div className="mt-16 flex flex-col gap-2 text-2xl">
-            <div className="flex justify-center">
-                <img
-                    src="/loading.gif"
-                    alt="loading gif"
-                    className="pointer-events-none flex h-16 w-16 justify-center opacity-60"
-                />
-            </div>
-            <div className="flex justify-center">Loading...</div>
-        </div>
-    );
-};
+// const LoadingState = () => {
+//     return (
+//         <div className="mt-16 flex flex-col gap-2 text-2xl">
+//             <div className="flex justify-center">
+//                 <img
+//                     src="/loading.gif"
+//                     alt="loading gif"
+//                     className="pointer-events-none flex h-16 w-16 justify-center opacity-60"
+//                 />
+//             </div>
+//             <div className="flex justify-center">Loading...</div>
+//         </div>
+//     );
+// };
 
-const ErrorState = () => {
-    return (
-        <div className="mt-16 flex flex-col gap-2 text-2xl">
-            <div className="flex justify-center">
-                <img
-                    src="/error.png"
-                    alt="error"
-                    className="pointer-events-none flex w-[500px] justify-center"
-                />
-            </div>
-            <div className="flex justify-center">An error occurred...</div>
-        </div>
-    );
-};
+// const ErrorState = () => {
+//     return (
+//         <div className="mt-16 flex flex-col gap-2 text-2xl">
+//             <div className="flex justify-center">
+//                 <img
+//                     src="/error.png"
+//                     alt="error"
+//                     className="pointer-events-none flex w-[500px] justify-center"
+//                 />
+//             </div>
+//             <div className="flex justify-center">An error occurred...</div>
+//         </div>
+//     );
+// };
 
-const Search = () => {
+export function Search({
+    university: _university,
+    ge: _ge,
+    courses,
+    lastUpdated,
+}: {
+    university: string;
+    ge: string;
+    courses: CourseObject[];
+    lastUpdated: number;
+}) {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const { toast } = useToast();
+    // const { toast } = useToast();
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-    const searchUniversity = searchParams.get("uni");
-    const searchGE = searchParams.get("ge");
-
-    const [university, setUniversity] = useState(
-        searchUniversity || Object.keys(UNIVERSITY_GE)[0]
-    );
-    const [ge, setGE] = useState(searchGE || UNIVERSITY_GE[university][4]);
+    const [university, setUniversity] = useState(_university);
+    const [ge, setGE] = useState(_ge);
 
     const [format, setFormat] = useState([true, true]);
     const [enrollment, setEnrollment] = useState([true]);
@@ -110,9 +106,6 @@ const Search = () => {
     const [max, setMax] = useState(20);
 
     const [sort, setSort] = useState("Default Sort");
-
-    const [courses, setCourses] = useState<CourseObject[]>();
-    const [lastUpdated, setLastUpdated] = useState<number>();
 
     const [filterValues, setFilterValues] = useState<FilterValues>({
         format: format,
@@ -169,77 +162,78 @@ const Search = () => {
         router.push(`/search?uni=${universityParam}&ge=${geParam}`);
     };
 
-    useEffect(() => {
-        setLoading(true);
+    // useEffect(() => {
+    //     setLoading(true);
 
-        const fetchData = async () => {
-            try {
-                const courses = await queryDatabase(university, ge);
+    //     const fetchData = async () => {
+    //         try {
+    //             const courses = await queryDatabase(university, ge);
 
-                setCourses(courses.data);
-                setLastUpdated(courses.lastUpdated);
-                setLoading(false);
-                setError(false);
+    //             setCourses(courses.data);
+    //             setLastUpdated(courses.lastUpdated);
+    //             setLoading(false);
+    //             setError(false);
 
-                const dismissedRecently = getDismissedRecently();
-                const numSearches = getNumSearches();
+    //             const dismissedRecently = getDismissedRecently();
+    //             const numSearches = getNumSearches();
 
-                if (!dismissedRecently && numSearches > 2) {
-                    toast({
-                        title: "Enjoying GE-Z?",
-                        description:
-                            "Support us by giving us a star on Github!",
-                        action: (
-                            <Link href="https://github.com/laurelin60/GE-Z-Frontend">
-                                <ToastAction
-                                    altText="Star us on Github"
-                                    className="flex gap-x-2 border-2 border-primary drop-shadow-lg hover:drop-shadow-none"
-                                >
-                                    Star{" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        className="h-3 w-3"
-                                    >
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                    </svg>
-                                </ToastAction>
-                            </Link>
-                        ),
-                    });
+    //             if (!dismissedRecently && numSearches > 2) {
+    //                 toast({
+    //                     title: "Enjoying GE-Z?",
+    //                     description:
+    //                         "Support us by giving us a star on Github!",
+    //                     action: (
+    //                         <Link href="https://github.com/laurelin60/GE-Z-Frontend">
+    //                             <ToastAction
+    //                                 altText="Star us on Github"
+    //                                 className="flex gap-x-2 border-2 border-primary drop-shadow-lg hover:drop-shadow-none"
+    //                             >
+    //                                 Star{" "}
+    //                                 <svg
+    //                                     xmlns="http://www.w3.org/2000/svg"
+    //                                     width="24"
+    //                                     height="24"
+    //                                     viewBox="0 0 24 24"
+    //                                     fill="none"
+    //                                     stroke="currentColor"
+    //                                     className="h-3 w-3"
+    //                                 >
+    //                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    //                                 </svg>
+    //                             </ToastAction>
+    //                         </Link>
+    //                     ),
+    //                     duration: 8,
+    //                 });
 
-                    window.localStorage.setItem(
-                        "enjoymentDismissalTime",
-                        Date.now().toString()
-                    );
-                }
+    //                 window.localStorage.setItem(
+    //                     "enjoymentDismissalTime",
+    //                     Date.now().toString()
+    //                 );
+    //             }
 
-                window.localStorage.setItem(
-                    "gezSearches",
-                    (numSearches + 1).toString()
-                );
-            } catch (error) {
-                setLoading(false);
-                setError(true);
-                console.error("Error fetching data:", error);
-            }
-        };
+    //             window.localStorage.setItem(
+    //                 "gezSearches",
+    //                 (numSearches + 1).toString()
+    //             );
+    //         } catch (error) {
+    //             setLoading(false);
+    //             setError(true);
+    //             console.error("Error fetching data:", error);
+    //         }
+    //     };
 
-        logAnalytics({
-            category: analyticsEnum.search.title,
-            action: analyticsEnum.search.actions.SEARCH,
-            label: university,
-            value: UNIVERSITY_GE[university]?.findIndex((item) => {
-                return item.includes(ge);
-            }),
-        });
+    //     logAnalytics({
+    //         category: analyticsEnum.search.title,
+    //         action: analyticsEnum.search.actions.SEARCH,
+    //         label: university,
+    //         value: UNIVERSITY_GE[university]?.findIndex((item) => {
+    //             return item.includes(ge);
+    //         }),
+    //     });
 
-        fetchData();
-    }, [university, ge, toast]);
+    //     fetchData();
+    // }, [university, ge, toast]);
 
     return (
         <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
@@ -316,21 +310,13 @@ const Search = () => {
                         />
                     </div>
 
-                    {loading ? (
-                        <LoadingState />
-                    ) : error ? (
-                        <ErrorState />
-                    ) : (
-                        <SearchResults
-                            results={filterData(courses, filterValues)}
-                            university={university}
-                            ge={ge}
-                        />
-                    )}
+                    <SearchResults
+                        results={filterData(courses, filterValues)}
+                        university={university}
+                        ge={ge}
+                    />
                 </div>
             </div>
         </div>
     );
-};
-
-export default Search;
+}
