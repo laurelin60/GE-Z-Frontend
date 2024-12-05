@@ -9,6 +9,8 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Header } from "@/components/header";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Toaster } from "@/components/ui/toaster";
+// @ts-expect-error types are not provided by this library
+import sslRootCAs from "ssl-root-cas";
 
 const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
 
@@ -40,9 +42,11 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    if (process.env.NODE_ENV === "development") {
-        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
-    }
+    /**
+     * Adds additional (missing) certificates to Node
+     * {@link https://stackoverflow.com/a/22263280}
+     */
+    sslRootCAs.inject();
 
     return (
         <html lang="en">
