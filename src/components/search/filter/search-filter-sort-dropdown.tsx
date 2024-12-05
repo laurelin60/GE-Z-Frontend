@@ -5,24 +5,23 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useSearchContext } from "@/contexts/search-context/search-context";
 
 interface SearchFilterSortDropdownProps {
-    value: string;
-    onChange: (input: string) => void;
     data: string[];
 }
 
 export function SearchFilterSortDropdown({
-    value,
     data,
-    onChange,
 }: SearchFilterSortDropdownProps) {
+    const { sort, setSort } = useSearchContext();
+
     return (
         <div className="flex items-center gap-4 md:flex-row">
             <div className="hidden text-gray sm:flex">Sort By:</div>
             <Select
-                value={value}
-                onValueChange={onChange}
+                value={sort}
+                onValueChange={setSort}
             >
                 <SelectTrigger className="text-regular min-h-full w-40 rounded-lg border-[1px] border-gray">
                     <SelectValue />

@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
 import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
-import type {
-    CourseObject,
-    FilterValues,
-} from "@/components/search/search.types";
+import type { CourseObject } from "@/components/search/search.types";
+import { useSearchContext } from "@/contexts/search-context/search-context";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { useQueryState } from "nuqs";
 
@@ -27,6 +25,8 @@ export function Search({
     courses: CourseObject[];
     lastUpdated: number;
 }) {
+    const { filterValues } = useSearchContext();
+
     const [university, setUniversity] = useQueryState("uni", {
         defaultValue: _university,
         shallow: false,
@@ -37,53 +37,6 @@ export function Search({
         shallow: false,
         clearOnDefault: false,
     });
-
-    const [format, setFormat] = useState([true, true]);
-    const [enrollment, setEnrollment] = useState([true]);
-    const [available, setAvailable] = useState([true]);
-    const [start, setStart] = useState<Date>();
-    const [end, setEnd] = useState<Date>();
-    const [institution, setInstitution] = useState("Any Institution");
-    const [min, setMin] = useState(0);
-    const [max, setMax] = useState(20);
-
-    const [sort, setSort] = useState("Default Sort");
-
-    const [filterValues, setFilterValues] = useState<FilterValues>({
-        format: format,
-        enrollment: enrollment,
-        available: available,
-        start: start,
-        end: end,
-        institution: institution,
-        min: min,
-        max: max,
-        sort: sort,
-    });
-
-    useEffect(() => {
-        setFilterValues({
-            format,
-            enrollment,
-            available,
-            start,
-            end,
-            institution,
-            min,
-            max,
-            sort,
-        });
-    }, [
-        format,
-        enrollment,
-        available,
-        start,
-        end,
-        institution,
-        min,
-        max,
-        sort,
-    ]);
 
     const handleUniversityChange = useCallback(
         (university: string) => {
@@ -99,6 +52,8 @@ export function Search({
         },
         [setGE]
     );
+
+    const results = filterData(courses, filterValues);
 
     return (
         <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
@@ -126,46 +81,21 @@ export function Search({
             <SearchBlurb
                 filterData={filterData}
                 courses={courses}
-                filterValues={filterValues}
                 lastUpdated={lastUpdated}
             />
 
             <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
                 <div className="hidden h-fit xl:flex xl:flex-col">
-                    <SearchFilter
-                        setFormat={setFormat}
-                        setEnrollment={setEnrollment}
-                        setAvailable={setAvailable}
-                        setStart={setStart}
-                        setEnd={setEnd}
-                        setInstitution={setInstitution}
-                        setMin={setMin}
-                        setMax={setMax}
-                        filterValues={filterValues}
-                        courses={courses}
-                    />
+                    <SearchFilter courses={courses} />
                 </div>
 
                 <div className="w-full xl:w-[65%]">
                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                         <SearchFilterDialog>
-                            <SearchFilter
-                                setFormat={setFormat}
-                                setEnrollment={setEnrollment}
-                                setAvailable={setAvailable}
-                                setStart={setStart}
-                                setEnd={setEnd}
-                                setInstitution={setInstitution}
-                                setMin={setMin}
-                                setMax={setMax}
-                                filterValues={filterValues}
-                                courses={courses}
-                            />
+                            <SearchFilter courses={courses} />
                         </SearchFilterDialog>
 
                         <SearchFilterSortDropdown
-                            value={sort}
-                            onChange={setSort}
                             data={[
                                 "Default Sort",
                                 "Alphabetical",
@@ -176,7 +106,7 @@ export function Search({
                     </div>
 
                     <SearchResults
-                        results={filterData(courses, filterValues)}
+                        results={results}
                         university={university}
                         ge={ge}
                     />

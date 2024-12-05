@@ -6,19 +6,19 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useSearchContext } from "@/contexts/search-context/search-context";
 
 interface SearchFilterInstitutionDropdownProps {
-    value: string;
-    onChange: (input: string) => void;
     courses: CourseObject[] | undefined;
 }
 
 export function SearchFilterInstitutionDropdown({
-    value,
-    onChange,
     courses,
 }: SearchFilterInstitutionDropdownProps) {
-    const uniqueColleges = value == "Any Institution" ? [] : [value];
+    const { institution, setInstitution } = useSearchContext();
+
+    const uniqueColleges =
+        institution == "Any Institution" ? [] : [institution];
 
     const sendingInstitutions = courses?.map(
         (course: CourseObject) => course.sendingInstitution
@@ -40,8 +40,8 @@ export function SearchFilterInstitutionDropdown({
                 Teaching Institution
             </div>
             <Select
-                value={value}
-                onValueChange={onChange}
+                value={institution}
+                onValueChange={setInstitution}
             >
                 <SelectTrigger className="text-regular min-h-full w-full max-w-[368px] rounded-lg border-[1px] border-gray">
                     <SelectValue placeholder="Teaching Institution" />

@@ -3,6 +3,7 @@ import type {
     CourseObject,
     FilterValues,
 } from "@/components/search/search.types";
+import { useSearchContext } from "@/contexts/search-context/search-context";
 
 interface SearchBlurbProps {
     filterData: (
@@ -11,15 +12,15 @@ interface SearchBlurbProps {
     ) => CourseObject[];
     courses: CourseObject[] | undefined;
     lastUpdated: number | undefined;
-    filterValues: FilterValues;
 }
 
 export const SearchBlurb = ({
     filterData,
     courses,
     lastUpdated,
-    filterValues,
 }: SearchBlurbProps) => {
+    const { filterValues } = useSearchContext();
+
     const [timeAgo, setTimeAgo] = useState("");
 
     const getTimeAgo = useCallback((date: number) => {

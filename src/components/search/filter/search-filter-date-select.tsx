@@ -1,40 +1,38 @@
+import { useCallback } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { useSearchContext } from "@/contexts/search-context/search-context";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import { Button } from "../../ui/button";
 
-interface SearchFilterDateSelectProps {
-    onStartChange: (input: Date | undefined) => void;
-    onEndChange: (input: Date | undefined) => void;
-    start: Date | undefined;
-    end: Date | undefined;
-}
+export function SearchFilterDateSelect() {
+    const { start, setStart, end, setEnd } = useSearchContext();
 
-export function SearchFilterDateSelect({
-    onStartChange,
-    onEndChange,
-    start,
-    end,
-}: SearchFilterDateSelectProps) {
-    const handleStartChange = (date: Date | undefined) => {
-        if (!date) {
-            console.error("No start date selected");
-            return;
-        }
+    const handleStartChange = useCallback(
+        (date: Date | undefined) => {
+            if (!date) {
+                console.error("No start date selected");
+                return;
+            }
 
-        onStartChange(date);
-    };
+            setStart(date);
+        },
+        [setStart]
+    );
 
-    const handleEndChange = (date: Date | undefined) => {
-        onEndChange(date);
-    };
+    const handleEndChange = useCallback(
+        (date: Date | undefined) => {
+            setEnd(date);
+        },
+        [setEnd]
+    );
 
     return (
         <div className="relative flex flex-col">
