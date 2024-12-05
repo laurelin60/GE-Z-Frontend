@@ -1,6 +1,13 @@
-import { createSearchParamsCache, parseAsString } from "nuqs/server";
+import { UNIVERSITIES } from "@/lib/constants";
+import {
+    createSearchParamsCache,
+    parseAsString,
+    parseAsStringLiteral,
+} from "nuqs/server";
 
 export const searchParamsCache = createSearchParamsCache({
-    university: parseAsString.withDefault("University of California, Irvine"),
+    university: parseAsStringLiteral(UNIVERSITIES).withDefault(
+        "University of California, Irvine"
+    ),
     ge: parseAsString.withDefault("GE IV"),
 });

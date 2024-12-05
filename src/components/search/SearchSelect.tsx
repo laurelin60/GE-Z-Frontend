@@ -1,5 +1,3 @@
-"use client";
-
 import {
     Select,
     SelectContent,
@@ -8,16 +6,19 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-export interface DropdownComponentProps {
-    value: string;
-    data?: string[];
-    onChange: (university: string) => void;
+export interface DropdownComponentProps<T extends string> {
+    value: T;
+    data?: readonly T[];
+    onChange: (input: T) => void;
     placeholder?: string;
 }
 
-export const SearchSelect = (props: DropdownComponentProps) => {
-    const { value, data, onChange, placeholder } = props;
-
+export function SearchSelect<T extends string>({
+    value,
+    data,
+    onChange,
+    placeholder,
+}: DropdownComponentProps<T>) {
     return (
         <div className="relative flex h-12 w-[300px] md:h-16">
             <Select
@@ -28,7 +29,7 @@ export const SearchSelect = (props: DropdownComponentProps) => {
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
-                    {data?.map((item) => {
+                    {data?.map((item: string) => {
                         let option = item;
 
                         if (option.includes("University of California")) {
@@ -57,4 +58,4 @@ export const SearchSelect = (props: DropdownComponentProps) => {
             </Select>
         </div>
     );
-};
+}

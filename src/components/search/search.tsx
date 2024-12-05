@@ -7,31 +7,37 @@ import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
 import type { CourseObject } from "@/components/search/search.types";
 import { useSearchContext } from "@/contexts/search-context/search-context";
-import { UNIVERSITY_GE } from "@/lib/constants";
-import { useQueryState } from "nuqs";
+import { UNIVERSITIES, University, UNIVERSITY_GE } from "@/lib/constants";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import { filterData } from "../../lib/utils/filter";
 import { SearchFilter } from "./filter/search-filter";
 import { SearchSelect } from "./SearchSelect";
+
+interface SearchProps {
+    university: University;
+    ge: string;
+    courses: CourseObject[];
+    lastUpdated: number;
+}
 
 export function Search({
     university: _university,
     ge: _ge,
     courses,
     lastUpdated,
-}: {
-    university: string;
-    ge: string;
-    courses: CourseObject[];
-    lastUpdated: number;
-}) {
+}: SearchProps) {
     const { filterValues } = useSearchContext();
 
-    const [university, setUniversity] = useQueryState("university", {
-        defaultValue: _university,
-        shallow: false,
-        clearOnDefault: false,
-    });
+    const [university, setUniversity] = useQueryState(
+        "university",
+        parseAsStringLiteral(UNIVERSITIES)
+            .withDefault(_university)
+            .withOptions({
+                shallow: false,
+                clearOnDefault: false,
+            })
+    );
     const [ge, setGE] = useQueryState("ge", {
         defaultValue: _ge,
         shallow: false,
@@ -39,7 +45,9 @@ export function Search({
     });
 
     const handleUniversityChange = useCallback(
-        (university: string) => {
+        (value: string) => {
+            const university = value as University;
+
             setUniversity(university);
             setGE(UNIVERSITY_GE[university][0]);
         },
@@ -65,7 +73,7 @@ export function Search({
                 <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-2">
                     <SearchSelect
                         value={university}
-                        data={Object.keys(UNIVERSITY_GE)}
+                        data={UNIVERSITIES}
                         onChange={handleUniversityChange}
                         placeholder="University"
                     />

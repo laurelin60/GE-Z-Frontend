@@ -244,8 +244,6 @@ describe("Search Sorting", () => {
             sort: "Shortest Term",
         });
 
-        console.log(result);
-
         expect(result[0].sendingInstitution).toEqual(
             "placeholder sending institution 3"
         );
