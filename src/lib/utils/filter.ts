@@ -1,4 +1,4 @@
-import { CourseObject, FilterValues } from "../../components/search/Search";
+import { CourseObject, FilterValues } from "@/components/search/search.types";
 
 export const startsAfter = (start: Date | undefined, result: CourseObject) => {
     if (start === undefined) {

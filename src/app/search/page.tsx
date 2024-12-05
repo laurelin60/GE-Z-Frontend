@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Search } from "@/components/search/Search";
+import { Search } from "@/components/search/search";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { queryDatabase } from "@/lib/utils/query-db";
 

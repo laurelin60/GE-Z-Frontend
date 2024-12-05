@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-
-import { CourseObject, FilterValues } from "./Search";
+import { useCallback, useEffect, useState } from "react";
+import type {
+    CourseObject,
+    FilterValues,
+} from "@/components/search/search.types";
 
 interface SearchBlurbProps {
     filterData: (

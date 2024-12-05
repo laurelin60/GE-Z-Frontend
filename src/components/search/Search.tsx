@@ -5,48 +5,16 @@ import { SearchFilterDialog } from "@/components/search/filter/search-filter-dia
 import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
+import type {
+    CourseObject,
+    FilterValues,
+} from "@/components/search/search.types";
 import { UNIVERSITY_GE } from "@/lib/constants";
 import { useQueryState } from "nuqs";
 
 import { filterData } from "../../lib/utils/filter";
 import { SearchFilter } from "./filter/search-filter";
 import { SearchSelect } from "./SearchSelect";
-
-export interface CourseObject {
-    sendingInstitution: string;
-    courseCode: string;
-    courseName: string;
-    cvcId: string;
-    assistPath: string;
-    niceToHaves: string[];
-    units: number;
-    tuition: number;
-    startDate: number;
-    endDate: number;
-    async: boolean;
-    hasOpenSeats: boolean;
-    hasPrereqs: boolean;
-    instantEnrollment: boolean;
-    fulfillsGEs: FullFillsGE[];
-    articulatesTo: string[];
-}
-
-type FullFillsGE = {
-    category: string;
-    count: number;
-};
-
-export type FilterValues = {
-    format: boolean[];
-    enrollment: boolean[];
-    available: boolean[];
-    start: Date | undefined;
-    end: Date | undefined;
-    institution: string;
-    min: number;
-    max: number;
-    sort: string;
-};
 
 export function Search({
     university: _university,

@@ -1,8 +1,8 @@
+import type { CourseObject } from "@/components/search/search.types";
 import { format } from "date-fns";
 import { ExternalLinkIcon } from "lucide-react";
 import LazyLoad from "react-lazy-load";
 
-import { CourseObject } from "./Search";
 import Tags from "./Tags";
 
 const formatTime = (date: number) => {

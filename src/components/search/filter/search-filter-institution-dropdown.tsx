@@ -1,4 +1,4 @@
-import { CourseObject } from "@/components/search/Search";
+import type { CourseObject } from "@/components/search/search.types";
 import {
     Select,
     SelectContent,

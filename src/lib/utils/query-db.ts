@@ -1,4 +1,4 @@
-import { CourseObject } from "../../components/search/Search";
+import { CourseObject } from "@/components/search/search.types";
 
 export type DatabaseReturn = {
     data: CourseObject[];

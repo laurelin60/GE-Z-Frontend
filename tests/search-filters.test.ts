@@ -1,5 +1,6 @@
-import { CourseObject, FilterValues } from "@/components/search/Search";
+import { CourseObject, FilterValues } from "@/components/search/search.types";
 import { endsBefore, filterData, startsAfter } from "@/lib/utils/filter";
+
 import "@testing-library/jest-dom";
 
 interface CourseData {
@@ -88,7 +89,7 @@ describe("Search Filters", () => {
 
     test("default filter values do not throw error", async () => {
         expect(() => filterData(data.data, defaultFilterValues)).not.toThrow(
-            Error,
+            Error
         );
     });
 
@@ -154,7 +155,7 @@ describe("Search Filters", () => {
             institution: "placeholder sending institution 1",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 1",
+            "placeholder sending institution 1"
         );
     });
 });
@@ -191,7 +192,7 @@ describe("Filter Utils' Time Utilities", () => {
             sort: "Tuition",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 2",
+            "placeholder sending institution 2"
         );
     });
 });
@@ -203,7 +204,7 @@ describe("Search Sorting", () => {
             sort: "Alphabetical",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 1",
+            "placeholder sending institution 1"
         );
     });
 
@@ -213,7 +214,7 @@ describe("Search Sorting", () => {
             sort: "Alphabetical",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 1",
+            "placeholder sending institution 1"
         );
     });
 
@@ -223,7 +224,7 @@ describe("Search Sorting", () => {
             sort: "Tuition",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 2",
+            "placeholder sending institution 2"
         );
     });
 
@@ -233,7 +234,7 @@ describe("Search Sorting", () => {
             sort: "Shortest Term",
         });
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 1",
+            "placeholder sending institution 1"
         );
     });
 
@@ -246,7 +247,7 @@ describe("Search Sorting", () => {
         console.log(result);
 
         expect(result[0].sendingInstitution).toEqual(
-            "placeholder sending institution 3",
+            "placeholder sending institution 3"
         );
     });
 });

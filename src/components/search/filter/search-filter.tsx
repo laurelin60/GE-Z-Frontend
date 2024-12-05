@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
+import { SearchFilterCheckbox } from "@/components/search/filter/search-filter-checkbox";
 import { SearchFilterDateSelect } from "@/components/search/filter/search-filter-date-select";
 import { SearchFilterInstitutionDropdown } from "@/components/search/filter/search-filter-institution-dropdown";
-
-import { CourseObject, FilterValues } from "../Search";
-import { SearchFilterCheckbox } from "./search-filter-checkbox";
+import { CourseObject, FilterValues } from "@/components/search/search.types";
 
 interface SearchFilterProps {
     setFormat: Dispatch<SetStateAction<boolean[]>>;
