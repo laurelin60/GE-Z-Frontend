@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "./globals.css";
 
@@ -39,13 +40,17 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
+    if (process.env.NODE_ENV === "development") {
+        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+    }
+
     return (
         <html lang="en">
             <body className={inter.className}>
                 <div className="flex flex-col place-content-center bg-background text-text">
                     <Header />
                     <GoogleAnalytics />
-                    {children}
+                    <NuqsAdapter>{children}</NuqsAdapter>
                     <ScrollToTop />
                     <Footer />
                     <Toaster />
