@@ -38,11 +38,15 @@ export function Search({
                 clearOnDefault: false,
             })
     );
-    const [ge, setGE] = useQueryState("ge", {
-        defaultValue: _ge,
-        shallow: false,
-        clearOnDefault: false,
-    });
+    const [ge, setGE] = useQueryState(
+        "ge",
+        parseAsStringLiteral(UNIVERSITY_GE[university])
+            .withDefault(_ge)
+            .withOptions({
+                shallow: false,
+                clearOnDefault: false,
+            })
+    );
 
     const handleUniversityChange = useCallback(
         (value: string) => {

@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import Error from "@/app/search/error";
 import { searchParamsCache } from "@/app/search/searchParams";
 import { Search } from "@/components/search/search";
 import { UNIVERSITY_GE } from "@/lib/constants";
@@ -16,25 +16,31 @@ export default async function Page({
     const university = searchUniversity || Object.keys(UNIVERSITY_GE)[0];
     const ge = searchGe || UNIVERSITY_GE[university][0];
 
+    if (!UNIVERSITY_GE[university].includes(ge)) {
+        return (
+            <Error
+                error={`GE (${ge}) not found for University (${university})`}
+            />
+        );
+    }
+
     const coursesResponse = await queryDatabase(university, ge).catch((e) => {
         console.error(e);
     });
 
     if (!coursesResponse) {
-        return <div>An error occurred...</div>;
+        return <Error error={`No course response`} />;
     }
 
     const courses = coursesResponse.data;
     const lastUpdated = coursesResponse.lastUpdated;
 
     return (
-        <Suspense>
-            <Search
-                university={university}
-                ge={ge}
-                courses={courses}
-                lastUpdated={lastUpdated}
-            />
-        </Suspense>
+        <Search
+            university={university}
+            ge={ge}
+            courses={courses}
+            lastUpdated={lastUpdated}
+        />
     );
 }
