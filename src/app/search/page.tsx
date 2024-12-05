@@ -9,7 +9,7 @@ export default async function Page({
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
     // ! fix me
-    const searchUniversity = (await searchParams)["uni"] as string;
+    const searchUniversity = (await searchParams)["university"] as string;
     const searchGE = (await searchParams)["ge"] as string;
 
     const university = searchUniversity || Object.keys(UNIVERSITY_GE)[0];

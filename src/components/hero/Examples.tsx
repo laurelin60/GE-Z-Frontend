@@ -25,21 +25,21 @@ const EXAMPLES: Example[] = [
         geText: "GE IV - Arts and Humanities",
         institution: "UCI",
         ge: "IV",
-        link: "/search?uni=University%20of%20California%2C%20Irvine&ge=GE%20IV",
+        link: "/search?ge=GE+IV&university=University+of+California,+Irvine",
     },
     {
         name: "UCLA",
         geText: "Life Sciences",
         institution: "UCLA",
         ge: "Scientific Inquiry: Life Sciences",
-        link: "search?uni=University%20of%20California%2C%20Los%20Angeles&ge=Scientific%20Inquiry%3A%20Life%20Sciences",
+        link: "/search?ge=Scientific+Inquiry:+Life+Sciences&university=University+of+California,+Los+Angeles",
     },
     {
         name: "UC Santa Barbara",
         geText: "GE E - Culture and Thought",
         institution: "UCSB",
         ge: "E",
-        link: "/search?uni=University%20of%20California%2C%20Santa%20Barbara&ge=GE%20E",
+        link: "/search?ge=GE+E&university=University+of+California,+Santa+Barbara",
     },
 ];
 

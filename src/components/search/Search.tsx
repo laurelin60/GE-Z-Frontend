@@ -27,7 +27,7 @@ export function Search({
 }) {
     const { filterValues } = useSearchContext();
 
-    const [university, setUniversity] = useQueryState("uni", {
+    const [university, setUniversity] = useQueryState("university", {
         defaultValue: _university,
         shallow: false,
         clearOnDefault: false,
