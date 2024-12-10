@@ -55,11 +55,13 @@ for university students.
     </a>
 </p>
 
+<!--
 <p align="center">
     <a href="https://ge-z.vercel.app">
   <img width="264" alt="Mobile Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/c86a8705-4b41-4f0d-940d-a32ab6b60b46">
     </a>
 </p>
+-->
 
 ## Using GE-Z
 
