@@ -5,7 +5,10 @@ export type DatabaseReturn = {
     lastUpdated: number;
 };
 
-const cache: Record<string, [Date, DatabaseReturn]> = {};
+const cache: Record<string, [number, DatabaseReturn]> = {};
+const THIRTY_MINUTES = 30 * 60 * 1000;
+
+console.log(THIRTY_MINUTES);
 
 export async function queryDatabase(
     university: string,
@@ -16,14 +19,15 @@ export async function queryDatabase(
 
     const cacheKey = universityParam + geParam;
 
-    if (cache[cacheKey] && cache[cacheKey][0]) {
-        const [cachedDate, cachedData] = cache[cacheKey];
+    // if (cache[cacheKey]) {
+    //     const [cachedDate, cachedData] = cache[cacheKey];
+    //     console.log(cachedDate);
 
-        // If not older than 30 minutes, return cached courses
-        if ((new Date().getTime() - cachedDate.getTime()) / (1000 * 60) <= 30) {
-            return cachedData;
-        }
-    }
+    //     if (Date.now() - cachedDate <= THIRTY_MINUTES) {
+    //         console.log(cachedData);
+    //         return cachedData;
+    //     }
+    // }
 
     const universityUri = encodeURIComponent(universityParam);
     const geUri = encodeURIComponent(geParam);
@@ -39,7 +43,9 @@ export async function queryDatabase(
         const data = await response.json();
         const output = { data: data.data, lastUpdated: data.lastUpdated };
 
-        cache[cacheKey] = [new Date(), output];
+        cache[cacheKey] = [Date.now(), output];
+
+        console.log(output.lastUpdated);
 
         return output;
     } catch (error) {
