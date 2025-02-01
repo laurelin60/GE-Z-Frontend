@@ -8,8 +8,6 @@ export type DatabaseReturn = {
 const cache: Record<string, [number, DatabaseReturn]> = {};
 const THIRTY_MINUTES = 30 * 60 * 1000;
 
-console.log(THIRTY_MINUTES);
-
 export async function queryDatabase(
     university: string,
     ge: string
@@ -19,15 +17,14 @@ export async function queryDatabase(
 
     const cacheKey = universityParam + geParam;
 
-    // if (cache[cacheKey]) {
-    //     const [cachedDate, cachedData] = cache[cacheKey];
-    //     console.log(cachedDate);
+    if (cache[cacheKey]) {
+        const [cachedDate, cachedData] = cache[cacheKey];
+        console.log(cachedDate);
 
-    //     if (Date.now() - cachedDate <= THIRTY_MINUTES) {
-    //         console.log(cachedData);
-    //         return cachedData;
-    //     }
-    // }
+        if (Date.now() - cachedDate <= THIRTY_MINUTES) {
+            return cachedData;
+        }
+    }
 
     const universityUri = encodeURIComponent(universityParam);
     const geUri = encodeURIComponent(geParam);
@@ -35,7 +32,9 @@ export async function queryDatabase(
     const url = `https://i-did-ur.mom/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            cache: "no-cache",
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -44,8 +43,6 @@ export async function queryDatabase(
         const output = { data: data.data, lastUpdated: data.lastUpdated };
 
         cache[cacheKey] = [Date.now(), output];
-
-        console.log(output.lastUpdated);
 
         return output;
     } catch (error) {
