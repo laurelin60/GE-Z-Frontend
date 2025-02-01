@@ -19,7 +19,6 @@ export async function queryDatabase(
 
     if (cache[cacheKey]) {
         const [cachedDate, cachedData] = cache[cacheKey];
-        console.log(cachedDate);
 
         if (Date.now() - cachedDate <= THIRTY_MINUTES) {
             return cachedData;
