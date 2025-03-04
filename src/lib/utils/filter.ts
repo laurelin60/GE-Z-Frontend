@@ -48,9 +48,10 @@ export function filterData(
         const withinTime =
             startsAfter(filterValues.start, result) &&
             endsBefore(filterValues.end, result);
+        const hasTuition = result.tuition > 0; // avoid TBD courses
 
         return (
-            onlineFormat && hasOpenSeats && teachingInstitution && withinTime
+            onlineFormat && hasOpenSeats && teachingInstitution && withinTime && hasTuition
         );
     });
 
