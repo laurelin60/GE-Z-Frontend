@@ -6,7 +6,6 @@ import { SearchFilterSortDropdown } from "@/components/search/filter/search-filt
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
 import type { CourseObject } from "@/components/search/search.types";
-import { useSearchContext } from "@/contexts/search-context/search-context";
 import { UNIVERSITIES, University, UNIVERSITY_GE } from "@/lib/constants";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
@@ -27,8 +26,6 @@ export function Search({
     courses,
     lastUpdated,
 }: SearchProps) {
-    const { filterValues } = useSearchContext();
-
     const [university, setUniversity] = useQueryState(
         "university",
         parseAsStringLiteral(UNIVERSITIES)
@@ -64,8 +61,6 @@ export function Search({
         },
         [setGE]
     );
-
-    const results = filterData(courses, filterValues);
 
     return (
         <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
@@ -118,7 +113,7 @@ export function Search({
                     </div>
 
                     <SearchResults
-                        results={results}
+                        courses={courses}
                         university={university}
                         ge={ge}
                     />

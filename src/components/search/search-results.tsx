@@ -1,4 +1,6 @@
 import type { CourseObject } from "@/components/search/search.types";
+import { useSearchContext } from "@/contexts/search-context/search-context";
+import { filterData } from "@/lib/utils/filter";
 import { format } from "date-fns";
 import { ExternalLinkIcon } from "lucide-react";
 import LazyLoad from "react-lazy-load";
@@ -10,12 +12,15 @@ const formatTime = (date: number) => {
 };
 
 interface SearchResultsProps {
-    results: CourseObject[];
+    courses: CourseObject[];
     university: string;
     ge: string;
 }
 
-export function SearchResults({ results, university, ge }: SearchResultsProps) {
+export function SearchResults({ courses, university, ge }: SearchResultsProps) {
+    const { filterValues } = useSearchContext();
+    const results = filterData(courses, filterValues);
+
     if (results.length <= 0) {
         return (
             <div className="flex flex-col gap-2 text-2xl">
@@ -27,7 +32,10 @@ export function SearchResults({ results, university, ge }: SearchResultsProps) {
                     />
                 </div>
                 <div className="flex w-full flex-col justify-center gap-y-2 text-center">
-                    <p>No results found...</p>
+                    <p>
+                        No results found... ({courses.length - results.length}{" "}
+                        courses hidden by filters)
+                    </p>
                     {university == "University of California, Irvine" &&
                     (ge.includes("Ia") || ge.includes("Ib")) ? (
                         <p className="text-sm text-zinc-500">

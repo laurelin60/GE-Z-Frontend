@@ -4,7 +4,7 @@ import { FilterValues } from "@/components/search/search.types";
 export function useSearchState() {
     const [format, setFormat] = useState<boolean[]>([true, true]);
     const [enrollment, setEnrollment] = useState<boolean[]>([true]);
-    const [available, setAvailable] = useState<boolean[]>([true]);
+    const [available, setAvailable] = useState<boolean[]>([false]);
     const [start, setStart] = useState<Date>();
     const [end, setEnd] = useState<Date>();
     const [institution, setInstitution] = useState<string>("Any Institution");
