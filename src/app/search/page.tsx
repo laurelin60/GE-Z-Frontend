@@ -2,7 +2,7 @@ import Error from "@/app/search/error";
 import { searchParamsCache } from "@/app/search/searchParams";
 import { Search } from "@/components/search/search";
 import { UNIVERSITY_GE } from "@/lib/constants";
-import { queryDatabase } from "@/lib/utils/query-db";
+import { queryDatabase } from "@/lib/db";
 import { SearchParams } from "nuqs";
 
 export default async function Page({
@@ -24,16 +24,15 @@ export default async function Page({
         );
     }
 
-    const coursesResponse = await queryDatabase(university, ge).catch((e) => {
+    const data = await queryDatabase(university, ge).catch((e) => {
         console.error(e);
     });
 
-    if (!coursesResponse) {
+    if (!data) {
         return <Error error={`No course response`} />;
     }
 
-    const courses = coursesResponse.data;
-    const lastUpdated = coursesResponse.lastUpdated;
+    const { data: courses, lastUpdated } = data;
 
     return (
         <Search
