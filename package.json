@@ -9,13 +9,9 @@
         "lint": "next lint",
         "format": "npx prettier --write .",
         "test": "jest",
-        "test:watch": "jest --watch",
-        "db:generate": "drizzle-kit generate",
-        "db:migrate": "drizzle-kit migrate",
-        "db:studio": "drizzle-kit studio"
+        "test:watch": "jest --watch"
     },
     "dependencies": {
-        "@neondatabase/serverless": "^1.0.1",
         "@radix-ui/react-checkbox": "^1.1.2",
         "@radix-ui/react-dialog": "^1.1.2",
         "@radix-ui/react-popover": "^1.0.7",
@@ -25,8 +21,6 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "date-fns": "^3.6.0",
-        "dotenv": "^16.5.0",
-        "drizzle-orm": "^0.44.2",
         "lucide-react": "0.462.0",
         "next": "^14.2.18",
         "next-pwa": "^5.6.0",
@@ -50,7 +44,6 @@
         "@typescript-eslint/eslint-plugin": "8.16.0",
         "@typescript-eslint/parser": "8.16.0",
         "autoprefixer": "^10.0.1",
-        "drizzle-kit": "^0.31.1",
         "eslint": "^8",
         "eslint-config-next": "14.0.2",
         "jest": "^29.7.0",
@@ -60,7 +53,6 @@
         "prettier-plugin-tailwindcss": "^0.6.9",
         "tailwindcss": "^3.3.0",
         "ts-node": "^10.9.2",
-        "tsx": "^4.20.3",
         "typescript": "^5",
         "typescript-eslint": "^8.16.0"
     },
