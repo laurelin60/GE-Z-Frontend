@@ -11,17 +11,16 @@ export default function Home() {
         <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
             <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-24">
                 <div className="flex flex-col items-center gap-y-5 text-center">
-                    <h1 className="flex-center max-w-2xl flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
-                        <span className="hidden md:flex">
-                            Online, Async, and{" "}
-                        </span>
+                    <h1 className="flex-center flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
+                        <span className="hidden md:flex">Discover online</span>
                         <span className="flex text-center md:hidden">
-                            Online, Async,
+                            Discover online
                         </span>
-                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-5xl text-transparent xs:text-7xl sm:text-8xl md:text-9xl">
-                            Articulable
+                        <span className="text-5xl leading-normal text-primary xs:text-7xl sm:text-[7rem] md:text-8xl lg:text-9xl">
+                            College Credit
                         </span>
                     </h1>
+
                     <p className="max-w-prose px-2 text-muted-foreground sm:text-lg">
                         GE-Z sources data directly from{" "}
                         <Link
