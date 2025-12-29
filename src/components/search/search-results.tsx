@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CourseObject } from "@/components/search/search.types";
 import { useSearchContext } from "@/contexts/search-context/search-context";
 import { filterData } from "@/lib/utils/filter";
@@ -150,28 +151,28 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-4 font-medium">
-                                    <button className="rounded-lg border-2 border-primary bg-primary px-4 py-1 text-white transition-all active:border-primary active:bg-transparent active:text-primary">
-                                        <a
-                                            href={`https://assist.org/${result.assistPath}`}
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="flex flex-row items-center gap-2"
-                                        >
+                                    <Link
+                                        href={`https://assist.org/${result.assistPath}`}
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="flex flex-row items-center gap-2"
+                                    >
+                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90">
                                             Assist
                                             <ExternalLinkIcon className="size-5" />
-                                        </a>
-                                    </button>
-                                    <button className="flex items-center rounded-lg border-2 px-4 py-1 text-primary transition-all active:border-primary active:bg-primary active:text-white">
-                                        <a
-                                            href={`https://search.cvc.edu/courses/${result.cvcId}`}
-                                            target="_blank"
-                                            referrerPolicy="no-referrer"
-                                            className="flex flex-row items-center gap-2"
-                                        >
+                                        </button>
+                                    </Link>
+                                    <a
+                                        href={`https://search.cvc.edu/courses/${result.cvcId}`}
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="flex flex-row items-center gap-2"
+                                    >
+                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-4 py-2 text-primary transition-all hover:bg-accent">
                                             CVC
                                             <ExternalLinkIcon className="size-5" />
-                                        </a>
-                                    </button>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
