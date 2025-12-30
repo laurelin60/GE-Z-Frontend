@@ -50,7 +50,7 @@ export function Search({
             const university = value as University;
 
             setUniversity(university);
-            setGE(UNIVERSITY_GE[university][0]);
+            setGE(UNIVERSITY_GE[university][2]);
         },
         [setGE, setUniversity]
     );

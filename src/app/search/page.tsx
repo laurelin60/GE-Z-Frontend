@@ -14,7 +14,7 @@ export default async function Page({
         await searchParamsCache.parse(searchParams);
 
     const university = searchUniversity || Object.keys(UNIVERSITY_GE)[0];
-    const ge = searchGe || UNIVERSITY_GE[university][0];
+    const ge = searchGe || UNIVERSITY_GE[university][2];
 
     if (!UNIVERSITY_GE[university].includes(ge)) {
         return (
