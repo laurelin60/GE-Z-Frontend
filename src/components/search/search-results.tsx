@@ -3,7 +3,7 @@ import type { CourseObject } from "@/components/search/search.types";
 import { useSearchContext } from "@/contexts/search-context/search-context";
 import { filterData } from "@/lib/utils/filter";
 import { format } from "date-fns";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, InfoIcon } from "lucide-react";
 import LazyLoad from "react-lazy-load";
 
 import Tags from "./Tags";
@@ -143,36 +143,42 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                 </div>
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
-                            <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 px-4 py-2 md:px-8 md:py-4">
-                                <div className="flex flex-row items-center gap-3 text-xl font-semibold md:text-2xl">
-                                    Tuition:{" "}
-                                    <span className="text-primary">
-                                        {`$${result.tuition.toFixed(2)}`}
+                            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-2 md:px-8 md:py-4">
+                                <div className="text-2xl font-medium">
+                                    <span className="hidden md:inline">
+                                        Tuition:{" "}
                                     </span>
+                                    {`$${result.tuition.toFixed(2)}`}
                                 </div>
-                                <div className="flex items-center gap-4 font-medium">
+
+                                <div className="flex items-center gap-2 font-medium">
                                     <Link
                                         href={`https://assist.org/${result.assistPath}`}
                                         target="_blank"
                                         referrerPolicy="no-referrer"
                                         className="flex flex-row items-center gap-2"
                                     >
-                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90">
-                                            Assist
+                                        <button className="box-border hidden h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-4 py-2 text-primary transition-all hover:bg-accent md:flex">
+                                            Articulation
                                             <ExternalLinkIcon className="size-5" />
                                         </button>
+
+                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-2 py-2 text-primary transition-all hover:bg-accent md:hidden">
+                                            <InfoIcon className="size-5" />
+                                        </button>
                                     </Link>
-                                    <a
+
+                                    <Link
                                         href={`https://search.cvc.edu/courses/${result.cvcId}`}
                                         target="_blank"
                                         referrerPolicy="no-referrer"
                                         className="flex flex-row items-center gap-2"
                                     >
-                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-4 py-2 text-primary transition-all hover:bg-accent">
-                                            CVC
+                                        <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90">
+                                            Register
                                             <ExternalLinkIcon className="size-5" />
                                         </button>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
