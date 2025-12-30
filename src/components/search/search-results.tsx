@@ -71,7 +71,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                 result.sendingInstitution
                             }
                         >
-                            <div className="flex flex-col gap-2 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
+                            <div className="flex flex-col gap-1 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
                                 <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
                                     {result.sendingInstitution}
                                 </div>
@@ -80,6 +80,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                     <span>{result.courseName}</span>
                                 </div>
                             </div>
+
                             {result.niceToHaves.length > 0 && (
                                 <div className="flex flex-row overflow-hidden">
                                     <div className="flex flex-row gap-2 overflow-x-auto px-4 py-2 md:px-8 md:py-4">
@@ -92,6 +93,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                     </div>
                                 </div>
                             )}
+
                             <div className="border-2 border-t border-bg_secondary"></div>
                             <div className="flex justify-between overflow-hidden">
                                 <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">

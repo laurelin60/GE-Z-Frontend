@@ -62,7 +62,7 @@ export const SearchBlurb = ({
         <>
             <div className="flex flex-col gap-y-2 md:gap-y-4">
                 <div className="flex flex-col gap-2 text-base font-normal text-gray sm:text-lg md:text-xl">
-                    <div>
+                    <div className="text-pretty">
                         We found{" "}
                         <b className="text-black">
                             {courses
@@ -71,7 +71,8 @@ export const SearchBlurb = ({
                             courses
                         </b>{" "}
                         based on your search and filters. Please consult an
-                        academic advisor for further information.
+                        academic advisor for further information. Our data may
+                        not always be up to date.
                     </div>
 
                     <div className="flex text-sm text-gray md:justify-end md:text-base">
