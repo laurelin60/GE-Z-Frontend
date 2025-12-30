@@ -52,10 +52,10 @@ export default function RootLayout({
                                 {children}
 
                                 <Footer />
+                                <ScrollToTop />
                             </div>
                         </div>
                     </NuqsAdapter>
-                    <ScrollToTop />
                     <Toaster />
                 </div>
             </body>

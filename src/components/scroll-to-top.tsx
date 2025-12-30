@@ -1,14 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronUpIcon } from "lucide-react";
 
 export function ScrollToTop() {
     const [isVisible, setIsVisible] = useState(false);
+    const buttonRef = useRef<HTMLDivElement>(null);
 
     const toggleVisibility = useCallback(() => {
-        if (window.scrollY > 700) {
+        const scrollElement = buttonRef.current?.parentElement;
+        if (!scrollElement) return;
+
+        if (scrollElement.scrollTop > 700) {
             setIsVisible(true);
         } else {
             setIsVisible(false);
@@ -16,27 +20,34 @@ export function ScrollToTop() {
     }, []);
 
     const scrollToTop = useCallback(() => {
-        window.scrollTo({
+        const scrollElement = buttonRef.current?.parentElement;
+        if (!scrollElement) return;
+
+        scrollElement.scrollTo({
             top: 0,
             behavior: "smooth",
         });
     }, []);
 
     useEffect(() => {
-        window.addEventListener("scroll", toggleVisibility);
+        const scrollElement = buttonRef.current?.parentElement;
+        if (!scrollElement) return;
+
+        scrollElement.addEventListener("scroll", toggleVisibility);
 
         return () => {
-            window.removeEventListener("scroll", toggleVisibility);
+            scrollElement.removeEventListener("scroll", toggleVisibility);
         };
     }, [toggleVisibility]);
 
     return (
         <div
+            ref={buttonRef}
             className={cn(
                 "group fixed bottom-4 right-4 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary px-3 transition-all",
                 !isVisible
                     ? "invisible opacity-0"
-                    : "visible opacity-60 hover:w-40 hover:opacity-100"
+                    : "visible opacity-80 hover:w-40 hover:opacity-100"
             )}
             onClick={scrollToTop}
         >
