@@ -20,12 +20,12 @@ export function SearchSelect<T extends string>({
     placeholder,
 }: DropdownComponentProps<T>) {
     return (
-        <div className="relative flex h-12 w-[300px] md:h-16">
+        <div className="relative flex h-12 w-72 max-w-full">
             <Select
                 value={value}
                 onValueChange={onChange}
             >
-                <SelectTrigger className="h-full w-full overflow-ellipsis rounded-xl border-2 border-gray px-4 text-left text-base md:text-2xl">
+                <SelectTrigger className="h-full w-full overflow-ellipsis rounded-xl border-2 border-gray px-4 text-left text-base md:text-xl">
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>

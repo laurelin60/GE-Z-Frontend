@@ -43,12 +43,19 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div className="flex flex-col place-content-center bg-background text-text">
+                <div className="flex min-h-dvh flex-col">
                     <Header />
                     <GoogleAnalytics />
-                    <NuqsAdapter>{children}</NuqsAdapter>
+                    <NuqsAdapter>
+                        <div className="flex h-0 grow">
+                            <div className="relative flex max-h-full w-full flex-col overflow-auto">
+                                {children}
+
+                                <Footer />
+                            </div>
+                        </div>
+                    </NuqsAdapter>
                     <ScrollToTop />
-                    <Footer />
                     <Toaster />
                 </div>
             </body>

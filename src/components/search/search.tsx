@@ -63,13 +63,13 @@ export function Search({
     );
 
     return (
-        <div className="wrapper mb-8 min-h-[calc(100vh-96px)] px-4 md:mb-16 lg:px-28 xl:px-36">
+        <div className="flex w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-8">
             <div className="flex flex-wrap text-6xl font-bold">
                 Search <span className="hidden lg:flex">&nbsp;For Courses</span>
             </div>
 
             <div className="mt-4 flex flex-row items-center justify-between">
-                <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-2">
+                <div className="grid w-fit grid-cols-2 gap-4">
                     <SearchSelect
                         value={university}
                         data={UNIVERSITIES}
@@ -91,12 +91,12 @@ export function Search({
                 lastUpdated={lastUpdated}
             />
 
-            <div className="mt-4 flex flex-row gap-4 md:mt-8 md:gap-8">
-                <div className="hidden h-fit xl:flex xl:flex-col">
+            <div className="flex flex-row gap-4 md:gap-8">
+                <div className="sticky top-8 hidden h-fit shrink-0 xl:flex">
                     <SearchFilter courses={courses} />
                 </div>
 
-                <div className="w-full xl:w-[65%]">
+                <div className="w-full">
                     <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
                         <SearchFilterDialog>
                             <SearchFilter courses={courses} />

@@ -60,7 +60,7 @@ export const SearchBlurb = ({
 
     return (
         <>
-            <div className="mt-4 flex flex-col gap-y-2 md:mt-8 md:gap-y-4">
+            <div className="flex flex-col gap-y-2 md:gap-y-4">
                 <div className="flex flex-col gap-2 text-base font-normal text-gray sm:text-lg md:text-xl">
                     <div>
                         We found{" "}
@@ -74,7 +74,7 @@ export const SearchBlurb = ({
                         academic advisor for further information.
                     </div>
 
-                    <div className="flex text-sm font-light text-gray md:justify-end md:text-base">
+                    <div className="flex text-sm text-gray md:justify-end md:text-base">
                         {"GE-Z's"} data was updated{" "}
                         {lastUpdated ? timeAgo : "x"} ago
                     </div>

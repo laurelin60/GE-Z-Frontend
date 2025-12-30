@@ -75,7 +75,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                 <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
                                     {result.sendingInstitution}
                                 </div>
-                                <div className="text-2xl font-bold md:text-3xl">
+                                <div className="text-pretty text-2xl font-bold md:text-3xl">
                                     {result.courseCode}{" "}
                                     <span>{result.courseName}</span>
                                 </div>
@@ -144,7 +144,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                             </div>
                             <div className="border-2 border-t border-bg_secondary"></div>
                             <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 px-4 py-2 md:px-8 md:py-4">
-                                <div className="flex flex-row items-center gap-3 text-2xl font-semibold">
+                                <div className="flex flex-row items-center gap-3 text-xl font-semibold md:text-2xl">
                                     Tuition:{" "}
                                     <span className="text-primary">
                                         {`$${result.tuition.toFixed(2)}`}
