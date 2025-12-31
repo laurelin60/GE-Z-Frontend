@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "./globals.css";
@@ -11,7 +11,10 @@ import { Header } from "@/components/header";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"], fallback: ["sans-serif"] });
+const geist = Geist({
+    subsets: ["latin"],
+    fallback: ["sans-serif"],
+});
 
 export const metadata: Metadata = {
     title: "GE-Z",
@@ -52,7 +55,7 @@ export default function RootLayout({
                     />
                 )}
             </head>
-            <body className={inter.className}>
+            <body className={geist.className}>
                 <div className="flex min-h-dvh flex-col">
                     <Header />
                     <GoogleAnalytics />

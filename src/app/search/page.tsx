@@ -5,11 +5,10 @@ import { UNIVERSITY_GE } from "@/lib/constants";
 import { queryDatabase } from "@/lib/utils/query-db";
 import { SearchParams } from "nuqs";
 
-export default async function Page({
-    searchParams,
-}: {
+export default async function Page(props: {
     searchParams: Promise<SearchParams>;
 }) {
+    const searchParams = await props.searchParams;
     const { university: searchUniversity, ge: searchGe } =
         await searchParamsCache.parse(searchParams);
 
