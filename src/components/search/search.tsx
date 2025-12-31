@@ -10,7 +10,6 @@ import type { CourseObject } from "@/components/search/search.types";
 import { SearchSelect } from "@/components/search/SearchSelect";
 import { UNIVERSITIES, University, UNIVERSITY_GE } from "@/lib/constants";
 import { filterData } from "@/lib/utils/filter";
-import { SelectRootChangeEventDetails } from "@base-ui/react/select";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 interface SearchProps {
@@ -69,7 +68,7 @@ export function Search({
             </div>
 
             <div className="flex flex-row items-center justify-between">
-                <div className="grid shrink-0 grid-cols-2 gap-4">
+                <div className="grid max-w-full grid-cols-2 gap-4">
                     <SearchSelect
                         value={university}
                         data={UNIVERSITIES}
