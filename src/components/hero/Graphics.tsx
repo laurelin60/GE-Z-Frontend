@@ -4,7 +4,7 @@ const Graphics = () => {
             <div className="relative isolate">
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-48"
+                    className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[72px] sm:-top-48"
                 >
                     <div
                         style={{
@@ -18,14 +18,14 @@ const Graphics = () => {
             <div className="relative isolate hidden md:flex">
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu blur-[52px] sm:-top-72"
+                    className="pointer-events-none absolute -top-196 right-0 -z-10 transform-gpu overflow-hidden blur-[72px] xl:-top-128"
                 >
                     <div
                         style={{
                             clipPath:
                                 "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
                         }}
-                        className="relative aspect-1155/678 w-64.5 rotate-30 bg-linear-to-tr from-blue-500 to-purple-500 opacity-30 sm:w-88.75 md:right-0 lg:-right-[12vw] xl:-right-[20vw]"
+                        className="aspect-1155/678 w-96 rotate-30 bg-linear-to-tr from-blue-500 to-purple-500 opacity-30 sm:w-128 md:-right-32 md:w-160 lg:-right-[12vw] lg:w-192 xl:-right-[20vw]"
                     />
                 </div>
             </div>
