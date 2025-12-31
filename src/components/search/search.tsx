@@ -63,7 +63,7 @@ export function Search({
     );
 
     return (
-        <div className="flex w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-8">
+        <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-8">
             <div className="flex flex-wrap text-6xl font-bold">
                 Search <span className="hidden lg:flex">&nbsp;For Courses</span>
             </div>
@@ -96,8 +96,8 @@ export function Search({
                     <SearchFilter courses={courses} />
                 </div>
 
-                <div className="w-full">
-                    <div className="mb-8 flex flex-wrap items-center justify-between gap-y-4 xl:justify-end">
+                <div className="w-full min-w-0">
+                    <div className="mb-8 flex items-center justify-between gap-4 xl:justify-end">
                         <SearchFilterDialog>
                             <SearchFilter courses={courses} />
                         </SearchFilterDialog>

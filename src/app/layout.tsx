@@ -4,6 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "./globals.css";
 
+import Script from "next/script";
 import { Footer } from "@/components/footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Header } from "@/components/header";
@@ -42,6 +43,15 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head>
+                {process.env.NODE_ENV === "development" && (
+                    <Script
+                        src="//unpkg.com/react-grab/dist/index.global.js"
+                        crossOrigin="anonymous"
+                        strategy="beforeInteractive"
+                    />
+                )}
+            </head>
             <body className={inter.className}>
                 <div className="flex min-h-dvh flex-col">
                     <Header />
