@@ -11,17 +11,17 @@ export default function Home() {
         <main className="flex flex-col px-32 py-24">
             <div className="flex flex-col space-y-12 text-center">
                 <div className="inline-block space-y-4 text-left">
-                    <div className="text-balance text-8xl font-medium tracking-tight">
+                    <div className="text-8xl font-medium tracking-tight text-balance">
                         Get{" "}
                         <img
                             src="/seal.svg"
                             alt="UC Seal"
-                            className="inline-block h-[1lh] align-[calc(-0.15lh)]"
+                            className="inline-block h-lh align-[calc(-0.15lh)]"
                         />
                         <span>UC</span> Credits from Community College Courses
                     </div>
 
-                    <div className="w-3/4 text-2xl font-light text-muted-foreground">
+                    <div className="text-muted-foreground w-3/4 text-2xl font-light">
                         GE-Z sources data directly from Assist.org and CVC.edu
                         to find you high-quality, articulable California
                         Community College courses that save you time and money.

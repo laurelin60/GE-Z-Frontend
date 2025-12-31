@@ -43,7 +43,7 @@ export function SearchFilterInstitutionDropdown({
                 value={institution}
                 onValueChange={setInstitution}
             >
-                <SelectTrigger className="text-regular min-h-full w-full max-w-[368px] rounded-lg border-[1px] border-gray">
+                <SelectTrigger className="text-regular min-h-full w-full max-w-[368px] rounded-lg border border-gray">
                     <SelectValue placeholder="Teaching Institution" />
                 </SelectTrigger>
                 <SelectContent>

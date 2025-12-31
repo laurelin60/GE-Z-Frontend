@@ -23,7 +23,7 @@ export function SearchFilterSortDropdown({
                 value={sort}
                 onValueChange={setSort}
             >
-                <SelectTrigger className="text-regular min-h-full w-40 rounded-lg border-[1px] border-gray">
+                <SelectTrigger className="text-regular min-h-full w-40 rounded-lg border border-gray">
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

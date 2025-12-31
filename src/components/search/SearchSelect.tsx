@@ -25,7 +25,7 @@ export function SearchSelect<T extends string>({
                 value={value}
                 onValueChange={onChange}
             >
-                <SelectTrigger className="h-full w-full overflow-ellipsis rounded-xl border-2 border-gray px-4 text-left text-base md:text-xl">
+                <SelectTrigger className="h-full w-full text-ellipsis rounded-xl border-2 border-gray px-4 text-left text-base md:text-xl">
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>

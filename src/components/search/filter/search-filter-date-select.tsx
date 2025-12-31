@@ -48,7 +48,7 @@ export function SearchFilterDateSelect() {
                                 <Button
                                     variant={"outline"}
                                     className={cn(
-                                        "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
+                                        "w-44 justify-start rounded-lg border border-gray text-left font-normal",
                                         !start && "text-muted-foreground"
                                     )}
                                 >
@@ -82,7 +82,7 @@ export function SearchFilterDateSelect() {
                                 <Button
                                     variant={"outline"}
                                     className={cn(
-                                        "w-44 justify-start rounded-lg border-[1px] border-gray text-left font-normal",
+                                        "w-44 justify-start rounded-lg border border-gray text-left font-normal",
                                         !end && "text-muted-foreground"
                                     )}
                                 >
