@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 
 export default function Home() {
     return (
-        <main className="flex min-h-[calc(100vh-96px)] flex-col items-center">
+        <main className="flex flex-col items-center">
             <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-24">
                 <div className="flex flex-col items-center gap-y-5 text-center">
                     <h1 className="flex-center flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
