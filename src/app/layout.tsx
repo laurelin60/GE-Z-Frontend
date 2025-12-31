@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "./globals.css";
@@ -11,9 +11,14 @@ import { Header } from "@/components/header";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Toaster } from "@/components/ui/toaster";
 
-const geist = Geist({
+const geistSans = Geist({
     subsets: ["latin"],
-    fallback: ["sans-serif"],
+    variable: "--font-geist-sans",
+});
+
+const geistMono = Geist_Mono({
+    subsets: ["latin"],
+    variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +60,9 @@ export default function RootLayout({
                     />
                 )}
             </head>
-            <body className={geist.className}>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
                 <div className="flex min-h-dvh flex-col">
                     <Header />
                     <GoogleAnalytics />

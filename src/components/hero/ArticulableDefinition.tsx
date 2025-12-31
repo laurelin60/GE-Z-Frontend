@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
     Popover,
     PopoverContent,
@@ -6,32 +5,23 @@ import {
 } from "@/components/ui/popover";
 import { HelpCircle } from "lucide-react";
 
-const ArticulableDefinition = () => {
+export function ArticulableDefinition() {
     return (
         <Popover>
             <PopoverTrigger aria-label="definition">
-                <HelpCircle className="inline-block h-4 w-4" />
+                <HelpCircle className="inline-block h-lh cursor-pointer align-[calc(-0.25lh)]" />
             </PopoverTrigger>
+
             <PopoverContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                     &quot;An articulated course is a course... that can be used
                     to satisfy... general education requirements at another
                     college or university.&quot; - <br />
-                    <Link
-                        href={
-                            "https://www.sdmesa.edu/about-mesa/administration/articulation/homepage-docs/Articulated%20vs%20Transferable.pdf"
-                        }
-                        referrerPolicy="no-referrer"
-                        target="_blank"
-                    >
-                        <i>
-                            <u>San Diego Mesa College</u>
-                        </i>
-                    </Link>
+                    <i>
+                        <u>San Diego Mesa College</u>
+                    </i>
                 </p>
             </PopoverContent>
         </Popover>
     );
-};
-
-export default ArticulableDefinition;
+}

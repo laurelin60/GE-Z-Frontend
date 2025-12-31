@@ -1,10 +1,8 @@
 import Link from "next/link";
-import ArticulableDefinition from "@/components/hero/ArticulableDefinition";
+import { ArticulableDefinition } from "@/components/hero/ArticulableDefinition";
 import Examples from "@/components/hero/Examples";
 import Graphics from "@/components/hero/Graphics";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
@@ -21,25 +19,7 @@ export default function Home() {
                         <span>UC</span> Credits from Community College Courses
                     </div>
 
-                    <div className="text-muted-foreground w-3/4 text-2xl font-light">
-                        GE-Z sources data directly from Assist.org and CVC.edu
-                        to find you high-quality, articulable California
-                        Community College courses that save you time and money.
-                    </div>
-                </div>
-
-                {/* <div className="flex flex-col items-center gap-y-5 text-center">
-                    <h1 className="flex-center flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
-                        <span className="hidden md:flex">Discover online</span>
-                        <span className="flex text-center md:hidden">
-                            Discover online
-                        </span>
-                        <span className="text-5xl leading-normal text-primary xs:text-7xl sm:text-[7rem] md:text-8xl lg:text-9xl">
-                            College Credit
-                        </span>
-                    </h1>
-
-                    <p className="max-w-prose px-2 text-muted-foreground sm:text-lg">
+                    <div className="text-muted-foreground w-3/4 text-2xl">
                         GE-Z sources data directly from{" "}
                         <Link
                             href="https://assist.org/"
@@ -61,33 +41,24 @@ export default function Home() {
                         to find you high-quality, articulable
                         <ArticulableDefinition /> California Community College
                         courses that save you time and money.
-                    </p>
-                </div> */}
+                    </div>
+                </div>
 
                 <div className="flex flex-row gap-4">
                     <Link href={"/search"}>
                         <Button
-                            className={cn(
-                                buttonVariants({
-                                    size: "lg",
-                                }),
-                                "flex-center w-fit gap-2 text-lg text-white"
-                            )}
+                            size="lg"
+                            className="h-fit rounded-lg px-8 py-3 text-xl"
                         >
                             Search Transferable Courses{" "}
-                            <Search className="h-5 w-5" />
                         </Button>
                     </Link>
 
                     <Link href={"/search"}>
                         <Button
-                            className={cn(
-                                buttonVariants({
-                                    size: "lg",
-                                    variant: "outline",
-                                }),
-                                "flex-center w-fit gap-2 text-lg"
-                            )}
+                            variant="outline"
+                            size="lg"
+                            className="h-fit rounded-lg px-8 py-3 text-xl"
                         >
                             Search by UC Course
                         </Button>

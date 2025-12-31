@@ -27,7 +27,7 @@ export const SearchFilterCheckbox = ({
                 {categories.map((category, index) => (
                     <div
                         key={category}
-                        className="flex-center space-x-2"
+                        className="flex items-center justify-center space-x-2"
                     >
                         <Checkbox
                             id={category + "label"}
