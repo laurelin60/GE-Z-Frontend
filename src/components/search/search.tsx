@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
+import { SearchFilter } from "@/components/search/filter/search-filter";
 import { SearchFilterDialog } from "@/components/search/filter/search-filter-dialog";
 import { SearchFilterSortDropdown } from "@/components/search/filter/search-filter-sort-dropdown";
 import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
 import type { CourseObject } from "@/components/search/search.types";
+import { SearchSelect } from "@/components/search/SearchSelect";
 import { UNIVERSITIES, University, UNIVERSITY_GE } from "@/lib/constants";
+import { filterData } from "@/lib/utils/filter";
+import { SelectRootChangeEventDetails } from "@base-ui/react/select";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
-
-import { filterData } from "../../lib/utils/filter";
-import { SearchFilter } from "./filter/search-filter";
-import { SearchSelect } from "./SearchSelect";
 
 interface SearchProps {
     university: University;
@@ -63,24 +63,22 @@ export function Search({
     );
 
     return (
-        <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-32">
+        <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-16">
             <div className="flex flex-wrap text-6xl font-bold">
                 Search <span className="hidden lg:flex">&nbsp;For Courses</span>
             </div>
 
-            <div className="mt-4 flex flex-row items-center justify-between">
-                <div className="grid w-fit grid-cols-2 gap-4">
+            <div className="flex flex-row items-center justify-between">
+                <div className="grid shrink-0 grid-cols-2 gap-4">
                     <SearchSelect
                         value={university}
                         data={UNIVERSITIES}
                         onChange={handleUniversityChange}
-                        placeholder="University"
                     />
                     <SearchSelect
                         value={ge}
                         data={UNIVERSITY_GE[university]}
                         onChange={handleGeChange}
-                        placeholder="Category"
                     />
                 </div>
             </div>

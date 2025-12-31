@@ -10,10 +10,9 @@ const Tags = (props: TagsProps) => {
 
     if (tag == "Online Tutoring") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <PresentationIcon className="size-4" />
-                </div>
+            <div className="text-muted-foreground inline-flex w-fit flex-row items-center rounded-full border-2 px-4 py-1 whitespace-nowrap">
+                <PresentationIcon className="size-5" />
+                &nbsp;
                 <div>Online Tutoring</div>
             </div>
         );
@@ -21,10 +20,9 @@ const Tags = (props: TagsProps) => {
 
     if (tag == "Zero Textbook Cost") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <HandCoinsIcon className="size-4" />
-                </div>
+            <div className="text-muted-foreground inline-flex w-fit flex-row items-center rounded-full border-2 px-4 py-1 whitespace-nowrap">
+                <HandCoinsIcon className="size-5" />
+                &nbsp;
                 <div>Zero Textbook Cost</div>
             </div>
         );
@@ -32,10 +30,9 @@ const Tags = (props: TagsProps) => {
 
     if (tag == "Quality Reviewed") {
         return (
-            <div className="flex w-fit flex-row items-center gap-2 whitespace-nowrap rounded-full border-2 border-gray px-4 py-1 font-medium text-gray">
-                <div className="text-black">
-                    <AwardIcon className="size-4" />
-                </div>
+            <div className="text-muted-foreground inline-flex w-fit flex-row items-center rounded-full border-2 px-4 py-1 whitespace-nowrap">
+                <AwardIcon className="size-5" />
+                &nbsp;
                 <div>Quality Reviewed</div>
             </div>
         );

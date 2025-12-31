@@ -61,7 +61,7 @@ export default function RootLayout({
                 )}
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} root antialiased`}
             >
                 <div className="flex min-h-dvh flex-col">
                     <Header />

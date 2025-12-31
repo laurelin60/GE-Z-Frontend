@@ -260,9 +260,20 @@
 
 @layer base {
     * {
-        @apply border-border;
+        @apply border-border outline-ring/50 min-w-0;
+    }
+    html {
+        font-size: 18;
     }
     body {
-        @apply bg-background min-w-0;
+        @apply bg-background text-foreground relative;
+    }
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    .root {
+        isolation: isolate;
     }
 }

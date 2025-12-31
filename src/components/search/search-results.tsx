@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CourseObject } from "@/components/search/search.types";
 import Tags from "@/components/search/Tags";
+import { Button } from "@/components/ui/button";
 import { useSearchContext } from "@/contexts/search-context/search-context";
 import { filterData } from "@/lib/utils/filter";
 import { format } from "date-fns";
@@ -64,18 +65,18 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                     //     offset={500}
                     // >
                     <div
-                        className="rounded-t-lg border-2 border-gray"
+                        className="border-gray rounded-t-lg border-2"
                         key={
                             result.courseCode +
                             result.courseName +
                             result.sendingInstitution
                         }
                     >
-                        <div className="flex flex-col gap-1 rounded-t-lg bg-bg_secondary px-4 py-2 md:px-8 md:py-4">
-                            <div className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-primary md:text-xl">
+                        <div className="bg-bg_secondary flex flex-col gap-1 rounded-t-lg px-4 py-2 md:px-8 md:py-4">
+                            <div className="text-primary overflow-hidden text-lg font-semibold text-ellipsis whitespace-nowrap md:text-xl">
                                 {result.sendingInstitution}
                             </div>
-                            <div className="text-pretty text-2xl font-bold md:text-3xl">
+                            <div className="text-2xl font-bold text-pretty md:text-3xl">
                                 {result.courseCode}{" "}
                                 <span>{result.courseName}</span>
                             </div>
@@ -94,7 +95,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                             </div>
                         )}
 
-                        <div className="border-2 border-t border-bg_secondary"></div>
+                        <div className="border-bg_secondary border-2 border-t"></div>
                         <div className="flex justify-between overflow-hidden">
                             <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">
                                 <div className="flex flex-col whitespace-nowrap">
@@ -139,42 +140,48 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                 </div>
                             </div>
                         </div>
-                        <div className="border-2 border-t border-bg_secondary"></div>
+                        <div className="border-bg_secondary border-2 border-t"></div>
                         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-2 md:px-8 md:py-4">
-                            <div className="text-2xl font-medium">
+                            <div className="text-xl font-medium">
                                 <span className="hidden md:inline">
                                     Tuition:{" "}
                                 </span>
                                 {`$${result.tuition.toFixed(2)}`}
                             </div>
 
-                            <div className="flex items-center gap-2 font-medium">
+                            <div className="flex items-center gap-2">
                                 <Link
                                     href={`https://assist.org/${result.assistPath}`}
                                     target="_blank"
                                     referrerPolicy="no-referrer"
                                     className="flex flex-row items-center gap-2"
                                 >
-                                    <button className="box-border hidden h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-4 py-2 text-primary transition-all hover:bg-accent md:flex">
+                                    <Button
+                                        variant="outline"
+                                        className="hidden text-base md:flex"
+                                    >
                                         Articulation
-                                        <ExternalLinkIcon className="size-5" />
-                                    </button>
+                                        <ExternalLinkIcon />
+                                    </Button>
 
-                                    <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg border-2 px-2 py-2 text-primary transition-all hover:bg-accent md:hidden">
-                                        <InfoIcon className="size-5" />
-                                    </button>
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        className="flex text-base md:hidden"
+                                    >
+                                        <InfoIcon />
+                                    </Button>
                                 </Link>
 
                                 <Link
                                     href={`https://search.cvc.edu/courses/${result.cvcId}`}
                                     target="_blank"
                                     referrerPolicy="no-referrer"
-                                    className="flex flex-row items-center gap-2"
                                 >
-                                    <button className="box-border flex h-9 flex-nowrap items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90">
+                                    <Button className="text-base">
                                         Register
-                                        <ExternalLinkIcon className="size-5" />
-                                    </button>
+                                        <ExternalLinkIcon />
+                                    </Button>
                                 </Link>
                             </div>
                         </div>
