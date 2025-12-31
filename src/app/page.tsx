@@ -8,9 +8,27 @@ import { Search } from "lucide-react";
 
 export default function Home() {
     return (
-        <main className="flex flex-col items-center">
-            <div className="wrapper mt-20 flex flex-col items-center gap-y-5 text-center md:mt-24">
-                <div className="flex flex-col items-center gap-y-5 text-center">
+        <main className="flex flex-col px-32 py-24">
+            <div className="flex flex-col space-y-12 text-center">
+                <div className="inline-block space-y-4 text-left">
+                    <div className="text-balance text-8xl font-medium tracking-tight">
+                        Get{" "}
+                        <img
+                            src="/seal.svg"
+                            alt="UC Seal"
+                            className="inline-block h-[1lh] align-[calc(-0.15lh)]"
+                        />
+                        <span>UC</span> Credits from Community College Courses
+                    </div>
+
+                    <div className="w-3/4 text-2xl font-light text-muted-foreground">
+                        GE-Z sources data directly from Assist.org and CVC.edu
+                        to find you high-quality, articulable California
+                        Community College courses that save you time and money.
+                    </div>
+                </div>
+
+                {/* <div className="flex flex-col items-center gap-y-5 text-center">
                     <h1 className="flex-center flex-col text-4xl font-bold xs:text-5xl sm:text-6xl">
                         <span className="hidden md:flex">Discover online</span>
                         <span className="flex text-center md:hidden">
@@ -44,19 +62,37 @@ export default function Home() {
                         <ArticulableDefinition /> California Community College
                         courses that save you time and money.
                     </p>
+                </div> */}
+
+                <div className="flex flex-row gap-4">
+                    <Link href={"/search"}>
+                        <Button
+                            className={cn(
+                                buttonVariants({
+                                    size: "lg",
+                                }),
+                                "flex-center w-fit gap-2 text-lg text-white"
+                            )}
+                        >
+                            Search Transferable Courses{" "}
+                            <Search className="h-5 w-5" />
+                        </Button>
+                    </Link>
+
+                    <Link href={"/search"}>
+                        <Button
+                            className={cn(
+                                buttonVariants({
+                                    size: "lg",
+                                    variant: "outline",
+                                }),
+                                "flex-center w-fit gap-2 text-lg"
+                            )}
+                        >
+                            Search by UC Course
+                        </Button>
+                    </Link>
                 </div>
-                <Link href={"/search"}>
-                    <Button
-                        className={cn(
-                            buttonVariants({
-                                size: "lg",
-                            }),
-                            "flex-center w-fit gap-2 text-lg text-white"
-                        )}
-                    >
-                        Discover Courses <Search className="h-5 w-5" />
-                    </Button>
-                </Link>
             </div>
 
             <Graphics />
