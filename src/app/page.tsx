@@ -43,9 +43,9 @@ export default function Home() {
                         to find you high-quality, articulable
                         <ArticulableDefinition /> California Community College
                         courses that save you time and money. */}
-                        Find online, asynchronous classes that save you time and
-                        money. Search across 120 CSU campuses for courses you
-                        can transfer for prerequisite credit and GE
+                        Find online, community college classes that save you
+                        time and money. Search across 100+ campuses for courses
+                        you can transfer for prerequisite credit and GE
                         requirements.
                     </div>
                 </div>
