@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
     return (
-        <div className="flex h-full flex-col gap-y-12 text-center">
+        <div className="my-auto flex h-fit flex-col gap-y-12 text-center">
             <div className="inline-block space-y-6 text-left">
                 <div className="text-8xl font-medium tracking-tight text-balance">
                     Get{" "}
@@ -19,7 +19,7 @@ export function Hero() {
                     <span>UC</span> Credits from Community College Courses
                 </div>
 
-                <div className="text-muted-foreground w-3/4 text-2xl">
+                <div className="text-muted-foreground w-3/4 text-2xl text-pretty">
                     {/* GE-Z sources data directly from{" "}
                         <Link
                             href="https://assist.org/"
@@ -54,6 +54,16 @@ export function Hero() {
                         className="h-fit rounded-lg px-8 py-3 text-xl"
                     >
                         Search Courses{" "}
+                    </Button>
+                </Link>
+
+                <Link href={"#how-it-works"}>
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="h-fit rounded-lg px-8 py-3 text-xl"
+                    >
+                        How does it work?
                     </Button>
                 </Link>
 
