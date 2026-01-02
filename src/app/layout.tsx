@@ -67,7 +67,7 @@ export default function RootLayout({
                     <Header />
                     <GoogleAnalytics />
                     <NuqsAdapter>
-                        <div className="flex h-0 grow">
+                        <div className="flex min-h-0 flex-1">
                             <div className="flex max-h-full w-full flex-col overflow-auto">
                                 {children}
 

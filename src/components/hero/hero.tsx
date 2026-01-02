@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
     return (
-        <div className="my-auto flex h-fit flex-col gap-y-12 pb-48 text-center lg:pb-24">
+        <div className="my-auto flex h-fit flex-col gap-y-12 pb-24 text-center lg:pb-32">
             <div className="inline-block space-y-6 text-left">
                 <div
                     className={cn(

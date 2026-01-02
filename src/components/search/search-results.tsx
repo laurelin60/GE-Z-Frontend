@@ -96,9 +96,9 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                         )}
 
                         <div className="border-bg_secondary border-2 border-t"></div>
-                        <div className="flex justify-between overflow-hidden">
-                            <div className="flex flex-row gap-4 overflow-x-auto px-4 py-2 md:gap-8 md:px-8 md:py-4">
-                                <div className="flex flex-col whitespace-nowrap">
+                        <div className="flex justify-between overflow-x-auto">
+                            <div className="flex w-fit min-w-fit flex-row gap-4 px-4 py-2 md:gap-8 md:px-8 md:py-4">
+                                <div className="flex shrink-0 flex-col whitespace-nowrap">
                                     <div className="text-sm font-medium">
                                         Units
                                     </div>
@@ -106,7 +106,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                         {`${result.units} Units`}
                                     </div>
                                 </div>
-                                <div className="flex flex-col whitespace-nowrap">
+                                <div className="flex shrink-0 flex-col whitespace-nowrap">
                                     <div className="text-sm font-medium">
                                         Term
                                     </div>
@@ -114,7 +114,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                         {startTime + " - " + endTime}
                                     </div>
                                 </div>
-                                <div className="flex flex-col whitespace-nowrap">
+                                <div className="flex shrink-0 flex-col whitespace-nowrap">
                                     <div className="text-sm font-medium">
                                         GEs
                                     </div>
@@ -130,7 +130,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                                             .join(", ")}
                                     </div>
                                 </div>
-                                <div className="flex flex-col whitespace-nowrap">
+                                <div className="flex shrink-0 flex-col whitespace-nowrap">
                                     <div className="text-sm font-medium">
                                         Articulates To
                                     </div>

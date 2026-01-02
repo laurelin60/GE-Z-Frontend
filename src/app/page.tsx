@@ -4,7 +4,7 @@ import Plasma from "@/components/Plasma";
 export default function Home() {
     return (
         <main className="flex min-h-full flex-col gap-y-12 px-4 py-24 md:px-16">
-            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 h-screen w-full opacity-10">
+            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-10 lg:block">
                 <Plasma
                     speed={1}
                     color="#684bff"
