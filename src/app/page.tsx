@@ -1,15 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArticulableDefinition } from "@/components/hero/ArticulableDefinition";
-import Examples from "@/components/hero/Examples";
-import Graphics from "@/components/hero/Graphics";
 import { Hero } from "@/components/hero/hero";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import Plasma from "@/components/Plasma";
 
 export default function Home() {
     return (
         <main className="flex min-h-full flex-col gap-y-12 px-16 py-24">
+            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 h-screen w-full opacity-20">
+                <Plasma
+                    speed={1}
+                    color="#684bff"
+                    scale={2}
+                    mouseInteractive={true}
+                    direction="reverse"
+                />
+                {/* <Iridescence
+                    color={[0.408, 0.294, 1.0]} // --primary #684bff
+                    speed={0.4}
+                /> */}
+            </div>
+
             <Hero />
 
             {/* <div className="grid grid-cols-3 gap-8">
