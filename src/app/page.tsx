@@ -59,7 +59,7 @@ export default function Home() {
                 <Examples />
             </div> */}
 
-            <Graphics />
+            {/* <Graphics /> */}
         </main>
     );
 }

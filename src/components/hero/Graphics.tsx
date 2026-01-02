@@ -1,6 +1,6 @@
 const Graphics = () => {
     return (
-        <div>
+        <div className="">
             <div className="relative isolate">
                 <div
                     aria-hidden="true"
