@@ -3,8 +3,8 @@ import Plasma from "@/components/Plasma";
 
 export default function Home() {
     return (
-        <main className="flex min-h-full flex-col gap-y-12 px-16 py-24">
-            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 h-screen w-full opacity-20">
+        <main className="flex min-h-full flex-col gap-y-12 px-4 py-24 md:px-16">
+            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 h-screen w-full opacity-10">
                 <Plasma
                     speed={1}
                     color="#684bff"
@@ -12,10 +12,6 @@ export default function Home() {
                     mouseInteractive={true}
                     direction="reverse"
                 />
-                {/* <Iridescence
-                    color={[0.408, 0.294, 1.0]} // --primary #684bff
-                    speed={0.4}
-                /> */}
             </div>
 
             <Hero />

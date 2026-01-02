@@ -122,9 +122,10 @@ export const Plasma: React.FC<PlasmaProps> = ({
             alpha: true,
             antialias: false,
             dpr: Math.min(window.devicePixelRatio || 1, 2),
+            preserveDrawingBuffer: true,
         });
         const gl = renderer.gl;
-        gl.clearColor(1, 1, 1, 1); // White background
+        gl.clearColor(0, 0, 0, 0); // Transparent background
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
         const canvas = gl.canvas as HTMLCanvasElement;
@@ -168,23 +169,34 @@ export const Plasma: React.FC<PlasmaProps> = ({
             containerRef.current.addEventListener("mousemove", handleMouseMove);
         }
 
-        const setSize = () => {
+        // Track pending size to apply in render loop (prevents flickering)
+        let pendingWidth = 0;
+        let pendingHeight = 0;
+        let needsResize = true;
+
+        const updatePendingSize = () => {
             const rect = containerRef.current!.getBoundingClientRect();
-            const width = Math.max(1, Math.floor(rect.width));
-            const height = Math.max(1, Math.floor(rect.height));
-            renderer.setSize(width, height);
-            const res = program.uniforms.iResolution.value as Float32Array;
-            res[0] = gl.drawingBufferWidth;
-            res[1] = gl.drawingBufferHeight;
+            pendingWidth = Math.max(1, Math.floor(rect.width));
+            pendingHeight = Math.max(1, Math.floor(rect.height));
+            needsResize = true;
         };
 
-        const ro = new ResizeObserver(setSize);
+        const ro = new ResizeObserver(updatePendingSize);
         ro.observe(containerRef.current);
-        setSize();
+        updatePendingSize();
 
         let raf = 0;
         const t0 = performance.now();
         const loop = (t: number) => {
+            // Apply resize in render loop to prevent flickering
+            if (needsResize) {
+                renderer.setSize(pendingWidth, pendingHeight);
+                const res = program.uniforms.iResolution.value as Float32Array;
+                res[0] = gl.drawingBufferWidth;
+                res[1] = gl.drawingBufferHeight;
+                needsResize = false;
+            }
+
             let timeValue = (t - t0) * 0.001;
             if (direction === "pingpong") {
                 const pingpongDuration = 10;
