@@ -96,7 +96,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                     value={effectiveUniversity ?? undefined}
                     onValueChange={handleUniversityChange}
                 >
-                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-full rounded-r-none rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:rounded-l-lg sm:rounded-b-lg md:text-xl lg:w-[350px] [&>svg]:h-6 [&>svg]:w-6">
+                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-13 w-full rounded-r-none rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:h-full sm:rounded-l-lg sm:rounded-bl-lg md:text-xl lg:w-[350px] [&>svg]:h-6 [&>svg]:w-6">
                         <SelectValue placeholder="Your University" />
                     </SelectTrigger>
                     <SelectContent>

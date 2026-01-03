@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ defaultUniversity }: HeroProps) {
     return (
-        <div className="my-auto flex h-fit flex-col gap-y-12 pb-24 text-center lg:pb-32">
+        <div className="my-auto flex h-fit flex-col gap-y-12 pb-20 text-center lg:pb-32">
             <div className="inline-block space-y-6">
                 <div
                     className={cn(
