@@ -62,11 +62,11 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                             result.sendingInstitution
                         }
                     >
-                        <div className="bg-bg_secondary flex flex-col gap-1 rounded-t-lg px-4 py-2 md:px-8 md:py-4">
-                            <div className="text-primary overflow-hidden text-lg font-semibold text-ellipsis whitespace-nowrap md:text-xl">
+                        <div className="bg-bg_secondary flex flex-col rounded-t-lg px-4 py-2 md:px-8 md:py-4">
+                            <div className="text-primary overflow-hidden text-base font-semibold text-ellipsis whitespace-nowrap md:text-lg xl:text-xl">
                                 {result.sendingInstitution}
                             </div>
-                            <div className="text-2xl font-bold text-pretty md:text-3xl">
+                            <div className="text-xl font-bold text-pretty md:text-xl xl:text-2xl">
                                 {result.courseCode}{" "}
                                 <span>{result.courseName}</span>
                             </div>
