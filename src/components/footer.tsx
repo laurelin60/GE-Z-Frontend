@@ -1,9 +1,17 @@
-export function Footer() {
-    return <div className="w-full shrink-0 p-16">{null}</div>;
+import Link from "next/link";
+import { GithubIcon } from "lucide-react";
 
+export function Footer() {
     return (
-        <div className="mx-auto flex w-full shrink-0 flex-col items-center justify-between p-4 text-center">
-            <div className="text-base font-medium">Made with 💖</div>
+        <div className="text-primary-foreground flex w-full shrink-0 justify-between bg-[#005581] px-4 py-4 text-base md:px-16">
+            <span className="font-medium">Built with 💖 </span>
+            <Link
+                href="https://github.com/laurelin60/GE-Z-Frontend"
+                target="_blank"
+                referrerPolicy="no-referrer"
+            >
+                <GithubIcon />
+            </Link>
         </div>
     );
 }
