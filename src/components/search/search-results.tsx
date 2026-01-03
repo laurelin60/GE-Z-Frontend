@@ -7,8 +7,6 @@ import { filterData } from "@/lib/utils/filter";
 import { format } from "date-fns";
 import { ExternalLinkIcon, InfoIcon } from "lucide-react";
 
-// import LazyLoad from "react-lazy-load";
-
 const formatTime = (date: number) => {
     return format(new Date(date), "MMM d");
 };
@@ -56,14 +54,6 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                 const endTime = formatTime(result.endDate);
 
                 return (
-                    // <LazyLoad
-                    //     key={
-                    //         result.courseCode +
-                    //         result.courseName +
-                    //         result.sendingInstitution
-                    //     }
-                    //     offset={500}
-                    // >
                     <div
                         className="border-gray rounded-t-lg border-2"
                         key={
@@ -186,7 +176,6 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                             </div>
                         </div>
                     </div>
-                    // </LazyLoad>
                 );
             })}
         </div>
