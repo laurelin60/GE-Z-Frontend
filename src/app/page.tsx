@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Hero } from "@/components/hero/hero";
 import Plasma from "@/components/Plasma";
 
@@ -14,7 +15,9 @@ export default function Home() {
                 />
             </div>
 
-            <Hero />
+            <Suspense>
+                <Hero />
+            </Suspense>
 
             {/* <div className="grid grid-cols-3 gap-8">
                 <Card className="aspect-square w-full">FOOBAR</Card>
