@@ -1,9 +1,14 @@
 import { HeroButtons } from "@/components/hero/hero-buttons";
+import { University } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 import { HeroUniversity } from "./hero-university";
 
-export function Hero() {
+interface HeroProps {
+    defaultUniversity: University | null;
+}
+
+export function Hero({ defaultUniversity }: HeroProps) {
     return (
         <div className="my-auto flex h-fit flex-col gap-y-12 pb-24 text-center lg:pb-32">
             <div className="inline-block space-y-6">
@@ -17,7 +22,7 @@ export function Hero() {
                     <span className="hidden md:inline-block">Get&nbsp;</span>
 
                     <span className="inline-block text-left sm:text-inherit">
-                        <HeroUniversity />
+                        <HeroUniversity defaultUniversity={defaultUniversity} />
                         &nbsp;Credits&nbsp;
                     </span>
                     <span className="inline-block text-left sm:text-inherit">
@@ -61,7 +66,7 @@ export function Hero() {
                 </div>
             </div>
 
-            <HeroButtons />
+            <HeroButtons defaultUniversity={defaultUniversity} />
         </div>
     );
 }

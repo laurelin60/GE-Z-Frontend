@@ -1,8 +1,11 @@
 import { Suspense } from "react";
+import { getUniversityCookie } from "@/actions/university";
 import { Hero } from "@/components/hero/hero";
 import Plasma from "@/components/Plasma";
 
-export default function Home() {
+export default async function Home() {
+    const defaultUniversity = await getUniversityCookie();
+
     return (
         <main className="flex min-h-full flex-col gap-y-12 px-4 py-24 md:px-16">
             <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
@@ -16,7 +19,7 @@ export default function Home() {
             </div>
 
             <Suspense>
-                <Hero />
+                <Hero defaultUniversity={defaultUniversity} />
             </Suspense>
 
             {/* <div className="grid grid-cols-3 gap-8">

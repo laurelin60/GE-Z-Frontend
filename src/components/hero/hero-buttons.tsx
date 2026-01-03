@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { setUniversityCookie } from "@/actions/university";
 import { Button } from "@/components/ui/button";
 import {
     Select,
@@ -15,10 +16,13 @@ import { UNIVERSITIES, University } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
-const GEZ_UNIVERSITY_KEY = "GEZ_university";
+interface HeroButtonsProps {
+    defaultUniversity: University | null;
+}
 
-export function HeroButtons() {
+export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
     const router = useRouter();
+    const [, startTransition] = useTransition();
 
     const [university, setUniversity] = useQueryState(
         "university",
@@ -28,13 +32,23 @@ export function HeroButtons() {
         })
     );
 
+    // Use URL state if available, otherwise fall back to server-side cookie value
+    const effectiveUniversity = university ?? defaultUniversity;
+
     const clickSearchDisabled = useMemo(() => {
-        return !university || !UNIVERSITIES.includes(university);
-    }, [university]);
+        return (
+            !effectiveUniversity ||
+            !UNIVERSITIES.includes(effectiveUniversity as University)
+        );
+    }, [effectiveUniversity]);
 
     const handleUniversityChange = useCallback(
         (value: string) => {
             setUniversity(value as University);
+            // Persist to cookie for future visits
+            startTransition(() => {
+                setUniversityCookie(value as University);
+            });
         },
         [setUniversity]
     );
@@ -44,23 +58,15 @@ export function HeroButtons() {
             return;
         }
 
-        router.push(`/search?university=${university}`);
-    }, [clickSearchDisabled, university, router]);
+        router.push(`/search?university=${effectiveUniversity}`);
+    }, [clickSearchDisabled, effectiveUniversity, router]);
 
+    // Sync URL state with cookie default on mount (if URL doesn't have university param)
     useEffect(() => {
-        if (!university) {
-            const stored = localStorage.getItem(GEZ_UNIVERSITY_KEY);
-            if (stored && UNIVERSITIES.includes(stored as University)) {
-                setUniversity(stored as University);
-            }
+        if (!university && defaultUniversity) {
+            setUniversity(defaultUniversity);
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        if (university) {
-            localStorage.setItem(GEZ_UNIVERSITY_KEY, university);
-        }
-    }, [university]);
 
     return (
         <div className="mx-auto flex max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
@@ -87,7 +93,7 @@ export function HeroButtons() {
                 </div>
 
                 <Select
-                    value={university ?? undefined}
+                    value={effectiveUniversity ?? undefined}
                     onValueChange={handleUniversityChange}
                 >
                     <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-[300px] rounded-l-lg rounded-r-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 md:text-xl [&>svg]:h-6 [&>svg]:w-6">
