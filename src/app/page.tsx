@@ -4,15 +4,13 @@ import { getUniversityCookie } from "@/actions/university";
 import { Hero } from "@/components/landing/hero/hero";
 import { PainPoints } from "@/components/landing/pain-points";
 import Plasma from "@/components/Plasma";
-import { Card, CardContent } from "@/components/ui/card";
-import { ClockIcon } from "lucide-react";
 
 export default async function Page() {
     const defaultUniversity = await getUniversityCookie();
 
     return (
         <main className="flex min-h-full flex-col gap-y-24 px-4 md:px-16">
-            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
+            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
                 <Plasma
                     speed={0.5}
                     color="#1295d8"

@@ -67,12 +67,17 @@ export default function RootLayout({
                     <Header />
                     <GoogleAnalytics />
                     <NuqsAdapter>
-                        <div className="flex min-h-0 flex-1 md:h-0 md:flex-none md:grow">
-                            <div className="flex max-h-full w-full flex-col overflow-auto">
-                                {children}
-
+                        <div className="relative h-full flex-1 md:h-0 md:grow md:justify-center">
+                            <div className="flex max-h-full flex-wrap overflow-auto">
+                                <div className="w-px grow">
+                                    <div className="flex justify-center">
+                                        <div className="w-px grow overflow-auto">
+                                            {children}
+                                        </div>
+                                        <ScrollToTop />
+                                    </div>
+                                </div>
                                 <Footer />
-                                <ScrollToTop />
                             </div>
                         </div>
                     </NuqsAdapter>

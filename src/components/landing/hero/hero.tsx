@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ defaultUniversity }: HeroProps) {
     return (
-        <div className="flex shrink-0 flex-col items-center gap-y-12 py-24 text-center md:h-full md:justify-center">
+        <div className="flex h-full shrink-0 flex-col items-center gap-y-12 py-24 text-center">
             <div className="inline-block space-y-6">
                 <div
                     className={cn(
