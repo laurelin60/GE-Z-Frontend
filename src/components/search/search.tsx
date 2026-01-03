@@ -62,8 +62,8 @@ export function Search({
     );
 
     return (
-        <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:space-y-8 md:px-16">
-            <div className="flex flex-wrap text-6xl font-bold">
+        <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:px-16 lg:space-y-8">
+            <div className="flex flex-wrap text-4xl font-bold lg:text-6xl">
                 Search <span className="hidden lg:flex">&nbsp;For Courses</span>
             </div>
 

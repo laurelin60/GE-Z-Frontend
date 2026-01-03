@@ -25,7 +25,7 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
 
     if (results.length <= 0) {
         return (
-            <div className="flex flex-col gap-2 text-2xl">
+            <div className="flex flex-col gap-2 text-xl">
                 <div className="flex justify-center">
                     <img
                         src="/no_results.png"
