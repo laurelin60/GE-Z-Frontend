@@ -9,5 +9,5 @@ export const searchParamsCache = createSearchParamsCache({
     university: parseAsStringLiteral(UNIVERSITIES).withDefault(
         "University of California, Irvine"
     ),
-    ge: parseAsString.withDefault("GE IV"),
+    ge: parseAsString,
 });
