@@ -1,13 +1,15 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { getUniversityCookie } from "@/actions/university";
 import { Hero } from "@/components/hero/hero";
 import Plasma from "@/components/Plasma";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default async function Home() {
     const defaultUniversity = await getUniversityCookie();
 
     return (
-        <main className="flex min-h-full flex-col gap-y-12 px-4 py-24 md:px-16">
+        <main className="flex min-h-full flex-col gap-y-24 px-4 md:px-16">
             <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
                 <Plasma
                     speed={0.5}
@@ -21,6 +23,87 @@ export default async function Home() {
             <Suspense>
                 <Hero defaultUniversity={defaultUniversity} />
             </Suspense>
+
+            <div className="flex flex-col items-center gap-y-12">
+                <span className="text-center text-5xl font-medium tracking-[-0.055em] sm:tracking-tighter xl:tracking-tight">
+                    Find courses that work for you
+                </span>
+
+                <div className="grid w-full grid-cols-2 gap-8">
+                    <Card className="rounded-lg">
+                        <CardContent className="space-y-6 p-6">
+                            <div className="aspect-video w-full bg-blue-300" />
+                            <div className="flex flex-col gap-y-2">
+                                <span className="text-2xl font-medium">
+                                    Study on your own schedule
+                                </span>
+                                <p className="text-muted-foreground text-pretty">
+                                    All courses are sourced from{" "}
+                                    <Link
+                                        href="https://cvc.edu/"
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="text-primary hover:underline"
+                                    >
+                                        California Virtual Campus
+                                    </Link>
+                                    , ensuring high-quality and accreditation.
+                                    Available completely online.
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="rounded-lg">
+                        <CardContent className="space-y-6 p-6">
+                            <div className="aspect-video w-full bg-blue-300" />
+                            <div className="flex flex-col gap-y-2">
+                                <span className="text-2xl font-medium">
+                                    Clear prerequisite credit and GE
+                                    requirements
+                                </span>
+                                <p className="text-muted-foreground text-pretty">
+                                    Course articulations are sourced directly
+                                    from{" "}
+                                    <Link
+                                        href="https://assist.org/"
+                                        target="_blank"
+                                        referrerPolicy="no-referrer"
+                                        className="text-primary hover:underline"
+                                    >
+                                        Assist.org
+                                    </Link>
+                                    , ensuring they transfer for credit at your
+                                    university. Fulfill prerequisites and
+                                    general education requirements with ease.
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+
+            <div
+                className="flex flex-col items-center gap-y-12"
+                id="how-it-works"
+            >
+                <span className="text-center text-5xl font-medium tracking-[-0.055em] sm:tracking-tighter xl:tracking-tight">
+                    How does it work?
+                </span>
+
+                <div className="grid w-full grid-cols-2 gap-8">
+                    <Card>
+                        <CardContent className="p-6">
+                            <div className="aspect-video w-full bg-blue-300" />
+                            <p>Foo</p>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardContent>foo</CardContent>
+                    </Card>
+                </div>
+            </div>
 
             {/* <div className="grid grid-cols-3 gap-8">
                 <Card className="aspect-square w-full">FOOBAR</Card>

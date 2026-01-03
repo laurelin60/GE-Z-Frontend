@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useTransition } from "react";
-import Link from "next/link";
+import { useCallback, useMemo, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { setUniversityCookie } from "@/actions/university";
 import { Button } from "@/components/ui/button";
@@ -61,16 +60,9 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
         router.push(`/search?university=${effectiveUniversity}`);
     }, [clickSearchDisabled, effectiveUniversity, router]);
 
-    // Sync URL state with cookie default on mount (if URL doesn't have university param)
-    useEffect(() => {
-        if (!university && defaultUniversity) {
-            setUniversity(defaultUniversity);
-        }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
     return (
         <div className="mx-auto flex w-full max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
-            <div className="flex flex-col gap-0 sm:flex-row">
+            <div className="flex shrink-0 flex-col gap-0 sm:flex-row">
                 {/* Button wrapper comes first in DOM for peer selector, but displays second via order */}
                 <div
                     className={cn(
@@ -122,15 +114,18 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                 </Select>
             </div>
 
-            <Link href={"#how-it-works"}>
-                <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-md h-full w-full max-w-full rounded-lg px-8 py-3 md:text-xl"
-                >
-                    How does it work?
-                </Button>
-            </Link>
+            <Button
+                variant="outline"
+                size="lg"
+                className="text-md h-full w-full rounded-lg px-8 py-3 md:text-xl lg:w-fit"
+                onClick={() => {
+                    document
+                        .getElementById("how-it-works")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                }}
+            >
+                How does it work?
+            </Button>
         </div>
     );
 }

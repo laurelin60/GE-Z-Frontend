@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ defaultUniversity }: HeroProps) {
     return (
-        <div className="my-auto flex h-fit flex-col gap-y-12 pb-20 text-center lg:pb-32">
+        <div className="flex shrink-0 flex-col items-center gap-y-12 py-24 text-center md:h-full md:justify-center">
             <div className="inline-block space-y-6">
                 <div
                     className={cn(
@@ -20,7 +20,6 @@ export function Hero({ defaultUniversity }: HeroProps) {
                     )}
                 >
                     <span className="hidden sm:inline-block">Get&nbsp;</span>
-
                     <span className="inline-block text-left sm:text-inherit">
                         <HeroUniversity defaultUniversity={defaultUniversity} />
                         &nbsp;Credits&nbsp;
@@ -43,7 +42,6 @@ export function Hero({ defaultUniversity }: HeroProps) {
                         </span>
                     </span>
                 </div>
-
                 <div
                     className={cn(
                         "text-muted-foreground mx-auto text-pretty lg:mx-0 xl:w-3/4",
@@ -52,8 +50,8 @@ export function Hero({ defaultUniversity }: HeroProps) {
                     )}
                 >
                     <span className="hidden md:inline">
-                        Find online, community college classes that save you
-                        time and money.&nbsp;
+                        Find online community college classes that save you time
+                        and money.&nbsp;
                     </span>
                     <span className="hidden sm:inline">
                         Search across 100+ campuses for courses you can transfer
