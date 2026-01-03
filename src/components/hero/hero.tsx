@@ -1,6 +1,8 @@
 import { HeroButtons } from "@/components/hero/hero-buttons";
 import { cn } from "@/lib/utils";
 
+import { HeroUniversity } from "./hero-university";
+
 export function Hero() {
     return (
         <div className="my-auto flex h-fit flex-col gap-y-12 pb-24 text-center lg:pb-32">
@@ -15,7 +17,8 @@ export function Hero() {
                     <span className="hidden md:inline-block">Get&nbsp;</span>
 
                     <span className="inline-block text-left sm:text-inherit">
-                        UC Credits&nbsp;
+                        <HeroUniversity />
+                        &nbsp;Credits&nbsp;
                     </span>
                     <span className="inline-block text-left sm:text-inherit">
                         from&nbsp;

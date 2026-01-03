@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,8 @@ import {
 import { UNIVERSITIES, University } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
+
+const GEZ_UNIVERSITY_KEY = "GEZ_university";
 
 export function HeroButtons() {
     const router = useRouter();
@@ -44,6 +46,21 @@ export function HeroButtons() {
 
         router.push(`/search?university=${university}`);
     }, [clickSearchDisabled, university, router]);
+
+    useEffect(() => {
+        if (!university) {
+            const stored = localStorage.getItem(GEZ_UNIVERSITY_KEY);
+            if (stored && UNIVERSITIES.includes(stored as University)) {
+                setUniversity(stored as University);
+            }
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        if (university) {
+            localStorage.setItem(GEZ_UNIVERSITY_KEY, university);
+        }
+    }, [university]);
 
     return (
         <div className="mx-auto flex max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
