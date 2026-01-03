@@ -10,6 +10,12 @@ interface PlasmaProps {
     scale?: number;
     opacity?: number;
     mouseInteractive?: boolean;
+    /** Target frames per second (default: 24). Lower = less CPU/GPU usage */
+    targetFPS?: number;
+    /** Shader quality: iterations per pixel. "low" = 30, "medium" = 45, "high" = 60 */
+    quality?: "low" | "medium" | "high";
+    /** Max device pixel ratio (default: 1). Lower = fewer pixels to render */
+    maxDPR?: number;
 }
 
 const hexToRgb = (hex: string): [number, number, number] => {
@@ -22,6 +28,12 @@ const hexToRgb = (hex: string): [number, number, number] => {
     ];
 };
 
+const QUALITY_ITERATIONS = {
+    low: 30,
+    medium: 45,
+    high: 60,
+} as const;
+
 const vertex = `#version 300 es
 precision highp float;
 in vec2 position;
@@ -33,7 +45,8 @@ void main() {
 }
 `;
 
-const fragment = `#version 300 es
+// Generate fragment shader with configurable iteration count
+const createFragment = (iterations: number) => `#version 300 es
 precision highp float;
 uniform vec2 iResolution;
 uniform float iTime;
@@ -57,7 +70,7 @@ void mainImage(out vec4 o, vec2 C) {
   float i, d, z, T = iTime * uSpeed * uDirection;
   vec3 O, p, S;
 
-  for (vec2 r = iResolution.xy, Q; ++i < 60.; O += o.w/d*o.xyz) {
+  for (vec2 r = iResolution.xy, Q; ++i < ${iterations.toFixed(1)}; O += o.w/d*o.xyz) {
     p = z*normalize(vec3(C-.5*r,r.y)); 
     p.z -= 4.; 
     S = p;
@@ -104,7 +117,10 @@ export const Plasma: React.FC<PlasmaProps> = ({
     direction = "forward",
     scale = 1,
     opacity = 1,
-    mouseInteractive = true,
+    mouseInteractive = false,
+    targetFPS = 24,
+    quality = "high",
+    maxDPR = 1,
 }) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const mousePos = useRef({ x: 0, y: 0 });
@@ -117,11 +133,15 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
         const directionMultiplier = direction === "reverse" ? -1.0 : 1.0;
 
+        // Generate shader with quality-based iterations
+        const iterations = QUALITY_ITERATIONS[quality];
+        const fragment = createFragment(iterations);
+
         const renderer = new Renderer({
             webgl: 2,
             alpha: true,
             antialias: false,
-            dpr: Math.min(window.devicePixelRatio || 1, 2),
+            dpr: Math.min(window.devicePixelRatio || 1, maxDPR),
             preserveDrawingBuffer: true,
         });
         const gl = renderer.gl;
@@ -185,9 +205,30 @@ export const Plasma: React.FC<PlasmaProps> = ({
         ro.observe(containerRef.current);
         updatePendingSize();
 
+        // Animation state
         let raf = 0;
+        let isRunning = true;
+        let isVisible = !document.hidden;
+        let isInViewport = true;
         const t0 = performance.now();
+
+        // Frame rate throttling
+        const frameInterval = 1000 / targetFPS;
+        let lastFrameTime = 0;
+
         const loop = (t: number) => {
+            if (!isRunning) return;
+
+            // Schedule next frame first
+            raf = requestAnimationFrame(loop);
+
+            // Skip frame if not enough time has passed (frame rate throttling)
+            if (t - lastFrameTime < frameInterval) return;
+            lastFrameTime = t;
+
+            // Skip rendering if not visible
+            if (!isVisible || !isInViewport) return;
+
             // Apply resize in render loop to prevent flickering
             if (needsResize) {
                 renderer.setSize(pendingWidth, pendingHeight);
@@ -214,13 +255,35 @@ export const Plasma: React.FC<PlasmaProps> = ({
                 (program.uniforms.iTime as any).value = timeValue;
             }
             renderer.render({ scene: mesh });
-            raf = requestAnimationFrame(loop);
         };
+
+        // Visibility change handler (tab visibility)
+        const handleVisibilityChange = () => {
+            isVisible = !document.hidden;
+        };
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        // Intersection observer (viewport visibility)
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                isInViewport = entry.isIntersecting;
+            },
+            { threshold: 0 }
+        );
+        io.observe(containerRef.current);
+
+        // Start animation loop
         raf = requestAnimationFrame(loop);
 
         return () => {
+            isRunning = false;
             cancelAnimationFrame(raf);
             ro.disconnect();
+            io.disconnect();
+            document.removeEventListener(
+                "visibilitychange",
+                handleVisibilityChange
+            );
             if (mouseInteractive && containerRef.current) {
                 containerRef.current.removeEventListener(
                     "mousemove",
@@ -231,7 +294,17 @@ export const Plasma: React.FC<PlasmaProps> = ({
                 containerRef.current?.removeChild(canvas);
             } catch {}
         };
-    }, [color, speed, direction, scale, opacity, mouseInteractive]);
+    }, [
+        color,
+        speed,
+        direction,
+        scale,
+        opacity,
+        mouseInteractive,
+        targetFPS,
+        quality,
+        maxDPR,
+    ]);
 
     return (
         <div

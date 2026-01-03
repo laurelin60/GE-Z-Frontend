@@ -15,7 +15,7 @@ export default async function Page() {
                     speed={0.5}
                     color="#1295d8"
                     scale={2}
-                    mouseInteractive={true}
+                    mouseInteractive={false}
                     direction="reverse"
                 />
             </div>
