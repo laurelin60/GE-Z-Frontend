@@ -1,19 +1,18 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { HeroButtons } from "@/components/hero/hero-buttons";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
     return (
         <div className="my-auto flex h-fit flex-col gap-y-12 pb-24 text-center lg:pb-32">
-            <div className="inline-block space-y-6 text-left">
+            <div className="inline-block space-y-6">
                 <div
                     className={cn(
-                        "font-medium tracking-[-0.055em] sm:tracking-tighter lg:tracking-tight",
+                        "font-medium tracking-[-0.055em] sm:tracking-tighter xl:tracking-tight",
                         "text-center sm:text-center lg:text-left",
-                        "text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl"
+                        "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl"
                     )}
                 >
-                    {/* <span className="inline-block">Get&nbsp;</span> */}
+                    <span className="hidden md:inline-block">Get&nbsp;</span>
 
                     <span className="inline-block text-left sm:text-inherit">
                         UC Credits&nbsp;
@@ -59,36 +58,7 @@ export function Hero() {
                 </div>
             </div>
 
-            <div className="mx-auto flex max-w-full flex-row gap-4 lg:mx-0">
-                <Link href={"/search"}>
-                    <Button
-                        size="lg"
-                        className="text-md h-fit max-w-full rounded-lg px-8 py-3 md:text-xl"
-                    >
-                        Search Courses{" "}
-                    </Button>
-                </Link>
-
-                <Link href={"#how-it-works"}>
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="text-md h-fit max-w-full rounded-lg px-8 py-3 md:text-xl"
-                    >
-                        How does it work?
-                    </Button>
-                </Link>
-
-                {/* <Link href={"/search"}>
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="h-fit rounded-lg px-8 py-3 text-xl"
-                    >
-                        Search by UC Course
-                    </Button>
-                </Link> */}
-            </div>
+            <HeroButtons />
         </div>
     );
 }

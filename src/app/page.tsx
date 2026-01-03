@@ -4,10 +4,10 @@ import Plasma from "@/components/Plasma";
 export default function Home() {
     return (
         <main className="flex min-h-full flex-col gap-y-12 px-4 py-24 md:px-16">
-            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-10 lg:block">
+            <div className="pointer-events-none absolute inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
                 <Plasma
-                    speed={1}
-                    color="#684bff"
+                    speed={0.5}
+                    color="#1295d8"
                     scale={2}
                     mouseInteractive={true}
                     direction="reverse"
