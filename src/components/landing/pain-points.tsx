@@ -1,18 +1,17 @@
 import { cn } from "@/lib/utils";
 import {
-    BicepsFlexedIcon,
     BookCheckIcon,
     BookOpenTextIcon,
     CircleDollarSignIcon,
     ClockIcon,
     GraduationCapIcon,
-    UniversityIcon,
+    SchoolIcon,
     type LucideIcon,
 } from "lucide-react";
 
 const PAIN_POINTS = [
     {
-        icon: UniversityIcon,
+        icon: SchoolIcon,
         title: "Search across 100+ colleges and universities",
     },
     {
@@ -21,7 +20,7 @@ const PAIN_POINTS = [
     },
     {
         icon: CircleDollarSignIcon,
-        title: "Save money on expensive tuition and fees",
+        title: "Save money on expensive tuition costs and fees",
     },
     {
         icon: BookCheckIcon,
@@ -29,7 +28,7 @@ const PAIN_POINTS = [
     },
     {
         icon: ClockIcon,
-        title: "Study on your own schedule with asynchronous courses",
+        title: "Study on your  schedule with async courses",
     },
     {
         icon: BookOpenTextIcon,
@@ -43,36 +42,42 @@ const PAIN_POINTS = [
 export function PainPoints() {
     return (
         <div className="flex flex-col items-center gap-y-12">
-            <span className="flex flex-col items-center gap-y-2 md:gap-y-4">
-                <span className="text-center text-3xl font-medium tracking-[-0.055em] text-balance sm:tracking-tighter md:text-3xl lg:text-4xl xl:text-5xl xl:tracking-tight">
+            <div className="flex w-full flex-col gap-y-2 text-center md:gap-y-4">
+                <span className="text-3xl font-medium tracking-[-0.055em] text-balance sm:tracking-tighter md:text-3xl lg:text-4xl xl:text-5xl xl:tracking-tight">
                     Find courses that work for you
                 </span>
                 <span
                     className={cn(
-                        "text-muted-foreground text-center tracking-tight text-balance",
+                        "text-muted-foreground tracking-tight text-balance",
                         "text-base lg:text-lg xl:text-xl"
                     )}
                 >
                     Don't be limited by your university's offerings
                 </span>
-            </span>
+            </div>
 
-            <div className="grid w-fit max-w-5xl grid-cols-1 gap-8 gap-y-12 sm:grid-cols-3">
+            <div className="grid w-full max-w-5xl grid-cols-1 gap-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
                 {PAIN_POINTS.map((painPoint, index) => (
                     <div
                         className={cn(
-                            "mx-auto flex w-fit max-w-fit flex-col items-center gap-y-2 text-center",
-                            index >= PAIN_POINTS.length / 2 && "hidden md:flex"
+                            "mx-auto flex w-full flex-col justify-start gap-y-2",
+                            "items-center text-center",
+                            index >= 4 && "hidden md:flex"
                         )}
                         key={painPoint.title}
                     >
-                        <span>
-                            <painPoint.icon className="text-primary size-8" />
-                        </span>
+                        <div className="outline-border/80 flex w-fit items-center rounded-md p-2 outline-2">
+                            <painPoint.icon
+                                className={cn(
+                                    "text-primary",
+                                    "size-8 md:size-8"
+                                )}
+                            />
+                        </div>
                         <span
                             className={cn(
-                                "mx-auto leading-tight font-medium text-balance",
-                                "text-sm md:text-base lg:text-lg"
+                                "w-3/5 leading-tight font-medium text-balance sm:w-3/4 xl:w-3/4",
+                                "text-base md:text-base lg:text-lg"
                             )}
                         >
                             {painPoint.title}
