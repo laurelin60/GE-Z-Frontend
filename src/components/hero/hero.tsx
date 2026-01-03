@@ -19,7 +19,7 @@ export function Hero({ defaultUniversity }: HeroProps) {
                         "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl"
                     )}
                 >
-                    <span className="hidden md:inline-block">Get&nbsp;</span>
+                    <span className="hidden sm:inline-block">Get&nbsp;</span>
 
                     <span className="inline-block text-left sm:text-inherit">
                         <HeroUniversity defaultUniversity={defaultUniversity} />

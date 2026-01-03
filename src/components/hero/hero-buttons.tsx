@@ -70,7 +70,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
 
     return (
         <div className="mx-auto flex max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
-            <div className="flex flex-row gap-0">
+            <div className="flex flex-col gap-0 sm:flex-row">
                 {/* Button wrapper comes first in DOM for peer selector, but displays second via order */}
                 <div
                     className={cn(
@@ -85,7 +85,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                 >
                     <Button
                         size="lg"
-                        className="h-full max-w-full rounded-lg rounded-l-none px-8 py-3 text-base disabled:opacity-100 md:text-xl"
+                        className="h-full w-full max-w-full rounded-lg rounded-t-none px-8 py-3 text-base disabled:opacity-100 sm:rounded-t-lg sm:rounded-l-none md:text-xl"
                         disabled={clickSearchDisabled}
                     >
                         Search Courses{" "}
@@ -96,25 +96,25 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                     value={effectiveUniversity ?? undefined}
                     onValueChange={handleUniversityChange}
                 >
-                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-[300px] rounded-l-lg rounded-r-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 md:text-xl [&>svg]:h-6 [&>svg]:w-6">
+                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-[350px] rounded-r-none rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:rounded-l-lg sm:rounded-b-lg md:text-xl [&>svg]:h-6 [&>svg]:w-6">
                         <SelectValue placeholder="Your University" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem
                             value="University of California, Irvine"
-                            className="text-lg"
+                            className="text-base md:text-lg"
                         >
                             UC Irvine
                         </SelectItem>
                         <SelectItem
                             value="University of California, Los Angeles"
-                            className="text-lg"
+                            className="text-base md:text-lg"
                         >
                             UC Los Angeles
                         </SelectItem>
                         <SelectItem
                             value="University of California, Santa Barbara"
-                            className="text-lg"
+                            className="text-base md:text-lg"
                         >
                             UC Santa Barbara
                         </SelectItem>
@@ -126,7 +126,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                 <Button
                     variant="outline"
                     size="lg"
-                    className="text-md h-full max-w-full rounded-lg px-8 py-3 md:text-xl"
+                    className="text-md h-full w-full max-w-full rounded-lg px-8 py-3 md:text-xl"
                 >
                     How does it work?
                 </Button>
