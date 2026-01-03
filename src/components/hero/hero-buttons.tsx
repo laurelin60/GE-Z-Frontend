@@ -69,7 +69,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className="mx-auto flex max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
+        <div className="mx-auto flex w-full max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
             <div className="flex flex-col gap-0 sm:flex-row">
                 {/* Button wrapper comes first in DOM for peer selector, but displays second via order */}
                 <div
@@ -96,7 +96,7 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                     value={effectiveUniversity ?? undefined}
                     onValueChange={handleUniversityChange}
                 >
-                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-[350px] rounded-r-none rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:rounded-l-lg sm:rounded-b-lg md:text-xl [&>svg]:h-6 [&>svg]:w-6">
+                    <SelectTrigger className="data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-full w-full rounded-r-none rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:rounded-l-lg sm:rounded-b-lg md:text-xl lg:w-[350px] [&>svg]:h-6 [&>svg]:w-6">
                         <SelectValue placeholder="Your University" />
                     </SelectTrigger>
                     <SelectContent>
