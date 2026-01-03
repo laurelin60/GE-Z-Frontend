@@ -1,11 +1,13 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { getUniversityCookie } from "@/actions/university";
-import { Hero } from "@/components/hero/hero";
+import { Hero } from "@/components/landing/hero/hero";
+import { PainPoints } from "@/components/landing/pain-points";
 import Plasma from "@/components/Plasma";
 import { Card, CardContent } from "@/components/ui/card";
+import { ClockIcon } from "lucide-react";
 
-export default async function Home() {
+export default async function Page() {
     const defaultUniversity = await getUniversityCookie();
 
     return (
@@ -24,64 +26,7 @@ export default async function Home() {
                 <Hero defaultUniversity={defaultUniversity} />
             </Suspense>
 
-            <div className="flex flex-col items-center gap-y-12">
-                <span className="text-center text-5xl font-medium tracking-[-0.055em] sm:tracking-tighter xl:tracking-tight">
-                    Find courses that work for you
-                </span>
-
-                <div className="grid w-full grid-cols-2 gap-8">
-                    <Card className="rounded-lg">
-                        <CardContent className="space-y-6 p-6">
-                            <div className="aspect-video w-full bg-blue-300" />
-                            <div className="flex flex-col gap-y-2">
-                                <span className="text-2xl font-medium">
-                                    Study on your own schedule
-                                </span>
-                                <p className="text-muted-foreground text-pretty">
-                                    All courses are sourced from{" "}
-                                    <Link
-                                        href="https://cvc.edu/"
-                                        target="_blank"
-                                        referrerPolicy="no-referrer"
-                                        className="text-primary hover:underline"
-                                    >
-                                        California Virtual Campus
-                                    </Link>
-                                    , ensuring high-quality and accreditation.
-                                    Available completely online.
-                                </p>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="rounded-lg">
-                        <CardContent className="space-y-6 p-6">
-                            <div className="aspect-video w-full bg-blue-300" />
-                            <div className="flex flex-col gap-y-2">
-                                <span className="text-2xl font-medium">
-                                    Clear prerequisite credit and GE
-                                    requirements
-                                </span>
-                                <p className="text-muted-foreground text-pretty">
-                                    Course articulations are sourced directly
-                                    from{" "}
-                                    <Link
-                                        href="https://assist.org/"
-                                        target="_blank"
-                                        referrerPolicy="no-referrer"
-                                        className="text-primary hover:underline"
-                                    >
-                                        Assist.org
-                                    </Link>
-                                    , ensuring they transfer for credit at your
-                                    university. Fulfill prerequisites and
-                                    general education requirements with ease.
-                                </p>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
-            </div>
+            <PainPoints />
 
             <div
                 className="flex flex-col items-center gap-y-12"
@@ -151,8 +96,6 @@ export default async function Home() {
 
                 <Examples />
             </div> */}
-
-            {/* <Graphics /> */}
         </main>
     );
 }

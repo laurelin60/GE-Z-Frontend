@@ -1,4 +1,4 @@
-import { HeroButtons } from "@/components/hero/hero-buttons";
+import { HeroButtons } from "@/components/landing/hero/hero-buttons";
 import { University } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
