@@ -110,6 +110,13 @@ export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
                         >
                             UC Santa Barbara
                         </SelectItem>
+                        <SelectItem
+                            value={"More"}
+                            className="text-base md:text-lg"
+                            disabled
+                        >
+                            More coming soon...
+                        </SelectItem>
                     </SelectContent>
                 </Select>
             </div>
