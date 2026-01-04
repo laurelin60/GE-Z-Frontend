@@ -61,14 +61,14 @@ export default function RootLayout({
                 )}
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} root overflow-hidden antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} root antialiased md:overflow-hidden`}
             >
                 <div className="flex min-h-dvh flex-col">
                     <Header />
                     <GoogleAnalytics />
                     <NuqsAdapter>
                         <div className="relative flex-1 md:h-0 md:flex-none md:grow md:justify-center">
-                            <div className="flex max-h-full flex-wrap md:overflow-auto">
+                            <div className="flex max-h-full flex-wrap overflow-auto">
                                 <div className="w-px grow">
                                     <div className="flex justify-center">
                                         <div className="w-px grow">
