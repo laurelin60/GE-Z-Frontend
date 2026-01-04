@@ -262,7 +262,7 @@
 
 @layer base {
     * {
-        @apply border-border outline-ring/50 min-w-0 overscroll-y-none;
+        @apply border-border outline-ring/50 min-w-0;
     }
     html {
         font-size: 18;
