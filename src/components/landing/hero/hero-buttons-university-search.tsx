@@ -63,7 +63,7 @@ export function HeroButtonsUniversitySearch({
     }, [clickSearchDisabled, effectiveUniversity, router]);
 
     return (
-        <div className="flex shrink-0 flex-col gap-0 sm:flex-row">
+        <div className="flex w-full shrink-0 flex-col gap-0 sm:flex-row lg:w-fit">
             {/* Button wrapper comes first in DOM for peer selector, but displays second via order */}
             <div
                 className={cn(
