@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { getUniversityCookie } from "@/actions/university";
 import { Hero } from "@/components/landing/hero/hero";
-import { HeroButtons } from "@/components/landing/hero/hero-buttons";
 import { HeroButtonsUniversitySearch } from "@/components/landing/hero/hero-buttons-university-search";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { PainPoints } from "@/components/landing/pain-points";
@@ -29,9 +28,9 @@ export default async function Page() {
 
             <PainPoints />
 
-            {/* <HowItWorks /> */}
+            <HowItWorks />
 
-            <div className="mx-auto flex w-full max-w-6xl flex-col items-center space-y-12 rounded-xl text-center">
+            <div className="mx-auto flex w-full max-w-6xl flex-col items-center space-y-12 rounded-xl">
                 <div className="flex w-full flex-col gap-y-2 text-center md:gap-y-4">
                     <span
                         className={cn(
@@ -57,28 +56,6 @@ export default async function Page() {
                     defaultUniversity={defaultUniversity}
                 />
             </div>
-
-            {/* <div
-                className="flex flex-col items-center gap-y-12"
-                id="how-it-works"
-            >
-                <span className="text-center text-5xl font-medium tracking-[-0.055em] sm:tracking-tighter xl:tracking-tight">
-                    How does it work?
-                </span>
-
-                <div className="grid w-full grid-cols-2 gap-8">
-                    <Card>
-                        <CardContent className="p-6">
-                            <div className="aspect-video w-full bg-blue-300" />
-                            <p>Foo</p>
-                        </CardContent>
-                    </Card>
-
-                    <Card>
-                        <CardContent>foo</CardContent>
-                    </Card>
-                </div>
-            </div> */}
         </main>
     );
 }
