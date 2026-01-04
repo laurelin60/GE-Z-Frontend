@@ -43,7 +43,13 @@ export function PainPoints() {
     return (
         <div className="flex flex-col items-center gap-y-12">
             <div className="flex w-full flex-col gap-y-2 text-center md:gap-y-4">
-                <span className="text-3xl font-medium tracking-[-0.055em] text-balance sm:tracking-tighter md:text-3xl lg:text-4xl xl:text-5xl xl:tracking-tight">
+                <span
+                    className={cn(
+                        "font-medium tracking-[-0.055em] text-balance",
+                        "sm:tracking-tighter xl:tracking-tight",
+                        "text-3xl md:text-3xl lg:text-4xl xl:text-5xl"
+                    )}
+                >
                     Find courses that work for you
                 </span>
                 <span
