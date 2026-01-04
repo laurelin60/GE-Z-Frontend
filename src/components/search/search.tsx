@@ -89,7 +89,7 @@ export function Search({
             />
 
             <div className="flex flex-row gap-4 md:gap-8">
-                <div className="sticky top-8 hidden h-fit shrink-0 xl:flex">
+                <div className="sticky top-24 hidden h-fit shrink-0 xl:flex">
                     <SearchFilter courses={courses} />
                 </div>
 
