@@ -6,19 +6,41 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { PainPoints } from "@/components/landing/pain-points";
 import Plasma from "@/components/Plasma";
 import { cn } from "@/lib/utils";
+import { MeshGradient } from "@paper-design/shaders-react";
 
 export default async function Page() {
     const defaultUniversity = await getUniversityCookie();
 
     return (
         <main className="flex min-h-full flex-col gap-y-36 px-4 md:px-16">
-            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 hidden h-screen w-full opacity-15 lg:block">
-                <Plasma
+            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 h-screen w-full opacity-50 lg:block">
+                {/* <Plasma
                     speed={0.5}
                     color="#1295d8"
                     scale={2}
                     mouseInteractive={false}
                     direction="reverse"
+                /> */}
+                <MeshGradient
+                    width={3000}
+                    height={1800}
+                    colors={[
+                        "#ffffff",
+                        "#ffffff",
+                        "#ffffff",
+                        "#ffffff",
+                        "#ffffff",
+                        "#0f7cb3",
+                        "#ffffff",
+                        "#ffffff",
+                    ]}
+                    distortion={0.1}
+                    swirl={1}
+                    grainMixer={0.3}
+                    grainOverlay={0}
+                    speed={0.5}
+                    scale={1}
+                    offsetX={0.6}
                 />
             </div>
 
