@@ -13,7 +13,7 @@ export default async function Page() {
 
     return (
         <main className="flex min-h-full flex-col gap-y-36 px-4 md:px-16">
-            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 h-screen w-full opacity-50 lg:block">
+            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 h-0 w-full opacity-50 lg:block">
                 {/* <Plasma
                     speed={0.5}
                     color="#1295d8"
