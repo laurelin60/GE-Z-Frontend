@@ -34,7 +34,7 @@ const STEPS = [
 export function HowItWorks() {
     return (
         <div
-            className="bg-primary mx-auto flex w-full flex-col items-baseline space-y-4 rounded-xl p-4 py-8 md:space-y-12 md:p-12"
+            className="bg-primary mx-auto flex w-full flex-col items-baseline space-y-4 rounded-xl p-4 py-8 md:space-y-12 md:p-12 scroll-mt-24"
             id="how-it-works"
         >
             <div className="flex w-full flex-col gap-y-2 text-left md:gap-y-4">
