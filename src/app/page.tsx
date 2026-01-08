@@ -4,7 +4,6 @@ import { Hero } from "@/components/landing/hero/hero";
 import { HeroButtonsUniversitySearch } from "@/components/landing/hero/hero-buttons-university-search";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { PainPoints } from "@/components/landing/pain-points";
-import Plasma from "@/components/Plasma";
 import { cn } from "@/lib/utils";
 import { MeshGradient } from "@paper-design/shaders-react";
 
@@ -14,13 +13,6 @@ export default async function Page() {
     return (
         <main className="flex min-h-full flex-col gap-y-36 px-4 md:px-16">
             <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 h-0 w-full opacity-50 lg:block">
-                {/* <Plasma
-                    speed={0.5}
-                    color="#1295d8"
-                    scale={2}
-                    mouseInteractive={false}
-                    direction="reverse"
-                /> */}
                 <MeshGradient
                     width={3000}
                     height={1800}
@@ -44,9 +36,7 @@ export default async function Page() {
                 />
             </div>
 
-            <Suspense>
-                <Hero defaultUniversity={defaultUniversity} />
-            </Suspense>
+            <Hero defaultUniversity={defaultUniversity} />
 
             <PainPoints />
 

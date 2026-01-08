@@ -1,6 +1,10 @@
 "use client";
 
-import { HeroButtonsUniversitySearch } from "@/components/landing/hero/hero-buttons-university-search";
+import { Suspense } from "react";
+import {
+    HeroButtonsUniversitySearch,
+    HeroButtonUniversitySearchFallback,
+} from "@/components/landing/hero/hero-buttons-university-search";
 import { Button } from "@/components/ui/button";
 import type { University } from "@/lib/constants";
 
@@ -11,9 +15,11 @@ interface HeroButtonsProps {
 export function HeroButtons({ defaultUniversity }: HeroButtonsProps) {
     return (
         <div className="mx-auto flex w-full max-w-full flex-col gap-4 lg:mx-0 lg:flex-row">
-            <HeroButtonsUniversitySearch
-                defaultUniversity={defaultUniversity}
-            />
+            <Suspense fallback={<HeroButtonUniversitySearchFallback />}>
+                <HeroButtonsUniversitySearch
+                    defaultUniversity={defaultUniversity}
+                />
+            </Suspense>
 
             <Button
                 variant="outline"

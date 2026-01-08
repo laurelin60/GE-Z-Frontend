@@ -121,3 +121,25 @@ export function HeroButtonsUniversitySearch({
         </div>
     );
 }
+
+export function HeroButtonUniversitySearchFallback() {
+    return (
+        <div className="flex w-full shrink-0 flex-col gap-0 sm:flex-row lg:w-fit">
+            <div className={cn("disabled order-last shrink-0")}>
+                <Button
+                    size="lg"
+                    className="disabled h-full w-full max-w-full rounded-lg rounded-t-none px-8 py-3 text-base disabled:opacity-100 sm:rounded-t-lg sm:rounded-l-none md:text-xl"
+                    disabled={true}
+                >
+                    Search Courses{" "}
+                </Button>
+            </div>
+
+            <Select value={undefined}>
+                <SelectTrigger className="disabled data-placeholder:text-muted-foreground text-md peer-active:ring-primary box-border h-13 w-full rounded-b-none px-8 py-3 peer-active:animate-pulse peer-active:ring-2 peer-active:[animation-duration:600ms] focus:ring-0 sm:h-full sm:rounded-l-lg sm:rounded-tr-none sm:rounded-bl-lg md:text-xl lg:w-[350px] [&>svg]:h-6 [&>svg]:w-6">
+                    <SelectValue placeholder="" />
+                </SelectTrigger>
+            </Select>
+        </div>
+    );
+}

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { HeroButtons } from "@/components/landing/hero/hero-buttons";
 import { University } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,11 @@ export function Hero({ defaultUniversity }: HeroProps) {
                 >
                     <span className="hidden sm:inline-block">Get&nbsp;</span>
                     <span className="inline-block text-left sm:text-inherit">
-                        <HeroUniversity defaultUniversity={defaultUniversity} />
+                        <Suspense>
+                            <HeroUniversity
+                                defaultUniversity={defaultUniversity}
+                            />
+                        </Suspense>
                         &nbsp;Credits&nbsp;
                     </span>
                     <span className="inline-block text-left sm:text-inherit">
