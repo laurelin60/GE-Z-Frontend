@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getUniversityCookie } from "@/actions/university";
 import { Hero } from "@/components/landing/hero/hero";
 import { HeroButtonsUniversitySearch } from "@/components/landing/hero/hero-buttons-university-search";
@@ -12,10 +11,11 @@ export default async function Page() {
 
     return (
         <main className="flex min-h-full flex-col gap-y-36 px-4 md:px-16">
-            <div className="pointer-events-none fixed inset-0 top-0 left-0 -z-10 h-0 w-full opacity-50 lg:block">
+            <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 flex justify-center opacity-50 lg:block">
                 <MeshGradient
-                    width={3000}
-                    height={1800}
+                    style={{ maxWidth: 1728, margin: "auto" }}
+                    width={"100%"}
+                    height={"100vh"}
                     colors={[
                         "#ffffff",
                         "#ffffff",

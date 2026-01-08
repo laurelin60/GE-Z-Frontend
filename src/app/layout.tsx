@@ -63,7 +63,7 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <div className="flex min-h-dvh flex-col">
+                <div className="outline-border mx-auto flex min-h-dvh max-w-[1728px] flex-col outline-2">
                     <Header />
                     <GoogleAnalytics />
                     <NuqsAdapter>
