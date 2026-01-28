@@ -16,7 +16,7 @@ Built with: <br>
 
 <p align="center">
     <a href="https://ge-z.vercel.app">
-        <img width="1728" alt="Open Graph Image" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/4d500a0c-4d2b-40ca-b7b9-46cf52cdf7f9">
+        <img width="1728" alt="Open Graph Image" src="https://github.com/laurelin60/GE-Z-Frontend/blob/main/public/open-graph.png?raw=true">
     </a>
 </p>
 
@@ -47,6 +47,7 @@ for university students.
 -   Find courses eligible for instant enrollment, zero textbook fees, and more
 -   Sort courses by units, tuition, timeframe, and more!
 
+<!--
 ## Screenshots
 
 <p align="center">
@@ -55,7 +56,6 @@ for university students.
     </a>
 </p>
 
-<!--
 <p align="center">
     <a href="https://ge-z.vercel.app">
   <img width="264" alt="Mobile Home Page" src="https://github.com/laurelin60/GE-Z-Frontend/assets/100006999/c86a8705-4b41-4f0d-940d-a32ab6b60b46">
