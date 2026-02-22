@@ -8,7 +8,7 @@ import { SearchBlurb } from "@/components/search/search-blurb";
 import { SearchResults } from "@/components/search/search-results";
 import type { CourseObject } from "@/components/search/search.types";
 import { SearchSelect } from "@/components/search/SearchSelect";
-import { UNIVERSITIES, University, UNIVERSITY_GE } from "@/lib/constants";
+import { UNIVERSITIES, UNIVERSITY_GE, type University } from "@/lib/constants";
 import { filterData } from "@/lib/utils/filter";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
@@ -64,7 +64,7 @@ export function Search({
     return (
         <div className="flex w-full max-w-full flex-col space-y-4 px-4 py-8 md:px-16 lg:space-y-8">
             <div className="flex flex-wrap text-4xl font-bold lg:text-6xl">
-                Search <span className="hidden lg:flex">&nbsp;For Courses</span>
+                Search <span className="hidden lg:flex">&nbsp;by GE</span>
             </div>
 
             <div className="flex flex-row items-center justify-between">

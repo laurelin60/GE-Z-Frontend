@@ -14,7 +14,7 @@ const formatTime = (date: number) => {
 interface SearchResultsProps {
     courses: CourseObject[];
     university: string;
-    ge: string;
+    ge?: string;
 }
 
 export function SearchResults({ courses, university, ge }: SearchResultsProps) {
@@ -36,8 +36,8 @@ export function SearchResults({ courses, university, ge }: SearchResultsProps) {
                         No results found... ({courses.length - results.length}{" "}
                         courses hidden by filters)
                     </p>
-                    {university == "University of California, Irvine" &&
-                    (ge.includes("Ia") || ge.includes("Ib")) ? (
+                    {university === "University of California, Irvine" &&
+                    (ge?.includes("Ia") || ge?.includes("Ib")) ? (
                         <p className="text-sm text-zinc-500">
                             (GE Ia and Ib are not transferable at UCI)
                         </p>
