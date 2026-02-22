@@ -1,4 +1,7 @@
-import { CourseObject, FilterValues } from "@/components/search/search.types";
+import type {
+    CourseObject,
+    FilterValues,
+} from "@/components/search/search.types";
 
 export const startsAfter = (start: Date | undefined, result: CourseObject) => {
     if (start === undefined) {
@@ -43,15 +46,19 @@ export function filterData(
             ? result.hasOpenSeats
             : true;
         const teachingInstitution =
-            result.sendingInstitution == filterValues.institution ||
-            filterValues.institution == "Any Institution";
+            result.sendingInstitution === filterValues.institution ||
+            filterValues.institution === "Any Institution";
         const withinTime =
             startsAfter(filterValues.start, result) &&
             endsBefore(filterValues.end, result);
         const hasTuition = result.tuition > 0; // avoid TBD courses
 
         return (
-            onlineFormat && hasOpenSeats && teachingInstitution && withinTime && hasTuition
+            onlineFormat &&
+            hasOpenSeats &&
+            teachingInstitution &&
+            withinTime &&
+            hasTuition
         );
     });
 
