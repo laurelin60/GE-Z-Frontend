@@ -14,7 +14,14 @@ export default async function Page(props: {
     let courses: Awaited<ReturnType<typeof queryCourseDatabase>> | null = null;
 
     const sanitizedCode = courseCode?.trim() || null;
-    const queryCode = sanitizedCode?.toUpperCase().replace(/\s+/g, "") || null;
+    let queryCode = sanitizedCode?.toUpperCase().replace(/\s+/g, "") || null;
+
+    if (
+        university === "University of California, Irvine" &&
+        queryCode?.startsWith("ICS")
+    ) {
+        queryCode = "I&CSCI" + queryCode.slice(3);
+    }
 
     if (queryCode) {
         courses = await queryCourseDatabase(university, queryCode).catch(
