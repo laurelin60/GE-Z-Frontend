@@ -13,14 +13,11 @@ export default async function Page(props: {
 
     let courses: Awaited<ReturnType<typeof queryCourseDatabase>> | null = null;
 
-    const sanitizedCode =
-        courseCode
-            ?.toUpperCase()
-            .replace(/[^A-Z0-9& ]/g, "")
-            .trim() || null;
+    const sanitizedCode = courseCode?.trim() || null;
+    const queryCode = sanitizedCode?.toUpperCase().replace(/\s+/g, "") || null;
 
-    if (sanitizedCode) {
-        courses = await queryCourseDatabase(university, sanitizedCode).catch(
+    if (queryCode) {
+        courses = await queryCourseDatabase(university, queryCode).catch(
             (e) => {
                 console.error(e);
                 return null;

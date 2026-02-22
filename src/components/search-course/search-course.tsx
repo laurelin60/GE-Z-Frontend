@@ -60,10 +60,7 @@ export function SearchCourse({
         (e: React.FormEvent) => {
             e.preventDefault();
             const raw = inputRef.current?.value ?? "";
-            const sanitized = raw
-                .toUpperCase()
-                .replace(/[^A-Z0-9& ]/g, "")
-                .trim();
+            const sanitized = raw.trim();
             if (!sanitized) return;
             if (inputRef.current) inputRef.current.value = sanitized;
             setCourseCode(sanitized);
