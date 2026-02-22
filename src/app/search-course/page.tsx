@@ -13,8 +13,14 @@ export default async function Page(props: {
 
     let courses: Awaited<ReturnType<typeof queryCourseDatabase>> | null = null;
 
-    if (courseCode) {
-        courses = await queryCourseDatabase(university, courseCode).catch(
+    const sanitizedCode =
+        courseCode
+            ?.toUpperCase()
+            .replace(/[^A-Z0-9& ]/g, "")
+            .trim() || null;
+
+    if (sanitizedCode) {
+        courses = await queryCourseDatabase(university, sanitizedCode).catch(
             (e) => {
                 console.error(e);
                 return null;
@@ -22,16 +28,18 @@ export default async function Page(props: {
         );
     }
 
-    if (courseCode && !courses) {
+    if (sanitizedCode && !courses) {
         return (
-            <SearchError error={`Failed to fetch courses for ${courseCode}`} />
+            <SearchError
+                error={`Failed to fetch courses for ${sanitizedCode}`}
+            />
         );
     }
 
     return (
         <SearchCourse
             university={university}
-            courseCode={courseCode ?? ""}
+            courseCode={sanitizedCode ?? ""}
             courses={courses?.data ?? []}
             lastUpdated={courses?.lastUpdated ?? 0}
         />
