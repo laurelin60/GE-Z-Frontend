@@ -5,6 +5,8 @@ export type DatabaseReturn = {
     lastUpdated: number;
 };
 
+const BACKEND_BASE_URL =
+    "http://ec2-52-9-243-157.us-west-1.compute.amazonaws.com";
 const cache: Record<string, [number, DatabaseReturn]> = {};
 const THIRTY_MINUTES = 30 * 60 * 1000;
 
@@ -49,7 +51,7 @@ export async function queryDatabase(
 
     const universityUri = encodeURIComponent(university);
     const geUri = encodeURIComponent(geParam);
-    const url = `https://doin-ur.mom/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
+    const url = `${BACKEND_BASE_URL}/api/cvc-courses?institution=${universityUri}&ge=${geUri}`;
 
     return cachedFetch(cacheKey, url);
 }
@@ -62,7 +64,7 @@ export async function queryCourseDatabase(
 
     const universityUri = encodeURIComponent(university);
     const courseCodeUri = encodeURIComponent(courseCode);
-    const url = `https://doin-ur.mom/api/cvc-courses/course?institution=${universityUri}&courseCode=${courseCodeUri}`;
+    const url = `${BACKEND_BASE_URL}/api/cvc-courses/course?institution=${universityUri}&courseCode=${courseCodeUri}`;
 
     return cachedFetch(cacheKey, url);
 }
