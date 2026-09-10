@@ -6,7 +6,7 @@ export type DatabaseReturn = {
 };
 
 const BACKEND_BASE_URL =
-    "http://ec2-52-9-243-157.us-west-1.compute.amazonaws.com";
+    "https://zackhe.pics";
 const cache: Record<string, [number, DatabaseReturn]> = {};
 const THIRTY_MINUTES = 30 * 60 * 1000;
 
